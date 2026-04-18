@@ -680,6 +680,250 @@
       line-height: 2.2;
     }
 
+    /* ── WHO (target audience) ── */
+    .who {
+      background: var(--offwhite);
+      padding: 130px 80px;
+    }
+
+    .who-inner {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: #6E5E50;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 18px;
+    }
+
+    .who-display {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 7vw, 110px);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+
+    .who-lead {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(28,25,24,0.78);
+      letter-spacing: 0.05em;
+      margin-bottom: 64px;
+    }
+
+    .who-list {
+      list-style: none;
+      border-top: 1px solid var(--sand);
+    }
+
+    .who-list li {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.9;
+      color: var(--charcoal);
+      padding: 24px 0 24px 38px;
+      border-bottom: 1px solid var(--sand);
+      position: relative;
+    }
+
+    .who-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 6px;
+      top: 26px;
+      font-size: 11px;
+      color: #6E5E50;
+    }
+
+    /* ── OFFER (Monitor) ── */
+    .offer {
+      background: var(--greige);
+      padding: 140px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offer-ghost {
+      position: absolute;
+      top: 60px;
+      right: -40px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(120px, 18vw, 280px);
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(28,25,24,0.05);
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+    }
+
+    .offer-head {
+      position: relative;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .offer-display {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(56px, 8vw, 128px);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1;
+      color: var(--charcoal);
+      margin: 10px 0 22px;
+    }
+
+    .offer-lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #6E5E50;
+      font-weight: 600;
+    }
+
+    .price-board {
+      max-width: 760px;
+      margin: 0 auto 36px;
+      background: var(--offwhite);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    .price-col {
+      text-align: center;
+      padding: 56px 32px;
+    }
+
+    .price-col.regular {
+      border-right: 1px solid rgba(28,25,24,0.08);
+    }
+
+    .price-col.monitor {
+      background: var(--navy);
+      color: var(--offwhite);
+    }
+
+    .price-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 18px;
+      opacity: 0.78;
+    }
+
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5.5vw, 68px);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .price-col.regular .price-amount {
+      color: var(--charcoal);
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+      opacity: 0.5;
+    }
+
+    .price-col.monitor .price-amount {
+      color: var(--offwhite);
+    }
+
+    .price-limit {
+      display: block;
+      margin-top: 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--taupe);
+      font-weight: 500;
+    }
+
+    .price-note {
+      text-align: center;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 12px;
+      line-height: 2.1;
+      color: rgba(28,25,24,0.7);
+      max-width: 580px;
+      margin: 0 auto 80px;
+      position: relative;
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 920px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .offer-block {
+      background: var(--offwhite);
+      padding: 48px 44px;
+    }
+
+    .block-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: #6E5E50;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .block-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--sand);
+    }
+
+    .block-list {
+      list-style: none;
+    }
+
+    .block-list li {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 2.1;
+      color: rgba(28,25,24,0.85);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .block-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--taupe);
+    }
+
     /* ── CTA ── */
     .cta-sec {
       background: var(--navy);
@@ -717,11 +961,17 @@
     .cta-title {
       font-family: 'Noto Serif JP', serif;
       font-size: clamp(20px, 2.8vw, 42px);
-      font-weight: 200;
+      font-weight: 300;
       line-height: 2.1;
-      color: rgba(245,240,234,0.88);
-      margin-bottom: 68px;
+      color: rgba(245,240,234,0.95);
+      margin-bottom: 56px;
       position: relative;
+    }
+
+    .cta-title em {
+      font-style: normal;
+      color: #C4B49E;
+      font-weight: 500;
     }
 
     .cta-btn {
@@ -742,6 +992,18 @@
       background: var(--offwhite);
       color: var(--navy);
       border-color: var(--offwhite);
+    }
+
+    .cta-note {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(245,240,234,0.55);
+      margin-top: 26px;
+      display: block;
+      position: relative;
+      font-weight: 500;
     }
 
     /* ── FOOTER ── */
@@ -840,6 +1102,17 @@
       }
       .prof-right-thumb { width: 160px; }
 
+      .who { padding: 80px 22px; }
+      .who-list li { padding: 20px 0 20px 32px; font-size: 13px; }
+
+      .offer { padding: 80px 22px; }
+      .offer-ghost { font-size: 96px; top: 30px; right: -20px; }
+      .price-board { grid-template-columns: 1fr; max-width: 100%; }
+      .price-col { padding: 40px 24px; }
+      .price-col.regular { border-right: none; border-bottom: 1px solid rgba(28,25,24,0.08); }
+      .offer-grid { grid-template-columns: 1fr; gap: 20px; }
+      .offer-block { padding: 32px 24px; }
+
       .cta-sec { padding: 80px 24px; }
 
       footer {
@@ -885,8 +1158,8 @@
       「招く側」へ。<br>
       「いつかやる」は、今日で終わりに。
     </p>
-    <a href="https://www.instagram.com/hanu_party" target="_blank" class="hero-cta-link">
-      Instagram でお問い合わせ
+    <a href="#offer" class="hero-cta-link">
+      モニター募集の詳細を見る
     </a>
   </div>
 
@@ -952,6 +1225,24 @@
       <h3 class="before-title">センスがあるか自信がなく、<br>踏み出せずにいる</h3>
       <p class="before-text">おしゃれなパーティーは、特別な人だけのもの。自分には縁がないと思っていませんか？</p>
     </div>
+  </div>
+</section>
+
+<!-- ── WHO (target audience) ── -->
+<section class="who" id="who">
+  <div class="who-inner">
+    <span class="section-eyebrow">— For Whom —</span>
+    <h2 class="who-display">For You.</h2>
+    <p class="who-lead">こんな方に、お届けしています。</p>
+    <ul class="who-list">
+      <li>30代〜40代の女性起業家</li>
+      <li>発信もサービスもあるけれど、まだ"リアルの場"を主催したことがない方</li>
+      <li>自分のサービス・商品を持っている</li>
+      <li>オンラインでは顧客と繋がっているが、リアルの場で会ったことはほぼない</li>
+      <li>Instagramで他の起業家の周年パーティー投稿を見て、羨ましさと焦りを感じている</li>
+      <li>「自分なんて…」「まだ早い」で先送りしてきた、まだ自分のパーティーを開いたことのない人</li>
+      <li>大切な人たちを集める場を、自分の手で作りたいと思っている</li>
+    </ul>
   </div>
 </section>
 
@@ -1044,16 +1335,70 @@
   </div>
 </section>
 
+<!-- ── OFFER (Monitor) ── -->
+<section class="offer" id="offer">
+  <div class="offer-ghost">MONITOR</div>
+
+  <div class="offer-head">
+    <span class="section-eyebrow">— Special Offer —</span>
+    <h2 class="offer-display">Monitor.</h2>
+    <p class="offer-lead">3組様限定 — モニター募集</p>
+  </div>
+
+  <div class="price-board">
+    <div class="price-col regular">
+      <span class="price-label">通常価格</span>
+      <div class="price-amount">¥80,000</div>
+    </div>
+    <div class="price-col monitor">
+      <span class="price-label">モニター価格</span>
+      <div class="price-amount">¥50,000</div>
+      <span class="price-limit">※ 3組様限定</span>
+    </div>
+  </div>
+
+  <p class="price-note">
+    プロデュース料・当日ディレクション料を含む<br>
+    会場費・飲食費・装飾費は別途実費（おひとり 1.5万円前後が目安）
+  </p>
+
+  <div class="offer-grid">
+    <div class="offer-block">
+      <span class="block-eyebrow">— Service —</span>
+      <h3 class="block-title">サービス内容</h3>
+      <ul class="block-list">
+        <li>パーティー1回 まるごとトータルプロデュース</li>
+        <li>企画 〜 当日運営まで</li>
+        <li>事前打ち合わせ：オンライン or 対面</li>
+        <li>当日：ディレクションとして参加</li>
+        <li>対象規模：15〜30名前後</li>
+        <li>場所：相談可</li>
+      </ul>
+    </div>
+    <div class="offer-block">
+      <span class="block-eyebrow">— Conditions —</span>
+      <h3 class="block-title">モニター条件</h3>
+      <ul class="block-list">
+        <li>感想のご提供</li>
+        <li>当日の写真・動画の使用許可</li>
+        <li>Instagramでのご紹介投稿</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ── CTA ── -->
 <section class="cta-sec">
   <div class="cta-ghost">READY?</div>
-  <span class="cta-pre">Let's create together</span>
+  <span class="cta-pre">First step</span>
   <h2 class="cta-title">
-    あなたのパーティー、<br>一緒に作りましょう。
+    まずは <em>無料Zoom相談</em> から。<br>
+    あなたのパーティーを、一緒に。
   </h2>
   <a href="https://www.instagram.com/hanu_party" target="_blank" class="cta-btn">
-    Instagram でお問い合わせ
+    無料Zoom相談を予約する
   </a>
+  <span class="cta-note">Instagram DM からお気軽にどうぞ</span>
 </section>
 
 <!-- ── FOOTER ── -->
