@@ -741,10 +741,30 @@
     .before {
       background: var(--greige);
       padding: 120px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Small cutout portrait floating in top-right of Before section */
+    .before-portrait {
+      position: absolute;
+      top: 36px;
+      right: 64px;
+      width: clamp(120px, 14vw, 180px);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .before-portrait img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 6px 18px rgba(28, 25, 24, 0.10));
     }
 
     .before-head {
       margin-bottom: 72px;
+      position: relative;
+      z-index: 3;
     }
 
     .before-display {
@@ -1444,6 +1464,7 @@
 
       .before { padding: 80px 24px; }
       .before-grid { grid-template-columns: 1fr; }
+      .before-portrait { top: 16px; right: 16px; width: 80px; }
 
       .service {
         padding: 80px 24px;
@@ -1585,6 +1606,9 @@
 
 <!-- ── BEFORE / 共感（お悩み）── -->
 <section class="before" id="before">
+  <div class="before-portrait">
+    <img src="image/portrait_before_cutout.png?v=4" alt="">
+  </div>
   <div class="before-head">
     <div class="before-display">
       Before.
@@ -1643,18 +1667,18 @@
       </li>
       <li>
         <span class="s-num">04</span>
+        <span class="s-name">ケータリング</span>
+        <span class="s-en">Catering</span>
+      </li>
+      <li>
+        <span class="s-num">05</span>
         <span class="s-name">ペーパーアイテム・演出</span>
         <span class="s-en">Paper &amp; Direction</span>
       </li>
       <li>
-        <span class="s-num">05</span>
+        <span class="s-num">06</span>
         <span class="s-name">当日の運営・進行</span>
         <span class="s-en">Operation</span>
-      </li>
-      <li>
-        <span class="s-num">06</span>
-        <span class="s-name">ケータリング</span>
-        <span class="s-en">Catering</span>
       </li>
     </ul>
   </div>
@@ -1682,7 +1706,7 @@
     <div class="oval-container">
       <div class="oval-dark-bg"></div>
       <div class="oval-frame">
-        <img src="image/portrait_profile.jpg?v=3" alt="">
+        <img src="image/portrait_profile_cutout.png?v=4" alt="">
         <div class="oval-overlay-text">Hanu.</div>
       </div>
     </div>
