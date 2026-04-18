@@ -173,40 +173,40 @@
       display: inline-block;
       opacity: 0;
       transform-origin: 50% 100%;
-      animation: hero-word-pop 0.95s cubic-bezier(0.34, 1.56, 0.64, 1) both,
-                 hero-word-float 4.5s ease-in-out infinite;
+      animation: hero-word-pop 1s cubic-bezier(0.34, 1.78, 0.64, 1) both,
+                 hero-word-bounce 2.6s ease-in-out infinite;
       will-change: transform;
-      text-shadow: 0 6px 24px rgba(28,25,24,0.12);
+      text-shadow: 0 8px 28px rgba(28,25,24,0.18);
     }
 
     .hero-display .word:nth-of-type(1) {
-      animation-delay: 0.25s, 1.5s;
+      animation-delay: 0.25s, 1.4s;
     }
     .hero-display .word:nth-of-type(2) {
-      animation-delay: 0.5s, 1.7s;
+      animation-delay: 0.55s, 1.6s;
     }
     .hero-display .word:nth-of-type(3) {
-      animation-delay: 0.85s, 1.9s;
+      animation-delay: 0.95s, 1.8s;
     }
 
-    .hero-display .word + .word { margin-left: 0.18em; }
+    .hero-display .word + .word { margin-left: 0.2em; }
 
     @keyframes hero-word-pop {
       0% {
         opacity: 0;
-        transform: scale(0.25) translateY(80px) rotateZ(-6deg);
-        filter: blur(10px);
+        transform: scale(0.2) translateY(120px) rotateZ(-8deg);
+        filter: blur(12px);
       }
-      55% {
+      50% {
         opacity: 1;
-        transform: scale(1.18) translateY(-14px) rotateZ(2deg);
+        transform: scale(1.25) translateY(-22px) rotateZ(3deg);
         filter: blur(0);
       }
-      75% {
-        transform: scale(0.93) translateY(4px) rotateZ(-1deg);
+      72% {
+        transform: scale(0.9) translateY(8px) rotateZ(-1.5deg);
       }
-      88% {
-        transform: scale(1.04) translateY(-2px) rotateZ(0.4deg);
+      86% {
+        transform: scale(1.06) translateY(-4px) rotateZ(0.6deg);
       }
       100% {
         opacity: 1;
@@ -214,16 +214,58 @@
       }
     }
 
-    @keyframes hero-word-float {
-      0%, 100% { transform: translateY(0) rotateZ(0); }
-      50%      { transform: translateY(-8px) rotateZ(-0.4deg); }
+    /* Continuous, more visible bouncing motion */
+    @keyframes hero-word-bounce {
+      0%, 100% {
+        transform: translateY(0) rotateZ(0) scale(1);
+      }
+      40% {
+        transform: translateY(-16px) rotateZ(-1.2deg) scale(1.04);
+      }
+      60% {
+        transform: translateY(-10px) rotateZ(0.8deg) scale(1.02);
+      }
     }
 
-    /* Hover invites another tiny pop */
+    /* Hover gives an extra pop */
     .hero-display:hover .word {
       animation-play-state: paused;
-      transform: scale(1.06) translateY(-6px);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: scale(1.12) translateY(-12px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.78, 0.64, 1);
+    }
+
+    /* Subtle floating motion for other big English display headings */
+    @keyframes display-float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    .before-display,
+    .service-display,
+    .prof-display,
+    .luxury-display,
+    .who-display,
+    .offer-display {
+      display: inline-block;
+      animation: display-float 4s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .service-display { animation-duration: 4.5s; animation-delay: 0.3s; }
+    .prof-display    { animation-duration: 5s;   animation-delay: 0.6s; }
+    .luxury-display  { animation-duration: 4.2s; animation-delay: 0.2s; }
+    .who-display     { animation-duration: 4.8s; animation-delay: 0.5s; }
+    .offer-display   { animation-duration: 4.3s; animation-delay: 0.4s; }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-display .word,
+      .before-display, .service-display, .prof-display,
+      .luxury-display, .who-display, .offer-display {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
     }
 
     .hero-jp-sub {
@@ -601,13 +643,6 @@
       object-fit: cover;
       object-position: center top;
       display: block;
-      /* Very subtle warmth lift only — no white-out */
-      filter: brightness(1.04) saturate(0.97);
-    }
-
-    /* Hero oval keeps photo natural — no aggressive brightening */
-    .hero .oval-frame img {
-      filter: brightness(1.03) saturate(0.97);
     }
 
     .service-visual-label {
