@@ -104,14 +104,15 @@
     /* Arc text "ARE YOU READY?" */
     .hero-arc {
       position: absolute;
-      top: 0;
+      top: -10px;
       left: 50%;
-      width: clamp(440px, 62vw, 820px);
+      width: clamp(460px, 64vw, 880px);
       pointer-events: none;
       z-index: 6;
       opacity: 0;
       transform-origin: 50% 100%;
       animation: hero-arc-in 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+      overflow: visible;
     }
 
     .hero-arc-text {
@@ -163,14 +164,15 @@
       100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
     }
 
-    /* Floating party cutouts — fade in / fade out softly, looping */
+    /* Floating party cutouts — visible immediately, then gentle pulse fade */
     .hero-float {
       position: absolute;
-      opacity: 0;
+      opacity: 1;
       filter: drop-shadow(5px 6px 0 var(--navy)) drop-shadow(0 10px 18px rgba(28,25,24,0.16));
-      animation: hero-float-fade 9.5s ease-in-out infinite both;
-      will-change: opacity;
+      animation: hero-float-pulse 8s ease-in-out infinite;
+      will-change: opacity, transform;
       z-index: 3;
+      transform: rotate(var(--rot, 0deg));
     }
 
     .hero-float img {
@@ -184,22 +186,19 @@
         74% 100%, 54% 96%, 34% 100%, 14% 95%,
         2% 80%, 5% 60%, 0% 42%, 4% 22%
       );
-      transform: rotate(var(--rot, 0deg));
     }
 
-    .hero-float.f1 { top: 6%;   left: 3%;  width: clamp(120px, 14vw, 180px); aspect-ratio: 3/4; animation-delay: 1.4s; }
-    .hero-float.f2 { top: 2%;   left: 24%; width: clamp(100px, 11vw, 150px); aspect-ratio: 4/5; animation-delay: 3.0s; }
-    .hero-float.f3 { top: 4%;   right: 24%;width: clamp(100px, 11vw, 150px); aspect-ratio: 4/5; animation-delay: 4.6s; }
-    .hero-float.f4 { top: 8%;   right: 3%; width: clamp(120px, 14vw, 180px); aspect-ratio: 3/4; animation-delay: 0.6s; }
-    .hero-float.f5 { bottom: 8%;left: 8%;  width: clamp(140px, 16vw, 200px); aspect-ratio: 4/5; animation-delay: 6.2s; }
-    .hero-float.f6 { bottom: 6%;right: 8%; width: clamp(140px, 16vw, 200px); aspect-ratio: 4/5; animation-delay: 7.8s; }
+    .hero-float.f1 { top: 6%;   left: 3%;  width: clamp(120px, 14vw, 180px); aspect-ratio: 3/4; animation-delay: -1s; }
+    .hero-float.f2 { top: 2%;   left: 22%; width: clamp(100px, 11vw, 150px); aspect-ratio: 4/5; animation-delay: -2.4s; }
+    .hero-float.f3 { top: 3%;   right: 22%;width: clamp(100px, 11vw, 150px); aspect-ratio: 4/5; animation-delay: -3.7s; }
+    .hero-float.f4 { top: 7%;   right: 3%; width: clamp(120px, 14vw, 180px); aspect-ratio: 3/4; animation-delay: -5s; }
+    .hero-float.f5 { bottom: 8%;left: 6%;  width: clamp(140px, 16vw, 200px); aspect-ratio: 4/5; animation-delay: -6.2s; }
+    .hero-float.f6 { bottom: 6%;right: 6%; width: clamp(140px, 16vw, 200px); aspect-ratio: 4/5; animation-delay: -7.4s; }
 
-    @keyframes hero-float-fade {
-      0%   { opacity: 0; }
-      14%  { opacity: 1; }
-      62%  { opacity: 1; }
-      82%  { opacity: 0; }
-      100% { opacity: 0; }
+    @keyframes hero-float-pulse {
+      0%, 100% { opacity: 1; }
+      45%      { opacity: 0.08; }
+      62%      { opacity: 0.08; }
     }
 
     /* Bottom copy */
@@ -1499,11 +1498,11 @@
 <!-- ── HERO (Cutout Collage) ── -->
 <section class="hero">
   <div class="hero-stage">
-    <svg class="hero-arc" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <svg class="hero-arc" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
       <defs>
-        <path id="arcPath" d="M 60 340 A 340 340 0 0 1 740 340" fill="none"/>
+        <path id="arcPath" d="M 80 520 A 420 420 0 0 1 920 520" fill="none"/>
       </defs>
-      <text class="hero-arc-text" font-size="86">
+      <text class="hero-arc-text" font-size="96">
         <textPath href="#arcPath" startOffset="50%" text-anchor="middle">ARE YOU READY?</textPath>
       </text>
     </svg>
