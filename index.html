@@ -362,6 +362,89 @@
       position: relative;
     }
 
+    /* ── LUXURY PARTY (visual feature) ── */
+    .luxury {
+      position: relative;
+      min-height: 88vh;
+      overflow: hidden;
+      background: var(--charcoal);
+    }
+
+    .luxury-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .luxury-media img,
+    .luxury-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.6) saturate(1.05);
+    }
+
+    .luxury-overlay {
+      position: relative;
+      z-index: 1;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 80px;
+      background: linear-gradient(90deg,
+        rgba(20,18,17,0.65) 0%,
+        rgba(20,18,17,0.25) 55%,
+        rgba(20,18,17,0.05) 100%);
+    }
+
+    .luxury-inner {
+      max-width: 560px;
+      position: relative;
+    }
+
+    .luxury-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: #C4B49E;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .luxury-display {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(64px, 9vw, 140px);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1;
+      color: var(--offwhite);
+      margin-bottom: 36px;
+    }
+
+    .luxury-display em {
+      font-style: italic;
+      color: #C4B49E;
+    }
+
+    .luxury-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 2.4;
+      color: rgba(245,240,234,0.94);
+    }
+
+    .luxury-rule {
+      width: 60px;
+      height: 1px;
+      background: #C4B49E;
+      margin: 36px 0 0;
+      opacity: 0.7;
+    }
+
     /* ── BEFORE ── */
     .before {
       background: var(--greige);
@@ -460,18 +543,13 @@
       object-fit: cover;
       object-position: center top;
       display: block;
-      filter: brightness(1.18) contrast(0.92) saturate(0.95);
+      /* Very subtle warmth lift only — no white-out */
+      filter: brightness(1.04) saturate(0.97);
     }
 
-    /* Brighten the dark hero photo */
+    /* Hero oval keeps photo natural — no aggressive brightening */
     .hero .oval-frame img {
-      filter: brightness(1.18) contrast(0.92) saturate(0.95);
-    }
-
-    /* Soft warm wash behind dark photos so the dark backdrop reads warmer */
-    .hero-oval-col .oval-frame,
-    .service-visual-frame {
-      background: linear-gradient(180deg, #E8E1D7 0%, #DDD3C4 100%);
+      filter: brightness(1.03) saturate(0.97);
     }
 
     .service-visual-label {
@@ -1102,6 +1180,10 @@
       }
       .prof-right-thumb { width: 160px; }
 
+      .luxury { min-height: 70vh; }
+      .luxury-overlay { padding: 80px 22px; min-height: 70vh; }
+      .luxury-text { font-size: 14px; line-height: 2.2; }
+
       .who { padding: 80px 22px; }
       .who-list li { padding: 20px 0 20px 32px; font-size: 13px; }
 
@@ -1199,6 +1281,27 @@
     誰かの<em>人生が変わる</em>。
   </h2>
   <div class="stmt-rule"></div>
+</section>
+
+<!-- ── LUXURY PARTY (visual feature) ── -->
+<section class="luxury">
+  <div class="luxury-media">
+    <img src="https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?auto=format&fit=crop&w=1800&q=80"
+         alt="Luxury Party — Champagne &amp; Candlelight">
+  </div>
+  <div class="luxury-overlay">
+    <div class="luxury-inner">
+      <span class="luxury-eyebrow">— A Night to Remember —</span>
+      <h2 class="luxury-display">Luxury<br><em>Party.</em></h2>
+      <p class="luxury-text">
+        グラスを傾ける音、<br>
+        揺れるキャンドルの光、<br>
+        大切な人たちの笑顔。<br><br>
+        その一夜が、<br>あなたのストーリーになる。
+      </p>
+      <div class="luxury-rule"></div>
+    </div>
+  </div>
 </section>
 
 <!-- ── BEFORE ── -->
