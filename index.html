@@ -473,7 +473,7 @@
       background: #ffffff;
       border-radius: 50%;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: center;
       overflow: hidden;
     }
@@ -483,7 +483,7 @@
       height: auto;
       max-height: 100%;
       object-fit: contain;
-      object-position: center bottom;
+      object-position: center center;
       display: block;
     }
 
@@ -750,11 +750,11 @@
       overflow: hidden;
     }
 
-    /* Sharp circular portrait floating on the LEFT of Before section */
+    /* Sharp circular portrait floating on the RIGHT of Before section, white BG */
     .before-portrait {
       position: absolute;
       top: 60px;
-      left: 32px;
+      right: 32px;
       width: clamp(110px, 12vw, 160px);
       height: clamp(110px, 12vw, 160px);
       border-radius: 50%;
@@ -762,7 +762,7 @@
       pointer-events: none;
       z-index: 4;
       box-shadow: 0 8px 24px rgba(28, 25, 24, 0.12);
-      background: #fff;
+      background: #ffffff;
     }
     .before-portrait img {
       width: 100%;
@@ -1618,7 +1618,7 @@
 <!-- ── BEFORE / 共感（お悩み）── -->
 <section class="before" id="before">
   <div class="before-portrait">
-    <img src="image/hanu1_web.jpg?v=5" alt="">
+    <img src="image/portrait_before_cutout.png?v=6" alt="">
   </div>
   <div class="before-head">
     <div class="before-display">
@@ -1717,7 +1717,7 @@
     <div class="oval-container">
       <div class="oval-dark-bg"></div>
       <div class="oval-frame">
-        <img src="image/portrait_profile_cutout.png?v=4" alt="">
+        <img src="image/portrait_profile_cutout.png?v=5" alt="">
         <div class="oval-overlay-text">Hanu.</div>
       </div>
     </div>
