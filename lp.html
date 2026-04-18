@@ -166,6 +166,64 @@
       line-height: 1.1;
       color: var(--charcoal);
       margin-bottom: 36px;
+      perspective: 800px;
+    }
+
+    .hero-display .word {
+      display: inline-block;
+      opacity: 0;
+      transform-origin: 50% 100%;
+      animation: hero-word-pop 0.95s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+                 hero-word-float 4.5s ease-in-out infinite;
+      will-change: transform;
+      text-shadow: 0 6px 24px rgba(28,25,24,0.12);
+    }
+
+    .hero-display .word:nth-of-type(1) {
+      animation-delay: 0.25s, 1.5s;
+    }
+    .hero-display .word:nth-of-type(2) {
+      animation-delay: 0.5s, 1.7s;
+    }
+    .hero-display .word:nth-of-type(3) {
+      animation-delay: 0.85s, 1.9s;
+    }
+
+    .hero-display .word + .word { margin-left: 0.18em; }
+
+    @keyframes hero-word-pop {
+      0% {
+        opacity: 0;
+        transform: scale(0.25) translateY(80px) rotateZ(-6deg);
+        filter: blur(10px);
+      }
+      55% {
+        opacity: 1;
+        transform: scale(1.18) translateY(-14px) rotateZ(2deg);
+        filter: blur(0);
+      }
+      75% {
+        transform: scale(0.93) translateY(4px) rotateZ(-1deg);
+      }
+      88% {
+        transform: scale(1.04) translateY(-2px) rotateZ(0.4deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotateZ(0);
+      }
+    }
+
+    @keyframes hero-word-float {
+      0%, 100% { transform: translateY(0) rotateZ(0); }
+      50%      { transform: translateY(-8px) rotateZ(-0.4deg); }
+    }
+
+    /* Hover invites another tiny pop */
+    .hero-display:hover .word {
+      animation-play-state: paused;
+      transform: scale(1.06) translateY(-6px);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .hero-jp-sub {
@@ -1233,7 +1291,7 @@
   <div class="hero-left">
     <div class="hero-en-small">For Her</div>
     <h1 class="hero-display">
-      Are You<br>Ready?
+      <span class="word">Are</span><span class="word">You</span><br><span class="word">Ready?</span>
     </h1>
     <p class="hero-jp-sub">
       「招かれる側」から、<br>
