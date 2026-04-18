@@ -750,20 +750,26 @@
       overflow: hidden;
     }
 
-    /* Small cutout portrait floating in top-right of Before section */
+    /* Sharp circular portrait floating on the LEFT of Before section */
     .before-portrait {
       position: absolute;
-      top: 36px;
-      right: 64px;
-      width: clamp(120px, 14vw, 180px);
+      top: 60px;
+      left: 32px;
+      width: clamp(110px, 12vw, 160px);
+      height: clamp(110px, 12vw, 160px);
+      border-radius: 50%;
+      overflow: hidden;
       pointer-events: none;
-      z-index: 2;
+      z-index: 4;
+      box-shadow: 0 8px 24px rgba(28, 25, 24, 0.12);
+      background: #fff;
     }
     .before-portrait img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
       display: block;
-      filter: drop-shadow(0 6px 18px rgba(28, 25, 24, 0.10));
     }
 
     .before-head {
@@ -1469,7 +1475,7 @@
 
       .before { padding: 80px 24px; }
       .before-grid { grid-template-columns: 1fr; }
-      .before-portrait { top: 16px; right: 16px; width: 80px; }
+      .before-portrait { top: 16px; left: 16px; right: auto; width: 70px; height: 70px; }
 
       .service {
         padding: 80px 24px;
@@ -1612,7 +1618,7 @@
 <!-- ── BEFORE / 共感（お悩み）── -->
 <section class="before" id="before">
   <div class="before-portrait">
-    <img src="image/portrait_before_cutout.png?v=4" alt="">
+    <img src="image/hanu1_web.jpg?v=5" alt="">
   </div>
   <div class="before-head">
     <div class="before-display">
