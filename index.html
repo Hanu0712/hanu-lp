@@ -194,19 +194,17 @@
       display: block;
     }
 
-    /* 10 photos arranged around the perimeter — never overlap, never under arc text */
-    /* LEFT side — 5 photos staggered top→bottom */
-    .hero-float.f1  { top: 4%;    left: 14%;  width: clamp(78px,  9vw,  118px); height: clamp(98px,  11vw, 148px); animation-delay: -0.5s; }
-    .hero-float.f2  { top: 22%;   left: 1%;   width: clamp(96px, 11vw,  140px); height: clamp(120px, 14vw, 175px); animation-delay: -1.8s; }
-    .hero-float.f3  { top: 44%;   left: 6%;   width: clamp(82px, 10vw,  125px); height: clamp(102px, 12vw, 156px); animation-delay: -3.1s; }
-    .hero-float.f4  { top: 64%;   left: 1%;   width: clamp(96px, 11vw,  140px); height: clamp(120px, 14vw, 175px); animation-delay: -4.4s; }
-    .hero-float.f5  { bottom: 2%; left: 16%;  width: clamp(82px, 10vw,  125px); height: clamp(102px, 12vw, 156px); animation-delay: -5.7s; }
-    /* RIGHT side — 5 photos staggered top→bottom */
-    .hero-float.f6  { top: 4%;    right: 14%; width: clamp(78px,  9vw,  118px); height: clamp(98px,  11vw, 148px); animation-delay: -7.0s; }
-    .hero-float.f7  { top: 22%;   right: 1%;  width: clamp(96px, 11vw,  140px); height: clamp(120px, 14vw, 175px); animation-delay: -1.2s; }
-    .hero-float.f8  { top: 44%;   right: 6%;  width: clamp(82px, 10vw,  125px); height: clamp(102px, 12vw, 156px); animation-delay: -2.5s; }
-    .hero-float.f9  { top: 64%;   right: 1%;  width: clamp(96px, 11vw,  140px); height: clamp(120px, 14vw, 175px); animation-delay: -3.8s; }
-    .hero-float.f10 { bottom: 2%; right: 16%; width: clamp(82px, 10vw,  125px); height: clamp(102px, 12vw, 156px); animation-delay: -5.1s; }
+    /* 8 photos arranged around the perimeter — symmetric 4 left + 4 right, never overlap, never under arc text */
+    /* LEFT side — 4 photos staggered top→bottom */
+    .hero-float.f1  { top: 4%;   left: 14%; width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -0.5s; }
+    .hero-float.f2  { top: 26%;  left: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -1.8s; }
+    .hero-float.f3  { top: 50%;  left: 6%;  width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -3.1s; }
+    .hero-float.f4  { top: 74%;  left: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -4.4s; }
+    /* RIGHT side — 4 photos staggered top→bottom (mirror) */
+    .hero-float.f6  { top: 4%;   right: 14%; width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -7.0s; }
+    .hero-float.f7  { top: 26%;  right: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -1.2s; }
+    .hero-float.f8  { top: 50%;  right: 6%;  width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -2.5s; }
+    .hero-float.f9  { top: 74%;  right: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -3.8s; }
 
     @keyframes hero-float-pulse {
       0%, 100% { opacity: 1; }
@@ -1431,17 +1429,15 @@
       .hero-arc { width: min(96vw, 520px); top: 8px; }
       .hero-arc-text { font-size: 60px; }
       .hero-center { width: 170px; height: 226px; top: 18%; }
-      /* Mobile: 10 photos around hero — tighter & smaller, no overlap */
-      .hero-float.f1  { width: 60px; height: 78px;  top: 1%;    left: 22%;  }
-      .hero-float.f2  { width: 70px; height: 92px;  top: 14%;   left: 1%;   }
-      .hero-float.f3  { width: 58px; height: 76px;  top: 36%;   left: 4%;   }
-      .hero-float.f4  { width: 70px; height: 92px;  top: 56%;   left: 1%;   }
-      .hero-float.f5  { width: 60px; height: 78px;  bottom: 1%; left: 22%;  }
-      .hero-float.f6  { width: 60px; height: 78px;  top: 1%;    right: 22%; }
-      .hero-float.f7  { width: 70px; height: 92px;  top: 14%;   right: 1%;  }
-      .hero-float.f8  { width: 58px; height: 76px;  top: 36%;   right: 4%;  }
-      .hero-float.f9  { width: 70px; height: 92px;  top: 56%;   right: 1%;  }
-      .hero-float.f10 { width: 60px; height: 78px;  bottom: 1%; right: 22%; }
+      /* Mobile: 8 photos around hero (4 left + 4 right), tighter & smaller, no overlap */
+      .hero-float.f1  { width: 60px; height: 78px;  top: 2%;  left: 22%;  }
+      .hero-float.f2  { width: 70px; height: 92px;  top: 22%; left: 1%;   }
+      .hero-float.f3  { width: 60px; height: 78px;  top: 46%; left: 4%;   }
+      .hero-float.f4  { width: 70px; height: 92px;  top: 70%; left: 1%;   }
+      .hero-float.f6  { width: 60px; height: 78px;  top: 2%;  right: 22%; }
+      .hero-float.f7  { width: 70px; height: 92px;  top: 22%; right: 1%;  }
+      .hero-float.f8  { width: 60px; height: 78px;  top: 46%; right: 4%;  }
+      .hero-float.f9  { width: 70px; height: 92px;  top: 70%; right: 1%;  }
       .hero-jp-sub-new { font-size: 13px; line-height: 2.2; }
 
       .statement { padding: 80px 24px; min-height: auto; }
@@ -1541,19 +1537,20 @@
       </text>
     </svg>
 
-    <div class="hero-float f1"  style="--rot:-7deg"><img src="image/gal01.jpg" alt=""></div>
-    <div class="hero-float f2"  style="--rot:5deg"><img src="image/gal02.jpg" alt=""></div>
-    <div class="hero-float f3"  style="--rot:-4deg"><img src="image/gal03.jpg" alt=""></div>
-    <div class="hero-float f4"  style="--rot:8deg"><img src="image/gal04.jpg" alt=""></div>
-    <div class="hero-float f5"  style="--rot:6deg"><img src="image/gal05.jpg" alt=""></div>
-    <div class="hero-float f6"  style="--rot:-6deg"><img src="image/gal06.jpg" alt=""></div>
-    <div class="hero-float f7"  style="--rot:4deg"><img src="image/gal07.jpg" alt=""></div>
-    <div class="hero-float f8"  style="--rot:-5deg"><img src="image/gal08.jpg" alt=""></div>
-    <div class="hero-float f9"  style="--rot:7deg"><img src="image/gal09.jpg" alt=""></div>
-    <div class="hero-float f10" style="--rot:-3deg"><img src="image/gal10.jpg" alt=""></div>
+    <!-- gal01 (couple drinking) lives in Service section now — removed here for no duplicates -->
+    <!-- LEFT 4 photos -->
+    <div class="hero-float f1"  style="--rot:-7deg"><img src="image/gal02.jpg?v=3" alt=""></div>
+    <div class="hero-float f2"  style="--rot:5deg"><img src="image/gal03.jpg?v=3" alt=""></div>
+    <div class="hero-float f3"  style="--rot:-4deg"><img src="image/gal04.jpg?v=3" alt=""></div>
+    <div class="hero-float f4"  style="--rot:8deg"><img src="image/gal05.jpg?v=3" alt=""></div>
+    <!-- RIGHT 4 photos -->
+    <div class="hero-float f6"  style="--rot:-6deg"><img src="image/gal06.jpg?v=3" alt=""></div>
+    <div class="hero-float f7"  style="--rot:4deg"><img src="image/gal07.jpg?v=3" alt=""></div>
+    <div class="hero-float f8"  style="--rot:-5deg"><img src="image/gal08.jpg?v=3" alt=""></div>
+    <div class="hero-float f9"  style="--rot:7deg"><img src="image/gal09.jpg?v=3" alt=""></div>
 
     <div class="hero-center">
-      <img src="image/portrait_hero.jpg" alt="">
+      <img src="image/portrait_hero.jpg?v=3" alt="">
     </div>
   </div>
 
@@ -1617,7 +1614,7 @@
 <section class="service" id="service">
   <div class="service-visual">
     <div class="service-visual-frame">
-      <img src="image/portrait_service.jpg" alt="">
+      <img src="image/portrait_service.jpg?v=3" alt="">
     </div>
     <div class="service-visual-label">— How we produce —</div>
   </div>
@@ -1685,7 +1682,7 @@
     <div class="oval-container">
       <div class="oval-dark-bg"></div>
       <div class="oval-frame">
-        <img src="image/portrait_profile.jpg" alt="">
+        <img src="image/portrait_profile.jpg?v=3" alt="">
         <div class="oval-overlay-text">Hanu.</div>
       </div>
     </div>
@@ -1693,7 +1690,7 @@
 
   <div class="prof-right">
     <div class="prof-right-thumb">
-      <img src="image/portrait_profile_thumb.jpg" alt="">
+      <img src="image/portrait_profile_thumb.jpg?v=3" alt="">
     </div>
     <p class="prof-caption">
       女性起業家のための<br>
