@@ -111,7 +111,9 @@
       z-index: 6;
       opacity: 0;
       transform-origin: 50% 100%;
-      animation: hero-arc-in 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+      animation:
+        hero-arc-in    1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both,
+        hero-arc-swing 2.6s ease-in-out 1.6s both;
       overflow: visible;
     }
 
@@ -124,11 +126,21 @@
     }
 
     @keyframes hero-arc-in {
-      0%   { opacity: 0; transform: translateX(-50%) scale(0.5) rotate(-14deg); }
-      40%  { opacity: 1; transform: translateX(-50%) scale(1.08) rotate(6deg); }
-      65%  { transform: translateX(-50%) scale(0.97) rotate(-3deg); }
-      85%  { transform: translateX(-50%) scale(1.02) rotate(1deg); }
+      0%   { opacity: 0; transform: translateX(-50%) scale(0.45) rotate(-16deg); }
+      45%  { opacity: 1; transform: translateX(-50%) scale(1.10) rotate(6deg); }
+      70%  { transform: translateX(-50%) scale(0.96) rotate(-3deg); }
+      88%  { transform: translateX(-50%) scale(1.02) rotate(1deg); }
       100% { opacity: 1; transform: translateX(-50%) scale(1) rotate(0); }
+    }
+
+    @keyframes hero-arc-swing {
+      0%   { transform: translateX(-50%) rotate(0); }
+      14%  { transform: translateX(-50%) rotate(-9deg); }
+      32%  { transform: translateX(-50%) rotate(8deg); }
+      50%  { transform: translateX(-50%) rotate(-5deg); }
+      68%  { transform: translateX(-50%) rotate(3deg); }
+      84%  { transform: translateX(-50%) rotate(-1deg); }
+      100% { transform: translateX(-50%) rotate(0); }
     }
 
     /* Center photo (her portrait) — placed BELOW arc text so they never overlap */
