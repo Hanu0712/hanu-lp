@@ -97,7 +97,7 @@
       position: relative;
       width: 100%;
       max-width: 1280px;
-      height: clamp(540px, 78vh, 780px);
+      height: clamp(620px, 82vh, 820px);
       margin: 0 auto;
     }
 
@@ -131,16 +131,16 @@
       100% { opacity: 1; transform: translateX(-50%) scale(1) rotate(0); }
     }
 
-    /* Center photo (her portrait) */
+    /* Center photo (her portrait) — placed BELOW arc text so they never overlap */
     .hero-center {
       position: absolute;
-      top: 14%;
+      top: 22%;
       left: 50%;
-      width: clamp(240px, 28vw, 360px);
-      height: clamp(320px, 37vw, 480px);
+      width: clamp(220px, 25vw, 320px);
+      height: clamp(290px, 32vw, 425px);
       z-index: 5;
       transform: translateX(-50%);
-      background: var(--navy);
+      background: var(--greige2);
       box-shadow: 8px 10px 0 var(--navy), 0 22px 36px rgba(28,25,24,0.22);
       border-radius: 4px;
       overflow: hidden;
@@ -182,12 +182,13 @@
       display: block;
     }
 
-    .hero-float.f1 { top: 6%;   left: 3%;  width: clamp(120px, 14vw, 180px); height: clamp(160px, 19vw, 240px); animation-delay: -1s; }
-    .hero-float.f2 { top: 2%;   left: 22%; width: clamp(100px, 11vw, 150px); height: clamp(125px, 14vw, 188px); animation-delay: -2.4s; }
-    .hero-float.f3 { top: 3%;   right: 22%;width: clamp(100px, 11vw, 150px); height: clamp(125px, 14vw, 188px); animation-delay: -3.7s; }
-    .hero-float.f4 { top: 7%;   right: 3%; width: clamp(120px, 14vw, 180px); height: clamp(160px, 19vw, 240px); animation-delay: -5s; }
-    .hero-float.f5 { bottom: 8%;left: 6%;  width: clamp(140px, 16vw, 200px); height: clamp(175px, 20vw, 250px); animation-delay: -6.2s; }
-    .hero-float.f6 { bottom: 6%;right: 6%; width: clamp(140px, 16vw, 200px); height: clamp(175px, 20vw, 250px); animation-delay: -7.4s; }
+    /* Photos arranged in 2 vertical columns down each side (NEVER under arc text) */
+    .hero-float.f1 { top: 22%;   left: 3%;  width: clamp(110px, 13vw, 165px); height: clamp(145px, 17vw, 220px); animation-delay: -1s; }
+    .hero-float.f2 { top: 48%;   left: 7%;  width: clamp(95px,  11vw, 140px); height: clamp(118px, 13vw, 175px); animation-delay: -2.4s; }
+    .hero-float.f5 { bottom: 4%; left: 3%;  width: clamp(120px, 14vw, 175px); height: clamp(150px, 17vw, 218px); animation-delay: -6.2s; }
+    .hero-float.f4 { top: 22%;   right: 3%; width: clamp(110px, 13vw, 165px); height: clamp(145px, 17vw, 220px); animation-delay: -5s; }
+    .hero-float.f3 { top: 48%;   right: 7%; width: clamp(95px,  11vw, 140px); height: clamp(118px, 13vw, 175px); animation-delay: -3.7s; }
+    .hero-float.f6 { bottom: 4%; right: 3%; width: clamp(120px, 14vw, 175px); height: clamp(150px, 17vw, 218px); animation-delay: -7.4s; }
 
     @keyframes hero-float-pulse {
       0%, 100% { opacity: 1; }
@@ -1517,15 +1518,15 @@
       </text>
     </svg>
 
-    <div class="hero-float f1" style="--rot:-7deg"><img src="GAL01_PLACEHOLDER" alt=""></div>
-    <div class="hero-float f2" style="--rot:5deg"><img src="GAL02_PLACEHOLDER" alt=""></div>
-    <div class="hero-float f3" style="--rot:-4deg"><img src="GAL03_PLACEHOLDER" alt=""></div>
-    <div class="hero-float f4" style="--rot:8deg"><img src="GAL04_PLACEHOLDER" alt=""></div>
-    <div class="hero-float f5" style="--rot:6deg"><img src="GAL05_PLACEHOLDER" alt=""></div>
-    <div class="hero-float f6" style="--rot:-6deg"><img src="GAL06_PLACEHOLDER" alt=""></div>
+    <div class="hero-float f1" style="--rot:-7deg"><img src="image/gal01.jpg" alt=""></div>
+    <div class="hero-float f2" style="--rot:5deg"><img src="image/gal02.jpg" alt=""></div>
+    <div class="hero-float f3" style="--rot:-4deg"><img src="image/gal03.jpg" alt=""></div>
+    <div class="hero-float f4" style="--rot:8deg"><img src="image/gal04.jpg" alt=""></div>
+    <div class="hero-float f5" style="--rot:6deg"><img src="image/gal05.jpg" alt=""></div>
+    <div class="hero-float f6" style="--rot:-6deg"><img src="image/gal06.jpg" alt=""></div>
 
     <div class="hero-center">
-      <img src="HERO_IMG_PLACEHOLDER" alt="Hanu — Party Produce">
+      <img src="image/portrait_hero.jpg" alt="">
     </div>
   </div>
 
@@ -1589,7 +1590,7 @@
 <section class="service" id="service">
   <div class="service-visual">
     <div class="service-visual-frame">
-      <img src="SERVICE_IMG_PLACEHOLDER" alt="Hanu — Service">
+      <img src="image/portrait_service.jpg" alt="">
     </div>
     <div class="service-visual-label">— How we produce —</div>
   </div>
@@ -1603,12 +1604,12 @@
     <ul class="service-list">
       <li>
         <span class="s-num">01</span>
-        <span class="s-name">コンセプト企画</span>
+        <span class="s-name">コンセプト設計</span>
         <span class="s-en">Concept</span>
       </li>
       <li>
         <span class="s-num">02</span>
-        <span class="s-name">会場選定・交渉</span>
+        <span class="s-name">会場選定</span>
         <span class="s-en">Venue</span>
       </li>
       <li>
@@ -1618,8 +1619,8 @@
       </li>
       <li>
         <span class="s-num">04</span>
-        <span class="s-name">招待状・演出企画</span>
-        <span class="s-en">Direction</span>
+        <span class="s-name">ペーパーアイテム・演出</span>
+        <span class="s-en">Paper &amp; Direction</span>
       </li>
       <li>
         <span class="s-num">05</span>
@@ -1628,8 +1629,8 @@
       </li>
       <li>
         <span class="s-num">06</span>
-        <span class="s-name">フォトグラファー手配</span>
-        <span class="s-en">Photo</span>
+        <span class="s-name">ケータリング</span>
+        <span class="s-en">Catering</span>
       </li>
     </ul>
   </div>
@@ -1657,7 +1658,7 @@
     <div class="oval-container">
       <div class="oval-dark-bg"></div>
       <div class="oval-frame">
-        <img src="PROFILE_IMG_PLACEHOLDER" alt="Hanu Profile">
+        <img src="image/portrait_profile.jpg" alt="">
         <div class="oval-overlay-text">Hanu.</div>
       </div>
     </div>
@@ -1665,7 +1666,7 @@
 
   <div class="prof-right">
     <div class="prof-right-thumb">
-      <img src="PROFILE_THUMB_PLACEHOLDER" alt="Hanu Detail">
+      <img src="image/portrait_profile_thumb.jpg" alt="">
     </div>
     <p class="prof-caption">
       女性起業家のための<br>
