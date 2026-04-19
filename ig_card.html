@@ -176,29 +176,29 @@
     /* ── MAIN: photo + profile/service side by side ── */
     .main {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 44px;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 48px;
       flex: 1;
       min-height: 0;
       position: relative;
       z-index: 2;
-      margin-bottom: 36px;
+      margin-bottom: 28px;
+      align-items: stretch;
     }
 
     .left-col {
       display: flex;
       flex-direction: column;
       min-height: 0;
+      justify-content: center;
     }
 
     .photo {
       width: 100%;
-      flex: 1;
+      aspect-ratio: 4 / 5;
       overflow: hidden;
       background: var(--offwhite);
       border-radius: 50%;
-      min-height: 0;
-      margin-bottom: 24px;
       box-shadow: 0 6px 28px rgba(28,25,24,0.08);
     }
 
@@ -212,11 +212,12 @@
 
     .concept {
       background: var(--navy);
-      padding: 32px 24px 34px;
+      padding: 24px 32px 26px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      margin-top: 0;
+      margin: 0 0 28px;
+      z-index: 2;
     }
 
     .concept-ghost {
@@ -249,13 +250,13 @@
 
     .concept-title {
       font-family: 'Playfair Display', serif;
-      font-size: 44px;
+      font-size: 52px;
       font-weight: 900;
       font-style: italic;
       line-height: 1.04;
       color: var(--offwhite);
       letter-spacing: -0.005em;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       position: relative;
       z-index: 1;
     }
@@ -484,19 +485,6 @@
       <div class="photo">
         <img src="image/portrait_profile_v3.png" alt="Hanu portrait">
       </div>
-      <div class="concept">
-        <div class="concept-ghost">CONCEPT</div>
-        <div class="concept-label">— Concept —</div>
-        <h2 class="concept-title">
-          small things,<br>
-          true <em>treasures.</em>
-        </h2>
-        <div class="concept-rule"></div>
-        <p class="concept-tagline">
-          Creating moments that shine.<br>
-          Designing parties that move hearts.
-        </p>
-      </div>
     </div>
 
     <div class="right-col">
@@ -520,6 +508,19 @@
         </ul>
       </div>
     </div>
+  </div>
+
+  <!-- CONCEPT (full width) -->
+  <div class="concept">
+    <div class="concept-ghost">CONCEPT</div>
+    <div class="concept-label">— Concept —</div>
+    <h2 class="concept-title">
+      small things, true <em>treasures.</em>
+    </h2>
+    <div class="concept-rule"></div>
+    <p class="concept-tagline">
+      Creating moments that shine. &nbsp;&nbsp;·&nbsp;&nbsp; Designing parties that move hearts.
+    </p>
   </div>
 
   <!-- FOOTER -->
