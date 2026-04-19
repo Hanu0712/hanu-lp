@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hanu — Instagram Feed Card</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -21,16 +21,13 @@
     }
 
     html, body {
-      background: #2a2a2a;
+      background: var(--greige);
       font-family: 'Noto Serif JP', serif;
       color: var(--charcoal);
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
+      margin: 0;
+      padding: 0;
     }
 
     /* ── CARD (1080x1350, 4:5) ── */
@@ -40,10 +37,9 @@
       background: var(--greige);
       position: relative;
       overflow: hidden;
-      padding: 64px 80px 56px;
+      padding: 48px 72px 40px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
     }
 
     /* Ghost watermark behind everything */
@@ -212,11 +208,11 @@
 
     .concept {
       background: var(--navy);
-      padding: 24px 32px 26px;
+      padding: 14px 32px 18px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      margin: 0 0 28px;
+      margin: 0 0 14px;
       z-index: 2;
     }
 
@@ -243,34 +239,34 @@
       text-transform: uppercase;
       color: var(--gold);
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       position: relative;
       z-index: 1;
     }
 
     .concept-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 52px;
-      font-weight: 900;
-      font-style: italic;
-      line-height: 1.04;
+      font-family: 'Pinyon Script', cursive;
+      font-size: 44px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 1;
       color: var(--offwhite);
-      letter-spacing: -0.005em;
-      margin-bottom: 16px;
+      letter-spacing: 0.005em;
+      margin: 0 0 6px;
       position: relative;
       z-index: 1;
     }
 
     .concept-title em {
-      font-style: italic;
+      font-style: normal;
       color: var(--gold);
     }
 
     .concept-rule {
-      width: 36px;
+      width: 32px;
       height: 1px;
       background: var(--gold);
-      margin: 0 auto 16px;
+      margin: 0 auto 8px;
       opacity: 0.6;
       position: relative;
       z-index: 1;
@@ -278,12 +274,12 @@
 
     .concept-tagline {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: 0.38em;
       text-transform: uppercase;
-      color: rgba(245,240,234,0.85);
+      color: rgba(245,240,234,0.95);
       font-weight: 500;
-      line-height: 2.1;
+      line-height: 1.75;
       position: relative;
       z-index: 1;
     }
@@ -357,29 +353,27 @@
 
     /* Service block */
     .service {
-      margin-top: 28px;
+      margin-top: 20px;
     }
 
-    .service-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
+    .produce-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1.08;
       color: var(--charcoal);
-      opacity: 0.7;
-      font-weight: 600;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      margin-bottom: 12px;
     }
 
-    .service-label::before {
-      content: '';
-      width: 24px;
-      height: 1px;
-      background: currentColor;
-      opacity: 0.6;
+    .produce-desc {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      line-height: 1.9;
+      color: rgba(28,25,24,0.82);
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
     }
 
     .service-list {
@@ -390,15 +384,15 @@
     .service-list li {
       border-bottom: 1px solid rgba(28,25,24,0.18);
       display: grid;
-      grid-template-columns: 40px 1fr;
-      gap: 12px;
-      padding: 9px 0;
+      grid-template-columns: 30px 1fr auto;
+      gap: 10px;
+      padding: 8px 0;
       align-items: center;
     }
 
     .s-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.18em;
       color: #6E5E50;
@@ -406,10 +400,21 @@
 
     .s-name {
       font-family: 'Noto Serif JP', serif;
-      font-size: 14.5px;
+      font-size: 13px;
       font-weight: 400;
       color: var(--charcoal);
       letter-spacing: 0.04em;
+    }
+
+    .s-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      color: #6E5E50;
+      text-transform: uppercase;
+      text-align: right;
+      line-height: 1.3;
     }
 
     /* ── FOOTER (CTA) ── */
@@ -419,7 +424,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 24px;
+      padding-top: 16px;
       border-top: 1px solid rgba(28,25,24,0.18);
     }
 
@@ -497,14 +502,17 @@
       </div>
 
       <div class="service">
-        <div class="service-label">Service</div>
+        <h3 class="produce-title">How We<br>Produce.</h3>
+        <p class="produce-desc">
+          コンセプト設計から当日の進行まで、すべてを一貫してプロデュース。あなたの想いを、記憶に残る一日へと設計します。
+        </p>
         <ul class="service-list">
-          <li><span class="s-num">01</span><span class="s-name">コンセプト設計</span></li>
-          <li><span class="s-num">02</span><span class="s-name">会場選定</span></li>
-          <li><span class="s-num">03</span><span class="s-name">装飾・スタイリング</span></li>
-          <li><span class="s-num">04</span><span class="s-name">ペーパー・演出</span></li>
-          <li><span class="s-num">05</span><span class="s-name">当日運営</span></li>
-          <li><span class="s-num">06</span><span class="s-name">ケータリング</span></li>
+          <li><span class="s-num">01</span><span class="s-name">コンセプト設計</span><span class="s-en">Concept</span></li>
+          <li><span class="s-num">02</span><span class="s-name">会場選定</span><span class="s-en">Venue</span></li>
+          <li><span class="s-num">03</span><span class="s-name">装飾・スタイリング</span><span class="s-en">Styling</span></li>
+          <li><span class="s-num">04</span><span class="s-name">ケータリング</span><span class="s-en">Catering</span></li>
+          <li><span class="s-num">05</span><span class="s-name">ペーパーアイテム・演出</span><span class="s-en">Paper &amp; Direction</span></li>
+          <li><span class="s-num">06</span><span class="s-name">当日の運営・進行</span><span class="s-en">Operation</span></li>
         </ul>
       </div>
     </div>
@@ -515,11 +523,12 @@
     <div class="concept-ghost">CONCEPT</div>
     <div class="concept-label">— Concept —</div>
     <h2 class="concept-title">
-      small things, true <em>treasures.</em>
+      Small things, true <em>treasures.</em>
     </h2>
     <div class="concept-rule"></div>
     <p class="concept-tagline">
-      Creating moments that shine. &nbsp;&nbsp;·&nbsp;&nbsp; Designing parties that move hearts.
+      Creating moments that shine.<br>
+      Designing parties that move hearts.
     </p>
   </div>
 
