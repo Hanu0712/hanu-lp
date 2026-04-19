@@ -1460,10 +1460,11 @@
       .hero-stage {
         height: clamp(420px, 70vh, 560px);
       }
-      /* Mobile: arc text moved further up + smaller, photo pushed down so they NEVER overlap */
-      .hero-arc { width: min(88vw, 460px); top: -28px; }
-      .hero-arc-text { font-size: 50px; }
-      .hero-center { width: 160px; height: 214px; top: 28%; }
+      /* Mobile: arc text sits in the gap between top floats and the center photo */
+      .hero-stage { height: clamp(540px, 78vh, 620px); }
+      .hero-arc { width: min(90vw, 480px); top: 13%; }
+      .hero-arc-text { font-size: 54px; }
+      .hero-center { width: 168px; height: 220px; top: 33%; }
       /* Mobile: 8 photos around hero (4 left + 4 right), tighter & smaller, no overlap */
       .hero-float.f1  { width: 60px; height: 78px;  top: 2%;  left: 22%;  }
       .hero-float.f2  { width: 70px; height: 92px;  top: 22%; left: 1%;   }
@@ -1735,7 +1736,7 @@
     <div class="oval-container">
       <div class="oval-dark-bg"></div>
       <div class="oval-frame">
-        <img src="image/portrait_profile_cutout.png?v=7" alt="">
+        <img src="image/portrait_profile_cutout.png?v=9" alt="">
         <div class="oval-overlay-text">Hanu.</div>
       </div>
     </div>
