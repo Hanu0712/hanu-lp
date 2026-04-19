@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hanu — Instagram Feed Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --greige:   #C9C3BC;
+      --greige2:  #D4CFC9;
+      --navy:     #1A2737;
+      --charcoal: #1C1918;
+      --white:    #FFFFFF;
+      --offwhite: #F5F0EA;
+      --taupe:    #9B8B7E;
+      --sand:     #E0D8D0;
+      --gold:     #C4B49E;
+    }
+
+    html, body {
+      background: #2a2a2a;
+      font-family: 'Noto Serif JP', serif;
+      color: var(--charcoal);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* ── CARD (1080x1350, 4:5) ── */
+    .card {
+      width: 1080px;
+      height: 1350px;
+      background: var(--greige);
+      position: relative;
+      overflow: hidden;
+      padding: 64px 80px 56px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+    }
+
+    /* Ghost watermark behind everything */
+    .card-ghost {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 420px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(28,25,24,0.03);
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 44px;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+
+    .logo small {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.6;
+      font-weight: 500;
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    .year::before {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.55;
+      margin: 0 0 10px auto;
+    }
+
+    /* ── CATCH (2 lines) ── */
+    .catch {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .catch p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 2;
+      color: var(--charcoal);
+      letter-spacing: 0.06em;
+    }
+
+    .catch p + p { margin-top: 4px; }
+
+    .catch strong {
+      font-weight: 500;
+    }
+
+    /* ── VISION (highlighted) ── */
+    .vision {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 28px 40px 32px;
+      margin-bottom: 44px;
+      background: var(--navy);
+      color: var(--offwhite);
+    }
+
+    .vision-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      letter-spacing: 0.48em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .vision p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 26px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--offwhite);
+      letter-spacing: 0.06em;
+    }
+
+    .vision p em {
+      font-style: normal;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ── MAIN: photo + profile/service side by side ── */
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 36px;
+    }
+
+    .photo {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--offwhite);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+    }
+
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Profile block */
+    .profile {
+      position: relative;
+    }
+
+    .profile-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.7;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .profile-label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.6;
+    }
+
+    .profile-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1.1;
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+
+    .profile-meta {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 2.1;
+      color: rgba(28,25,24,0.82);
+      letter-spacing: 0.04em;
+    }
+
+    .profile-meta em {
+      font-style: normal;
+      font-weight: 600;
+      color: #6E5E50;
+    }
+
+    /* Service block */
+    .service {
+      margin-top: 28px;
+    }
+
+    .service-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.7;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .service-label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.6;
+    }
+
+    .service-list {
+      list-style: none;
+      border-top: 1px solid rgba(28,25,24,0.18);
+    }
+
+    .service-list li {
+      border-bottom: 1px solid rgba(28,25,24,0.18);
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 12px;
+      padding: 11px 0;
+      align-items: center;
+    }
+
+    .s-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: #6E5E50;
+    }
+
+    .s-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14.5px;
+      font-weight: 400;
+      color: var(--charcoal);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER (CTA) ── */
+    .card-footer {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(28,25,24,0.18);
+    }
+
+    .foot-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.6;
+      font-weight: 500;
+    }
+
+    .foot-cta {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      letter-spacing: 0.18em;
+      color: var(--charcoal);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .foot-cta::before {
+      content: '';
+      width: 48px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-ghost">Hanu</div>
+
+  <!-- HEADER -->
+  <header class="card-header">
+    <div class="logo">
+      Hanu
+      <small>Party Produce for Her</small>
+    </div>
+    <div class="year">2025 — Produce</div>
+  </header>
+
+  <!-- CATCH -->
+  <div class="catch">
+    <p>「招かれる側」から、「招く側」へ。</p>
+    <p>「いつかやる」は、今日で終わりに。</p>
+  </div>
+
+  <!-- VISION -->
+  <div class="vision">
+    <div class="vision-label">— Our Vision —</div>
+    <p>あなたのパーティーで、<br>誰かの <em>人生が変わる</em>。</p>
+  </div>
+
+  <!-- MAIN: photo + profile/service -->
+  <div class="main">
+    <div class="photo">
+      <img src="image/白メイン.PNG" alt="Hanu portrait">
+    </div>
+
+    <div class="right-col">
+      <div class="profile">
+        <div class="profile-label">Profile</div>
+        <div class="profile-title">Party<br>Producer.</div>
+        <p class="profile-meta">
+          パーティー・ウェディング業界で <em>19年</em>。<br>
+          延べ <em>500組以上</em> のパーティーを<br>プランニング。
+        </p>
+      </div>
+
+      <div class="service">
+        <div class="service-label">Service</div>
+        <ul class="service-list">
+          <li><span class="s-num">01</span><span class="s-name">コンセプト設計</span></li>
+          <li><span class="s-num">02</span><span class="s-name">会場選定</span></li>
+          <li><span class="s-num">03</span><span class="s-name">装飾・スタイリング</span></li>
+          <li><span class="s-num">04</span><span class="s-name">ペーパー・演出</span></li>
+          <li><span class="s-num">05</span><span class="s-name">当日運営</span></li>
+          <li><span class="s-num">06</span><span class="s-name">ケータリング</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="card-footer">
+    <span class="foot-tag">Party Produce for Her</span>
+    <span class="foot-cta">@hanu_party</span>
+  </footer>
+</div>
+
+</body>
+</html>
