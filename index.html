@@ -1458,9 +1458,10 @@
       .hero-stage {
         height: clamp(420px, 70vh, 560px);
       }
-      .hero-arc { width: min(96vw, 520px); top: 8px; }
-      .hero-arc-text { font-size: 60px; }
-      .hero-center { width: 170px; height: 226px; top: 18%; }
+      /* Mobile: arc text moved further up + smaller, photo pushed down so they NEVER overlap */
+      .hero-arc { width: min(88vw, 460px); top: -28px; }
+      .hero-arc-text { font-size: 50px; }
+      .hero-center { width: 160px; height: 214px; top: 28%; }
       /* Mobile: 8 photos around hero (4 left + 4 right), tighter & smaller, no overlap */
       .hero-float.f1  { width: 60px; height: 78px;  top: 2%;  left: 22%;  }
       .hero-float.f2  { width: 70px; height: 92px;  top: 22%; left: 1%;   }
@@ -1474,9 +1475,23 @@
 
       .statement { padding: 80px 24px; min-height: auto; }
 
-      .before { padding: 80px 24px; }
-      .before-grid { grid-template-columns: 1fr; }
-      .before-portrait { width: 90px; height: 90px; }
+      .before { padding: 64px 20px; }
+      .before-grid { grid-template-columns: 1fr; gap: 1px; }
+      .before-head {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 32px;
+        flex-wrap: nowrap;
+      }
+      .before-display { font-size: 44px; flex: 1; min-width: 0; gap: 8px; }
+      .before-display-sub { font-size: 10px; letter-spacing: 0.24em; display: block; width: 100%; margin-top: 4px; }
+      .before-portrait { width: 88px; height: 88px; }
+      .before-item { padding: 28px 20px 32px; }
+      .before-num { font-size: 56px; margin-bottom: 8px; }
+      .before-title { font-size: 14px; line-height: 1.8; margin-bottom: 12px; }
+      .before-text  { font-size: 12px; line-height: 2; }
 
       .service {
         padding: 80px 24px;
