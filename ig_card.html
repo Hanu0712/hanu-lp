@@ -177,7 +177,7 @@
     .main {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 44px;
       flex: 1;
       min-height: 0;
       position: relative;
@@ -185,22 +185,106 @@
       margin-bottom: 36px;
     }
 
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
     .photo {
       width: 100%;
-      height: 100%;
+      flex: 1;
       overflow: hidden;
       background: var(--offwhite);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 50%;
+      min-height: 0;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 28px rgba(28,25,24,0.08);
     }
 
     .photo img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: center center;
+      object-fit: cover;
+      object-position: center 22%;
       display: block;
+    }
+
+    .concept {
+      background: var(--navy);
+      padding: 32px 24px 34px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 0;
+    }
+
+    .concept-ghost {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 180px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(255,255,255,0.025);
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+      z-index: 0;
+    }
+
+    .concept-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .concept-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 44px;
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1.04;
+      color: var(--offwhite);
+      letter-spacing: -0.005em;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .concept-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .concept-rule {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 16px;
+      opacity: 0.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .concept-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(245,240,234,0.85);
+      font-weight: 500;
+      line-height: 2.1;
+      position: relative;
+      z-index: 1;
     }
 
     .right-col {
@@ -238,21 +322,30 @@
 
     .profile-title {
       font-family: 'Playfair Display', serif;
-      font-size: 42px;
+      font-size: 38px;
       font-weight: 900;
       font-style: italic;
       line-height: 1.1;
       color: var(--charcoal);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .profile-meta {
       font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
+      font-size: 12.5px;
       font-weight: 400;
-      line-height: 2.1;
-      color: rgba(28,25,24,0.82);
+      line-height: 2.05;
+      color: rgba(28,25,24,0.85);
       letter-spacing: 0.04em;
+    }
+
+    .profile-meta strong {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: 15px;
+      color: var(--charcoal);
+      letter-spacing: 0.01em;
     }
 
     .profile-meta em {
@@ -387,8 +480,23 @@
 
   <!-- MAIN: photo + profile/service -->
   <div class="main">
-    <div class="photo">
-      <img src="image/白メイン.PNG" alt="Hanu portrait">
+    <div class="left-col">
+      <div class="photo">
+        <img src="image/portrait_profile_v3.png" alt="Hanu portrait">
+      </div>
+      <div class="concept">
+        <div class="concept-ghost">CONCEPT</div>
+        <div class="concept-label">— Concept —</div>
+        <h2 class="concept-title">
+          small things,<br>
+          true <em>treasures.</em>
+        </h2>
+        <div class="concept-rule"></div>
+        <p class="concept-tagline">
+          Creating moments that shine.<br>
+          Designing parties that move hearts.
+        </p>
+      </div>
     </div>
 
     <div class="right-col">
@@ -396,8 +504,7 @@
         <div class="profile-label">Profile</div>
         <div class="profile-title">Party<br>Producer.</div>
         <p class="profile-meta">
-          パーティー・ウェディング業界で <em>19年</em>。<br>
-          延べ <em>500組以上</em> のパーティーを<br>プランニング。
+          <strong>Hanu</strong>／パーティープロデューサー。パーティー・ウェディング業界で <em>19年</em>、延べ <em>500組以上</em> のパーティーをプランニング。大切にしているのは、<em>緩急と余白</em>、そこから生まれる <em>一体感</em>。パーティーに参加した人の記憶に鮮明に刻まれる一日を、あなたのために設計します。
         </p>
       </div>
 
