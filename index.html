@@ -753,22 +753,23 @@
       overflow: hidden;
     }
 
-    /* Circular portrait sits inline next to the Before. headline */
+    /* Circular portrait sits inline next to the Before. headline — prominent size with solid white circle */
     .before-portrait {
-      width: clamp(120px, 14vw, 180px);
-      height: clamp(120px, 14vw, 180px);
+      width: clamp(160px, 18vw, 240px);
+      height: clamp(160px, 18vw, 240px);
       border-radius: 50%;
       overflow: hidden;
       pointer-events: none;
       flex-shrink: 0;
-      box-shadow: 0 8px 24px rgba(28, 25, 24, 0.12);
+      box-shadow: 0 10px 32px rgba(28, 25, 24, 0.18);
       background: #ffffff;
+      border: 4px solid #ffffff;
     }
     .before-portrait img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 18%;
+      object-position: center 22%;
       display: block;
     }
 
@@ -1643,7 +1644,7 @@
       <span class="before-display-sub">こんなお悩み、ありませんか？</span>
     </div>
     <div class="before-portrait">
-      <img src="image/portrait_before_v4.png" alt="">
+      <img src="image/portrait_before_v5.png" alt="">
     </div>
   </div>
   <div class="before-grid">
