@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hanu — Party Produce for Her</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Hanu — Party Produce for Her (PC preview)</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -97,7 +100,7 @@
       position: relative;
       width: 100%;
       max-width: 1280px;
-      height: clamp(620px, 82vh, 820px);
+      height: clamp(480px, 64vh, 640px);
       margin: 0 auto;
     }
 
@@ -194,13 +197,17 @@
       display: block;
     }
 
-    /* Photos arranged in 2 vertical columns down each side (NEVER under arc text) */
-    .hero-float.f1 { top: 22%;   left: 3%;  width: clamp(110px, 13vw, 165px); height: clamp(145px, 17vw, 220px); animation-delay: -1s; }
-    .hero-float.f2 { top: 48%;   left: 7%;  width: clamp(95px,  11vw, 140px); height: clamp(118px, 13vw, 175px); animation-delay: -2.4s; }
-    .hero-float.f5 { bottom: 4%; left: 3%;  width: clamp(120px, 14vw, 175px); height: clamp(150px, 17vw, 218px); animation-delay: -6.2s; }
-    .hero-float.f4 { top: 22%;   right: 3%; width: clamp(110px, 13vw, 165px); height: clamp(145px, 17vw, 220px); animation-delay: -5s; }
-    .hero-float.f3 { top: 48%;   right: 7%; width: clamp(95px,  11vw, 140px); height: clamp(118px, 13vw, 175px); animation-delay: -3.7s; }
-    .hero-float.f6 { bottom: 4%; right: 3%; width: clamp(120px, 14vw, 175px); height: clamp(150px, 17vw, 218px); animation-delay: -7.4s; }
+    /* 8 photos arranged around the perimeter — symmetric 4 left + 4 right, never overlap, never under arc text */
+    /* LEFT side — 4 photos staggered top→bottom */
+    .hero-float.f1  { top: 4%;   left: 14%; width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -0.5s; }
+    .hero-float.f2  { top: 26%;  left: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -1.8s; }
+    .hero-float.f3  { top: 50%;  left: 6%;  width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -3.1s; }
+    .hero-float.f4  { top: 74%;  left: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -4.4s; }
+    /* RIGHT side — 4 photos staggered top→bottom (mirror) */
+    .hero-float.f6  { top: 4%;   right: 14%; width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -7.0s; }
+    .hero-float.f7  { top: 26%;  right: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -1.2s; }
+    .hero-float.f8  { top: 50%;  right: 6%;  width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -2.5s; }
+    .hero-float.f9  { top: 74%;  right: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -3.8s; }
 
     @keyframes hero-float-pulse {
       0%, 100% { opacity: 1; }
@@ -211,7 +218,7 @@
     /* Bottom copy */
     .hero-copy {
       position: relative;
-      margin-top: 28px;
+      margin: 18px auto 0;
       text-align: center;
       z-index: 10;
       max-width: 640px;
@@ -230,9 +237,9 @@
 
     .hero-jp-sub-new {
       font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
+      font-size: 20px;
       font-weight: 400;
-      line-height: 2.4;
+      line-height: 2.1;
       color: var(--charcoal);
       margin-bottom: 24px;
     }
@@ -242,7 +249,7 @@
       align-items: center;
       gap: 14px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--charcoal);
@@ -409,9 +416,9 @@
 
     .hero-jp-sub {
       font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 400;
-      line-height: 2.4;
+      line-height: 2.2;
       color: var(--charcoal);
       opacity: 0.92;
       margin-bottom: 52px;
@@ -466,15 +473,20 @@
       z-index: 1;
       width: clamp(280px, 26vw, 440px);
       height: clamp(380px, 68vh, 640px);
+      background: #ffffff;
       border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
     }
 
     .oval-frame img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center center;
       display: block;
     }
 
@@ -545,11 +557,11 @@
     /* ── STATEMENT ── */
     .statement {
       background: var(--navy);
-      padding: 120px 80px;
+      padding: 72px 80px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      min-height: 60vh;
+      min-height: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -619,13 +631,14 @@
 
     .stmt-jp {
       font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
-      font-weight: 300;
-      color: rgba(245,240,234,0.72);
-      letter-spacing: 0.08em;
-      margin-top: 38px;
+      font-size: 26px;
+      font-weight: 400;
+      color: rgba(245,240,234,0.82);
+      letter-spacing: 0.04em;
+      margin-top: 32px;
       position: relative;
-      line-height: 2.1;
+      line-height: 1.8;
+      white-space: nowrap;
     }
 
     .stmt-jp em {
@@ -736,11 +749,39 @@
     /* ── BEFORE ── */
     .before {
       background: var(--greige);
-      padding: 120px 80px;
+      padding: 120px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Circular portrait sits inline next to the Before. headline — prominent size with solid white circle */
+    .before-portrait {
+      width: clamp(160px, 18vw, 240px);
+      height: clamp(160px, 18vw, 240px);
+      border-radius: 50%;
+      overflow: hidden;
+      pointer-events: none;
+      flex-shrink: 0;
+      box-shadow: 0 10px 32px rgba(28, 25, 24, 0.18);
+      background: #ffffff;
+      border: 4px solid #ffffff;
+    }
+    .before-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 22%;
+      display: block;
     }
 
     .before-head {
       margin-bottom: 72px;
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
     }
 
     .before-display {
@@ -758,7 +799,7 @@
 
     .before-display-sub {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
+      font-size: 17px;
       letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--charcoal);
@@ -776,7 +817,7 @@
 
     .before-item {
       background: var(--greige);
-      padding: 48px 40px 52px;
+      padding: 48px 20px 52px;
     }
 
     .before-num {
@@ -790,17 +831,19 @@
     }
 
     .before-title {
-      font-size: 15px;
+      font-size: 23px;
       font-weight: 500;
-      line-height: 2;
+      line-height: 1.8;
       margin-bottom: 16px;
       color: var(--charcoal);
+      white-space: nowrap;
+      letter-spacing: -0.02em;
     }
 
     .before-text {
-      font-size: 13px;
+      font-size: 17px;
       color: rgba(28,25,24,0.82);
-      line-height: 2.3;
+      line-height: 2.1;
     }
 
     /* ── SERVICE (with image side) ── */
@@ -862,12 +905,12 @@
     }
 
     .service-desc {
-      font-size: 14px;
+      font-size: 18px;
       font-weight: 400;
       color: rgba(28,25,24,0.85);
-      line-height: 2.4;
+      line-height: 2.1;
       margin-bottom: 44px;
-      max-width: 480px;
+      max-width: 640px;
     }
 
     .service-list {
@@ -891,21 +934,21 @@
 
     .s-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       letter-spacing: 0.2em;
       color: #6E5E50;
     }
 
     .s-name {
-      font-size: 15px;
+      font-size: 18px;
       font-weight: 500;
       color: var(--charcoal);
     }
 
     .s-en {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.2em;
       color: #6E5E50;
@@ -918,15 +961,18 @@
       background: var(--greige2);
       min-height: 90vh;
       display: grid;
-      grid-template-columns: 56px 1fr 1.1fr 1fr;
+      grid-template-columns: 1fr auto 1fr;
       align-items: stretch;
       position: relative;
       overflow: hidden;
     }
 
     .prof-side-text {
-      grid-column: 1;
-      grid-row: 1;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -942,11 +988,11 @@
     }
 
     .prof-left {
-      grid-column: 2;
+      grid-column: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 80px 24px 80px 32px;
+      padding: 80px 24px 80px 80px;
     }
 
     .prof-label {
@@ -982,11 +1028,12 @@
     }
 
     .prof-bio {
-      font-size: 13.5px;
+      font-size: 15.5px;
       font-weight: 400;
       color: rgba(28,25,24,0.88);
-      line-height: 2.5;
-      max-width: 380px;
+      line-height: 1.95;
+      max-width: none;
+      white-space: nowrap;
     }
 
     .prof-bio strong {
@@ -1013,7 +1060,7 @@
     }
 
     .prof-oval-col {
-      grid-column: 3;
+      grid-column: 2;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1021,17 +1068,17 @@
     }
 
     .prof-right {
-      grid-column: 4;
+      grid-column: 3;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       padding: 80px 48px 80px 24px;
-      gap: 28px;
+      gap: 20px;
     }
 
     .prof-right-thumb {
-      width: clamp(140px, 13vw, 200px);
+      width: clamp(170px, 16vw, 230px);
       aspect-ratio: 3/4;
       overflow: hidden;
     }
@@ -1046,7 +1093,7 @@
 
     .prof-caption {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--charcoal);
@@ -1089,7 +1136,7 @@
 
     .who-lead {
       font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 400;
       color: rgba(28,25,24,0.78);
       letter-spacing: 0.05em;
@@ -1103,7 +1150,7 @@
 
     .who-list li {
       font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 400;
       line-height: 1.9;
       color: var(--charcoal);
@@ -1161,7 +1208,7 @@
 
     .offer-lead {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
+      font-size: 17px;
       letter-spacing: 0.32em;
       text-transform: uppercase;
       color: #6E5E50;
@@ -1234,10 +1281,10 @@
     .price-note {
       text-align: center;
       font-family: 'Noto Serif JP', serif;
-      font-size: 12px;
-      line-height: 2.1;
+      font-size: 18px;
+      line-height: 2;
       color: rgba(28,25,24,0.7);
-      max-width: 580px;
+      max-width: 680px;
       margin: 0 auto 80px;
       position: relative;
     }
@@ -1258,18 +1305,18 @@
 
     .block-eyebrow {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: 0.4em;
       text-transform: uppercase;
       color: #6E5E50;
       font-weight: 600;
       display: block;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .block-title {
       font-family: 'Noto Serif JP', serif;
-      font-size: 18px;
+      font-size: 21px;
       font-weight: 500;
       color: var(--charcoal);
       margin-bottom: 24px;
@@ -1283,11 +1330,11 @@
 
     .block-list li {
       font-family: 'Noto Serif JP', serif;
-      font-size: 13px;
+      font-size: 18px;
       font-weight: 400;
-      line-height: 2.1;
+      line-height: 2;
       color: rgba(28,25,24,0.85);
-      padding-left: 20px;
+      padding-left: 22px;
       position: relative;
     }
 
@@ -1422,21 +1469,47 @@
       .hero-stage {
         height: clamp(420px, 70vh, 560px);
       }
-      .hero-arc { width: min(96vw, 520px); top: 8px; }
-      .hero-arc-text { font-size: 60px; }
-      .hero-center { width: 170px; height: 226px; top: 18%; }
-      .hero-float.f1 { width: 78px; height: 104px; top: 4%; left: 1%; }
-      .hero-float.f2 { width: 66px; height: 82px;  top: 0%; left: 18%; }
-      .hero-float.f3 { width: 66px; height: 82px;  top: 1%; right: 18%; }
-      .hero-float.f4 { width: 78px; height: 104px; top: 4%; right: 1%; }
-      .hero-float.f5 { width: 96px; height: 120px; bottom: 6%; left: 4%; }
-      .hero-float.f6 { width: 96px; height: 120px; bottom: 4%; right: 4%; }
-      .hero-jp-sub-new { font-size: 13px; line-height: 2.2; }
+      /* Mobile: arc text sits in the gap between top floats and the center photo */
+      .hero-stage { height: clamp(540px, 78vh, 620px); }
+      .hero-arc { width: min(90vw, 480px); top: 13%; }
+      .hero-arc-text { font-size: 54px; }
+      .hero-center { width: 168px; height: 220px; top: 33%; }
+      /* 8 photos, 4 per side, vertically spaced so none overlap each other, arc, or center */
+      .hero-float.f1  { width: 48px; height: 60px; top: 1%;  left: 6%;  }
+      .hero-float.f2  { width: 54px; height: 70px; top: 16%; left: 0%;  }
+      .hero-float.f3  { width: 50px; height: 64px; top: 48%; left: 0%;  }
+      .hero-float.f4  { width: 58px; height: 74px; top: 82%; left: 4%;  }
+      .hero-float.f6  { width: 48px; height: 60px; top: 1%;  right: 6%; }
+      .hero-float.f7  { width: 54px; height: 70px; top: 16%; right: 0%; }
+      .hero-float.f8  { width: 50px; height: 64px; top: 48%; right: 0%; }
+      .hero-float.f9  { width: 58px; height: 74px; top: 82%; right: 4%; }
+      .hero-jp-sub-new { font-size: 19px; line-height: 2; }
+      .hero-jp-sub { font-size: 19px; line-height: 2; }
 
-      .statement { padding: 80px 24px; min-height: auto; }
+      .statement { padding: 56px 24px; min-height: 0; }
+      .stmt-jp { font-size: 20px; letter-spacing: 0; margin-top: 24px; white-space: normal; line-height: 1.9; word-break: keep-all; overflow-wrap: break-word; }
 
-      .before { padding: 80px 24px; }
-      .before-grid { grid-template-columns: 1fr; }
+      .before { padding: 64px 20px; }
+      .before-grid { grid-template-columns: 1fr; gap: 1px; }
+      .before-head {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 32px;
+        flex-wrap: nowrap;
+      }
+      .before-display { font-size: 44px; flex: 1; min-width: 0; gap: 8px; }
+      .before-display-sub { font-size: 17px; letter-spacing: 0.18em; display: block; width: 100%; margin-top: 4px; }
+      .before-portrait { width: 88px; height: 88px; }
+      .before-item { padding: 28px 20px 32px; }
+      .before-num { font-size: 56px; margin-bottom: 8px; }
+      .before-title { font-size: 19px; line-height: 1.7; margin-bottom: 12px; letter-spacing: -0.02em; white-space: normal; word-break: keep-all; overflow-wrap: break-word; }
+      .before-text  { font-size: 16px; line-height: 2; }
+      .service-desc { font-size: 17px; line-height: 2; }
+      .s-name { font-size: 17px; }
+      .prof-bio { font-size: 15px; line-height: 1.8; white-space: normal; }
+      .who-lead { font-size: 15px; }
 
       .service {
         padding: 80px 24px;
@@ -1481,15 +1554,18 @@
       .g-6 { grid-column: 1 / span 2; grid-row: 4; }
 
       .who { padding: 80px 22px; }
-      .who-list li { padding: 20px 0 20px 32px; font-size: 13px; }
+      .who-list li { padding: 20px 0 20px 32px; font-size: 15px; }
 
       .offer { padding: 80px 22px; }
       .offer-ghost { font-size: 96px; top: 30px; right: -20px; }
       .price-board { grid-template-columns: 1fr; max-width: 100%; }
       .price-col { padding: 40px 24px; }
       .price-col.regular { border-right: none; border-bottom: 1px solid rgba(28,25,24,0.08); }
+      .price-note { font-size: 17px; line-height: 1.9; }
       .offer-grid { grid-template-columns: 1fr; gap: 20px; }
       .offer-block { padding: 32px 24px; }
+      .block-title { font-size: 20px; }
+      .block-list li { font-size: 17px; line-height: 1.9; }
 
       .cta-sec { padding: 80px 24px; }
 
@@ -1530,15 +1606,20 @@
       </text>
     </svg>
 
-    <div class="hero-float f1" style="--rot:-7deg"><img src="image/gal01.jpg" alt=""></div>
-    <div class="hero-float f2" style="--rot:5deg"><img src="image/gal02.jpg" alt=""></div>
-    <div class="hero-float f3" style="--rot:-4deg"><img src="image/gal03.jpg" alt=""></div>
-    <div class="hero-float f4" style="--rot:8deg"><img src="image/gal04.jpg" alt=""></div>
-    <div class="hero-float f5" style="--rot:6deg"><img src="image/gal05.jpg" alt=""></div>
-    <div class="hero-float f6" style="--rot:-6deg"><img src="image/gal06.jpg" alt=""></div>
+    <!-- gal01 (couple drinking) lives in Service section now — removed here for no duplicates -->
+    <!-- LEFT 4 photos -->
+    <div class="hero-float f1"  style="--rot:-7deg"><img src="image/gal02.jpg?v=7" alt=""></div>
+    <div class="hero-float f2"  style="--rot:5deg"><img src="image/gal03.jpg?v=7" alt=""></div>
+    <div class="hero-float f3"  style="--rot:-4deg"><img src="image/gal04.jpg?v=7" alt=""></div>
+    <div class="hero-float f4"  style="--rot:8deg"><img src="image/gal05.jpg?v=7" alt=""></div>
+    <!-- RIGHT 4 photos -->
+    <div class="hero-float f6"  style="--rot:-6deg"><img src="image/gal06.jpg?v=7" alt=""></div>
+    <div class="hero-float f7"  style="--rot:4deg"><img src="image/gal07.jpg?v=7" alt=""></div>
+    <div class="hero-float f8"  style="--rot:-5deg"><img src="image/gal08.jpg?v=7" alt=""></div>
+    <div class="hero-float f9"  style="--rot:7deg"><img src="image/gal09.jpg?v=7" alt=""></div>
 
     <div class="hero-center">
-      <img src="image/portrait_hero.jpg" alt="">
+      <img src="image/portrait_hero.jpg?v=7" alt="">
     </div>
   </div>
 
@@ -1566,8 +1647,7 @@
   </p>
   <div class="stmt-rule"></div>
   <p class="stmt-jp">
-    あなたのパーティーで、<br>
-    誰かの <em>人生が変わる</em>。
+    あなたのパーティーで、誰かの <em>人生が変わる</em>。
   </p>
 </section>
 
@@ -1582,17 +1662,17 @@
   <div class="before-grid">
     <div class="before-item">
       <div class="before-num">01</div>
-      <h3 class="before-title">「いくらかかるか<br>分からない」</h3>
+      <h3 class="before-title">「いくらかかるか、分からない」</h3>
       <p class="before-text">会場、飲食、装飾——全部足したらいくら？<br>調べる気力も湧かないまま、後回しになっている。</p>
     </div>
     <div class="before-item">
       <div class="before-num">02</div>
-      <h3 class="before-title">「何から決めればいいか<br>分からない」</h3>
+      <h3 class="before-title">「何から決めればいいか、分からない」</h3>
       <p class="before-text">日程、場所、人数、テーマ、案内文。<br>決めることが多すぎて、最初の一歩で止まっている。</p>
     </div>
     <div class="before-item">
       <div class="before-num">03</div>
-      <h3 class="before-title">「やらなくても、<br>別に困らない」</h3>
+      <h3 class="before-title">「やらなくても、別に困らない」</h3>
       <p class="before-text">わかっている。だから動けない。<br>でも本当は——"次のステージ"を見たい自分もいる。</p>
     </div>
   </div>
@@ -1602,7 +1682,7 @@
 <section class="service" id="service">
   <div class="service-visual">
     <div class="service-visual-frame">
-      <img src="image/portrait_service.jpg" alt="">
+      <img src="image/portrait_service.jpg?v=7" alt="">
     </div>
     <div class="service-visual-label">— How we produce —</div>
   </div>
@@ -1611,7 +1691,7 @@
       How We<br>Produce.
     </h2>
     <p class="service-desc">
-      企画から当日の演出まで、すべてをワンストップで担当。あなたのビジョンを形にするパーティーを一緒に作ります。
+      コンセプト設計から当日の進行まで、すべてを一貫してプロデュース。<br>あなたの想いを、記憶に残る一日へと設計します。
     </p>
     <ul class="service-list">
       <li>
@@ -1631,18 +1711,18 @@
       </li>
       <li>
         <span class="s-num">04</span>
+        <span class="s-name">ケータリング</span>
+        <span class="s-en">Catering</span>
+      </li>
+      <li>
+        <span class="s-num">05</span>
         <span class="s-name">ペーパーアイテム・演出</span>
         <span class="s-en">Paper &amp; Direction</span>
       </li>
       <li>
-        <span class="s-num">05</span>
+        <span class="s-num">06</span>
         <span class="s-name">当日の運営・進行</span>
         <span class="s-en">Operation</span>
-      </li>
-      <li>
-        <span class="s-num">06</span>
-        <span class="s-name">ケータリング</span>
-        <span class="s-en">Catering</span>
       </li>
     </ul>
   </div>
@@ -1658,10 +1738,12 @@
       Party<br>Producer.
     </h2>
     <p class="prof-bio">
-      <strong>Hanu</strong>／パーティープロデューサー。<br><br>
-      パーティー・ウェディング業界で <em>19年</em>、延べ <em>500組以上</em> のパーティーをプランニング。<br><br>
-      大切にしているのは、<em>緩急と余白</em>、そこから生まれる <em>一体感</em>。<br><br>
-      パーティーに参加した人の記憶に鮮明に刻まれる一日を、あなたのために設計します。<br><br>
+      Hanu／パーティープロデューサー。<br><br>
+      パーティー・ウェディング業界で19年、延べ500組以上の<br>
+      パーティーをプランニング。<br>
+      大切にしているのは、緩急と余白、そこから生まれる一体感。<br>
+      パーティーに参加した人の記憶に鮮明に刻まれる一日を、<br>
+      あなたのために設計します。<br><br>
       <a href="https://www.instagram.com/hanu_party" target="_blank">@hanu_party</a>
     </p>
   </div>
@@ -1670,7 +1752,7 @@
     <div class="oval-container">
       <div class="oval-dark-bg"></div>
       <div class="oval-frame">
-        <img src="image/portrait_profile.jpg" alt="">
+        <img src="image/portrait_profile_v3.png" alt="">
         <div class="oval-overlay-text">Hanu.</div>
       </div>
     </div>
@@ -1678,7 +1760,7 @@
 
   <div class="prof-right">
     <div class="prof-right-thumb">
-      <img src="image/portrait_profile_thumb.jpg" alt="">
+      <img src="image/portrait_profile_thumb.jpg?v=7" alt="">
     </div>
     <p class="prof-caption">
       女性起業家のための<br>
@@ -1720,7 +1802,7 @@
       <span class="block-eyebrow">— Service —</span>
       <h3 class="block-title">サービス内容</h3>
       <ul class="block-list">
-        <li>パーティー1回 まるごとトータルプロデュース</li>
+        <li>パーティー1回トータルプロデュース</li>
         <li>企画 〜 当日運営まで</li>
         <li>事前打ち合わせ：オンライン or 対面</li>
         <li>当日：ディレクションとして参加</li>
