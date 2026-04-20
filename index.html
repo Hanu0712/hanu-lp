@@ -961,7 +961,7 @@
       background: var(--greige2);
       min-height: 90vh;
       display: grid;
-      grid-template-columns: 56px 1fr 1.1fr 1fr;
+      grid-template-columns: 56px 1.6fr 1.1fr 1fr;
       align-items: stretch;
       position: relative;
       overflow: hidden;
@@ -1025,11 +1025,12 @@
     }
 
     .prof-bio {
-      font-size: 17.5px;
+      font-size: 15.5px;
       font-weight: 400;
       color: rgba(28,25,24,0.88);
       line-height: 1.95;
-      max-width: 560px;
+      max-width: none;
+      white-space: nowrap;
     }
 
     .prof-bio strong {
@@ -1504,7 +1505,7 @@
       .before-text  { font-size: 16px; line-height: 2; }
       .service-desc { font-size: 17px; line-height: 2; }
       .s-name { font-size: 17px; }
-      .prof-bio { font-size: 17px; line-height: 1.8; }
+      .prof-bio { font-size: 15px; line-height: 1.8; white-space: normal; }
       .who-lead { font-size: 15px; }
 
       .service {
