@@ -1469,20 +1469,18 @@
       .hero-stage {
         height: clamp(420px, 70vh, 560px);
       }
-      /* Mobile: arc text sits in the gap between top floats and the center photo */
-      .hero-stage { height: clamp(460px, 62vh, 520px); }
-      .hero-arc { width: min(90vw, 480px); top: 5%; }
+      /* Mobile: cleaner float layout — 6 photos (3 left + 3 right), none overlap arc/center */
+      .hero-stage { height: clamp(480px, 64vh, 540px); }
+      .hero-arc { width: min(86vw, 440px); top: 3%; }
       .hero-arc-text { font-size: 54px; }
-      .hero-center { width: 168px; height: 220px; top: 26%; }
-      /* Mobile: 8 photos around hero (4 left + 4 right), tighter & smaller, no overlap */
-      .hero-float.f1  { width: 60px; height: 78px;  top: 2%;  left: 22%;  }
-      .hero-float.f2  { width: 70px; height: 92px;  top: 22%; left: 1%;   }
-      .hero-float.f3  { width: 60px; height: 78px;  top: 46%; left: 4%;   }
-      .hero-float.f4  { width: 70px; height: 92px;  top: 70%; left: 1%;   }
-      .hero-float.f6  { width: 60px; height: 78px;  top: 2%;  right: 22%; }
-      .hero-float.f7  { width: 70px; height: 92px;  top: 22%; right: 1%;  }
-      .hero-float.f8  { width: 60px; height: 78px;  top: 46%; right: 4%;  }
-      .hero-float.f9  { width: 70px; height: 92px;  top: 70%; right: 1%;  }
+      .hero-center { width: 176px; height: 232px; top: 28%; }
+      .hero-float.f1, .hero-float.f6 { display: none; }
+      .hero-float.f2  { width: 64px; height: 82px;  top: 38%; left: 0%;  }
+      .hero-float.f3  { width: 56px; height: 72px;  top: 58%; left: 6%;  }
+      .hero-float.f4  { width: 70px; height: 90px;  top: 78%; left: 2%;  }
+      .hero-float.f7  { width: 64px; height: 82px;  top: 38%; right: 0%; }
+      .hero-float.f8  { width: 56px; height: 72px;  top: 58%; right: 6%; }
+      .hero-float.f9  { width: 70px; height: 90px;  top: 78%; right: 2%; }
       .hero-jp-sub-new { font-size: 19px; line-height: 2; }
       .hero-jp-sub { font-size: 19px; line-height: 2; }
 
