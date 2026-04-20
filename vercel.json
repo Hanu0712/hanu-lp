@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        { "type": "query", "key": "pc", "value": "2" }
+      ],
+      "destination": "/lp.html"
+    }
+  ]
+}
