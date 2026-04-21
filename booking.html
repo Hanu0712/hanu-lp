@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>無料Zoom相談予約 — Hanu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --greige:   #C9C3BC;
+      --greige2:  #D4CFC9;
+      --navy:     #1A2737;
+      --charcoal: #1C1918;
+      --offwhite: #F5F0EA;
+      --gold:     #C4B49E;
+      --taupe:    #9B8B7E;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Serif JP', serif;
+      background: var(--greige);
+      color: var(--charcoal);
+      font-weight: 300;
+      padding: 40px 16px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .back-link {
+      display: block;
+      max-width: 720px;
+      margin: 0 auto 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      opacity: 0.7;
+    }
+    .back-link:hover { opacity: 1; }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--offwhite);
+      padding: 48px 36px 56px;
+      border-radius: 4px;
+      box-shadow: 8px 10px 0 var(--navy);
+    }
+    .eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: clamp(32px, 6vw, 46px);
+      color: var(--navy);
+      text-align: center;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: var(--charcoal);
+      opacity: 0.72;
+      margin-bottom: 36px;
+      letter-spacing: 0.08em;
+      line-height: 1.9;
+    }
+    .step {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(28,25,24,0.14);
+    }
+    .step-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 6px;
+    }
+    .step-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Calendar */
+    .month-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .month-nav button {
+      background: none;
+      border: 1px solid rgba(28,25,24,0.25);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--charcoal);
+      transition: all 0.2s;
+    }
+    .month-nav button:hover:not(:disabled) {
+      background: var(--navy);
+      color: var(--offwhite);
+      border-color: var(--navy);
+    }
+    .month-nav button:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+    .month-label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--navy);
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .cal-header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-align: center;
+      padding: 8px 0;
+      color: var(--taupe);
+      font-weight: 500;
+    }
+    .cal-header.sun { color: #B56B6B; }
+    .cal-header.sat { color: #6B8AB5; }
+    .cal-cell {
+      background: var(--white, #fff);
+      background: #FFFFFF;
+      border: 1px solid rgba(28,25,24,0.08);
+      padding: 10px 0;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--charcoal);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.15s;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cal-cell.blank {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+    .cal-cell.disabled {
+      opacity: 0.28;
+      cursor: not-allowed;
+      background: transparent;
+    }
+    .cal-cell.sun:not(.disabled):not(.blank) { color: #B56B6B; }
+    .cal-cell.sat:not(.disabled):not(.blank) { color: #6B8AB5; }
+    .cal-cell:hover:not(.disabled):not(.blank):not(.selected) {
+      background: var(--gold);
+      color: var(--charcoal);
+      border-color: var(--gold);
+    }
+    .cal-cell.selected {
+      background: var(--navy) !important;
+      color: var(--offwhite) !important;
+      border-color: var(--navy);
+      box-shadow: 3px 3px 0 rgba(28,25,24,0.2);
+    }
+
+    /* Slots */
+    .slots {
+      display: grid;
+      gap: 10px;
+    }
+    .slot-btn {
+      background: #FFFFFF;
+      border: 1px solid rgba(28,25,24,0.2);
+      padding: 18px 20px;
+      text-align: left;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--charcoal);
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.15s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .slot-btn .time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .slot-btn .dur {
+      font-size: 11px;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+    .slot-btn:hover:not(.selected) {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .slot-btn.selected {
+      background: var(--navy);
+      color: var(--offwhite);
+      border-color: var(--navy);
+      box-shadow: 3px 3px 0 rgba(28,25,24,0.2);
+    }
+    .slot-btn.selected .dur { color: var(--gold); }
+
+    /* Form */
+    .form-field {
+      margin-bottom: 18px;
+    }
+    .form-field label {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 6px;
+    }
+    .form-field label .req {
+      color: #B56B6B;
+      margin-left: 4px;
+    }
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(28,25,24,0.2);
+      background: #FFFFFF;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15px;
+      color: var(--charcoal);
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--navy);
+    }
+    .form-field textarea { resize: vertical; min-height: 90px; }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      background: var(--navy);
+      color: var(--offwhite);
+      border: none;
+      padding: 18px 24px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      border-radius: 2px;
+      margin-top: 8px;
+      transition: background 0.2s;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 3px 4px 0 rgba(28,25,24,0.2);
+    }
+    .submit-btn:hover { background: var(--charcoal); }
+    .submit-btn.gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .submit-btn.gold:hover { background: #AE9E87; }
+    .submit-btn.ig {
+      background: #E4405F;
+      color: #fff;
+      margin-top: 10px;
+    }
+    .submit-btn.ig:hover { background: #C7324D; }
+
+    /* Confirmation */
+    .confirm-card {
+      background: var(--navy);
+      color: var(--offwhite);
+      padding: 28px 24px;
+      border-radius: 3px;
+      margin-bottom: 22px;
+      box-shadow: 5px 6px 0 rgba(28,25,24,0.25);
+    }
+    .confirm-card .row {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(245,240,234,0.15);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .confirm-card .row:last-child { border-bottom: none; }
+    .confirm-card .row .label {
+      flex-shrink: 0;
+      width: 90px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-top: 3px;
+    }
+    .confirm-card .row .val {
+      flex: 1;
+      word-break: break-all;
+    }
+    .confirm-card .row .val.hl {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--offwhite);
+    }
+    .confirm-note {
+      font-size: 12px;
+      line-height: 1.9;
+      color: rgba(28,25,24,0.75);
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      background: rgba(196,180,158,0.22);
+      border-left: 3px solid var(--gold);
+      border-radius: 2px;
+    }
+    .dm-text-box {
+      background: #FFF;
+      border: 1px dashed rgba(28,25,24,0.3);
+      padding: 16px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      line-height: 1.85;
+      color: var(--charcoal);
+      white-space: pre-wrap;
+      border-radius: 2px;
+      margin-bottom: 10px;
+      cursor: copy;
+    }
+    .dm-text-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 6px;
+    }
+    .copy-hint {
+      font-size: 11px;
+      color: var(--taupe);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 540px) {
+      body { padding: 24px 8px; }
+      .container { padding: 36px 20px 44px; box-shadow: 5px 6px 0 var(--navy); }
+      h1 { font-size: 30px; }
+      .month-label { font-size: 18px; }
+      .cal-cell { font-size: 14px; padding: 6px 0; }
+      .slot-btn { padding: 14px 16px; }
+      .slot-btn .time { font-size: 19px; }
+      .confirm-card .row { flex-direction: column; gap: 2px; }
+      .confirm-card .row .label { width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">‹ back to Hanu</a>
+
+<div class="container">
+  <div class="eyebrow">— Free Zoom Consultation —</div>
+  <h1>Reserve a Talk.</h1>
+  <p class="subtitle">
+    無料Zoom相談のご予約<br>
+    2026年 5月 〜 6月 のご都合の良い日時をお選びください
+  </p>
+
+  <!-- STEP 1: Date -->
+  <div id="step1" class="step" style="border-top:none; padding-top:0; margin-top:0;">
+    <div class="step-label">Step 1</div>
+    <div class="step-title">日付を選択してください</div>
+    <div class="month-nav">
+      <button id="prevMonth" aria-label="前の月">‹</button>
+      <div class="month-label" id="monthLabel">2026年 5月</div>
+      <button id="nextMonth" aria-label="次の月">›</button>
+    </div>
+    <div class="cal-grid" id="calendar"></div>
+  </div>
+
+  <!-- STEP 2: Time -->
+  <div id="step2" class="step hidden">
+    <div class="step-label">Step 2</div>
+    <div class="step-title">時間帯を選択してください</div>
+    <div class="slots">
+      <button class="slot-btn" data-slot="10:00-11:00"><span class="time">10:00 – 11:00</span><span class="dur">60 min</span></button>
+      <button class="slot-btn" data-slot="19:00-20:00"><span class="time">19:00 – 20:00</span><span class="dur">60 min</span></button>
+      <button class="slot-btn" data-slot="21:00-22:00"><span class="time">21:00 – 22:00</span><span class="dur">60 min</span></button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Form -->
+  <div id="step3" class="step hidden">
+    <div class="step-label">Step 3</div>
+    <div class="step-title">お客様情報をご入力ください</div>
+    <form id="bookingForm">
+      <div class="form-field">
+        <label>お名前<span class="req">*</span></label>
+        <input type="text" id="name" required autocomplete="name">
+      </div>
+      <div class="form-field">
+        <label>メールアドレス<span class="req">*</span></label>
+        <input type="email" id="email" required autocomplete="email">
+      </div>
+      <div class="form-field">
+        <label>Instagramアカウント（任意）</label>
+        <input type="text" id="instagram" placeholder="@your_account" autocomplete="off">
+      </div>
+      <div class="form-field">
+        <label>ご相談内容（任意）</label>
+        <textarea id="message" rows="4" placeholder="パーティーのイメージ、人数、気になっていることなど"></textarea>
+      </div>
+      <button type="submit" class="submit-btn">予約内容を確認</button>
+    </form>
+  </div>
+
+  <!-- STEP 4: Confirmation -->
+  <div id="step4" class="step hidden">
+    <div class="step-label">Step 4</div>
+    <div class="step-title">ご予約内容の送信</div>
+
+    <div class="confirm-card" id="confirmCard"></div>
+
+    <div class="confirm-note">
+      ご予約を確定するには、下記のどちらかの方法でHanuへお知らせください。<br>
+      折り返しZoomミーティングURLをご返信いたします。
+    </div>
+
+    <a id="emailLink" href="#" class="submit-btn gold">✉ メールで送信する</a>
+
+    <div class="dm-text-label" style="margin-top:20px;">Or — InstagramのDMで送る</div>
+    <div class="dm-text-box" id="dmTextBox" onclick="copyDM()"></div>
+    <div class="copy-hint">↑ タップでコピー → Instagram DMへ貼り付け</div>
+    <a href="https://www.instagram.com/hanu_party" target="_blank" class="submit-btn ig">Instagram @hanu_party へ</a>
+  </div>
+
+</div>
+
+<script>
+  const SLOTS = ['10:00-11:00', '19:00-20:00', '21:00-22:00'];
+  const MONTHS = [
+    { year: 2026, month: 5, label: '2026年 5月' },
+    { year: 2026, month: 6, label: '2026年 6月' }
+  ];
+  const DAY_LABELS = ['日','月','火','水','木','金','土'];
+
+  const BOOKING_EMAIL = 'hanuparty.08@gmail.com';
+
+  let monthIdx = 0;
+  let sel = { date: null, dateLabel: null, slot: null };
+
+  const $ = id => document.getElementById(id);
+
+  function renderCalendar() {
+    const m = MONTHS[monthIdx];
+    $('monthLabel').textContent = m.label;
+    $('prevMonth').disabled = monthIdx === 0;
+    $('nextMonth').disabled = monthIdx === MONTHS.length - 1;
+
+    const cal = $('calendar');
+    cal.innerHTML = '';
+    DAY_LABELS.forEach((d, i) => {
+      const h = document.createElement('div');
+      h.className = 'cal-header' + (i === 0 ? ' sun' : i === 6 ? ' sat' : '');
+      h.textContent = d;
+      cal.appendChild(h);
+    });
+
+    const firstDay = new Date(m.year, m.month - 1, 1).getDay();
+    const lastDate = new Date(m.year, m.month, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+      const blank = document.createElement('div');
+      blank.className = 'cal-cell blank';
+      cal.appendChild(blank);
+    }
+
+    for (let d = 1; d <= lastDate; d++) {
+      const dow = new Date(m.year, m.month - 1, d).getDay();
+      const cell = document.createElement('button');
+      cell.type = 'button';
+      cell.className = 'cal-cell' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '');
+      cell.textContent = d;
+      cell.onclick = () => {
+        document.querySelectorAll('.cal-cell').forEach(c => c.classList.remove('selected'));
+        cell.classList.add('selected');
+        const iso = `${m.year}-${String(m.month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        sel.date = iso;
+        sel.dateLabel = `${m.year}年 ${m.month}月${d}日（${DAY_LABELS[dow]}）`;
+        $('step2').classList.remove('hidden');
+        $('step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+      cal.appendChild(cell);
+    }
+  }
+
+  $('prevMonth').onclick = () => { if (monthIdx > 0) { monthIdx--; renderCalendar(); } };
+  $('nextMonth').onclick = () => { if (monthIdx < MONTHS.length - 1) { monthIdx++; renderCalendar(); } };
+
+  document.querySelectorAll('.slot-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      sel.slot = btn.dataset.slot;
+      $('step3').classList.remove('hidden');
+      $('step3').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+  });
+
+  $('bookingForm').onsubmit = (e) => {
+    e.preventDefault();
+    const name = $('name').value.trim();
+    const email = $('email').value.trim();
+    const instagram = $('instagram').value.trim();
+    const message = $('message').value.trim();
+
+    $('confirmCard').innerHTML = `
+      <div class="row"><div class="label">Date</div><div class="val hl">${sel.dateLabel}</div></div>
+      <div class="row"><div class="label">Time</div><div class="val hl">${sel.slot}</div></div>
+      <div class="row"><div class="label">Name</div><div class="val">${escapeHtml(name)}</div></div>
+      <div class="row"><div class="label">Email</div><div class="val">${escapeHtml(email)}</div></div>
+      ${instagram ? `<div class="row"><div class="label">Instagram</div><div class="val">${escapeHtml(instagram)}</div></div>` : ''}
+      ${message ? `<div class="row"><div class="label">Message</div><div class="val">${escapeHtml(message).replace(/\n/g,'<br>')}</div></div>` : ''}
+    `;
+
+    const subject = `【Zoom相談予約】${sel.dateLabel} ${sel.slot}`;
+    const body =
+      `Hanu様\n\n下記の日時で無料Zoom相談を予約させていただきたく、ご連絡いたします。\n\n` +
+      `■ ご希望日時\n${sel.dateLabel} ${sel.slot}\n\n` +
+      `■ お名前\n${name}\n\n` +
+      `■ メールアドレス\n${email}\n` +
+      (instagram ? `\n■ Instagram\n${instagram}\n` : '') +
+      (message ? `\n■ ご相談内容\n${message}\n` : '') +
+      `\nZoom URLのご返信をお待ちしております。\nよろしくお願いいたします。\n`;
+
+    $('emailLink').href = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    $('dmTextBox').textContent = body;
+
+    $('step4').classList.remove('hidden');
+    $('step4').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function copyDM() {
+    const text = $('dmTextBox').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const hint = document.querySelector('.copy-hint');
+      const orig = hint.textContent;
+      hint.textContent = '✓ コピーしました';
+      hint.style.color = '#6B8AB5';
+      setTimeout(() => { hint.textContent = orig; hint.style.color = ''; }, 1800);
+    });
+  }
+
+  renderCalendar();
+</script>
+
+</body>
+</html>
