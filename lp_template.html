@@ -1428,6 +1428,40 @@
       font-weight: 500;
     }
 
+    .cta-ig-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+      padding: 14px 32px;
+      background: transparent;
+      border: 1px solid rgba(245,240,234,0.35);
+      color: rgba(245,240,234,0.9);
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.22em;
+      font-size: 13px;
+      text-transform: uppercase;
+      transition: all 0.35s;
+    }
+    .cta-ig-bar:hover {
+      background: rgba(245,240,234,0.08);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .cta-ig-bar .ig-icon {
+      width: 18px; height: 18px;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.5;
+    }
+    .cta-ig-bar .ig-handle {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      font-weight: 500;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--charcoal);
@@ -1834,6 +1868,16 @@
     無料Zoom相談を予約する
   </a>
   <span class="cta-note">カレンダーから日時を選択できます</span>
+
+  <a href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener" class="cta-ig-bar">
+    <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" ry="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none"/>
+    </svg>
+    <span>Follow on Instagram</span>
+    <span class="ig-handle">@hanu_party</span>
+  </a>
 </section>
 
 <!-- ── FOOTER ── -->
