@@ -530,8 +530,8 @@
     <div class="step-title">お客様情報をご入力ください</div>
     <form id="bookingForm">
       <div class="form-field">
-        <label>お名前<span class="req">*</span></label>
-        <input type="text" id="name" required autocomplete="name">
+        <label>お名前（漢字）<span class="req">*</span></label>
+        <input type="text" id="name" required autocomplete="name" placeholder="山田 花子">
       </div>
       <div class="form-field">
         <label>お名前（カタカナ）<span class="req">*</span></label>
@@ -546,12 +546,13 @@
         <input type="text" id="instagram" placeholder="@your_account" autocomplete="off">
       </div>
       <div class="form-field">
-        <label>パーティー内容<span class="req">*</span></label>
+        <label>パーティー内容（複数選択可）<span class="req">*</span></label>
         <div class="checkbox-group" id="partyTypeGroup">
-          <label class="check-item"><input type="checkbox" name="partyType" value="誕生日会"><span>誕生日会</span></label>
-          <label class="check-item"><input type="checkbox" name="partyType" value="コミュニティ交流会"><span>コミュニティ交流会</span></label>
-          <label class="check-item"><input type="checkbox" name="partyType" value="コミュニティ懇親会"><span>コミュニティ懇親会</span></label>
           <label class="check-item"><input type="checkbox" name="partyType" value="周年パーティー"><span>周年パーティー</span></label>
+          <label class="check-item"><input type="checkbox" name="partyType" value="出版パーティー"><span>出版パーティー</span></label>
+          <label class="check-item"><input type="checkbox" name="partyType" value="コミュニティー交流会"><span>コミュニティー交流会</span></label>
+          <label class="check-item"><input type="checkbox" name="partyType" value="コミュニティ懇親会"><span>コミュニティ懇親会</span></label>
+          <label class="check-item"><input type="checkbox" name="partyType" value="お誕生日会"><span>お誕生日会</span></label>
           <label class="check-item"><input type="checkbox" name="partyType" value="検討中"><span>検討中</span></label>
         </div>
       </div>
