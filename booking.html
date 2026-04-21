@@ -307,6 +307,65 @@
     }
     .form-field textarea { resize: vertical; min-height: 90px; }
 
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+    }
+    @media (max-width: 540px) {
+      .checkbox-group { grid-template-columns: 1fr; }
+    }
+    .check-item {
+      display: flex !important;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid rgba(28,25,24,0.2);
+      background: #FFFFFF;
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: 'Noto Serif JP', serif !important;
+      font-size: 14px !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      color: var(--charcoal) !important;
+      margin-bottom: 0 !important;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .check-item:hover { border-color: var(--navy); }
+    .check-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid rgba(28,25,24,0.35);
+      border-radius: 2px;
+      background: #FFFFFF;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      margin: 0;
+    }
+    .check-item input[type="checkbox"]:checked {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .check-item input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 0px;
+      width: 6px;
+      height: 11px;
+      border-right: 2px solid var(--offwhite);
+      border-bottom: 2px solid var(--offwhite);
+      transform: rotate(45deg);
+    }
+    .check-item input[type="checkbox"]:checked + span {
+      color: var(--navy);
+      font-weight: 500;
+    }
+
     .submit-btn {
       display: block;
       width: 100%;
@@ -476,12 +535,26 @@
         <input type="text" id="name" required autocomplete="name">
       </div>
       <div class="form-field">
+        <label>お名前（カタカナ）<span class="req">*</span></label>
+        <input type="text" id="nameKana" required autocomplete="off" placeholder="ヤマダ ハナコ" pattern="^[\u30A0-\u30FF\s　ー]+$" title="カタカナで入力してください">
+      </div>
+      <div class="form-field">
         <label>メールアドレス<span class="req">*</span></label>
         <input type="email" id="email" required autocomplete="email">
       </div>
       <div class="form-field">
         <label>Instagramアカウント（任意）</label>
         <input type="text" id="instagram" placeholder="@your_account" autocomplete="off">
+      </div>
+      <div class="form-field">
+        <label>パーティー内容<span class="req">*</span></label>
+        <div class="checkbox-group" id="partyTypeGroup">
+          <label class="check-item"><input type="checkbox" name="partyType" value="誕生日会"><span>誕生日会</span></label>
+          <label class="check-item"><input type="checkbox" name="partyType" value="コミュニティ交流会"><span>コミュニティ交流会</span></label>
+          <label class="check-item"><input type="checkbox" name="partyType" value="コミュニティ懇親会"><span>コミュニティ懇親会</span></label>
+          <label class="check-item"><input type="checkbox" name="partyType" value="周年パーティー"><span>周年パーティー</span></label>
+          <label class="check-item"><input type="checkbox" name="partyType" value="検討中"><span>検討中</span></label>
+        </div>
       </div>
       <div class="form-field">
         <label>ご相談内容（任意）</label>
@@ -626,16 +699,27 @@
   $('bookingForm').onsubmit = (e) => {
     e.preventDefault();
     const name = $('name').value.trim();
+    const nameKana = $('nameKana').value.trim();
     const email = $('email').value.trim();
     const instagram = $('instagram').value.trim();
     const message = $('message').value.trim();
+    const partyTypes = Array.from(
+      document.querySelectorAll('input[name="partyType"]:checked')
+    ).map(el => el.value);
+
+    if (partyTypes.length === 0) {
+      alert('パーティー内容を1つ以上選択してください。');
+      return;
+    }
+    const partyTypeText = partyTypes.join('、');
 
     $('confirmCard').innerHTML = `
       <div class="row"><div class="label">Date</div><div class="val hl">${sel.dateLabel}</div></div>
       <div class="row"><div class="label">Time</div><div class="val hl">${sel.slot}</div></div>
-      <div class="row"><div class="label">Name</div><div class="val">${escapeHtml(name)}</div></div>
+      <div class="row"><div class="label">Name</div><div class="val">${escapeHtml(name)}（${escapeHtml(nameKana)}）</div></div>
       <div class="row"><div class="label">Email</div><div class="val">${escapeHtml(email)}</div></div>
       ${instagram ? `<div class="row"><div class="label">Instagram</div><div class="val">${escapeHtml(instagram)}</div></div>` : ''}
+      <div class="row"><div class="label">Party</div><div class="val">${escapeHtml(partyTypeText)}</div></div>
       ${message ? `<div class="row"><div class="label">Message</div><div class="val">${escapeHtml(message).replace(/\n/g,'<br>')}</div></div>` : ''}
     `;
 
@@ -643,9 +727,10 @@
     const body =
       `Hanu様\n\n下記の日時で無料Zoom相談を予約させていただきたく、ご連絡いたします。\n\n` +
       `■ ご希望日時\n${sel.dateLabel} ${sel.slot}\n\n` +
-      `■ お名前\n${name}\n\n` +
+      `■ お名前\n${name}（${nameKana}）\n\n` +
       `■ メールアドレス\n${email}\n` +
       (instagram ? `\n■ Instagram\n${instagram}\n` : '') +
+      `\n■ パーティー内容\n${partyTypeText}\n` +
       (message ? `\n■ ご相談内容\n${message}\n` : '') +
       `\nZoom URLのご返信をお待ちしております。\nよろしくお願いいたします。\n`;
 
