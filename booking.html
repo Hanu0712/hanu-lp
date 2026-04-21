@@ -138,36 +138,43 @@
       grid-template-columns: repeat(7, 1fr);
       gap: 4px;
     }
-    .coming-soon {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 56px 20px;
-      background: #FFFFFF;
-      border: 1px dashed rgba(28,25,24,0.2);
-      border-radius: 3px;
+    .cal-wrap { position: relative; }
+    .cal-wrap.coming-soon::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(245,240,234,0.72);
+      pointer-events: none;
+      border-radius: 2px;
     }
-    .coming-soon .cs-label {
+    .cs-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      pointer-events: none;
+      padding: 18px 28px;
+      background: rgba(28,25,24,0.92);
+      color: var(--offwhite);
+      border-radius: 2px;
+      box-shadow: 4px 5px 0 rgba(28,25,24,0.15);
+    }
+    .cs-overlay .cs-label {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 12px;
-      letter-spacing: 0.3em;
+      font-size: 18px;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 14px;
-    }
-    .coming-soon .cs-title {
-      font-family: 'Playfair Display', 'Noto Serif JP', serif;
-      font-size: 24px;
-      letter-spacing: 0.04em;
-      color: var(--navy);
-      margin-bottom: 14px;
       font-weight: 500;
     }
-    .coming-soon .cs-text {
+    .cs-overlay .cs-sub {
       font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
-      line-height: 2;
-      color: var(--charcoal);
-      letter-spacing: 0.02em;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      margin-top: 8px;
+      color: rgba(245,240,234,0.85);
     }
     .cal-header {
       font-family: 'Cormorant Garamond', serif;
@@ -544,7 +551,9 @@
       <div class="month-label" id="monthLabel">2026年 5月</div>
       <button id="nextMonth" aria-label="次の月">›</button>
     </div>
-    <div class="cal-grid" id="calendar"></div>
+    <div class="cal-wrap" id="calWrap">
+      <div class="cal-grid" id="calendar"></div>
+    </div>
   </div>
 
   <!-- STEP 2: Time -->
@@ -653,20 +662,12 @@
     $('prevMonth').disabled = monthIdx === 0;
     $('nextMonth').disabled = monthIdx === MONTHS.length - 1;
 
+    const wrap = $('calWrap');
+    wrap.classList.toggle('coming-soon', !!m.comingSoon);
+    wrap.querySelectorAll('.cs-overlay').forEach(el => el.remove());
+
     const cal = $('calendar');
     cal.innerHTML = '';
-
-    if (m.comingSoon) {
-      const notice = document.createElement('div');
-      notice.className = 'coming-soon';
-      notice.innerHTML = `
-        <div class="cs-label">— Coming Soon —</div>
-        <div class="cs-title">${m.month}月の予約枠</div>
-        <div class="cs-text">ただいま準備中です。<br>近日中にご案内いたします。</div>
-      `;
-      cal.appendChild(notice);
-      return;
-    }
 
     DAY_LABELS.forEach((d, i) => {
       const h = document.createElement('div');
@@ -691,7 +692,11 @@
       const cell = document.createElement('button');
       cell.type = 'button';
       cell.className = 'cal-cell' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '') + (isBlocked ? ' disabled' : '');
-      if (isBlocked) {
+      if (m.comingSoon) {
+        cell.textContent = d;
+        cell.disabled = true;
+        cell.style.cursor = 'default';
+      } else if (isBlocked) {
         cell.innerHTML = `<span class="cell-num">${d}</span><span class="sold">— SOLD OUT —</span>`;
         cell.disabled = true;
         cell.title = '予約不可';
@@ -708,6 +713,16 @@
         };
       }
       cal.appendChild(cell);
+    }
+
+    if (m.comingSoon) {
+      const overlay = document.createElement('div');
+      overlay.className = 'cs-overlay';
+      overlay.innerHTML = `
+        <div class="cs-label">— Coming Soon —</div>
+        <div class="cs-sub">近日公開予定</div>
+      `;
+      wrap.appendChild(overlay);
     }
   }
 
