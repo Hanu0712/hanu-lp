@@ -572,16 +572,11 @@
     <div class="confirm-card" id="confirmCard"></div>
 
     <div class="confirm-note">
-      ご予約を確定するには、下記のどちらかの方法でHanuへお知らせください。<br>
-      折り返しZoomミーティングURLをご返信いたします。
+      下記のボタンからご予約内容をお送りください。<br>
+      折り返し、ZoomミーティングURLをご返信いたします。
     </div>
 
     <a id="emailLink" href="#" class="submit-btn gold">✉ メールで送信する</a>
-
-    <div class="dm-text-label" style="margin-top:20px;">Or — InstagramのDMで送る</div>
-    <div class="dm-text-box" id="dmTextBox" onclick="copyDM()"></div>
-    <div class="copy-hint">↑ タップでコピー → Instagram DMへ貼り付け</div>
-    <a href="https://www.instagram.com/hanu_party" target="_blank" class="submit-btn ig">Instagram @hanu_party へ</a>
   </div>
 
 </div>
@@ -735,7 +730,6 @@
       `\nZoom URLのご返信をお待ちしております。\nよろしくお願いいたします。\n`;
 
     $('emailLink').href = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    $('dmTextBox').textContent = body;
 
     $('step4').classList.remove('hidden');
     $('step4').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -743,17 +737,6 @@
 
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-
-  function copyDM() {
-    const text = $('dmTextBox').textContent;
-    navigator.clipboard.writeText(text).then(() => {
-      const hint = document.querySelector('.copy-hint');
-      const orig = hint.textContent;
-      hint.textContent = '✓ コピーしました';
-      hint.style.color = '#6B8AB5';
-      setTimeout(() => { hint.textContent = orig; hint.style.color = ''; }, 1800);
-    });
   }
 
   renderCalendar();
