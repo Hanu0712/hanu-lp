@@ -138,6 +138,37 @@
       grid-template-columns: repeat(7, 1fr);
       gap: 4px;
     }
+    .coming-soon {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 56px 20px;
+      background: #FFFFFF;
+      border: 1px dashed rgba(28,25,24,0.2);
+      border-radius: 3px;
+    }
+    .coming-soon .cs-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .coming-soon .cs-title {
+      font-family: 'Playfair Display', 'Noto Serif JP', serif;
+      font-size: 24px;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+    .coming-soon .cs-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14px;
+      line-height: 2;
+      color: var(--charcoal);
+      letter-spacing: 0.02em;
+    }
     .cal-header {
       font-family: 'Cormorant Garamond', serif;
       font-size: 11px;
@@ -588,7 +619,9 @@
   const SLOTS = ['11:00-12:00', '21:00-22:00'];
   const MONTHS = [
     { year: 2026, month: 5, label: '2026年 5月' },
-    { year: 2026, month: 6, label: '2026年 6月' }
+    { year: 2026, month: 6, label: '2026年 6月' },
+    { year: 2026, month: 7, label: '2026年 7月', comingSoon: true },
+    { year: 2026, month: 8, label: '2026年 8月', comingSoon: true }
   ];
   const DAY_LABELS = ['日','月','火','水','木','金','土'];
 
@@ -622,6 +655,19 @@
 
     const cal = $('calendar');
     cal.innerHTML = '';
+
+    if (m.comingSoon) {
+      const notice = document.createElement('div');
+      notice.className = 'coming-soon';
+      notice.innerHTML = `
+        <div class="cs-label">— Coming Soon —</div>
+        <div class="cs-title">${m.month}月の予約枠</div>
+        <div class="cs-text">ただいま準備中です。<br>近日中にご案内いたします。</div>
+      `;
+      cal.appendChild(notice);
+      return;
+    }
+
     DAY_LABELS.forEach((d, i) => {
       const h = document.createElement('div');
       h.className = 'cal-header' + (i === 0 ? ' sun' : i === 6 ? ' sat' : '');
