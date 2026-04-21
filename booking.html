@@ -172,9 +172,23 @@
       cursor: default;
     }
     .cal-cell.disabled {
-      opacity: 0.28;
       cursor: not-allowed;
-      background: transparent;
+      background: #FFFFFF;
+      color: rgba(28,25,24,0.45);
+      position: relative;
+      overflow: hidden;
+    }
+    .cal-cell.disabled::after {
+      content: '';
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      top: 50%;
+      height: 1px;
+      background: rgba(28,25,24,0.55);
+      transform: rotate(-30deg);
+      transform-origin: center;
+      pointer-events: none;
     }
     .cal-cell.sun:not(.disabled):not(.blank) { color: #B56B6B; }
     .cal-cell.sat:not(.disabled):not(.blank) { color: #6B8AB5; }
