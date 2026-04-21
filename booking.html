@@ -488,6 +488,11 @@
 
   const BOOKING_EMAIL = 'hanuparty.08@gmail.com';
 
+  const BLOCKED_DATES = new Set([
+    '2026-05-08','2026-05-09','2026-05-10','2026-05-12','2026-05-13',
+    '2026-05-23','2026-05-24','2026-05-27','2026-05-28','2026-05-30'
+  ]);
+
   let monthIdx = 0;
   let sel = { date: null, dateLabel: null, slot: null };
 
@@ -519,19 +524,25 @@
 
     for (let d = 1; d <= lastDate; d++) {
       const dow = new Date(m.year, m.month - 1, d).getDay();
+      const iso = `${m.year}-${String(m.month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const isBlocked = BLOCKED_DATES.has(iso);
       const cell = document.createElement('button');
       cell.type = 'button';
-      cell.className = 'cal-cell' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '');
+      cell.className = 'cal-cell' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '') + (isBlocked ? ' disabled' : '');
       cell.textContent = d;
-      cell.onclick = () => {
-        document.querySelectorAll('.cal-cell').forEach(c => c.classList.remove('selected'));
-        cell.classList.add('selected');
-        const iso = `${m.year}-${String(m.month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        sel.date = iso;
-        sel.dateLabel = `${m.year}年 ${m.month}月${d}日（${DAY_LABELS[dow]}）`;
-        $('step2').classList.remove('hidden');
-        $('step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      };
+      if (isBlocked) {
+        cell.disabled = true;
+        cell.title = '予約不可';
+      } else {
+        cell.onclick = () => {
+          document.querySelectorAll('.cal-cell').forEach(c => c.classList.remove('selected'));
+          cell.classList.add('selected');
+          sel.date = iso;
+          sel.dateLabel = `${m.year}年 ${m.month}月${d}日（${DAY_LABELS[dow]}）`;
+          $('step2').classList.remove('hidden');
+          $('step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+      }
       cal.appendChild(cell);
     }
   }
