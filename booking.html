@@ -645,11 +645,19 @@
 
   // per-date disabled slots (date -> Set of slot strings NG)
   const BLOCKED_SLOTS = {};
+  const _addNgSlot = (iso, slot) => {
+    if (!BLOCKED_SLOTS[iso]) BLOCKED_SLOTS[iso] = new Set();
+    BLOCKED_SLOTS[iso].add(slot);
+  };
   [
     '2026-05-02','2026-05-03','2026-05-04','2026-05-05','2026-05-07',
     '2026-05-14','2026-05-16','2026-05-17','2026-05-19','2026-05-20',
     '2026-05-21','2026-05-22','2026-05-25','2026-05-26','2026-05-27'
-  ].forEach(d => { BLOCKED_SLOTS[d] = new Set(['11:00-12:00']); });
+  ].forEach(d => _addNgSlot(d, '11:00-12:00'));
+  [
+    '2026-05-01','2026-05-07','2026-05-08','2026-05-10','2026-05-12',
+    '2026-05-15','2026-05-18','2026-05-29','2026-05-30'
+  ].forEach(d => _addNgSlot(d, '21:00-22:00'));
 
   let monthIdx = 0;
   let sel = { date: null, dateLabel: null, slot: null };
