@@ -174,21 +174,21 @@
     .cal-cell.disabled {
       cursor: not-allowed;
       background: #FFFFFF;
-      color: rgba(28,25,24,0.45);
-      position: relative;
-      overflow: hidden;
+      color: rgba(28,25,24,0.3);
+      flex-direction: column;
+      gap: 1px;
+      padding: 4px 2px;
     }
-    .cal-cell.disabled::after {
-      content: '';
-      position: absolute;
-      left: -10%;
-      right: -10%;
-      top: 50%;
-      height: 1px;
-      background: rgba(28,25,24,0.55);
-      transform: rotate(-30deg);
-      transform-origin: center;
-      pointer-events: none;
+    .cal-cell.disabled .cell-num { font-size: 11px; line-height: 1; opacity: 0.7; }
+    .cal-cell.disabled .sold {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      line-height: 1.15;
+      color: #B56B6B;
+      font-weight: 600;
+      text-align: center;
+      white-space: nowrap;
     }
     .cal-cell.sun:not(.disabled):not(.blank) { color: #B56B6B; }
     .cal-cell.sat:not(.disabled):not(.blank) { color: #6B8AB5; }
@@ -249,29 +249,26 @@
       box-shadow: 3px 3px 0 rgba(28,25,24,0.2);
     }
     .slot-btn.selected .dur { color: var(--gold); }
+    .slot-btn .sold {
+      display: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      color: #B56B6B;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
     .slot-btn.disabled {
       cursor: not-allowed;
-      color: rgba(28,25,24,0.35);
+      color: rgba(28,25,24,0.45);
       background: #FFFFFF;
-      position: relative;
-      overflow: hidden;
     }
-    .slot-btn.disabled .dur { color: rgba(28,25,24,0.3); }
+    .slot-btn.disabled .time { color: rgba(28,25,24,0.45); }
+    .slot-btn.disabled .dur { display: none; }
+    .slot-btn.disabled .sold { display: inline; }
     .slot-btn.disabled:hover {
       background: #FFFFFF;
       border-color: rgba(28,25,24,0.2);
-    }
-    .slot-btn.disabled::after {
-      content: '';
-      position: absolute;
-      left: 4%;
-      right: 4%;
-      top: 50%;
-      height: 1px;
-      background: rgba(28,25,24,0.5);
-      transform: rotate(-6deg);
-      transform-origin: center;
-      pointer-events: none;
     }
 
     /* Form */
@@ -463,9 +460,9 @@
     <div class="step-label">Step 2</div>
     <div class="step-title">時間帯を選択してください</div>
     <div class="slots">
-      <button class="slot-btn" data-slot="11:00-12:00"><span class="time">11:00 – 12:00</span><span class="dur">60 min</span></button>
-      <button class="slot-btn" data-slot="19:00-20:00"><span class="time">19:00 – 20:00</span><span class="dur">60 min</span></button>
-      <button class="slot-btn" data-slot="21:00-22:00"><span class="time">21:00 – 22:00</span><span class="dur">60 min</span></button>
+      <button class="slot-btn" data-slot="11:00-12:00"><span class="time">11:00 – 12:00</span><span class="dur">60 min</span><span class="sold">— SOLD OUT —</span></button>
+      <button class="slot-btn" data-slot="19:00-20:00"><span class="time">19:00 – 20:00</span><span class="dur">60 min</span><span class="sold">— SOLD OUT —</span></button>
+      <button class="slot-btn" data-slot="21:00-22:00"><span class="time">21:00 – 22:00</span><span class="dur">60 min</span><span class="sold">— SOLD OUT —</span></button>
     </div>
   </div>
 
@@ -577,11 +574,12 @@
       const cell = document.createElement('button');
       cell.type = 'button';
       cell.className = 'cal-cell' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '') + (isBlocked ? ' disabled' : '');
-      cell.textContent = d;
       if (isBlocked) {
+        cell.innerHTML = `<span class="cell-num">${d}</span><span class="sold">— SOLD OUT —</span>`;
         cell.disabled = true;
         cell.title = '予約不可';
       } else {
+        cell.textContent = d;
         cell.onclick = () => {
           document.querySelectorAll('.cal-cell').forEach(c => c.classList.remove('selected'));
           cell.classList.add('selected');
