@@ -249,6 +249,30 @@
       box-shadow: 3px 3px 0 rgba(28,25,24,0.2);
     }
     .slot-btn.selected .dur { color: var(--gold); }
+    .slot-btn.disabled {
+      cursor: not-allowed;
+      color: rgba(28,25,24,0.35);
+      background: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+    .slot-btn.disabled .dur { color: rgba(28,25,24,0.3); }
+    .slot-btn.disabled:hover {
+      background: #FFFFFF;
+      border-color: rgba(28,25,24,0.2);
+    }
+    .slot-btn.disabled::after {
+      content: '';
+      position: absolute;
+      left: 4%;
+      right: 4%;
+      top: 50%;
+      height: 1px;
+      background: rgba(28,25,24,0.5);
+      transform: rotate(-6deg);
+      transform-origin: center;
+      pointer-events: none;
+    }
 
     /* Form */
     .form-field {
@@ -509,6 +533,14 @@
     '2026-06-18','2026-06-20','2026-06-21'
   ]);
 
+  // per-date disabled slots (date -> Set of slot strings NG)
+  const BLOCKED_SLOTS = {};
+  [
+    '2026-05-02','2026-05-03','2026-05-04','2026-05-05','2026-05-07',
+    '2026-05-14','2026-05-16','2026-05-17','2026-05-19','2026-05-20',
+    '2026-05-21','2026-05-22','2026-05-25','2026-05-26','2026-05-27'
+  ].forEach(d => { BLOCKED_SLOTS[d] = new Set(['10:00-11:00']); });
+
   let monthIdx = 0;
   let sel = { date: null, dateLabel: null, slot: null };
 
@@ -555,6 +587,7 @@
           cell.classList.add('selected');
           sel.date = iso;
           sel.dateLabel = `${m.year}年 ${m.month}月${d}日（${DAY_LABELS[dow]}）`;
+          refreshSlots(iso);
           $('step2').classList.remove('hidden');
           $('step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
@@ -566,8 +599,24 @@
   $('prevMonth').onclick = () => { if (monthIdx > 0) { monthIdx--; renderCalendar(); } };
   $('nextMonth').onclick = () => { if (monthIdx < MONTHS.length - 1) { monthIdx++; renderCalendar(); } };
 
+  function refreshSlots(iso) {
+    const ng = BLOCKED_SLOTS[iso] || new Set();
+    document.querySelectorAll('.slot-btn').forEach(btn => {
+      const s = btn.dataset.slot;
+      const blocked = ng.has(s);
+      btn.classList.toggle('disabled', blocked);
+      btn.disabled = blocked;
+      btn.title = blocked ? '予約不可' : '';
+      if (blocked && btn.classList.contains('selected')) {
+        btn.classList.remove('selected');
+        sel.slot = null;
+      }
+    });
+  }
+
   document.querySelectorAll('.slot-btn').forEach(btn => {
     btn.onclick = () => {
+      if (btn.disabled || btn.classList.contains('disabled')) return;
       document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       sel.slot = btn.dataset.slot;
