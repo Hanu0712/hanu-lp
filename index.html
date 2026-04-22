@@ -239,19 +239,20 @@
 
     .hero-eyebrow {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      letter-spacing: 0.26em;
+      font-size: clamp(13px, 1.5vw, 16px);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--charcoal);
-      opacity: 0.72;
-      font-weight: 500;
-      margin-bottom: 4px;
-      line-height: 1.8;
+      opacity: 0.82;
+      font-weight: 600;
+      margin-bottom: 6px;
+      line-height: 1.7;
     }
     .hero-eyebrow .sep {
       display: inline-block;
-      margin: 0 0.4em;
-      opacity: 0.5;
+      margin: 0 0.45em;
+      opacity: 0.45;
+      font-weight: 400;
     }
 
     .hero-jp-sub-new {
@@ -2096,7 +2097,8 @@
 
       .cta-sec { padding: 80px 24px; }
 
-      .hero-eyebrow { font-size: 10px; letter-spacing: 0.22em; }
+      .hero-eyebrow { letter-spacing: 0.16em; }
+      .hero-eyebrow .sep { margin: 0 0.3em; }
       .hero-divider { width: 40px; margin: 4px auto 16px; }
 
       .purpose { padding: 64px 20px; }
@@ -2205,7 +2207,6 @@
     <div class="hero-divider" aria-hidden="true"></div>
     <p class="hero-jp-sub-new">
       「招かれる側」から、「招く側」へ。<br>
-      「いつかやる」は、今日で終わりに。<br>
       はじめての一日を、プロと設計する。
     </p>
     <a href="#offer" class="hero-cta-link-new">モニター募集の詳細を見る</a>
