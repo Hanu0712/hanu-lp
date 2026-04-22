@@ -239,13 +239,19 @@
 
     .hero-eyebrow {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 10px;
-      letter-spacing: 0.42em;
+      font-size: 11px;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--charcoal);
-      opacity: 0.65;
+      opacity: 0.72;
       font-weight: 500;
-      margin-bottom: 14px;
+      margin-bottom: 4px;
+      line-height: 1.8;
+    }
+    .hero-eyebrow .sep {
+      display: inline-block;
+      margin: 0 0.4em;
+      opacity: 0.5;
     }
 
     .hero-jp-sub-new {
@@ -1541,44 +1547,13 @@
       color: rgba(245,240,234,0.2);
     }
 
-    /* ── HERO METRIC (19 years / 500+ parties) ── */
-    .hero-metric {
-      display: inline-flex;
-      align-items: center;
-      gap: 22px;
-      margin: 0 auto 22px;
-      padding: 10px 24px;
-      border-top: 1px solid rgba(28,25,24,0.28);
-      border-bottom: 1px solid rgba(28,25,24,0.28);
-      position: relative;
-      z-index: 10;
-    }
-    .hero-metric-item {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-    .hero-metric-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 900;
-      font-style: italic;
-      color: var(--charcoal);
-      line-height: 1;
-    }
-    .hero-metric-num .plus { font-size: 14px; }
-    .hero-metric-unit {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 10px;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: rgba(28,25,24,0.7);
-      font-weight: 500;
-    }
-    .hero-metric-divider {
-      width: 1px;
-      height: 16px;
-      background: rgba(28,25,24,0.22);
+    /* ── HERO DIVIDER (eyebrow と 和文コピーの間の細線) ── */
+    .hero-divider {
+      width: 48px;
+      height: 1px;
+      background: rgba(28,25,24,0.35);
+      margin: 6px auto 20px;
+      opacity: 0.9;
     }
 
     /* ── PURPOSE (なぜパーティーを開くのか) ── */
@@ -2121,9 +2096,8 @@
 
       .cta-sec { padding: 80px 24px; }
 
-      .hero-metric { gap: 14px; padding: 8px 16px; margin-bottom: 16px; }
-      .hero-metric-num { font-size: 18px; }
-      .hero-metric-unit { font-size: 9px; letter-spacing: 0.26em; }
+      .hero-eyebrow { font-size: 10px; letter-spacing: 0.22em; }
+      .hero-divider { width: 40px; margin: 4px auto 16px; }
 
       .purpose { padding: 64px 20px; }
       .purpose-ghost { font-size: 96px; top: 20px; left: -10px; }
@@ -2197,19 +2171,6 @@
 <section class="hero">
   <div class="hero-tagline">女性起業家のための<br>パーティープロデュース</div>
 
-  <!-- Profile数字の先出し：19年／500組＋ -->
-  <div class="hero-metric" aria-label="Experience">
-    <div class="hero-metric-item">
-      <span class="hero-metric-num">19</span>
-      <span class="hero-metric-unit">Years</span>
-    </div>
-    <span class="hero-metric-divider" aria-hidden="true"></span>
-    <div class="hero-metric-item">
-      <span class="hero-metric-num">500<span class="plus">+</span></span>
-      <span class="hero-metric-unit">Parties</span>
-    </div>
-  </div>
-
   <div class="hero-stage">
     <svg class="hero-arc" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
       <defs>
@@ -2238,10 +2199,14 @@
   </div>
 
   <div class="hero-copy">
-    <div class="hero-eyebrow">2025 — Party Produce for Her</div>
+    <div class="hero-eyebrow">
+      Wedding &amp; Party Planning<span class="sep">/</span>19 Years · 500+ Events
+    </div>
+    <div class="hero-divider" aria-hidden="true"></div>
     <p class="hero-jp-sub-new">
       「招かれる側」から、「招く側」へ。<br>
-      「いつかやる」は、今日で終わりに。
+      「いつかやる」は、今日で終わりに。<br>
+      はじめての一日を、プロと設計する。
     </p>
     <a href="#offer" class="hero-cta-link-new">モニター募集の詳細を見る</a>
   </div>
