@@ -2146,16 +2146,18 @@
 
       .purpose { padding: 64px 20px; }
       .purpose-ghost { font-size: 96px; top: 20px; left: -10px; }
-      .purpose-grid { grid-template-columns: repeat(4, 1fr); gap: 44px 16px; }
-      .purpose-item { padding: 0; grid-column: span 2; }
-      /* mobile: 2x2 + 中央寄せ1 (row1: 1,2 / row2: 3,4 / row3: 5) */
-      .purpose-item:nth-child(4) { grid-column: 3 / span 2; }
-      .purpose-item:nth-child(5) { grid-column: 2 / span 2; }
+      /* mobile: 1カラム（text が 1 行に収まるようセル幅を確保） */
+      .purpose-grid { grid-template-columns: 1fr; gap: 52px; }
+      .purpose-item,
+      .purpose-item:nth-child(4),
+      .purpose-item:nth-child(5) { padding: 0; grid-column: 1; }
       .purpose-numeral { font-size: 46px; margin-bottom: 16px; }
       .purpose-ornament { margin-bottom: 18px; width: 26px; }
       .purpose-en { font-size: 22px; }
       .purpose-title { font-size: 12px; letter-spacing: 0.3em; margin-bottom: 16px; padding-left: 0.3em; }
-      .purpose-text { font-size: 15px; line-height: 1.95; max-width: 230px; }
+      .purpose-text { font-size: 15px; line-height: 1.95; max-width: 320px; }
+      /* sub 2行目「あなたのパーティーが〜」を1行に収める */
+      .purpose-sub { font-size: 14px; letter-spacing: 0; line-height: 1.9; }
 
       .after { padding: 64px 20px; }
       .after-grid { grid-template-columns: 1fr; gap: 1px; }
