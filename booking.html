@@ -476,16 +476,13 @@
       font-weight: 700;
       color: var(--offwhite);
     }
-    .confirm-note {
-      font-size: 15px;
-      line-height: 1.9;
+    .confirm-greeting {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 600;
       color: var(--charcoal);
-      font-weight: 500;
       margin-bottom: 18px;
-      padding: 16px 18px;
-      background: rgba(196,180,158,0.28);
-      border-left: 3px solid var(--gold);
-      border-radius: 2px;
+      letter-spacing: 0.04em;
     }
     .dm-text-box {
       background: #FFF;
@@ -611,16 +608,11 @@
     <div class="step-label">Step 4</div>
     <div class="step-title">ご予約内容の送信</div>
 
-    <a id="emailLink" href="#" class="submit-btn gold">✉ メールで送信する</a>
-
-    <div class="confirm-note">
-      この度は、お問い合わせを誠にありがとうございます。<br><br>
-      内容確認させていただき、折り返し<br>
-      ご連絡させていただきます。<br><br>
-      以下、お問い合わせ内容です。
-    </div>
+    <div class="confirm-greeting" id="confirmGreeting"></div>
 
     <div class="confirm-card" id="confirmCard"></div>
+
+    <a id="emailLink" href="#" class="submit-btn gold">✉ メールで送信する</a>
   </div>
 
 </div>
@@ -780,6 +772,8 @@
       return;
     }
     const partyTypeText = partyTypes.join('、');
+
+    $('confirmGreeting').textContent = `${name}様`;
 
     $('confirmCard').innerHTML = `
       <div class="row"><div class="label">Date</div><div class="val hl">${sel.dateLabel}</div></div>
