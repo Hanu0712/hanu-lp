@@ -1584,29 +1584,59 @@
     }
     .purpose-display {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(48px, 7vw, 110px);
+      font-size: clamp(56px, 8.2vw, 124px);
       font-weight: 900;
       font-style: italic;
       line-height: 1;
       color: var(--charcoal);
-      margin: 6px 0 22px;
+      margin: 6px 0 14px;
+      letter-spacing: -0.01em;
     }
     .purpose-display em {
       font-style: italic;
       color: #6E5E50;
     }
+    .purpose-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 auto 22px;
+      max-width: 320px;
+    }
+    .purpose-rule::before,
+    .purpose-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(28,25,24,0.22);
+    }
+    .purpose-rule-dot {
+      width: 5px;
+      height: 5px;
+      background: #6E5E50;
+      border-radius: 50%;
+      display: inline-block;
+      opacity: 0.7;
+    }
     .purpose-sub {
       font-family: 'Noto Serif JP', serif;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 400;
-      line-height: 2;
-      color: rgba(28,25,24,0.75);
+      line-height: 1.9;
+      color: var(--charcoal);
+      letter-spacing: 0.04em;
+    }
+    .purpose-sub em {
+      font-style: normal;
+      color: #6E5E50;
+      font-weight: 500;
     }
     .purpose-grid {
       max-width: 1120px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 64px 40px;
       background: transparent;
       position: relative;
@@ -1618,7 +1648,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      grid-column: span 2;
     }
+    /* 5 items: 3 top + 2 centered bottom */
+    .purpose-item:nth-child(4) { grid-column: 2 / span 2; }
+    .purpose-item:nth-child(5) { grid-column: 4 / span 2; }
     .purpose-numeral {
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -2112,13 +2146,15 @@
 
       .purpose { padding: 64px 20px; }
       .purpose-ghost { font-size: 96px; top: 20px; left: -10px; }
-      .purpose-grid { grid-template-columns: 1fr 1fr; gap: 44px 20px; }
-      .purpose-item { padding: 0; }
+      .purpose-grid { grid-template-columns: repeat(4, 1fr); gap: 44px 16px; }
+      .purpose-item { padding: 0; grid-column: span 2; }
+      .purpose-item:nth-child(4) { grid-column: 1 / span 2; }
+      .purpose-item:nth-child(5) { grid-column: 2 / span 2; }
       .purpose-numeral { font-size: 40px; margin-bottom: 14px; }
       .purpose-ornament { margin-bottom: 16px; width: 22px; }
       .purpose-en { font-size: 19px; }
       .purpose-title { font-size: 11px; letter-spacing: 0.3em; margin-bottom: 14px; padding-left: 0.3em; }
-      .purpose-text { font-size: 13px; line-height: 1.9; max-width: 190px; }
+      .purpose-text { font-size: 13px; line-height: 1.9; max-width: 210px; }
 
       .after { padding: 64px 20px; }
       .after-grid { grid-template-columns: 1fr; gap: 1px; }
@@ -2230,8 +2266,12 @@
   <div class="purpose-ghost">PURPOSE</div>
   <div class="purpose-head">
     <span class="section-eyebrow">— Purpose —</span>
-    <h2 class="purpose-display">Why we <em>gather.</em></h2>
-    <p class="purpose-sub">記念、感謝、はじまり——。<br>パーティーを開く理由は、ひとつではない。</p>
+    <h2 class="purpose-display">Moments <em>worth</em><br>marking.</h2>
+    <div class="purpose-rule" aria-hidden="true"><span class="purpose-rule-dot"></span></div>
+    <p class="purpose-sub">
+      招く側に立つと、<em>世界の見え方が変わる。</em><br>
+      ひと夜が、次の物語を動かしていく。
+    </p>
   </div>
 
   <div class="purpose-grid">
@@ -2239,7 +2279,7 @@
       <div class="purpose-numeral">I</div>
       <div class="purpose-ornament" aria-hidden="true"></div>
       <h3 class="purpose-en">Book Launch</h3>
-      <p class="purpose-title">出版記念</p>
+      <p class="purpose-title">出版パーティー</p>
       <p class="purpose-text">新しい章のはじまりを、<br>関わった方と、ともに寿ぐ。</p>
     </div>
 
@@ -2247,39 +2287,31 @@
       <div class="purpose-numeral">II</div>
       <div class="purpose-ornament" aria-hidden="true"></div>
       <h3 class="purpose-en">Anniversary</h3>
-      <p class="purpose-title">周年記念</p>
+      <p class="purpose-title">周年パーティー</p>
       <p class="purpose-text">重ねてきた年月に、<br>感謝と誇りを込めて。</p>
     </div>
 
     <div class="purpose-item">
       <div class="purpose-numeral">III</div>
       <div class="purpose-ornament" aria-hidden="true"></div>
-      <h3 class="purpose-en">A Toast of Gratitude</h3>
-      <p class="purpose-title">感謝会</p>
-      <p class="purpose-text">言葉にできなかった想いを、<br>ひと夜のかたちに。</p>
+      <h3 class="purpose-en">Community Gathering</h3>
+      <p class="purpose-title">コミュニティパーティー</p>
+      <p class="purpose-text">志を同じくする人が、<br>出会い、つながる場を。</p>
     </div>
 
     <div class="purpose-item">
       <div class="purpose-numeral">IV</div>
       <div class="purpose-ornament" aria-hidden="true"></div>
-      <h3 class="purpose-en">Community</h3>
-      <p class="purpose-title">コミュニティ構築</p>
-      <p class="purpose-text">志を同じくする人が、<br>出会い、つながる場所を。</p>
+      <h3 class="purpose-en">Birthday</h3>
+      <p class="purpose-title">お誕生日会</p>
+      <p class="purpose-text">年に一度の特別な一日を、<br>大切な人と分かち合う。</p>
     </div>
 
     <div class="purpose-item">
       <div class="purpose-numeral">V</div>
       <div class="purpose-ornament" aria-hidden="true"></div>
-      <h3 class="purpose-en">New Chapter</h3>
-      <p class="purpose-title">新プロジェクト発表</p>
-      <p class="purpose-text">次のはじまりを、<br>一番近くの人から届ける。</p>
-    </div>
-
-    <div class="purpose-item">
-      <div class="purpose-numeral">VI</div>
-      <div class="purpose-ornament" aria-hidden="true"></div>
       <h3 class="purpose-en">Milestones</h3>
-      <p class="purpose-title">節目の祝い</p>
+      <p class="purpose-title">記念日・節目</p>
       <p class="purpose-text">迎えたひとつの到達点を、<br>物語の一章として残す。</p>
     </div>
   </div>
