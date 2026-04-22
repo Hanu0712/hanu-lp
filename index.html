@@ -1607,51 +1607,60 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(28,25,24,0.1);
+      gap: 64px 40px;
+      background: transparent;
       position: relative;
     }
     .purpose-item {
-      background: var(--offwhite);
-      padding: 44px 28px 48px;
+      background: transparent;
+      padding: 0;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .purpose-icon {
-      width: 48px;
-      height: 48px;
+    .purpose-numeral {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 52px;
+      line-height: 1;
+      color: #6E5E50;
+      letter-spacing: 0.02em;
+      margin-bottom: 18px;
+    }
+    .purpose-ornament {
+      width: 28px;
+      height: 1px;
+      background: rgba(110,94,80,0.45);
       margin: 0 auto 22px;
-      color: #6E5E50;
     }
-    .purpose-icon svg {
-      width: 100%;
-      height: 100%;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.25;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    .purpose-num {
+    .purpose-en {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 10px;
-      letter-spacing: 0.38em;
-      color: #6E5E50;
-      font-weight: 600;
-      text-transform: uppercase;
+      font-style: italic;
+      font-size: 25px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.3;
       margin-bottom: 10px;
+      letter-spacing: 0.01em;
     }
     .purpose-title {
       font-family: 'Noto Serif JP', serif;
-      font-size: 17px;
-      font-weight: 500;
-      line-height: 1.7;
-      color: var(--charcoal);
-      margin-bottom: 10px;
+      font-size: 12px;
+      letter-spacing: 0.38em;
+      color: rgba(28,25,24,0.55);
+      font-weight: 400;
+      margin-bottom: 20px;
+      padding-left: 0.38em;
     }
     .purpose-text {
-      font-size: 14px;
-      color: rgba(28,25,24,0.72);
-      line-height: 1.9;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14.5px;
+      font-weight: 300;
+      color: rgba(28,25,24,0.78);
+      line-height: 2.05;
+      max-width: 240px;
     }
 
     /* ── AFTER (Before の対になる変化後) ── */
@@ -2103,11 +2112,13 @@
 
       .purpose { padding: 64px 20px; }
       .purpose-ghost { font-size: 96px; top: 20px; left: -10px; }
-      .purpose-grid { grid-template-columns: 1fr 1fr; }
-      .purpose-item { padding: 32px 16px 36px; }
-      .purpose-icon { width: 40px; height: 40px; margin-bottom: 16px; }
-      .purpose-title { font-size: 15px; line-height: 1.65; }
-      .purpose-text { font-size: 13px; line-height: 1.85; }
+      .purpose-grid { grid-template-columns: 1fr 1fr; gap: 44px 20px; }
+      .purpose-item { padding: 0; }
+      .purpose-numeral { font-size: 40px; margin-bottom: 14px; }
+      .purpose-ornament { margin-bottom: 16px; width: 22px; }
+      .purpose-en { font-size: 19px; }
+      .purpose-title { font-size: 11px; letter-spacing: 0.3em; margin-bottom: 14px; padding-left: 0.3em; }
+      .purpose-text { font-size: 13px; line-height: 1.9; max-width: 190px; }
 
       .after { padding: 64px 20px; }
       .after-grid { grid-template-columns: 1fr; gap: 1px; }
@@ -2218,92 +2229,58 @@
 <section class="purpose" id="purpose">
   <div class="purpose-ghost">PURPOSE</div>
   <div class="purpose-head">
-    <span class="section-eyebrow">— Why hold a party —</span>
-    <h2 class="purpose-display">For <em>what?</em></h2>
-    <p class="purpose-sub">（リード文：後ほど差し替え）</p>
+    <span class="section-eyebrow">— Purpose —</span>
+    <h2 class="purpose-display">Why we <em>gather.</em></h2>
+    <p class="purpose-sub">記念、感謝、はじまり——。<br>パーティーを開く理由は、ひとつではない。</p>
   </div>
 
   <div class="purpose-grid">
-    <!-- 01 出版記念 -->
     <div class="purpose-item">
-      <div class="purpose-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32">
-          <path d="M6 5h13a3 3 0 0 1 3 3v19H9a3 3 0 0 1-3-3V5z"/>
-          <path d="M6 22h16"/>
-          <path d="M10 10h8 M10 14h6"/>
-        </svg>
-      </div>
-      <div class="purpose-num">01</div>
-      <h3 class="purpose-title">出版記念</h3>
-      <p class="purpose-text">（文言未定）</p>
+      <div class="purpose-numeral">I</div>
+      <div class="purpose-ornament" aria-hidden="true"></div>
+      <h3 class="purpose-en">Book Launch</h3>
+      <p class="purpose-title">出版記念</p>
+      <p class="purpose-text">新しい章のはじまりを、<br>関わった方と、ともに寿ぐ。</p>
     </div>
 
-    <!-- 02 周年記念 -->
     <div class="purpose-item">
-      <div class="purpose-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32">
-          <rect x="5" y="14" width="22" height="13" rx="1"/>
-          <path d="M5 20h22"/>
-          <path d="M16 6v6 M10 10h12"/>
-        </svg>
-      </div>
-      <div class="purpose-num">02</div>
-      <h3 class="purpose-title">周年記念</h3>
-      <p class="purpose-text">（文言未定）</p>
+      <div class="purpose-numeral">II</div>
+      <div class="purpose-ornament" aria-hidden="true"></div>
+      <h3 class="purpose-en">Anniversary</h3>
+      <p class="purpose-title">周年記念</p>
+      <p class="purpose-text">重ねてきた年月に、<br>感謝と誇りを込めて。</p>
     </div>
 
-    <!-- 03 感謝会 -->
     <div class="purpose-item">
-      <div class="purpose-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32">
-          <path d="M16 27c-7-5-11-9-11-14a6 6 0 0 1 11-3 6 6 0 0 1 11 3c0 5-4 9-11 14z"/>
-        </svg>
-      </div>
-      <div class="purpose-num">03</div>
-      <h3 class="purpose-title">感謝会</h3>
-      <p class="purpose-text">（文言未定）</p>
+      <div class="purpose-numeral">III</div>
+      <div class="purpose-ornament" aria-hidden="true"></div>
+      <h3 class="purpose-en">A Toast of Gratitude</h3>
+      <p class="purpose-title">感謝会</p>
+      <p class="purpose-text">言葉にできなかった想いを、<br>ひと夜のかたちに。</p>
     </div>
 
-    <!-- 04 コミュニティ構築 -->
     <div class="purpose-item">
-      <div class="purpose-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32">
-          <circle cx="11" cy="12" r="3"/>
-          <circle cx="21" cy="12" r="3"/>
-          <path d="M5 24c0-3.5 2.5-6 6-6s6 2.5 6 6"/>
-          <path d="M15 24c0-3.5 2.5-6 6-6s6 2.5 6 6"/>
-        </svg>
-      </div>
-      <div class="purpose-num">04</div>
-      <h3 class="purpose-title">コミュニティ構築</h3>
-      <p class="purpose-text">（文言未定）</p>
+      <div class="purpose-numeral">IV</div>
+      <div class="purpose-ornament" aria-hidden="true"></div>
+      <h3 class="purpose-en">Community</h3>
+      <p class="purpose-title">コミュニティ構築</p>
+      <p class="purpose-text">志を同じくする人が、<br>出会い、つながる場所を。</p>
     </div>
 
-    <!-- 05 新プロジェクト発表 -->
     <div class="purpose-item">
-      <div class="purpose-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32">
-          <path d="M16 4v10 M16 18v10 M4 16h10 M18 16h10"/>
-          <path d="M8 8l5 5 M19 19l5 5 M8 24l5-5 M19 13l5-5"/>
-        </svg>
-      </div>
-      <div class="purpose-num">05</div>
-      <h3 class="purpose-title">新プロジェクト発表</h3>
-      <p class="purpose-text">（文言未定）</p>
+      <div class="purpose-numeral">V</div>
+      <div class="purpose-ornament" aria-hidden="true"></div>
+      <h3 class="purpose-en">New Chapter</h3>
+      <p class="purpose-title">新プロジェクト発表</p>
+      <p class="purpose-text">次のはじまりを、<br>一番近くの人から届ける。</p>
     </div>
 
-    <!-- 06 節目の祝い -->
     <div class="purpose-item">
-      <div class="purpose-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32">
-          <path d="M8 6h6v7a3 3 0 0 1-6 0V6z"/>
-          <path d="M18 6h6v7a3 3 0 0 1-6 0V6z"/>
-          <path d="M11 16v8 M21 16v8 M7 26h18"/>
-        </svg>
-      </div>
-      <div class="purpose-num">06</div>
-      <h3 class="purpose-title">節目の祝い</h3>
-      <p class="purpose-text">（文言未定）</p>
+      <div class="purpose-numeral">VI</div>
+      <div class="purpose-ornament" aria-hidden="true"></div>
+      <h3 class="purpose-en">Milestones</h3>
+      <p class="purpose-title">節目の祝い</p>
+      <p class="purpose-text">迎えたひとつの到達点を、<br>物語の一章として残す。</p>
     </div>
   </div>
 </section>
