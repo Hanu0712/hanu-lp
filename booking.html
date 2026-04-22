@@ -515,15 +515,30 @@
     .hidden { display: none !important; }
 
     @media (max-width: 540px) {
-      body { padding: 24px 8px; }
-      .container { padding: 36px 20px 44px; box-shadow: 5px 6px 0 var(--navy); }
+      body { padding: 16px 4px; }
+      .container { padding: 32px 10px 36px; box-shadow: 5px 6px 0 var(--navy); }
       h1 { font-size: 30px; }
       .month-label { font-size: 18px; }
-      .cal-cell { font-size: 14px; padding: 6px 0; }
+      .cal-grid { gap: 3px; }
+      .cal-cell { font-size: 14px; padding: 6px 0; min-width: 0; }
+      .cal-header { font-size: 10px; padding: 6px 0; }
+      .cal-cell.disabled { padding: 3px 1px; gap: 0; }
+      .cal-cell.disabled .cell-num { font-size: 10px; }
+      .cal-cell.disabled .sold {
+        font-size: 7px;
+        letter-spacing: 0.02em;
+      }
       .slot-btn { padding: 14px 16px; }
       .slot-btn .time { font-size: 19px; }
       .confirm-card .row { flex-direction: column; gap: 2px; }
       .confirm-card .row .label { width: auto; }
+    }
+
+    @media (max-width: 380px) {
+      .cal-cell.disabled .sold {
+        font-size: 6px;
+        letter-spacing: 0;
+      }
     }
   </style>
 </head>
