@@ -1072,6 +1072,11 @@
       border-bottom: 1px solid rgba(110,94,80,0.6);
     }
 
+    .prof-bio .bio-oneline {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
     .prof-oval-col {
       grid-column: 2;
       display: flex;
@@ -1586,6 +1591,12 @@
       .service-desc { font-size: 17px; line-height: 2; }
       .s-name { font-size: 17px; }
       .prof-bio { font-size: 15px; line-height: 1.8; white-space: normal; }
+      .prof-bio .bio-oneline {
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 3.2vw;
+        letter-spacing: -0.015em;
+      }
       .who-lead { font-size: 15px; }
 
       .service {
@@ -1819,7 +1830,7 @@
       Hanu／パーティープロデューサー。<br><br>
       パーティー・ウェディング業界で19年、延べ500組以上の<br>
       パーティーをプランニング。<br>
-      大切にしているのは、緩急と余白、そこから生まれる一体感。<br>
+      <span class="bio-oneline">大切にしているのは、緩急と余白、そこから生まれる一体感。</span><br>
       パーティーに参加した人の記憶に鮮明に刻まれる一日を、<br>
       あなたのために設計します。
     </p>
