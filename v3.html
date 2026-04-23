@@ -806,22 +806,37 @@
 
     .before-lead {
       max-width: 780px;
-      margin: 0 0 0;
+      margin: 0;
       padding: 8px 0 0;
       position: relative;
       z-index: 3;
       font-family: 'Noto Serif JP', serif;
-      font-size: 23px;
-      line-height: 2.3;
-      letter-spacing: -0.01em;
-      color: var(--charcoal);
-      font-weight: 500;
+      font-size: 17px;
+      line-height: 2.1;
+      letter-spacing: 0.02em;
+      color: rgba(28,25,24,0.88);
+      font-weight: 400;
     }
 
     .before-lead em {
       font-style: normal;
       font-weight: 500;
       color: var(--charcoal);
+    }
+
+    .before-photo {
+      max-width: 520px;
+      margin: 48px auto 8px;
+      padding: 0;
+      position: relative;
+      z-index: 3;
+    }
+
+    .before-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
 
     .before-story {
@@ -2143,7 +2158,8 @@
       }
       .before-display { font-size: 44px; flex: 1; min-width: 0; gap: 8px; }
       .before-display-sub { font-size: 17px; letter-spacing: 0.18em; display: block; width: 100%; margin-top: 4px; }
-      .before-lead { font-size: 19px; line-height: 2.1; padding: 0; letter-spacing: -0.01em; }
+      .before-lead { font-size: 15px; line-height: 2; padding: 0; letter-spacing: 0.02em; }
+      .before-photo { margin: 28px 0 4px; }
       .before-story { font-size: 19px; line-height: 1.9; margin-top: 40px; padding: 20px 16px 0; letter-spacing: -0.01em; min-height: 14em; }
       .before-portrait { width: 88px; height: 88px; }
       .before-item { padding: 28px 20px 32px; }
@@ -2422,7 +2438,6 @@
   <div class="before-head">
     <div class="before-display">
       Before.
-      <span class="before-display-sub">こんなお悩み、ありませんか？</span>
     </div>
   </div>
   <p class="before-lead">
@@ -2430,6 +2445,9 @@
     でも——<em>&ldquo;特別な一日&rdquo;</em>として心に残る集まりが、<br>
     本当はほしいのかもしれない。
   </p>
+  <figure class="before-photo">
+    <img src="image/portrait_before_side.jpg?v=1" alt="">
+  </figure>
   <div class="before-story" id="beforeStory">
     <div class="before-stanza">
       <p>ランチ会は、開いたことがある。</p>
