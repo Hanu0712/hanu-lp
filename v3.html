@@ -838,7 +838,7 @@
     }
 
     .before-story {
-      flex: 0 1 640px;
+      flex: 0 1 auto;
       min-width: 0;
     }
 
@@ -891,6 +891,7 @@
       opacity: 0;
       transform: translateY(8px);
       transition: opacity 1s ease, transform 1s ease;
+      white-space: nowrap;
     }
 
     .before-stanza.active p              { opacity: 1; transform: translateY(0); }
@@ -1848,6 +1849,26 @@
       font-weight: 500;
       font-style: normal;
     }
+
+    .after-lead {
+      max-width: 780px;
+      margin: -40px 0 56px;
+      padding: 8px 0 0;
+      position: relative;
+      z-index: 3;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 17px;
+      line-height: 2.1;
+      letter-spacing: 0.02em;
+      color: rgba(28,25,24,0.88);
+      font-weight: 400;
+    }
+
+    .after-lead em {
+      font-style: normal;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
     .after-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -2179,6 +2200,7 @@
       .before-body { grid-template-columns: 1fr; gap: 24px; margin-top: 28px; }
       .before-photo { width: 60%; max-width: 220px; margin: 0 auto; }
       .before-story { font-size: 17px; line-height: 1.9; text-align: center; min-height: 14em; }
+      .before-stanza p { white-space: normal; }
       .before-portrait { width: 88px; height: 88px; }
       .before-item { padding: 28px 20px 32px; }
       .before-num { font-size: 56px; margin-bottom: 8px; }
@@ -2284,6 +2306,7 @@
       }
       .after-display { font-size: 44px; flex: 1; min-width: 0; gap: 8px; }
       .after-display-sub { font-size: 17px; letter-spacing: 0.18em; display: block; width: 100%; margin-top: 4px; }
+      .after-lead { font-size: 15px; line-height: 2; padding: 0; letter-spacing: 0.02em; margin: -24px 0 32px; }
       .after-item { padding: 28px 20px 32px; }
       .after-num { font-size: 56px; margin-bottom: 8px; }
       .after-title { font-size: 19px; line-height: 1.7; margin-bottom: 12px; letter-spacing: -0.02em; white-space: normal; word-break: keep-all; overflow-wrap: break-word; }
@@ -2436,9 +2459,13 @@
   <div class="after-head">
     <div class="after-display">
       After.
-      <span class="after-display-sub">変化した、あなたの世界。</span>
     </div>
   </div>
+  <p class="after-lead">
+    <em>&ldquo;楽しかったね&rdquo;</em>で終わっていた集まりが、<br>
+    <em>&ldquo;心に刻まれる一日&rdquo;</em>になる。<br>
+    その変化は、事業の土台になる。
+  </p>
   <div class="after-grid">
     <div class="after-item">
       <div class="after-num">01</div>
