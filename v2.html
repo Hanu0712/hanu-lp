@@ -5,261 +5,426 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <title>Hanu — Party Produce for Her</title>
-  <meta name="description" content="「ランチ会」から、「パーティー」へ。はじめての一日を、プロと設計する。">
+  <meta name="description" content="「招かれる側」から、「招く側」へ。はじめての一日を、プロと設計する。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0E0D0C;
-      --bg-2:      #161412;
-      --bg-3:      #1E1B18;
-      --ink:       #EDE7DB;
-      --ink-90:    rgba(237, 231, 219, 0.92);
-      --ink-60:    rgba(237, 231, 219, 0.60);
-      --ink-40:    rgba(237, 231, 219, 0.40);
-      --ink-20:    rgba(237, 231, 219, 0.20);
-      --line:      rgba(237, 231, 219, 0.14);
-      --accent:    #A8916C;
-      --ellipse-before: #1C1A17;
-      --ellipse-after:  #24201B;
-      --serif-en:  'Playfair Display', 'Cormorant Garamond', serif;
-      --serif-en-2:'Cormorant Garamond', 'Playfair Display', serif;
-      --serif-jp:  'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+      --greige:   #C9C3BC;
+      --greige2:  #D4CFC9;
+      --navy:     #1A2737;
+      --charcoal: #1C1918;
+      --offwhite: #F5F0EA;
+      --sand:     #E0D8D0;
+      --taupe:    #9B8B7E;
+      --accent:   #6E5E50;
+      --line:     rgba(28,25,24,0.14);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: var(--serif-jp);
+      font-family: 'Noto Serif JP', serif;
+      color: var(--charcoal);
       font-weight: 300;
       line-height: 1.95;
       -webkit-font-smoothing: antialiased;
+      background: var(--greige);
       overflow-x: hidden;
     }
-
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
     /* ─────────────── Fixed Header ─────────────── */
     .site-header {
       position: fixed;
-      inset: 0 0 auto 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 28px 56px;
+      padding: 22px 40px;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       pointer-events: none;
-      mix-blend-mode: normal;
     }
     .site-header > * { pointer-events: auto; }
-
-    .logo {
-      font-family: var(--serif-en);
-      font-style: italic;
-      font-size: 22px;
-      letter-spacing: 0.04em;
+    .site-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--charcoal);
       line-height: 1;
-      color: var(--ink);
     }
-    .logo small {
+    .site-logo small {
       display: block;
-      font-family: var(--serif-en-2);
-      font-style: normal;
-      font-size: 9px;
-      letter-spacing: 0.46em;
+      font-size: 8px;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--ink-60);
-      margin-top: 8px;
+      opacity: 0.55;
+      margin-top: 5px;
+      font-weight: 400;
     }
-
-    .nav {
+    .header-links {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 8px;
+      gap: 6px;
     }
-    .nav a {
-      font-family: var(--serif-en-2);
+    .header-links a {
+      font-family: 'Cormorant Garamond', serif;
       font-size: 11px;
-      letter-spacing: 0.42em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--ink-90);
-      transition: color .3s;
+      color: var(--charcoal);
+      opacity: 0.85;
+      font-weight: 500;
+      transition: opacity .3s;
     }
-    .nav a:hover { color: var(--accent); }
+    .header-links a:hover { opacity: 1; }
 
-    /* ─────────────── Chapter common layout ─────────────── */
-    .chapter {
-      position: relative;
+    /* ═══════════════ HERO (既存 TOP 継承) ═══════════════ */
+    .hero {
       min-height: 100vh;
-      padding: 120px 56px 80px;
-      display: grid;
-      grid-template-columns: minmax(260px, 1fr) minmax(360px, 620px) minmax(260px, 1fr);
-      grid-template-rows: auto 1fr auto;
-      gap: 40px 48px;
-      background: var(--bg);
-    }
-
-    .chapter.alt { background: var(--bg-2); }
-
-    .chapter-summary {
-      grid-column: 1;
-      grid-row: 1;
-      align-self: start;
-      max-width: 340px;
-      font-family: var(--serif-jp);
-      font-size: 13px;
-      font-weight: 300;
-      line-height: 2.1;
-      color: var(--ink-90);
-      letter-spacing: 0.08em;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-    }
-    .chapter-summary::before {
-      content: "";
-      display: block;
-      width: 28px;
-      height: 1px;
-      background: var(--accent);
-      margin-bottom: 18px;
-      margin-top: -21px;
-    }
-
-    .chapter-topimage {
-      grid-column: 3;
-      grid-row: 1;
-      justify-self: end;
-      align-self: start;
-      width: 220px;
-      aspect-ratio: 3 / 4;
-      overflow: hidden;
-      filter: grayscale(25%) brightness(0.85);
-    }
-    .chapter-topimage img {
-      width: 100%; height: 100%; object-fit: cover;
-      transform: scale(1.02);
-    }
-
-    .chapter-stage {
-      grid-column: 2;
-      grid-row: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 56px;
-    }
-
-    .vtitle {
-      grid-column: 1;
-      grid-row: 3;
-      align-self: end;
-      justify-self: start;
-      writing-mode: vertical-rl;
-      text-orientation: sideways;
-      font-family: var(--serif-en);
-      font-style: italic;
-      font-weight: 400;
-      font-size: 64px;
-      letter-spacing: 0.04em;
-      color: var(--ink-90);
-      line-height: 1;
-      padding-bottom: 8px;
-      transform: rotate(180deg);
-    }
-
-    /* ─────────────── Ellipse ─────────────── */
-    .ellipse {
-      width: min(55vw, 560px);
-      aspect-ratio: 3 / 4;
-      border-radius: 50%;
-      overflow: hidden;
+      background: var(--greige);
       position: relative;
-      background: var(--ellipse-before);
-      box-shadow:
-        inset 0 0 80px rgba(0,0,0,0.35),
-        0 30px 80px -30px rgba(0,0,0,0.7);
-      cursor: pointer;
-    }
-    .ellipse[data-tone="after"]  { background: var(--ellipse-after); }
-    .ellipse .hint {
-      position: absolute;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--serif-en-2);
-      font-size: 10px;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--ink-60);
-      opacity: 0;
-      transition: opacity .6s;
-      pointer-events: none;
-    }
-    .ellipse.armed .hint { opacity: 0.7; }
-
-    .ellipse .photo {
-      position: absolute; inset: 0;
-      opacity: 1;
-      transition: opacity 1.5s ease;
-    }
-    .ellipse .photo img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(12%) brightness(0.88);
-    }
-    .ellipse.photo-fade .photo { opacity: 0.18; }
-
-    .ellipse .label {
-      position: absolute;
-      inset: 0;
+      overflow: hidden;
+      padding: 96px 24px 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+    .hero-tagline {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(16px, 2.2vw, 22px);
+      font-weight: 500;
+      color: var(--charcoal);
+      letter-spacing: 0.22em;
       text-align: center;
-      padding: 10%;
+      line-height: 1.85;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 10;
+    }
+    .hero-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      height: clamp(480px, 64vh, 640px);
+      margin: 0 auto;
+    }
+    .hero-arc {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: clamp(460px, 64vw, 880px);
+      pointer-events: none;
+      z-index: 6;
       opacity: 0;
-      transition: opacity 1s ease;
+      transform-origin: 50% 100%;
+      animation:
+        hero-arc-in    1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both,
+        hero-arc-swing 2.6s ease-in-out 1.6s both;
     }
-    .ellipse .label.show { opacity: 1; }
-    .ellipse .label .en {
-      font-family: var(--serif-en);
+    .hero-arc-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
       font-style: italic;
-      font-size: clamp(32px, 4vw, 56px);
-      color: var(--ink);
-      letter-spacing: 0.02em;
-      line-height: 1.1;
+      fill: var(--charcoal);
+      letter-spacing: 0.04em;
     }
-    .ellipse .label .jp {
-      font-family: var(--serif-jp);
-      font-size: 13px;
-      letter-spacing: 0.3em;
-      color: var(--ink-60);
-      margin-top: 18px;
+    @keyframes hero-arc-in {
+      0%   { opacity: 0; transform: translateX(-50%) scale(0.45) rotate(-16deg); }
+      45%  { opacity: 1; transform: translateX(-50%) scale(1.10) rotate(6deg); }
+      70%  { transform: translateX(-50%) scale(0.96) rotate(-3deg); }
+      88%  { transform: translateX(-50%) scale(1.02) rotate(1deg); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1) rotate(0); }
+    }
+    @keyframes hero-arc-swing {
+      0%   { transform: translateX(-50%) rotate(0); }
+      14%  { transform: translateX(-50%) rotate(-9deg); }
+      32%  { transform: translateX(-50%) rotate(8deg); }
+      50%  { transform: translateX(-50%) rotate(-5deg); }
+      68%  { transform: translateX(-50%) rotate(3deg); }
+      84%  { transform: translateX(-50%) rotate(-1deg); }
+      100% { transform: translateX(-50%) rotate(0); }
     }
 
-    /* ─────────────── Sequence (text below ellipse) ─────────────── */
-    .sequence {
-      width: min(80vw, 620px);
-      min-height: 190px;
-      position: relative;
-      text-align: center;
-    }
-    .seq-text {
+    .hero-center {
       position: absolute;
-      inset: 0;
-      font-family: var(--serif-jp);
-      font-size: 17px;
+      top: 22%;
+      left: 50%;
+      width: clamp(220px, 25vw, 320px);
+      height: clamp(290px, 32vw, 425px);
+      z-index: 5;
+      transform: translateX(-50%);
+      background: var(--greige2);
+      box-shadow: 8px 10px 0 var(--navy), 0 22px 36px rgba(28,25,24,0.22);
+      border-radius: 4px;
+      overflow: hidden;
+      opacity: 0;
+      animation: hero-center-in 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+    }
+    .hero-center img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    @keyframes hero-center-in {
+      0%   { opacity: 0; transform: translateX(-50%) translateY(40px) scale(0.85); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+    }
+
+    .hero-float {
+      position: absolute;
+      opacity: 1;
+      background: var(--navy);
+      box-shadow: 5px 6px 0 var(--navy), 0 12px 20px rgba(28,25,24,0.18);
+      border-radius: 3px;
+      overflow: hidden;
+      animation: hero-float-pulse 8s ease-in-out infinite;
+      z-index: 3;
+      transform: rotate(var(--rot, 0deg));
+    }
+    .hero-float img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-float.f1  { top: 4%;   left: 14%; width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -0.5s; }
+    .hero-float.f2  { top: 26%;  left: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -1.8s; }
+    .hero-float.f3  { top: 50%;  left: 6%;  width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -3.1s; }
+    .hero-float.f4  { top: 74%;  left: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -4.4s; }
+    .hero-float.f6  { top: 4%;   right: 14%; width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -7.0s; }
+    .hero-float.f7  { top: 26%;  right: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -1.2s; }
+    .hero-float.f8  { top: 50%;  right: 6%;  width: clamp(82px, 10vw, 125px); height: clamp(102px, 12vw, 156px); animation-delay: -2.5s; }
+    .hero-float.f9  { top: 74%;  right: 1%;  width: clamp(96px, 11vw, 140px); height: clamp(120px, 14vw, 175px); animation-delay: -3.8s; }
+    @keyframes hero-float-pulse {
+      0%, 100% { opacity: 1; }
+      45%, 62% { opacity: 0.14; }
+    }
+
+    .hero-copy {
+      position: relative;
+      margin: 20px auto 0;
+      text-align: center;
+      z-index: 10;
+      max-width: 640px;
+    }
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(13px, 1.5vw, 16px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.85;
+      font-weight: 600;
+      margin-bottom: 6px;
+      line-height: 1.7;
+    }
+    .hero-divider {
+      width: 48px;
+      height: 1px;
+      background: rgba(28,25,24,0.35);
+      margin: 6px auto 20px;
+    }
+    .hero-jp-sub-new {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 500;
+      line-height: 2.1;
+      color: var(--charcoal);
+      margin-bottom: 28px;
+    }
+    .hero-cta-link-new {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      font-weight: 600;
+      transition: opacity .3s;
+    }
+    .hero-cta-link-new::after {
+      content: ''; width: 44px; height: 1px; background: currentColor;
+      transition: width .4s;
+    }
+    .hero-cta-link-new:hover::after { width: 64px; }
+
+    /* ═══════════════ Chapter (Deuxième Classe Layout) ═══════════════ */
+    .chapter {
+      position: relative;
+      min-height: 100vh;
+      padding: 120px 56px 100px;
+      background: var(--greige);
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(420px, 620px) minmax(280px, 1fr);
+      grid-template-rows: auto 1fr auto;
+      column-gap: 40px;
+      row-gap: 36px;
+    }
+    .chapter.alt { background: var(--offwhite); }
+    .chapter.sand { background: var(--sand); }
+
+    /* 左上：3行の要約文 */
+    .ch-summary {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      max-width: 360px;
+      padding-top: 20px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13.5px;
+      font-weight: 400;
       line-height: 2.2;
       letter-spacing: 0.1em;
-      color: var(--ink);
+      color: var(--charcoal);
+      border-top: 1px solid var(--line);
+      position: relative;
+    }
+    .ch-summary::before {
+      content: "";
+      position: absolute;
+      top: -1px; left: 0;
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* 右上：小さいサムネ1枚 */
+    .ch-thumb {
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end;
+      align-self: start;
+      width: clamp(150px, 15vw, 220px);
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--greige2);
+      box-shadow: 4px 5px 0 var(--navy);
+    }
+    .ch-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* 中央：大楕円 + タイトルオーバーレイ */
+    .ch-oval-wrap {
+      grid-column: 2;
+      grid-row: 2;
+      align-self: center;
+      justify-self: center;
+      position: relative;
+      width: min(52vw, 560px);
+      aspect-ratio: 3 / 4;
+    }
+    .ch-oval {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--greige2);
+      box-shadow: inset 0 0 60px rgba(28,25,24,0.15),
+                  0 30px 60px -25px rgba(28,25,24,0.35);
+    }
+    .ch-oval-photo {
+      position: absolute; inset: 0;
+      opacity: 1;
+      transition: opacity 1.5s ease;
+    }
+    .ch-oval-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .ch-oval.photo-fade .ch-oval-photo { opacity: 0.22; }
+
+    .ch-oval-title {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 18%;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: clamp(54px, 7vw, 110px);
+      line-height: 1;
+      color: var(--charcoal);
+      letter-spacing: -0.005em;
+      text-shadow: 0 4px 30px rgba(245,240,234,0.45);
+      pointer-events: none;
+    }
+    .ch-oval-more {
+      position: absolute;
+      left: 50%;
+      bottom: 9%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.72;
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 3px;
+    }
+
+    /* 左下：縦書きの小さいタグ */
+    .ch-vtag {
+      grid-column: 1;
+      grid-row: 2 / 4;
+      align-self: end;
+      justify-self: start;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.58;
+      font-weight: 500;
+      padding: 0 4px;
+    }
+
+    /* 右下：「+」マーカー */
+    .ch-plus {
+      grid-column: 3;
+      grid-row: 3;
+      justify-self: end;
+      align-self: end;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--charcoal);
+      opacity: 0.52;
+      line-height: 1;
+      padding: 0 6px 6px 0;
+    }
+
+    /* 楕円下のコンテンツ（章別） */
+    .ch-body {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      text-align: center;
+      padding: 40px 0 0;
+    }
+
+    /* ═══════════════ Before/After テキストシーケンス ═══════════════ */
+    .sequence {
+      position: relative;
+      margin: 48px auto 0;
+      width: min(82vw, 660px);
+      min-height: 210px;
+    }
+    .seq-text {
+      position: absolute; inset: 0;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16.5px;
+      line-height: 2.25;
+      letter-spacing: 0.08em;
+      color: var(--charcoal);
       opacity: 0;
       transition: opacity 1s ease;
       white-space: pre-line;
@@ -267,795 +432,626 @@
     .seq-text.visible { opacity: 1; }
 
     .next-arrow {
-      position: absolute;
-      left: 50%;
-      bottom: -80px;
-      transform: translateX(-50%);
+      display: block;
+      margin-top: 36px;
       opacity: 0;
-      transition: opacity 1.4s ease;
-      font-family: var(--serif-en-2);
+      transition: opacity 1.2s ease;
+      font-family: 'Cormorant Garamond', serif;
       font-size: 10px;
       letter-spacing: 0.5em;
-      color: var(--ink-60);
+      color: var(--charcoal);
       text-transform: uppercase;
-      pointer-events: none;
+      text-align: center;
     }
     .next-arrow::after {
       content: "";
       display: block;
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, var(--ink-60), transparent);
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, rgba(28,25,24,0.6), transparent);
       margin: 14px auto 0;
       animation: drift 2.4s ease-in-out infinite;
     }
-    .next-arrow.show { opacity: 0.9; }
+    .next-arrow.show { opacity: 0.72; }
     @keyframes drift {
       0%, 100% { transform: translateY(0); opacity: 0.7; }
       50%      { transform: translateY(8px); opacity: 0.3; }
     }
 
-    /* ─────────────── Hero ─────────────── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      padding: 120px 56px 80px;
-      background: var(--bg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .hero-gallery {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .hero-gallery .slide {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 2.4s ease-in-out;
-      filter: grayscale(30%) brightness(0.55);
-      transform: scale(1.04);
-    }
-    .hero-gallery .slide.active { opacity: 1; }
-    .hero::after {
-      content:"";
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at center, rgba(14,13,12,0) 0%, rgba(14,13,12,0.55) 70%, rgba(14,13,12,0.85) 100%),
-        linear-gradient(to bottom, rgba(14,13,12,0.35), rgba(14,13,12,0) 30%, rgba(14,13,12,0) 70%, rgba(14,13,12,0.55));
-      z-index: 1;
-      pointer-events: none;
-    }
-    .hero-inner { position: relative; z-index: 2; max-width: 880px; }
-    .hero-badge {
-      display: inline-block;
-      font-family: var(--serif-en-2);
-      font-size: 11px;
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--ink-60);
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--ink-20);
-      margin-bottom: 56px;
-    }
-    .hero-main {
-      font-family: var(--serif-jp);
-      font-weight: 300;
-      font-size: clamp(28px, 4.4vw, 54px);
-      line-height: 1.65;
-      letter-spacing: 0.08em;
-      color: var(--ink);
-    }
-    .hero-main em {
-      font-style: normal;
-      font-family: var(--serif-en);
-      font-style: italic;
-      font-weight: 400;
-    }
-    .hero-sub {
-      margin-top: 40px;
-      font-family: var(--serif-jp);
-      font-size: 14px;
-      letter-spacing: 0.26em;
-      color: var(--ink-60);
-    }
-    .hero-cta {
-      display: inline-block;
-      margin-top: 72px;
-      padding: 18px 42px;
-      font-family: var(--serif-en-2);
-      font-size: 12px;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      color: var(--ink);
-      border: 1px solid var(--ink-40);
-      background: transparent;
-      cursor: pointer;
-      transition: background .4s, color .4s, border-color .4s;
-      text-decoration: none;
-    }
-    .hero-cta small {
-      display: block;
-      font-family: var(--serif-jp);
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      margin-top: 6px;
-      color: var(--ink-60);
-    }
-    .hero-cta:hover {
-      background: var(--ink);
-      color: var(--bg);
-      border-color: var(--ink);
-    }
-    .hero-cta:hover small { color: var(--bg); }
-
-    /* ─────────────── How We Produce ─────────────── */
+    /* ═══════════════ How We Produce ═══════════════ */
     .produce {
-      padding: 160px 56px 160px;
-      background: var(--bg-2);
+      background: var(--offwhite);
+      padding: 140px 56px 140px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .produce-ghost {
+      position: absolute;
+      top: 40px; left: -30px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(120px, 18vw, 240px);
+      font-weight: 900; font-style: italic;
+      color: rgba(28,25,24,0.04);
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: -0.02em;
     }
     .produce-eyebrow {
-      font-family: var(--serif-en-2);
+      position: relative;
+      font-family: 'Cormorant Garamond', serif;
       font-size: 11px;
       letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: var(--ink-60);
+      color: var(--accent);
+      font-weight: 600;
     }
     .produce-title {
-      font-family: var(--serif-en);
+      position: relative;
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: clamp(44px, 7vw, 96px);
-      color: var(--ink);
-      margin-top: 24px;
-      line-height: 1.1;
-      letter-spacing: 0.01em;
+      font-weight: 900;
+      font-size: clamp(48px, 8vw, 104px);
+      line-height: 1.05;
+      color: var(--charcoal);
+      margin-top: 18px;
+      letter-spacing: -0.005em;
+    }
+    .produce-title em {
+      font-style: italic;
+      color: var(--accent);
     }
     .produce-lead {
+      position: relative;
       max-width: 640px;
-      margin: 40px auto 0;
-      font-size: 14px;
+      margin: 36px auto 0;
+      font-size: 15px;
       line-height: 2.1;
-      letter-spacing: 0.14em;
-      color: var(--ink-90);
+      letter-spacing: 0.1em;
+      color: rgba(28,25,24,0.88);
     }
     .produce-steps {
-      margin-top: 96px;
+      position: relative;
+      margin: 96px auto 0;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 80px 48px;
+      gap: 72px 48px;
       max-width: 1080px;
-      margin-left: auto;
-      margin-right: auto;
       text-align: left;
     }
     .step-num {
-      font-family: var(--serif-en);
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: 42px;
+      font-size: 52px;
       color: var(--accent);
-      letter-spacing: 0.02em;
+      font-weight: 400;
       line-height: 1;
     }
     .step-en {
-      font-family: var(--serif-en);
-      font-size: 20px;
-      letter-spacing: 0.06em;
-      margin-top: 18px;
-      color: var(--ink);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 24px;
+      color: var(--charcoal);
+      margin-top: 14px;
+      letter-spacing: 0.02em;
     }
     .step-jp {
-      font-family: var(--serif-jp);
+      font-family: 'Noto Serif JP', serif;
       font-size: 12px;
       letter-spacing: 0.32em;
-      color: var(--ink-60);
-      margin-top: 10px;
-      padding-top: 16px;
+      color: rgba(28,25,24,0.62);
+      margin-top: 12px;
+      padding-top: 14px;
       border-top: 1px solid var(--line);
     }
 
-    /* ─────────────── Title gate (Profile / Monitor) ─────────────── */
-    .gate {
-      width: min(55vw, 560px);
-      aspect-ratio: 3 / 4;
-      border-radius: 50%;
-      background: var(--ellipse-before);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 0 80px rgba(0,0,0,0.35);
-      opacity: 0;
-      transition: opacity 1s ease;
-      margin: 0 auto 56px;
-    }
-    .gate.show { opacity: 1; }
-    .gate.dismiss { opacity: 0; transition: opacity 1s ease; }
-    .gate .en {
-      font-family: var(--serif-en);
-      font-style: italic;
-      font-size: clamp(40px, 5vw, 68px);
-      color: var(--ink);
-    }
-    .gate .jp {
-      margin-top: 18px;
-      font-family: var(--serif-jp);
-      font-size: 13px;
-      letter-spacing: 0.3em;
-      color: var(--ink-60);
-    }
-
-    /* ─────────────── Profile body ─────────────── */
+    /* ═══════════════ Profile / Monitor body ═══════════════ */
     .profile-body {
       max-width: 640px;
       margin: 0 auto;
-      text-align: center;
-      font-family: var(--serif-jp);
+      font-family: 'Noto Serif JP', serif;
       font-size: 15px;
-      line-height: 2.2;
-      letter-spacing: 0.12em;
-      color: var(--ink-90);
+      font-weight: 400;
+      line-height: 2.25;
+      letter-spacing: 0.1em;
+      color: var(--charcoal);
     }
     .profile-link {
-      margin-top: 64px;
-      font-family: var(--serif-en-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 48px;
+      padding: 14px 28px;
+      font-family: 'Cormorant Garamond', serif;
       font-size: 12px;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--ink);
-      border-bottom: 1px solid var(--ink-40);
-      padding-bottom: 4px;
-      display: inline-block;
+      color: var(--charcoal);
+      border: 1px solid var(--charcoal);
+      transition: background .4s, color .4s;
     }
-    .profile-link:hover { color: var(--accent); border-color: var(--accent); }
-    .profile-handle {
-      display: block;
-      font-family: var(--serif-jp);
+    .profile-link:hover { background: var(--charcoal); color: var(--offwhite); }
+    .profile-link .handle {
+      font-family: 'Noto Serif JP', serif;
       font-size: 11px;
-      letter-spacing: 0.2em;
-      color: var(--ink-60);
-      margin-top: 10px;
+      letter-spacing: 0.12em;
       text-transform: none;
-      border: none;
+      opacity: 0.75;
     }
 
-    /* ─────────────── Monitor body ─────────────── */
-    .monitor-body {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    .monitor-body { max-width: 760px; margin: 0 auto; padding: 0 16px; }
     .price-card {
       border: 1px solid var(--line);
       padding: 48px 40px;
       text-align: center;
-      background: rgba(168, 145, 108, 0.035);
+      background: rgba(255,255,255,0.28);
     }
     .price-regular {
-      font-family: var(--serif-en-2);
+      font-family: 'Cormorant Garamond', serif;
       font-size: 13px;
-      letter-spacing: 0.3em;
-      color: var(--ink-60);
+      letter-spacing: 0.28em;
+      color: rgba(28,25,24,0.55);
       text-decoration: line-through;
-      text-decoration-color: var(--ink-40);
+      text-decoration-thickness: 1px;
     }
-    .price-regular .jp { font-family: var(--serif-jp); margin-left: 14px; letter-spacing: 0.2em; }
+    .price-regular .jp { font-family: 'Noto Serif JP', serif; margin-left: 12px; letter-spacing: 0.2em; }
     .price-monitor {
-      margin-top: 18px;
-      font-family: var(--serif-en);
+      margin-top: 16px;
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: clamp(36px, 5vw, 56px);
-      color: var(--ink);
-      letter-spacing: 0.02em;
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 700;
+      color: var(--charcoal);
       line-height: 1;
     }
     .price-monitor .yen {
-      font-family: var(--serif-en-2);
+      font-family: 'Cormorant Garamond', serif;
       font-style: normal;
       font-size: 0.55em;
       color: var(--accent);
-      vertical-align: 0.15em;
+      vertical-align: 0.18em;
       margin-right: 4px;
+      font-weight: 500;
     }
     .price-monitor .jp {
       display: block;
-      font-family: var(--serif-jp);
+      font-family: 'Noto Serif JP', serif;
       font-size: 11px;
-      letter-spacing: 0.4em;
-      color: var(--ink-60);
+      letter-spacing: 0.38em;
+      color: rgba(28,25,24,0.58);
       margin-top: 16px;
       font-style: normal;
+      font-weight: 400;
     }
     .price-limit {
-      margin-top: 28px;
-      font-family: var(--serif-jp);
+      margin-top: 26px;
+      font-family: 'Noto Serif JP', serif;
       font-size: 12px;
       letter-spacing: 0.34em;
       color: var(--accent);
+      font-weight: 500;
     }
     .price-note {
-      margin-top: 28px;
+      margin-top: 26px;
       padding-top: 20px;
       border-top: 1px solid var(--line);
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      color: var(--ink-60);
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      color: rgba(28,25,24,0.7);
       line-height: 2;
     }
     .monitor-lists {
-      margin-top: 64px;
+      margin-top: 56px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 56px;
+      text-align: left;
     }
     .monitor-lists h3 {
-      font-family: var(--serif-en);
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 20px;
-      color: var(--ink);
-      margin-bottom: 20px;
+      font-size: 22px;
+      margin-bottom: 16px;
       padding-bottom: 10px;
       border-bottom: 1px solid var(--line);
-      letter-spacing: 0.04em;
+      color: var(--charcoal);
+      font-weight: 500;
     }
     .monitor-lists h3 small {
       display: block;
-      font-family: var(--serif-jp);
+      font-family: 'Noto Serif JP', serif;
       font-size: 10px;
       letter-spacing: 0.36em;
-      color: var(--ink-60);
-      font-weight: 300;
-      margin-top: 6px;
+      color: rgba(28,25,24,0.55);
+      font-weight: 400;
+      margin-top: 4px;
       font-style: normal;
     }
     .monitor-lists ul {
       list-style: none;
       font-size: 13px;
       line-height: 2.1;
-      letter-spacing: 0.1em;
-      color: var(--ink-90);
+      letter-spacing: 0.08em;
     }
-    .monitor-lists li {
-      position: relative;
-      padding-left: 16px;
-    }
+    .monitor-lists li { position: relative; padding-left: 16px; }
     .monitor-lists li::before {
-      content: "―";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
+      content: "—"; position: absolute; left: 0; color: var(--accent);
     }
 
-    /* ─────────────── Ready / CTA ─────────────── */
-    .ready {
-      padding: 140px 56px 160px;
-      background: var(--bg);
-      text-align: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .ready-stage {
-      position: relative;
-      width: min(60vw, 600px);
-      aspect-ratio: 3 / 4;
-      margin: 0 auto;
-    }
-    .ready-photo {
-      position: absolute; inset: 0;
-      border-radius: 50%;
-      overflow: hidden;
-      background: var(--bg-2);
-      opacity: 1;
-      transition: opacity 2s ease;
-    }
-    .ready-photo img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(25%) brightness(0.85);
-    }
-    .ready-title {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 2s ease;
-    }
-    .ready-title .en {
-      font-family: var(--serif-en);
-      font-style: italic;
-      font-size: clamp(64px, 9vw, 128px);
-      color: var(--ink);
-      line-height: 1;
-      letter-spacing: 0.01em;
-    }
-    .ready-title .jp {
-      margin-top: 28px;
-      font-family: var(--serif-jp);
-      font-size: 16px;
-      letter-spacing: 0.3em;
-      color: var(--ink-90);
-    }
-    .ready.reveal .ready-photo { opacity: 0; }
-    .ready.reveal .ready-title { opacity: 1; }
-
-    .ready-cta-block {
-      margin-top: 96px;
-      max-width: 520px;
-    }
+    /* ═══════════════ Ready / CTA body ═══════════════ */
     .ready-cta-head {
-      font-family: var(--serif-jp);
-      font-size: 15px;
-      letter-spacing: 0.24em;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
       line-height: 2.1;
-      color: var(--ink);
+      letter-spacing: 0.18em;
+      color: var(--charcoal);
+      margin-bottom: 14px;
     }
     .ready-cta-sub {
-      margin-top: 20px;
-      font-family: var(--serif-en-2);
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 15px;
+      font-size: 14px;
       letter-spacing: 0.18em;
-      color: var(--ink-60);
+      color: rgba(28,25,24,0.65);
     }
     .ready-cta-btn {
       display: inline-block;
-      margin-top: 56px;
+      margin-top: 48px;
       padding: 22px 56px;
-      font-family: var(--serif-en-2);
+      font-family: 'Cormorant Garamond', serif;
       font-size: 12px;
-      letter-spacing: 0.46em;
+      letter-spacing: 0.44em;
       text-transform: uppercase;
-      color: var(--bg);
-      background: var(--ink);
-      border: 1px solid var(--ink);
+      color: var(--offwhite);
+      background: var(--charcoal);
+      border: 1px solid var(--charcoal);
       transition: background .4s, color .4s;
     }
+    .ready-cta-btn:hover { background: transparent; color: var(--charcoal); }
     .ready-cta-btn small {
       display: block;
-      font-family: var(--serif-jp);
+      font-family: 'Noto Serif JP', serif;
       font-size: 10px;
-      letter-spacing: 0.32em;
+      letter-spacing: 0.28em;
       margin-top: 6px;
-      opacity: 0.7;
-    }
-    .ready-cta-btn:hover {
-      background: transparent;
-      color: var(--ink);
+      opacity: 0.75;
     }
     .ready-cta-note {
-      margin-top: 24px;
+      margin-top: 22px;
       font-size: 11px;
-      letter-spacing: 0.22em;
-      color: var(--ink-60);
+      letter-spacing: 0.2em;
+      color: rgba(28,25,24,0.55);
     }
 
-    /* ─────────────── Footer ─────────────── */
-    .site-footer {
-      padding: 64px 56px;
-      background: var(--bg);
-      border-top: 1px solid var(--line);
+    /* Footer */
+    footer {
+      background: var(--charcoal);
+      padding: 44px 40px;
       text-align: center;
-      font-family: var(--serif-en-2);
-      font-size: 11px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--ink-60);
+      color: rgba(245,240,234,0.45);
     }
-    .site-footer .jp {
+    footer .jp {
       display: block;
-      font-family: var(--serif-jp);
+      font-family: 'Noto Serif JP', serif;
       font-size: 10px;
-      letter-spacing: 0.3em;
-      color: var(--ink-40);
+      letter-spacing: 0.2em;
+      color: rgba(245,240,234,0.25);
       margin-top: 10px;
       text-transform: none;
     }
 
-    /* ─────────────── Skip button ─────────────── */
+    /* Skip button */
     .skip-btn {
       position: fixed;
-      right: 28px;
-      bottom: 28px;
+      right: 24px; bottom: 24px;
       z-index: 50;
       padding: 10px 18px;
-      background: rgba(14, 13, 12, 0.7);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--ink-20);
-      color: var(--ink-60);
-      font-family: var(--serif-en-2);
+      background: rgba(245,240,234,0.88);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--line);
+      color: var(--charcoal);
+      font-family: 'Cormorant Garamond', serif;
       font-size: 10px;
       letter-spacing: 0.34em;
       text-transform: uppercase;
       cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
+      opacity: 0; pointer-events: none;
       transition: opacity .5s;
     }
-    .skip-btn.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .skip-btn:hover { color: var(--ink); border-color: var(--ink-40); }
+    .skip-btn.show { opacity: 1; pointer-events: auto; }
+    .skip-btn:hover { background: var(--charcoal); color: var(--offwhite); }
 
-    /* ─────────────── Mobile ─────────────── */
+    /* ═══════════════ Mobile ═══════════════ */
     @media (max-width: 768px) {
-      .site-header { padding: 16px 20px; }
-      .logo { font-size: 18px; }
-      .logo small { font-size: 8px; letter-spacing: 0.38em; }
-      .nav a { font-size: 9px; letter-spacing: 0.32em; }
+      .site-header { padding: 14px 18px; }
+      .site-logo { font-size: 13px; }
+      .site-logo small { font-size: 7px; letter-spacing: 0.36em; }
+      .header-links a { font-size: 9px; letter-spacing: 0.26em; }
 
-      .hero { padding: 110px 20px 60px; }
-      .hero-badge { font-size: 9px; letter-spacing: 0.36em; margin-bottom: 36px; }
-      .hero-main { font-size: 24px; line-height: 1.7; letter-spacing: 0.06em; }
-      .hero-sub { font-size: 12px; letter-spacing: 0.2em; }
-      .hero-cta { margin-top: 52px; padding: 14px 30px; font-size: 10px; letter-spacing: 0.32em; }
-      .hero-cta small { font-size: 9px; }
+      .hero { padding: 110px 16px 60px; }
+      .hero-tagline { font-size: 14px; letter-spacing: 0.18em; margin-bottom: 10px; }
+      .hero-stage { height: clamp(520px, 78vh, 640px); }
+      .hero-center { top: 24%; width: clamp(180px, 48vw, 240px); height: clamp(240px, 64vw, 320px); }
+      .hero-float { animation-duration: 10s; }
+      .hero-float.f1  { top: 2%;  left: 2%;  width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
+      .hero-float.f2  { top: 24%; left: -4%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
+      .hero-float.f3  { top: 52%; left: 2%;  width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
+      .hero-float.f4  { top: 78%; left: -2%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
+      .hero-float.f6  { top: 2%;  right: 2%; width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
+      .hero-float.f7  { top: 24%; right: -4%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
+      .hero-float.f8  { top: 52%; right: 2%;  width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
+      .hero-float.f9  { top: 78%; right: -2%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
 
+      .hero-eyebrow { font-size: 11px; letter-spacing: 0.28em; }
+      .hero-jp-sub-new { font-size: 16px; line-height: 2.1; }
+      .hero-cta-link-new { font-size: 11px; letter-spacing: 0.28em; }
+
+      /* Chapter mobile: stack */
       .chapter {
-        padding: 100px 20px 80px;
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto;
-        gap: 28px;
+        grid-template-rows: auto auto auto auto auto auto;
+        padding: 80px 18px 60px;
+        column-gap: 0;
+        row-gap: 22px;
       }
-      .chapter-summary {
-        grid-column: 1;
-        grid-row: 1;
-        order: 1;
+      .ch-summary {
+        grid-column: 1; grid-row: 1;
         max-width: 100%;
-        font-size: 12px;
-        line-height: 2;
+        font-size: 13px;
         letter-spacing: 0.06em;
-        padding-top: 16px;
+        line-height: 2.1;
       }
-      .chapter-topimage {
-        grid-column: 1;
-        grid-row: 2;
-        order: 2;
+      .ch-thumb {
+        grid-column: 1; grid-row: 2;
         justify-self: center;
-        width: 60%;
-        max-width: 220px;
-        aspect-ratio: 4 / 3;
+        width: 44%;
+        max-width: 180px;
       }
-      .chapter-stage {
-        grid-column: 1;
-        grid-row: 3;
-        order: 3;
-        gap: 40px;
+      .ch-oval-wrap {
+        grid-column: 1; grid-row: 3;
+        width: 82vw;
       }
-      .vtitle {
-        grid-column: 1;
-        grid-row: 4;
-        order: 4;
+      .ch-oval-title { font-size: clamp(42px, 12vw, 68px); bottom: 20%; }
+      .ch-oval-more  { font-size: 10px; bottom: 10%; }
+      .ch-vtag {
+        grid-column: 1; grid-row: 5;
         writing-mode: horizontal-tb;
         transform: none;
-        font-size: 44px;
         justify-self: center;
-        padding: 20px 0 0;
+        font-size: 9px;
+        letter-spacing: 0.4em;
+        padding: 6px 0 0;
+        text-align: center;
+      }
+      .ch-plus {
+        grid-column: 1; grid-row: 6;
+        justify-self: center;
+        font-size: 18px;
+        padding: 0;
+      }
+      .ch-body {
+        grid-column: 1; grid-row: 4;
+        padding: 22px 0 0;
       }
 
-      .ellipse {
-        width: 80vw;
-      }
       .sequence {
         width: 88vw;
-        min-height: 220px;
+        min-height: 240px;
       }
       .seq-text {
-        font-size: 15px;
+        font-size: 14.5px;
         line-height: 2.15;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.05em;
       }
-      .next-arrow { bottom: -60px; font-size: 9px; letter-spacing: 0.4em; }
 
-      .produce { padding: 100px 20px 100px; }
-      .produce-lead { font-size: 13px; letter-spacing: 0.08em; }
+      .produce { padding: 88px 18px 88px; }
+      .produce-lead { font-size: 13px; letter-spacing: 0.06em; }
       .produce-steps {
         margin-top: 64px;
         grid-template-columns: 1fr;
-        gap: 44px;
+        gap: 48px;
       }
-      .step-num { font-size: 34px; }
-      .step-en { font-size: 17px; }
+      .step-num { font-size: 42px; }
+      .step-en  { font-size: 20px; }
 
-      .gate { width: 80vw; }
-      .profile-body { font-size: 14px; letter-spacing: 0.08em; line-height: 2.1; padding: 0 8px; }
-      .monitor-lists {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .price-card { padding: 32px 20px; }
-      .price-note { font-size: 11px; letter-spacing: 0.06em; }
+      .profile-body { font-size: 14px; letter-spacing: 0.06em; line-height: 2.1; }
+      .monitor-lists { grid-template-columns: 1fr; gap: 36px; }
+      .price-card { padding: 30px 18px; }
+      .price-note { font-size: 11px; letter-spacing: 0.04em; }
 
-      .ready { padding: 110px 20px 120px; }
-      .ready-stage { width: 80vw; }
-      .ready-title .en { font-size: 52px; }
-      .ready-title .jp { font-size: 13px; letter-spacing: 0.24em; }
       .ready-cta-btn { padding: 18px 36px; font-size: 10px; letter-spacing: 0.34em; }
 
-      .skip-btn { right: 16px; bottom: 16px; padding: 8px 14px; font-size: 9px; }
-      .site-footer { padding: 44px 20px; font-size: 9px; letter-spacing: 0.3em; }
+      .skip-btn { right: 14px; bottom: 14px; padding: 8px 14px; font-size: 9px; }
+      footer { padding: 34px 16px; font-size: 10px; letter-spacing: 0.3em; }
     }
 
-    /* ─────────────── Reduced motion ─────────────── */
+    @media (max-width: 480px) {
+      .hero-stage { height: 560px; }
+      .ch-oval-title { font-size: 48px; }
+    }
+
+    /* ═══════════════ Reduced motion ═══════════════ */
     @media (prefers-reduced-motion: reduce) {
-      .hero-gallery .slide { transition: none; }
-      .hero-gallery .slide:first-child { opacity: 1; }
+      .hero-arc, .hero-center, .hero-float {
+        animation: none !important;
+        opacity: 1 !important;
+      }
+      .hero-arc { transform: translateX(-50%) !important; }
+      .hero-center { transform: translateX(-50%) !important; }
+      .hero-float { transform: rotate(var(--rot, 0deg)) !important; }
       .sequence { min-height: auto; position: static; }
       .seq-text {
-        position: static;
-        opacity: 1 !important;
-        margin-bottom: 32px;
-        transition: none;
+        position: static; opacity: 1 !important; transition: none;
+        margin-bottom: 28px;
       }
-      .ellipse .photo { opacity: 1 !important; transition: none; }
-      .ellipse.photo-fade .photo { opacity: 1; }
-      .ellipse .label { display: none; }
-      .gate { opacity: 1 !important; transition: none; }
-      .gate.dismiss { opacity: 1 !important; }
-      .ready-photo, .ready-title { transition: none; }
-      .ready-title { opacity: 1 !important; position: static; margin-top: 32px; }
+      .ch-oval-photo, .ch-oval.photo-fade .ch-oval-photo {
+        opacity: 1 !important; transition: none;
+      }
       .next-arrow { opacity: 0.6 !important; }
       .skip-btn { display: none !important; }
-      .hero-gallery .slide { animation: none; }
     }
   </style>
 </head>
 <body>
 
+<!-- ── HEADER ── -->
 <header class="site-header">
-  <a class="logo" href="#hero">
+  <a class="site-logo" href="#hero">
     Hanu
     <small>Party Produce</small>
   </a>
-  <nav class="nav">
+  <div class="header-links">
     <a href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">Instagram</a>
     <a href="#ready">Contact</a>
-  </nav>
+  </div>
 </header>
 
 <button class="skip-btn" id="skipBtn" type="button">Skip ›</button>
 
-<!-- ══════════════ HERO ══════════════ -->
+<!-- ═══════════ HERO (既存 TOP 継承) ═══════════ -->
 <section class="hero" id="hero">
-  <div class="hero-gallery" id="heroGallery">
-    <div class="slide active" style="background-image:url('image/gal02.jpg')"></div>
-    <div class="slide" style="background-image:url('image/gal03.jpg')"></div>
-    <div class="slide" style="background-image:url('image/gal04.jpg')"></div>
-    <div class="slide" style="background-image:url('image/gal05.jpg')"></div>
-    <div class="slide" style="background-image:url('image/gal06.jpg')"></div>
-    <div class="slide" style="background-image:url('image/gal07.jpg')"></div>
-    <div class="slide" style="background-image:url('image/gal08.jpg')"></div>
-    <div class="slide" style="background-image:url('image/gal09.jpg')"></div>
+  <div class="hero-tagline">女性起業家のための<br>パーティープロデュース</div>
+
+  <div class="hero-stage">
+    <svg class="hero-arc" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <path id="arcPath" d="M 80 520 A 420 420 0 0 1 920 520" fill="none"/>
+      </defs>
+      <text class="hero-arc-text" font-size="96">
+        <textPath href="#arcPath" startOffset="50%" text-anchor="middle">ARE YOU READY?</textPath>
+      </text>
+    </svg>
+
+    <div class="hero-float f1" style="--rot:-7deg"><img src="image/image2/01.jpg" alt=""></div>
+    <div class="hero-float f2" style="--rot:5deg"><img src="image/image2/02.jpg" alt=""></div>
+    <div class="hero-float f3" style="--rot:-4deg"><img src="image/image2/03.jpg" alt=""></div>
+    <div class="hero-float f4" style="--rot:8deg"><img src="image/image2/04.jpg" alt=""></div>
+    <div class="hero-float f6" style="--rot:-6deg"><img src="image/image2/06.jpg" alt=""></div>
+    <div class="hero-float f7" style="--rot:4deg"><img src="image/image2/07.jpg" alt=""></div>
+    <div class="hero-float f8" style="--rot:-5deg"><img src="image/image2/08.jpg" alt=""></div>
+    <div class="hero-float f9" style="--rot:7deg"><img src="image/image2/10.jpg" alt=""></div>
+
+    <div class="hero-center">
+      <img src="image/image2/main.png" alt="Hanu">
+    </div>
   </div>
-  <div class="hero-inner">
-    <div class="hero-badge">Wedding &amp; Party Planning &nbsp;/&nbsp; 19 Years &nbsp;·&nbsp; 500+ Events</div>
-    <h1 class="hero-main">
-      「<em>ランチ会</em>」から、<br>
-      「<em>パーティー</em>」へ。
-    </h1>
-    <p class="hero-sub">はじめての一日を、プロと設計する。</p>
-    <a class="hero-cta" href="#monitor">
-      View Monitor Plan
-      <small>モニター募集の詳細を見る</small>
-    </a>
+
+  <div class="hero-copy">
+    <div class="hero-eyebrow">
+      Wedding &amp; Party Planning<br>
+      19 Years · 500+ Events
+    </div>
+    <div class="hero-divider" aria-hidden="true"></div>
+    <p class="hero-jp-sub-new">
+      「ランチ会」から、「パーティー」へ。<br>
+      はじめての一日を、プロと設計する。
+    </p>
+    <a href="#monitor" class="hero-cta-link-new">モニター募集の詳細を見る</a>
   </div>
 </section>
 
-<!-- ══════════════ BEFORE ══════════════ -->
+<!-- ═══════════ 2. BEFORE ═══════════ -->
 <section class="chapter" id="before" data-chapter="before">
-  <div class="chapter-summary">
-「"楽しかったね"で終わるランチ会も、悪くない。<br>
-でも——"特別な一日"として心に残る集まりが、<br>
-本当はほしいのかもしれない。」
+  <div class="ch-summary">
+    "楽しかったね"で終わるランチ会も、悪くない。<br>
+    でも——"特別な一日"として心に残る集まりが、<br>
+    本当はほしいのかもしれない。
   </div>
-  <div class="chapter-topimage">
-    <img src="image/work_s2.JPG" alt="ランチ会の日常">
+  <div class="ch-thumb">
+    <img src="image/image2/05.jpg" alt="">
   </div>
-  <div class="vtitle">Before.</div>
-  <div class="chapter-stage">
-    <div class="ellipse" data-tone="before" id="ellipseBefore">
-      <div class="photo"><img src="image/birthday②.JPG" alt=""></div>
-      <span class="hint">Tap to skip</span>
+
+  <div class="ch-oval-wrap">
+    <div class="ch-oval" id="ovalBefore">
+      <div class="ch-oval-photo"><img src="image/image2/09.jpg" alt=""></div>
+      <div class="ch-oval-title">Before.</div>
+      <a href="#after" class="ch-oval-more">More</a>
     </div>
+  </div>
+
+  <div class="ch-vtag">Hanu &nbsp; | &nbsp; Are you ready?</div>
+  <div class="ch-plus">+</div>
+
+  <div class="ch-body">
     <div class="sequence" id="seqBefore"></div>
     <div class="next-arrow" data-for="before">Scroll</div>
   </div>
 </section>
 
-<!-- ══════════════ AFTER ══════════════ -->
+<!-- ═══════════ 3. AFTER ═══════════ -->
 <section class="chapter alt" id="after" data-chapter="after">
-  <div class="chapter-summary">
-「"楽しかったね"で終わっていた集まりが、<br>
-"心に刻まれる一日"になる。<br>
-その変化は、事業の土台になる。」
+  <div class="ch-summary">
+    "楽しかったね"で終わっていた集まりが、<br>
+    "心に刻まれる一日"になる。<br>
+    その変化は、事業の土台になる。
   </div>
-  <div class="chapter-topimage">
-    <img src="image/ベビーシャワー②.JPG" alt="パーティー当日の光景">
+  <div class="ch-thumb">
+    <img src="image/image2/13.jpg" alt="">
   </div>
-  <div class="vtitle">After.</div>
-  <div class="chapter-stage">
-    <div class="ellipse" data-tone="after" id="ellipseAfter">
-      <div class="photo"><img src="image/記念パーティー②.JPG" alt=""></div>
-      <span class="hint">Tap to skip</span>
+
+  <div class="ch-oval-wrap">
+    <div class="ch-oval" id="ovalAfter">
+      <div class="ch-oval-photo"><img src="image/image2/14.jpg" alt=""></div>
+      <div class="ch-oval-title">After.</div>
+      <a href="#produce" class="ch-oval-more">More</a>
     </div>
+  </div>
+
+  <div class="ch-vtag">Hanu &nbsp; | &nbsp; Are you ready?</div>
+  <div class="ch-plus">+</div>
+
+  <div class="ch-body">
     <div class="sequence" id="seqAfter"></div>
     <div class="next-arrow" data-for="after">Scroll</div>
   </div>
 </section>
 
-<!-- ══════════════ HOW WE PRODUCE ══════════════ -->
+<!-- ═══════════ 4. HOW WE PRODUCE ═══════════ -->
 <section class="produce" id="produce">
-  <div class="produce-eyebrow">— Process</div>
-  <h2 class="produce-title">How We Produce.</h2>
+  <div class="produce-ghost">PROCESS</div>
+  <div class="produce-eyebrow">— Process —</div>
+  <h2 class="produce-title">How We <em>Produce.</em></h2>
   <p class="produce-lead">
     コンセプト設計から当日の進行まで、すべてを一貫してプロデュース。<br>
     あなたの想いを、記憶に残る一日へと設計します。
   </p>
   <div class="produce-steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-en">Concept</div>
-      <div class="step-jp">コンセプト設計</div>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-en">Venue</div>
-      <div class="step-jp">会場選定</div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-en">Styling</div>
-      <div class="step-jp">装飾・スタイリング</div>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-en">Catering</div>
-      <div class="step-jp">ケータリング</div>
-    </div>
-    <div class="step">
-      <div class="step-num">05</div>
-      <div class="step-en">Paper &amp; Direction</div>
-      <div class="step-jp">ペーパーアイテム・演出</div>
-    </div>
-    <div class="step">
-      <div class="step-num">06</div>
-      <div class="step-en">Operation</div>
-      <div class="step-jp">当日の運営・進行</div>
-    </div>
+    <div class="step"><div class="step-num">01</div><div class="step-en">Concept</div><div class="step-jp">コンセプト設計</div></div>
+    <div class="step"><div class="step-num">02</div><div class="step-en">Venue</div><div class="step-jp">会場選定</div></div>
+    <div class="step"><div class="step-num">03</div><div class="step-en">Styling</div><div class="step-jp">装飾・スタイリング</div></div>
+    <div class="step"><div class="step-num">04</div><div class="step-en">Catering</div><div class="step-jp">ケータリング</div></div>
+    <div class="step"><div class="step-num">05</div><div class="step-en">Paper &amp; Direction</div><div class="step-jp">ペーパーアイテム・演出</div></div>
+    <div class="step"><div class="step-num">06</div><div class="step-en">Operation</div><div class="step-jp">当日の運営・進行</div></div>
   </div>
 </section>
 
-<!-- ══════════════ PROFILE ══════════════ -->
-<section class="chapter" id="profile" data-chapter="profile">
-  <div class="chapter-summary">
-Party Producer.<br>
-500 組以上のパーティー・ウェディングを<br>
-プランニングしてきたプロの視点から、<br>
-あなたの一日を設計します。
+<!-- ═══════════ 5. PROFILE ═══════════ -->
+<section class="chapter sand" id="profile" data-chapter="profile">
+  <div class="ch-summary">
+    Party Producer.<br>
+    500組以上のパーティー・ウェディングを<br>
+    手がけてきたプロの視点から、設計します。
   </div>
-  <div class="chapter-topimage">
-    <img src="image/portrait_profile_v2.png" alt="Hanu Portrait">
+  <div class="ch-thumb">
+    <img src="image/image2/hanu2.jpg" alt="">
   </div>
-  <div class="vtitle">Profile.</div>
-  <div class="chapter-stage">
-    <div class="gate" id="gateProfile">
-      <div class="en">Profile.</div>
-      <div class="jp">Party Producer, Hanu.</div>
+
+  <div class="ch-oval-wrap">
+    <div class="ch-oval" id="ovalProfile">
+      <div class="ch-oval-photo"><img src="image/image2/hanu4.jpg" alt="Hanu"></div>
+      <div class="ch-oval-title">Profile.</div>
+      <a href="#monitor" class="ch-oval-more">More</a>
     </div>
-    <div class="profile-body">
+  </div>
+
+  <div class="ch-vtag">Hanu &nbsp; | &nbsp; Party Producer</div>
+  <div class="ch-plus">+</div>
+
+  <div class="ch-body">
+    <p class="profile-body">
       Hanu／パーティープロデューサー。<br><br>
       パーティー・ウェディング業界で19年、<br>
       延べ500組以上のパーティーをプランニング。<br><br>
@@ -1063,40 +1059,43 @@ Party Producer.<br>
       そこから生まれる一体感。<br>
       パーティーに参加した人の記憶に鮮明に刻まれる一日を、<br>
       あなたのために設計します。
-
-      <div>
-        <a class="profile-link" href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">
-          Follow on Instagram
-          <span class="profile-handle">@hanu_party</span>
-        </a>
-      </div>
-    </div>
+    </p>
+    <a class="profile-link" href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">
+      Follow on Instagram
+      <span class="handle">@hanu_party</span>
+    </a>
   </div>
 </section>
 
-<!-- ══════════════ MONITOR ══════════════ -->
-<section class="chapter alt" id="monitor" data-chapter="monitor">
-  <div class="chapter-summary">
-Monitor Plan.<br>
-3組様限定、モニター募集。<br>
-通常価格 ¥80,000 のところ<br>
-¥50,000 でご案内します。
+<!-- ═══════════ 6. MONITOR ═══════════ -->
+<section class="chapter" id="monitor" data-chapter="monitor">
+  <div class="ch-summary">
+    3組様限定、モニター募集。<br>
+    通常 ¥80,000 → モニター ¥50,000。<br>
+    プロのプロデュースを、特別価格で。
   </div>
-  <div class="chapter-topimage">
-    <img src="image/work_p2.JPG" alt="Party scene">
+  <div class="ch-thumb">
+    <img src="image/image2/02.jpg" alt="">
   </div>
-  <div class="vtitle">Monitor.</div>
-  <div class="chapter-stage">
-    <div class="gate" id="gateMonitor">
-      <div class="en">Monitor.</div>
-      <div class="jp">3組様限定、モニター募集。</div>
+
+  <div class="ch-oval-wrap">
+    <div class="ch-oval" id="ovalMonitor">
+      <div class="ch-oval-photo"><img src="image/image2/10.jpg" alt=""></div>
+      <div class="ch-oval-title">Monitor.</div>
+      <a href="#ready" class="ch-oval-more">More</a>
     </div>
+  </div>
+
+  <div class="ch-vtag">Hanu &nbsp; | &nbsp; 3 Spots Only</div>
+  <div class="ch-plus">+</div>
+
+  <div class="ch-body">
     <div class="monitor-body">
       <div class="price-card">
-        <div class="price-regular">Regular &nbsp;<span class="jp">通常価格</span>&nbsp; ¥80,000</div>
+        <div class="price-regular">Regular <span class="jp">通常価格</span> ¥80,000</div>
         <div class="price-monitor">
           <span class="yen">¥</span>50,000
-          <span class="jp">Monitor Price &nbsp;/&nbsp; モニター価格</span>
+          <span class="jp">Monitor Price — モニター価格</span>
         </div>
         <div class="price-limit">― 3組様限定 ―</div>
         <div class="price-note">
@@ -1131,24 +1130,33 @@ Monitor Plan.<br>
   </div>
 </section>
 
-<!-- ══════════════ READY ══════════════ -->
-<section class="ready" id="ready" data-chapter="ready">
-  <div class="ready-stage" id="readyStage">
-    <div class="ready-photo">
-      <img src="image/portrait_hero.jpg" alt="">
-    </div>
-    <div class="ready-title">
-      <div class="en"><em>Ready?</em></div>
-      <div class="jp">さあ、やりましょう。</div>
+<!-- ═══════════ 7. READY ═══════════ -->
+<section class="chapter alt" id="ready" data-chapter="ready">
+  <div class="ch-summary">
+    まずは、無料Zoom相談から。<br>
+    あなたのパーティーを、<br>
+    プロと一緒に、ここから始めましょう。
+  </div>
+  <div class="ch-thumb">
+    <img src="image/image2/06.jpg" alt="">
+  </div>
+
+  <div class="ch-oval-wrap">
+    <div class="ch-oval" id="ovalReady">
+      <div class="ch-oval-photo"><img src="image/image2/hanu4.jpg" alt=""></div>
+      <div class="ch-oval-title">Ready?</div>
+      <a href="booking.html" class="ch-oval-more">Book</a>
     </div>
   </div>
 
-  <div class="ready-cta-block">
-    <div class="ready-cta-head">
-      まずは、無料Zoom相談から。<br>
+  <div class="ch-vtag">Hanu &nbsp; | &nbsp; Are you ready?</div>
+  <div class="ch-plus">+</div>
+
+  <div class="ch-body">
+    <p class="ready-cta-head">
       あなたのパーティーを、一緒に。
-    </div>
-    <div class="ready-cta-sub">Book a Free 30-min Consultation</div>
+    </p>
+    <p class="ready-cta-sub">Book a Free 30-min Zoom Consultation</p>
     <a class="ready-cta-btn" href="booking.html">
       Book Now
       <small>無料Zoom相談を予約する</small>
@@ -1157,226 +1165,149 @@ Monitor Plan.<br>
   </div>
 </section>
 
-<footer class="site-footer">
-  Hanu &nbsp;·&nbsp; Party Produce for Her
+<footer>
+  Hanu — Party Produce for Her
   <span class="jp">© Hanu — All rights reserved.</span>
 </footer>
 
 <script>
 (() => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ─── Hero gallery cross-fade ─── */
-  (() => {
-    const slides = document.querySelectorAll('#heroGallery .slide');
-    if (!slides.length || prefersReduced) return;
-    let i = 0;
-    setInterval(() => {
-      slides[i].classList.remove('active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('active');
-    }, 5200);
-  })();
-
-  /* ─── Chapter animation engine ─── */
   const SKIP_BTN = document.getElementById('skipBtn');
 
-  const BEFORE_TEXTS = [
-    "ランチ会は、開いたことがある。\nママ友会の延長線のような、気軽な集まり。\n7〜8人で、美味しいごはんを食べて、笑って。\n\n「また集まりたいね」",
-    "「次回はみんなで集まれたらいいね」\n\nそう言って、解散する。\n——そして次回もまた、同じ規模で、同じ集まり方。",
-    "それも全然悪くない。楽しい。\nでも、\"若干\"の物足りなさを感じてしまう。\n\nその\"若干\"の正体を言葉にしてみると——",
-    "来てくれる人は、大体毎回ほぼ同じ。\n来られなかった人も、\n予定を無理して空ける程の勢いはない。",
-    "ちょっとおしゃれをして、出かける日——\nではなく、\nいつもよりちょっといいランチを\n楽しく食べる日のイメージ。",
-    "集まる趣旨も、少し曖昧だから\n楽しかったね、で終わってしまう。",
-    "記憶に残らないわけじゃない、けれど、\n\"特別な一日\"として、心に刻まれるものでもない。\n\n悪い集まりじゃない。\nむしろ、心地いい。",
-    "でも——\nこのままで、いいのかな、と\n思う瞬間がある。"
-  ];
-  // durations in seconds for each block (display duration). Fades are 1s (1.5s between 7→8).
-  const BEFORE_DURATIONS = [7, 5, 7, 6, 7, 5, 6, 5];
-  const BEFORE_FADES     = [1, 1, 1, 1, 1, 1, 1.5];
+  /* ═══════ Before / After text sequencer ═══════ */
+  const BEFORE = {
+    texts: [
+      "ランチ会は、開いたことがある。\nママ友会の延長線のような、気軽な集まり。\n7〜8人で、美味しいごはんを食べて、笑って。\n\n「また集まりたいね」",
+      "「次回はみんなで集まれたらいいね」\n\nそう言って、解散する。\n——そして次回もまた、同じ規模で、同じ集まり方。",
+      "それも全然悪くない。楽しい。\nでも、\"若干\"の物足りなさを感じてしまう。\n\nその\"若干\"の正体を言葉にしてみると——",
+      "来てくれる人は、大体毎回ほぼ同じ。\n来られなかった人も、\n予定を無理して空ける程の勢いはない。",
+      "ちょっとおしゃれをして、出かける日——\nではなく、\nいつもよりちょっといいランチを\n楽しく食べる日のイメージ。",
+      "集まる趣旨も、少し曖昧だから\n楽しかったね、で終わってしまう。",
+      "記憶に残らないわけじゃない、けれど、\n\"特別な一日\"として、心に刻まれるものでもない。\n\n悪い集まりじゃない。\nむしろ、心地いい。",
+      "でも——\nこのままで、いいのかな、と\n思う瞬間がある。"
+    ],
+    durations: [7, 5, 7, 6, 7, 5, 6, 5],
+    fades:     [1, 1, 1, 1, 1, 1, 1.5]
+  };
 
-  const AFTER_TEXTS = [
-    "パーティーをやると決めれば、\n自ずと動くもの。\n\n「誰に声をかける？」\n「場所はどこにする？」\n「どんな時間を過ごしてもらう？」\n\nこの段階から、\nパーティーは始まっている。",
-    "気軽なママ友会ともランチ会とも違う。\n\nもっと大きな目的をもって、\n時間を作ってきてもらえる。\n\n来ていただいた先に何があるかを、\n魅せること。",
-    "この部分を、プロがサポートする。\n\nあなたの、そしてあなたの大切なゲストの時間を、\n緩急と余白、一体感を持って演出する。",
-    "それを体感した先には、\nあなたの求心力、\nあなたの想い、\nあなたへのリスペクトが高まる。",
-    "ゲスト同士も、身近に感じられる。\n\nこれはリアルの場があってこそ。",
-    "パーティーの力を借りて、\nあなたも一緒に、\n飛躍しませんか。"
-  ];
-  const AFTER_DURATIONS = [8, 7, 6, 7, 5, 5];
-  const AFTER_FADES     = [1, 1, 1, 1, 1.5];
+  const AFTER = {
+    texts: [
+      "パーティーをやると決めれば、\n自ずと動くもの。\n\n「誰に声をかける？」\n「場所はどこにする？」\n「どんな時間を過ごしてもらう？」\n\nこの段階から、\nパーティーは始まっている。",
+      "気軽なママ友会ともランチ会とも違う。\n\nもっと大きな目的をもって、\n時間を作ってきてもらえる。\n\n来ていただいた先に何があるかを、\n魅せること。",
+      "この部分を、プロがサポートする。\n\nあなたの、そしてあなたの大切なゲストの時間を、\n緩急と余白、一体感を持って演出する。",
+      "それを体感した先には、\nあなたの求心力、\nあなたの想い、\nあなたへのリスペクトが高まる。",
+      "ゲスト同士も、身近に感じられる。\n\nこれはリアルの場があってこそ。",
+      "パーティーの力を借りて、\nあなたも一緒に、\n飛躍しませんか。"
+    ],
+    durations: [8, 7, 6, 7, 5, 5],
+    fades:     [1, 1, 1, 1, 1.5]
+  };
 
-  /**
-   * Build a sequenced animation controller.
-   * @param {HTMLElement} ellipse  The ellipse element (to fade photo)
-   * @param {HTMLElement} sequence The text container
-   * @param {HTMLElement} arrow    The next-arrow element
-   * @param {string[]} texts
-   * @param {number[]} durations  in seconds, per text block
-   * @param {number[]} fades      in seconds, between blocks
-   */
-  function makeSequencer(ellipse, sequence, arrow, texts, durations, fades) {
-    // Build text nodes
-    const nodes = texts.map(t => {
+  function makeSequencer(ovalEl, seqEl, arrowEl, spec) {
+    const nodes = spec.texts.map(t => {
       const el = document.createElement('div');
       el.className = 'seq-text';
       el.textContent = t;
-      sequence.appendChild(el);
+      seqEl.appendChild(el);
       return el;
     });
-
     const timers = [];
-    let idx = -1;
-    let started = false;
-    let done = false;
-
+    let idx = -1, started = false, done = false;
     const clearAll = () => { timers.forEach(clearTimeout); timers.length = 0; };
-
-    const show = (i) => {
-      nodes.forEach((n, k) => n.classList.toggle('visible', k === i));
-      idx = i;
-    };
-
+    const show = (i) => { nodes.forEach((n, k) => n.classList.toggle('visible', k === i)); idx = i; };
     const finish = () => {
       done = true;
-      setTimeout(() => { arrow.classList.add('show'); }, 3000);
-      ellipse.classList.remove('armed');
+      setTimeout(() => arrowEl.classList.add('show'), 3000);
       SKIP_BTN.classList.remove('show');
     };
-
-    const next = () => {
-      if (done) return;
-      if (idx < 0) {
-        // first: fade photo, show text 0
-        ellipse.classList.add('photo-fade');
-        show(0);
-        // schedule next
-        queue(0);
-      } else if (idx >= texts.length - 1) {
-        finish();
-      } else {
-        const fade = (fades[idx] || 1) * 1000;
-        // hide current during fade
-        nodes[idx].classList.remove('visible');
-        const nxt = idx + 1;
-        timers.push(setTimeout(() => {
-          show(nxt);
-          queue(nxt);
-        }, fade));
-      }
-    };
-
     const queue = (i) => {
       clearAll();
-      const dur = (durations[i] || 5) * 1000;
+      const dur = (spec.durations[i] || 5) * 1000;
       timers.push(setTimeout(next, dur));
     };
-
+    function next() {
+      if (done) return;
+      if (idx < 0) { ovalEl.classList.add('photo-fade'); show(0); queue(0); return; }
+      if (idx >= spec.texts.length - 1) { finish(); return; }
+      const fade = (spec.fades[idx] || 1) * 1000;
+      nodes[idx].classList.remove('visible');
+      const nxt = idx + 1;
+      timers.push(setTimeout(() => { show(nxt); queue(nxt); }, fade));
+    }
     const start = () => {
-      if (started) return;
-      started = true;
-      ellipse.classList.add('armed');
+      if (started) return; started = true;
       SKIP_BTN.classList.add('show');
-      // 0-3s: photo on. Then fade photo + show text 0.
       timers.push(setTimeout(next, 3000));
     };
-
     const skip = () => {
       if (done) return;
       if (idx < 0) { clearAll(); next(); return; }
-      if (idx >= texts.length - 1) { clearAll(); finish(); return; }
+      if (idx >= spec.texts.length - 1) { clearAll(); finish(); return; }
       clearAll();
       nodes[idx].classList.remove('visible');
       const nxt = idx + 1;
-      const fade = 400;
-      timers.push(setTimeout(() => {
-        show(nxt);
-        queue(nxt);
-      }, fade));
+      timers.push(setTimeout(() => { show(nxt); queue(nxt); }, 400));
     };
-
-    // Click on ellipse to skip
-    ellipse.addEventListener('click', skip);
+    ovalEl.addEventListener('click', skip);
     return { start, skip };
   }
 
-  /* ─── Build sequencers ─── */
   const sequencers = {};
   if (!prefersReduced) {
     sequencers.before = makeSequencer(
-      document.getElementById('ellipseBefore'),
+      document.getElementById('ovalBefore'),
       document.getElementById('seqBefore'),
       document.querySelector('.next-arrow[data-for="before"]'),
-      BEFORE_TEXTS, BEFORE_DURATIONS, BEFORE_FADES
+      BEFORE
     );
     sequencers.after = makeSequencer(
-      document.getElementById('ellipseAfter'),
+      document.getElementById('ovalAfter'),
       document.getElementById('seqAfter'),
       document.querySelector('.next-arrow[data-for="after"]'),
-      AFTER_TEXTS, AFTER_DURATIONS, AFTER_FADES
+      AFTER
     );
   } else {
-    // Render all texts at once for reduced motion
-    const render = (container, texts) => {
-      texts.forEach(t => {
+    const renderAll = (container, spec) => {
+      spec.texts.forEach(t => {
         const el = document.createElement('div');
         el.className = 'seq-text visible';
         el.textContent = t;
         container.appendChild(el);
       });
     };
-    render(document.getElementById('seqBefore'), BEFORE_TEXTS);
-    render(document.getElementById('seqAfter'), AFTER_TEXTS);
+    renderAll(document.getElementById('seqBefore'), BEFORE);
+    renderAll(document.getElementById('seqAfter'), AFTER);
   }
 
-  /* ─── Gates (Profile / Monitor) ─── */
-  function showGate(gate) {
-    if (prefersReduced) { gate.classList.add('show'); return; }
-    gate.classList.add('show');
-    setTimeout(() => gate.classList.add('dismiss'), 1100);
-  }
-
-  /* ─── Ready stage reveal ─── */
-  function readyReveal() {
-    const ready = document.getElementById('ready');
-    if (prefersReduced) { ready.classList.add('reveal'); return; }
-    setTimeout(() => ready.classList.add('reveal'), 3000);
-  }
-
-  /* ─── IntersectionObserver: fire once per chapter ─── */
   const seen = new Set();
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const id = entry.target.dataset.chapter;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const id = e.target.dataset.chapter;
       if (!id || seen.has(id)) return;
       seen.add(id);
-      if (id === 'before') sequencers.before && sequencers.before.start();
-      else if (id === 'after') sequencers.after && sequencers.after.start();
-      else if (id === 'profile') showGate(document.getElementById('gateProfile'));
-      else if (id === 'monitor') showGate(document.getElementById('gateMonitor'));
-      else if (id === 'ready')   readyReveal();
+      if (id === 'before' && sequencers.before) sequencers.before.start();
+      else if (id === 'after' && sequencers.after) sequencers.after.start();
     });
-  }, { threshold: 0.35 });
-
+  }, { threshold: 0.3 });
   document.querySelectorAll('[data-chapter]').forEach(el => io.observe(el));
 
-  /* ─── Skip button: skip the currently-active chapter ─── */
   SKIP_BTN.addEventListener('click', () => {
-    // Find whichever chapter is currently in view
-    const candidates = ['before', 'after'];
-    const viewportMid = window.innerHeight / 2;
-    for (const key of candidates) {
-      const section = document.getElementById(key);
-      if (!section) continue;
-      const r = section.getBoundingClientRect();
-      if (r.top < viewportMid && r.bottom > viewportMid) {
-        sequencers[key] && sequencers[key].skip();
+    const keys = ['before', 'after'];
+    const mid = window.innerHeight / 2;
+    for (const k of keys) {
+      const s = document.getElementById(k);
+      if (!s) continue;
+      const r = s.getBoundingClientRect();
+      if (r.top < mid && r.bottom > mid) {
+        sequencers[k] && sequencers[k].skip();
         return;
       }
     }
   });
 })();
 </script>
+
 </body>
 </html>
