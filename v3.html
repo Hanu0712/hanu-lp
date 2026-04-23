@@ -824,6 +824,63 @@
       color: var(--charcoal);
     }
 
+    .before-story {
+      max-width: 780px;
+      margin: 56px auto 0;
+      padding: 32px 20px 0;
+      position: relative;
+      z-index: 3;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 23px;
+      line-height: 1.95;
+      letter-spacing: -0.01em;
+      color: var(--charcoal);
+      font-weight: 500;
+      text-align: center;
+      display: grid;
+      min-height: 12em;
+    }
+
+    .before-stanza {
+      grid-column: 1;
+      grid-row: 1;
+      opacity: 0;
+      transition: opacity 1.1s ease;
+      pointer-events: none;
+    }
+
+    .before-stanza.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .before-stanza p {
+      margin: 0;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .before-stanza.active p              { opacity: 1; transform: translateY(0); }
+    .before-stanza.active p:nth-child(1) { transition-delay: 0.05s; }
+    .before-stanza.active p:nth-child(2) { transition-delay: 0.25s; }
+    .before-stanza.active p:nth-child(3) { transition-delay: 0.45s; }
+    .before-stanza.active p:nth-child(4) { transition-delay: 0.65s; }
+    .before-stanza.active p:nth-child(5) { transition-delay: 0.85s; }
+
+    .before-stanza-quote {
+      font-style: italic;
+      color: rgba(28,25,24,0.72);
+      letter-spacing: 0.02em;
+      font-weight: 500;
+    }
+
+    .before-story em {
+      font-style: normal;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
     .before-display {
       font-family: 'Playfair Display', serif;
       font-size: clamp(56px, 9vw, 140px);
@@ -2087,6 +2144,7 @@
       .before-display { font-size: 44px; flex: 1; min-width: 0; gap: 8px; }
       .before-display-sub { font-size: 17px; letter-spacing: 0.18em; display: block; width: 100%; margin-top: 4px; }
       .before-lead { font-size: 19px; line-height: 2.1; padding: 0; letter-spacing: -0.01em; }
+      .before-story { font-size: 19px; line-height: 1.9; margin-top: 40px; padding: 20px 16px 0; letter-spacing: -0.01em; min-height: 14em; }
       .before-portrait { width: 88px; height: 88px; }
       .before-item { padding: 28px 20px 32px; }
       .before-num { font-size: 56px; margin-bottom: 8px; }
@@ -2372,6 +2430,41 @@
     でも——<em>&ldquo;特別な一日&rdquo;</em>として心に残る集まりが、<br>
     本当はほしいのかもしれない。
   </p>
+  <div class="before-story" id="beforeStory">
+    <div class="before-stanza">
+      <p>ランチ会は、開いたことがある。</p>
+      <p>ママ友会の延長線のような、気軽な集まり。</p>
+      <p>7〜8人で、美味しいごはんを食べて、笑って。</p>
+      <p class="before-stanza-quote">「また集まりたいね」</p>
+      <p class="before-stanza-quote">「次回はみんなで集まれたらいいね」</p>
+    </div>
+    <div class="before-stanza">
+      <p>そう言って、解散する。</p>
+      <p>——そして次回もまた、同じ規模で、同じ集まり方。</p>
+      <p>それも全然悪くない。楽しい。</p>
+      <p>でも、<em>&ldquo;若干&rdquo;</em>の物足りなさを感じてしまう。</p>
+    </div>
+    <div class="before-stanza">
+      <p>その<em>&ldquo;若干&rdquo;</em>の正体を言葉にしてみると——</p>
+      <p>来てくれる人は、大体毎回ほぼ同じ。</p>
+      <p>来られなかった人も、</p>
+      <p>予定を無理して空ける程の勢いはない。</p>
+    </div>
+    <div class="before-stanza">
+      <p>ちょっとおしゃれをして、出かける日——</p>
+      <p>ではなく、</p>
+      <p>いつもよりちょっといいランチを楽しく食べる日のイメージ。</p>
+      <p>集まる趣旨も、少し曖昧だから</p>
+      <p>楽しかったね、で終わってしまう。</p>
+    </div>
+    <div class="before-stanza">
+      <p>記憶に残らないわけじゃない、けれど、</p>
+      <p><em>&ldquo;特別な一日&rdquo;</em>として、心に刻まれるものでもない。</p>
+      <p>悪い集まりじゃない。</p>
+      <p>むしろ、心地いい。</p>
+      <p>でも——このままで、いいのかな、と思う瞬間がある。</p>
+    </div>
+  </div>
 </section>
 
 <!-- ── AFTER（Before 3項目に対応する、変化後の姿）── -->
@@ -2671,6 +2764,43 @@
   </div>
   <small>© 2025 Hanu Party Produce. All rights reserved.</small>
 </footer>
+
+<script>
+  (function () {
+    var story = document.getElementById('beforeStory');
+    if (!story) return;
+    var stanzas = story.querySelectorAll('.before-stanza');
+    if (!stanzas.length) return;
+    var STEP = 7000;
+    var fired = false;
+    var show = function (i) {
+      stanzas.forEach(function (s, idx) {
+        s.classList.toggle('active', idx === i);
+      });
+    };
+    var play = function () {
+      if (fired) return;
+      fired = true;
+      var current = 0;
+      show(current);
+      var timer = setInterval(function () {
+        current++;
+        if (current >= stanzas.length) { clearInterval(timer); return; }
+        show(current);
+      }, STEP);
+    };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { play(); io.disconnect(); }
+        });
+      }, { threshold: 0.15 });
+      io.observe(story);
+    } else {
+      play();
+    }
+  })();
+</script>
 
 </body>
 </html>
