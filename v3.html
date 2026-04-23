@@ -826,12 +826,18 @@
 
     .before-body {
       margin-top: 48px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, auto);
-      gap: 48px;
+      display: flex;
+      justify-content: center;
       align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
       position: relative;
       z-index: 3;
+    }
+
+    .before-story {
+      flex: 0 1 560px;
+      min-width: 0;
     }
 
     .before-photo {
