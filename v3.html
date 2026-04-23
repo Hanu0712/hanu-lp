@@ -825,25 +825,27 @@
     }
 
     .before-body {
-      margin-top: 48px;
+      margin: 48px auto 0;
+      max-width: 1280px;
+      padding: 0 24px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 40px;
+      gap: clamp(56px, 8vw, 120px);
       flex-wrap: wrap;
       position: relative;
       z-index: 3;
     }
 
     .before-story {
-      flex: 0 1 560px;
+      flex: 0 1 640px;
       min-width: 0;
     }
 
     .before-photo {
       margin: 0;
       padding: 0;
-      width: clamp(180px, 22vw, 280px);
+      width: clamp(220px, 24vw, 320px);
       flex-shrink: 0;
     }
 
@@ -866,7 +868,7 @@
       letter-spacing: -0.01em;
       color: var(--charcoal);
       font-weight: 500;
-      text-align: left;
+      text-align: center;
       display: grid;
       min-height: 12em;
     }
@@ -2176,7 +2178,7 @@
       .before-lead { font-size: 15px; line-height: 2; padding: 0; letter-spacing: 0.02em; }
       .before-body { grid-template-columns: 1fr; gap: 24px; margin-top: 28px; }
       .before-photo { width: 60%; max-width: 220px; margin: 0 auto; }
-      .before-story { font-size: 17px; line-height: 1.9; text-align: left; min-height: 14em; }
+      .before-story { font-size: 17px; line-height: 1.9; text-align: center; min-height: 14em; }
       .before-portrait { width: 88px; height: 88px; }
       .before-item { padding: 28px 20px 32px; }
       .before-num { font-size: 56px; margin-bottom: 8px; }
