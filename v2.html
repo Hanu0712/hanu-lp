@@ -309,7 +309,7 @@
       align-self: center;
       justify-self: center;
       position: relative;
-      width: min(52vw, 580px);
+      width: clamp(320px, 30vw, 460px);
       aspect-ratio: 3 / 4;
     }
     .ch-oval {
@@ -337,8 +337,8 @@
     /* 楕円の中に表示される順次テキスト */
     .ch-oval-seq {
       position: absolute;
-      top: 12%; bottom: 12%;
-      left: 14%; right: 14%;
+      top: 10%; bottom: 10%;
+      left: 11%; right: 11%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -347,10 +347,10 @@
       position: absolute;
       left: 0; right: 0;
       font-family: 'Noto Serif JP', serif;
-      font-size: 20px;
+      font-size: 17px;
       font-weight: 400;
-      line-height: 2.3;
-      letter-spacing: 0.09em;
+      line-height: 2.1;
+      letter-spacing: 0.06em;
       color: var(--charcoal);
       text-align: center;
       white-space: pre-line;
