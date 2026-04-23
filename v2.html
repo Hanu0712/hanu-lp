@@ -220,12 +220,7 @@
       margin-bottom: 6px;
       line-height: 1.7;
     }
-    .hero-divider {
-      width: 48px;
-      height: 1px;
-      background: rgba(28,25,24,0.35);
-      margin: 6px auto 20px;
-    }
+    .hero-divider { width: 48px; height: 1px; background: rgba(28,25,24,0.35); margin: 6px auto 20px; }
     .hero-jp-sub-new {
       font-family: 'Noto Serif JP', serif;
       font-size: clamp(18px, 2.4vw, 24px);
@@ -244,7 +239,6 @@
       text-transform: uppercase;
       color: var(--charcoal);
       font-weight: 600;
-      transition: opacity .3s;
     }
     .hero-cta-link-new::after {
       content: ''; width: 44px; height: 1px; background: currentColor;
@@ -252,17 +246,17 @@
     }
     .hero-cta-link-new:hover::after { width: 64px; }
 
-    /* ═══════════════ Chapter (Deuxième Classe Layout) ═══════════════ */
+    /* ═══════════════ Chapter Layout ═══════════════ */
     .chapter {
       position: relative;
       min-height: 100vh;
       padding: 120px 56px 100px;
       background: var(--greige);
       display: grid;
-      grid-template-columns: minmax(280px, 1fr) minmax(420px, 620px) minmax(280px, 1fr);
+      grid-template-columns: minmax(260px, 1fr) minmax(420px, 620px) minmax(220px, 1fr);
       grid-template-rows: auto 1fr auto;
       column-gap: 40px;
-      row-gap: 36px;
+      row-gap: 44px;
     }
     .chapter.alt { background: var(--offwhite); }
     .chapter.sand { background: var(--sand); }
@@ -272,10 +266,10 @@
       grid-column: 1;
       grid-row: 1;
       align-self: start;
-      max-width: 360px;
-      padding-top: 20px;
+      max-width: 420px;
+      padding-top: 24px;
       font-family: 'Noto Serif JP', serif;
-      font-size: 13.5px;
+      font-size: 17px;
       font-weight: 400;
       line-height: 2.2;
       letter-spacing: 0.1em;
@@ -287,18 +281,17 @@
       content: "";
       position: absolute;
       top: -1px; left: 0;
-      width: 36px;
-      height: 1px;
+      width: 44px; height: 1px;
       background: var(--accent);
     }
 
-    /* 右上：小さいサムネ1枚 */
+    /* 右上：小サムネ */
     .ch-thumb {
       grid-column: 3;
       grid-row: 1;
       justify-self: end;
       align-self: start;
-      width: clamp(150px, 15vw, 220px);
+      width: clamp(160px, 16vw, 240px);
       aspect-ratio: 3 / 4;
       overflow: hidden;
       background: var(--greige2);
@@ -309,14 +302,14 @@
       object-fit: cover;
     }
 
-    /* 中央：大楕円 + タイトルオーバーレイ */
+    /* 中央：大楕円（写真＋テキスト演出） */
     .ch-oval-wrap {
       grid-column: 2;
       grid-row: 2;
       align-self: center;
       justify-self: center;
       position: relative;
-      width: min(52vw, 560px);
+      width: min(52vw, 580px);
       aspect-ratio: 3 / 4;
     }
     .ch-oval {
@@ -327,6 +320,7 @@
       background: var(--greige2);
       box-shadow: inset 0 0 60px rgba(28,25,24,0.15),
                   0 30px 60px -25px rgba(28,25,24,0.35);
+      cursor: pointer;
     }
     .ch-oval-photo {
       position: absolute; inset: 0;
@@ -338,102 +332,140 @@
       object-fit: cover;
     }
     .ch-oval.photo-fade .ch-oval-photo { opacity: 0.22; }
+    .ch-oval.photo-hide .ch-oval-photo { opacity: 0; }
 
-    .ch-oval-title {
+    /* 楕円の中に表示される順次テキスト */
+    .ch-oval-seq {
+      position: absolute;
+      top: 12%; bottom: 12%;
+      left: 14%; right: 14%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .seq-text {
       position: absolute;
       left: 0; right: 0;
-      bottom: 18%;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 2.3;
+      letter-spacing: 0.09em;
+      color: var(--charcoal);
       text-align: center;
+      white-space: pre-line;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .seq-text.visible { opacity: 1; }
+
+    /* Profile/Monitor 扉タイトル（1秒表示） */
+    .oval-gate {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+      padding: 20%;
+      pointer-events: none;
+    }
+    .oval-gate.show { opacity: 1; }
+    .oval-gate .en {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: clamp(46px, 6vw, 78px);
+      color: var(--charcoal);
+      line-height: 1;
+      letter-spacing: -0.005em;
+    }
+    .oval-gate .jp {
+      margin-top: 18px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14px;
+      letter-spacing: 0.22em;
+      color: rgba(28,25,24,0.75);
+      font-weight: 400;
+    }
+
+    /* Ready 扉（写真→タイトル） */
+    .oval-ready-title {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1.8s ease;
+      pointer-events: none;
+    }
+    .oval-ready-title.show { opacity: 1; }
+    .oval-ready-title .en {
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 900;
-      font-size: clamp(54px, 7vw, 110px);
+      font-size: clamp(64px, 9vw, 128px);
+      color: var(--charcoal);
       line-height: 1;
-      color: var(--charcoal);
-      letter-spacing: -0.005em;
-      text-shadow: 0 4px 30px rgba(245,240,234,0.45);
-      pointer-events: none;
     }
-    .ch-oval-more {
-      position: absolute;
-      left: 50%;
-      bottom: 9%;
-      transform: translateX(-50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
+    .oval-ready-title .jp {
+      margin-top: 22px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
+      letter-spacing: 0.26em;
       color: var(--charcoal);
-      opacity: 0.72;
-      text-decoration: none;
-      border-bottom: 1px solid currentColor;
-      padding-bottom: 3px;
     }
 
-    /* 左下：縦書きの小さいタグ */
-    .ch-vtag {
+    /* 左下：大きい縦書き章タイトル */
+    .ch-vtitle {
       grid-column: 1;
-      grid-row: 2 / 4;
+      grid-row: 2;
       align-self: end;
       justify-self: start;
       writing-mode: vertical-rl;
+      text-orientation: mixed;
       transform: rotate(180deg);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 10px;
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: clamp(64px, 8vw, 120px);
+      line-height: 1;
       color: var(--charcoal);
-      opacity: 0.58;
-      font-weight: 500;
-      padding: 0 4px;
+      letter-spacing: 0.01em;
+      padding: 0 0 4px 12px;
     }
 
     /* 右下：「+」マーカー */
     .ch-plus {
       grid-column: 3;
-      grid-row: 3;
+      grid-row: 2;
       justify-self: end;
       align-self: end;
       font-family: 'Playfair Display', serif;
       font-weight: 400;
-      font-size: 24px;
+      font-size: 28px;
       color: var(--charcoal);
-      opacity: 0.52;
+      opacity: 0.55;
       line-height: 1;
-      padding: 0 6px 6px 0;
+      padding: 0 10px 10px 0;
     }
 
-    /* 楕円下のコンテンツ（章別） */
+    /* 楕円下の本文（Profile/Monitor/Ready や next-arrow 置き場） */
     .ch-body {
       grid-column: 1 / -1;
       grid-row: 3;
       text-align: center;
-      padding: 40px 0 0;
+      padding: 24px 0 0;
     }
-
-    /* ═══════════════ Before/After テキストシーケンス ═══════════════ */
-    .sequence {
-      position: relative;
-      margin: 48px auto 0;
-      width: min(82vw, 660px);
-      min-height: 210px;
-    }
-    .seq-text {
-      position: absolute; inset: 0;
-      font-family: 'Noto Serif JP', serif;
-      font-size: 16.5px;
-      line-height: 2.25;
-      letter-spacing: 0.08em;
-      color: var(--charcoal);
-      opacity: 0;
-      transition: opacity 1s ease;
-      white-space: pre-line;
-    }
-    .seq-text.visible { opacity: 1; }
 
     .next-arrow {
-      display: block;
-      margin-top: 36px;
+      display: inline-block;
       opacity: 0;
       transition: opacity 1.2s ease;
       font-family: 'Cormorant Garamond', serif;
@@ -441,7 +473,6 @@
       letter-spacing: 0.5em;
       color: var(--charcoal);
       text-transform: uppercase;
-      text-align: center;
     }
     .next-arrow::after {
       content: "";
@@ -496,18 +527,15 @@
       margin-top: 18px;
       letter-spacing: -0.005em;
     }
-    .produce-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .produce-title em { font-style: italic; color: var(--accent); }
     .produce-lead {
       position: relative;
-      max-width: 640px;
+      max-width: 680px;
       margin: 36px auto 0;
-      font-size: 15px;
-      line-height: 2.1;
+      font-size: 17px;
+      line-height: 2.15;
       letter-spacing: 0.1em;
-      color: rgba(28,25,24,0.88);
+      color: rgba(28,25,24,0.9);
     }
     .produce-steps {
       position: relative;
@@ -529,29 +557,29 @@
     .step-en {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 24px;
+      font-size: 26px;
       color: var(--charcoal);
       margin-top: 14px;
       letter-spacing: 0.02em;
     }
     .step-jp {
       font-family: 'Noto Serif JP', serif;
-      font-size: 12px;
-      letter-spacing: 0.32em;
-      color: rgba(28,25,24,0.62);
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      color: rgba(28,25,24,0.65);
       margin-top: 12px;
       padding-top: 14px;
       border-top: 1px solid var(--line);
     }
 
-    /* ═══════════════ Profile / Monitor body ═══════════════ */
+    /* ═══════════════ Profile / Monitor / Ready body ═══════════════ */
     .profile-body {
-      max-width: 640px;
+      max-width: 680px;
       margin: 0 auto;
       font-family: 'Noto Serif JP', serif;
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 400;
-      line-height: 2.25;
+      line-height: 2.3;
       letter-spacing: 0.1em;
       color: var(--charcoal);
     }
@@ -560,9 +588,9 @@
       align-items: center;
       gap: 14px;
       margin-top: 48px;
-      padding: 14px 28px;
+      padding: 16px 32px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--charcoal);
@@ -572,7 +600,7 @@
     .profile-link:hover { background: var(--charcoal); color: var(--offwhite); }
     .profile-link .handle {
       font-family: 'Noto Serif JP', serif;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: none;
       opacity: 0.75;
@@ -583,12 +611,12 @@
       border: 1px solid var(--line);
       padding: 48px 40px;
       text-align: center;
-      background: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.32);
     }
     .price-regular {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
-      letter-spacing: 0.28em;
+      font-size: 14px;
+      letter-spacing: 0.26em;
       color: rgba(28,25,24,0.55);
       text-decoration: line-through;
       text-decoration-thickness: 1px;
@@ -598,7 +626,7 @@
       margin-top: 16px;
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: clamp(40px, 6vw, 64px);
+      font-size: clamp(42px, 6.4vw, 68px);
       font-weight: 700;
       color: var(--charcoal);
       line-height: 1;
@@ -615,9 +643,9 @@
     .price-monitor .jp {
       display: block;
       font-family: 'Noto Serif JP', serif;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.38em;
-      color: rgba(28,25,24,0.58);
+      color: rgba(28,25,24,0.6);
       margin-top: 16px;
       font-style: normal;
       font-weight: 400;
@@ -625,7 +653,7 @@
     .price-limit {
       margin-top: 26px;
       font-family: 'Noto Serif JP', serif;
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 0.34em;
       color: var(--accent);
       font-weight: 500;
@@ -634,9 +662,9 @@
       margin-top: 26px;
       padding-top: 20px;
       border-top: 1px solid var(--line);
-      font-size: 12.5px;
+      font-size: 14px;
       letter-spacing: 0.08em;
-      color: rgba(28,25,24,0.7);
+      color: rgba(28,25,24,0.72);
       line-height: 2;
     }
     .monitor-lists {
@@ -649,7 +677,7 @@
     .monitor-lists h3 {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 22px;
+      font-size: 24px;
       margin-bottom: 16px;
       padding-bottom: 10px;
       border-bottom: 1px solid var(--line);
@@ -659,7 +687,7 @@
     .monitor-lists h3 small {
       display: block;
       font-family: 'Noto Serif JP', serif;
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 0.36em;
       color: rgba(28,25,24,0.55);
       font-weight: 400;
@@ -668,37 +696,36 @@
     }
     .monitor-lists ul {
       list-style: none;
-      font-size: 13px;
+      font-size: 14.5px;
       line-height: 2.1;
       letter-spacing: 0.08em;
     }
-    .monitor-lists li { position: relative; padding-left: 16px; }
+    .monitor-lists li { position: relative; padding-left: 18px; }
     .monitor-lists li::before {
       content: "—"; position: absolute; left: 0; color: var(--accent);
     }
 
-    /* ═══════════════ Ready / CTA body ═══════════════ */
     .ready-cta-head {
       font-family: 'Noto Serif JP', serif;
-      font-size: 16px;
+      font-size: 18px;
       line-height: 2.1;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       color: var(--charcoal);
       margin-bottom: 14px;
     }
     .ready-cta-sub {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 14px;
+      font-size: 15px;
       letter-spacing: 0.18em;
       color: rgba(28,25,24,0.65);
     }
     .ready-cta-btn {
       display: inline-block;
       margin-top: 48px;
-      padding: 22px 56px;
+      padding: 24px 60px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 0.44em;
       text-transform: uppercase;
       color: var(--offwhite);
@@ -710,19 +737,18 @@
     .ready-cta-btn small {
       display: block;
       font-family: 'Noto Serif JP', serif;
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 0.28em;
       margin-top: 6px;
-      opacity: 0.75;
+      opacity: 0.78;
     }
     .ready-cta-note {
       margin-top: 22px;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.2em;
-      color: rgba(28,25,24,0.55);
+      color: rgba(28,25,24,0.58);
     }
 
-    /* Footer */
     footer {
       background: var(--charcoal);
       padding: 44px 40px;
@@ -743,7 +769,6 @@
       text-transform: none;
     }
 
-    /* Skip button */
     .skip-btn {
       position: fixed;
       right: 24px; bottom: 24px;
@@ -776,33 +801,33 @@
       .hero-stage { height: clamp(520px, 78vh, 640px); }
       .hero-center { top: 24%; width: clamp(180px, 48vw, 240px); height: clamp(240px, 64vw, 320px); }
       .hero-float { animation-duration: 10s; }
-      .hero-float.f1  { top: 2%;  left: 2%;  width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
-      .hero-float.f2  { top: 24%; left: -4%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
-      .hero-float.f3  { top: 52%; left: 2%;  width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
-      .hero-float.f4  { top: 78%; left: -2%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
-      .hero-float.f6  { top: 2%;  right: 2%; width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
-      .hero-float.f7  { top: 24%; right: -4%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
-      .hero-float.f8  { top: 52%; right: 2%;  width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
-      .hero-float.f9  { top: 78%; right: -2%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
+      .hero-float.f1 { top: 2%;  left: 2%; width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
+      .hero-float.f2 { top: 24%; left: -4%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
+      .hero-float.f3 { top: 52%; left: 2%; width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
+      .hero-float.f4 { top: 78%; left: -2%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
+      .hero-float.f6 { top: 2%;  right: 2%; width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
+      .hero-float.f7 { top: 24%; right: -4%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
+      .hero-float.f8 { top: 52%; right: 2%; width: clamp(70px, 18vw, 96px); height: clamp(88px, 22vw, 120px); }
+      .hero-float.f9 { top: 78%; right: -2%; width: clamp(80px, 20vw, 110px); height: clamp(100px, 24vw, 135px); }
 
       .hero-eyebrow { font-size: 11px; letter-spacing: 0.28em; }
       .hero-jp-sub-new { font-size: 16px; line-height: 2.1; }
       .hero-cta-link-new { font-size: 11px; letter-spacing: 0.28em; }
 
-      /* Chapter mobile: stack */
       .chapter {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto auto auto;
-        padding: 80px 18px 60px;
+        grid-template-rows: auto auto auto auto auto;
+        padding: 84px 18px 60px;
         column-gap: 0;
-        row-gap: 22px;
+        row-gap: 24px;
       }
       .ch-summary {
         grid-column: 1; grid-row: 1;
         max-width: 100%;
-        font-size: 13px;
+        font-size: 15px;
         letter-spacing: 0.06em;
         line-height: 2.1;
+        padding-top: 20px;
       }
       .ch-thumb {
         grid-column: 1; grid-row: 2;
@@ -812,57 +837,56 @@
       }
       .ch-oval-wrap {
         grid-column: 1; grid-row: 3;
-        width: 82vw;
+        width: 86vw;
       }
-      .ch-oval-title { font-size: clamp(42px, 12vw, 68px); bottom: 20%; }
-      .ch-oval-more  { font-size: 10px; bottom: 10%; }
-      .ch-vtag {
-        grid-column: 1; grid-row: 5;
+      .seq-text {
+        font-size: 15px;
+        line-height: 2.2;
+        letter-spacing: 0.05em;
+      }
+      .ch-oval-seq { top: 10%; bottom: 10%; left: 10%; right: 10%; }
+      .oval-gate .en { font-size: clamp(40px, 11vw, 60px); }
+      .oval-gate .jp { font-size: 12px; letter-spacing: 0.2em; }
+      .oval-ready-title .en { font-size: clamp(48px, 14vw, 80px); }
+      .oval-ready-title .jp { font-size: 13px; letter-spacing: 0.22em; }
+
+      .ch-vtitle {
+        grid-column: 1; grid-row: 4;
         writing-mode: horizontal-tb;
         transform: none;
         justify-self: center;
-        font-size: 9px;
-        letter-spacing: 0.4em;
-        padding: 6px 0 0;
+        font-size: 48px;
+        padding: 12px 0 0;
         text-align: center;
       }
       .ch-plus {
-        grid-column: 1; grid-row: 6;
+        grid-column: 1; grid-row: 5;
         justify-self: center;
-        font-size: 18px;
+        align-self: start;
+        font-size: 20px;
         padding: 0;
       }
       .ch-body {
-        grid-column: 1; grid-row: 4;
-        padding: 22px 0 0;
-      }
-
-      .sequence {
-        width: 88vw;
-        min-height: 240px;
-      }
-      .seq-text {
-        font-size: 14.5px;
-        line-height: 2.15;
-        letter-spacing: 0.05em;
+        grid-column: 1; grid-row: 5;
+        padding: 14px 0 0;
       }
 
       .produce { padding: 88px 18px 88px; }
-      .produce-lead { font-size: 13px; letter-spacing: 0.06em; }
-      .produce-steps {
-        margin-top: 64px;
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
+      .produce-lead { font-size: 15px; letter-spacing: 0.06em; }
+      .produce-steps { margin-top: 64px; grid-template-columns: 1fr; gap: 48px; }
       .step-num { font-size: 42px; }
-      .step-en  { font-size: 20px; }
+      .step-en { font-size: 22px; }
+      .step-jp { font-size: 12px; }
 
-      .profile-body { font-size: 14px; letter-spacing: 0.06em; line-height: 2.1; }
+      .profile-body { font-size: 15px; letter-spacing: 0.06em; line-height: 2.1; }
       .monitor-lists { grid-template-columns: 1fr; gap: 36px; }
-      .price-card { padding: 30px 18px; }
-      .price-note { font-size: 11px; letter-spacing: 0.04em; }
+      .monitor-lists h3 { font-size: 20px; }
+      .monitor-lists ul { font-size: 13.5px; }
+      .price-card { padding: 32px 18px; }
+      .price-note { font-size: 12.5px; letter-spacing: 0.04em; }
 
-      .ready-cta-btn { padding: 18px 36px; font-size: 10px; letter-spacing: 0.34em; }
+      .ready-cta-head { font-size: 15px; letter-spacing: 0.12em; }
+      .ready-cta-btn { padding: 18px 36px; font-size: 11px; letter-spacing: 0.34em; }
 
       .skip-btn { right: 14px; bottom: 14px; padding: 8px 14px; font-size: 9px; }
       footer { padding: 34px 16px; font-size: 10px; letter-spacing: 0.3em; }
@@ -870,7 +894,7 @@
 
     @media (max-width: 480px) {
       .hero-stage { height: 560px; }
-      .ch-oval-title { font-size: 48px; }
+      .ch-vtitle { font-size: 40px; }
     }
 
     /* ═══════════════ Reduced motion ═══════════════ */
@@ -882,14 +906,15 @@
       .hero-arc { transform: translateX(-50%) !important; }
       .hero-center { transform: translateX(-50%) !important; }
       .hero-float { transform: rotate(var(--rot, 0deg)) !important; }
-      .sequence { min-height: auto; position: static; }
+      .ch-oval-seq { position: static; display: block; padding: 20px 0; }
       .seq-text {
         position: static; opacity: 1 !important; transition: none;
-        margin-bottom: 28px;
+        margin-bottom: 20px;
       }
-      .ch-oval-photo, .ch-oval.photo-fade .ch-oval-photo {
+      .ch-oval-photo, .ch-oval.photo-fade .ch-oval-photo, .ch-oval.photo-hide .ch-oval-photo {
         opacity: 1 !important; transition: none;
       }
+      .oval-gate, .oval-ready-title { opacity: 1 !important; transition: none; }
       .next-arrow { opacity: 0.6 !important; }
       .skip-btn { display: none !important; }
     }
@@ -897,7 +922,6 @@
 </head>
 <body>
 
-<!-- ── HEADER ── -->
 <header class="site-header">
   <a class="site-logo" href="#hero">
     Hanu
@@ -914,12 +938,9 @@
 <!-- ═══════════ HERO (既存 TOP 継承) ═══════════ -->
 <section class="hero" id="hero">
   <div class="hero-tagline">女性起業家のための<br>パーティープロデュース</div>
-
   <div class="hero-stage">
     <svg class="hero-arc" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-      <defs>
-        <path id="arcPath" d="M 80 520 A 420 420 0 0 1 920 520" fill="none"/>
-      </defs>
+      <defs><path id="arcPath" d="M 80 520 A 420 420 0 0 1 920 520" fill="none"/></defs>
       <text class="hero-arc-text" font-size="96">
         <textPath href="#arcPath" startOffset="50%" text-anchor="middle">ARE YOU READY?</textPath>
       </text>
@@ -934,16 +955,11 @@
     <div class="hero-float f8" style="--rot:-5deg"><img src="image/image2/08.jpg" alt=""></div>
     <div class="hero-float f9" style="--rot:7deg"><img src="image/image2/10.jpg" alt=""></div>
 
-    <div class="hero-center">
-      <img src="image/image2/main.png" alt="Hanu">
-    </div>
+    <div class="hero-center"><img src="image/image2/main.png" alt="Hanu"></div>
   </div>
 
   <div class="hero-copy">
-    <div class="hero-eyebrow">
-      Wedding &amp; Party Planning<br>
-      19 Years · 500+ Events
-    </div>
+    <div class="hero-eyebrow">Wedding &amp; Party Planning<br>19 Years · 500+ Events</div>
     <div class="hero-divider" aria-hidden="true"></div>
     <p class="hero-jp-sub-new">
       「ランチ会」から、「パーティー」へ。<br>
@@ -960,23 +976,19 @@
     でも——"特別な一日"として心に残る集まりが、<br>
     本当はほしいのかもしれない。
   </div>
-  <div class="ch-thumb">
-    <img src="image/image2/05.jpg" alt="">
-  </div>
+  <div class="ch-thumb"><img src="image/image2/05.jpg" alt=""></div>
 
   <div class="ch-oval-wrap">
     <div class="ch-oval" id="ovalBefore">
       <div class="ch-oval-photo"><img src="image/image2/09.jpg" alt=""></div>
-      <div class="ch-oval-title">Before.</div>
-      <a href="#after" class="ch-oval-more">More</a>
+      <div class="ch-oval-seq" id="seqBefore"></div>
     </div>
   </div>
 
-  <div class="ch-vtag">Hanu &nbsp; | &nbsp; Are you ready?</div>
+  <div class="ch-vtitle">Before.</div>
   <div class="ch-plus">+</div>
 
   <div class="ch-body">
-    <div class="sequence" id="seqBefore"></div>
     <div class="next-arrow" data-for="before">Scroll</div>
   </div>
 </section>
@@ -988,23 +1000,19 @@
     "心に刻まれる一日"になる。<br>
     その変化は、事業の土台になる。
   </div>
-  <div class="ch-thumb">
-    <img src="image/image2/13.jpg" alt="">
-  </div>
+  <div class="ch-thumb"><img src="image/image2/13.jpg" alt=""></div>
 
   <div class="ch-oval-wrap">
     <div class="ch-oval" id="ovalAfter">
       <div class="ch-oval-photo"><img src="image/image2/14.jpg" alt=""></div>
-      <div class="ch-oval-title">After.</div>
-      <a href="#produce" class="ch-oval-more">More</a>
+      <div class="ch-oval-seq" id="seqAfter"></div>
     </div>
   </div>
 
-  <div class="ch-vtag">Hanu &nbsp; | &nbsp; Are you ready?</div>
+  <div class="ch-vtitle">After.</div>
   <div class="ch-plus">+</div>
 
   <div class="ch-body">
-    <div class="sequence" id="seqAfter"></div>
     <div class="next-arrow" data-for="after">Scroll</div>
   </div>
 </section>
@@ -1035,19 +1043,19 @@
     500組以上のパーティー・ウェディングを<br>
     手がけてきたプロの視点から、設計します。
   </div>
-  <div class="ch-thumb">
-    <img src="image/image2/hanu2.jpg" alt="">
-  </div>
+  <div class="ch-thumb"><img src="image/image2/hanu2.jpg" alt=""></div>
 
   <div class="ch-oval-wrap">
     <div class="ch-oval" id="ovalProfile">
       <div class="ch-oval-photo"><img src="image/image2/hanu4.jpg" alt="Hanu"></div>
-      <div class="ch-oval-title">Profile.</div>
-      <a href="#monitor" class="ch-oval-more">More</a>
+      <div class="oval-gate" id="gateProfile">
+        <div class="en">Profile.</div>
+        <div class="jp">Party Producer, Hanu.</div>
+      </div>
     </div>
   </div>
 
-  <div class="ch-vtag">Hanu &nbsp; | &nbsp; Party Producer</div>
+  <div class="ch-vtitle">Profile.</div>
   <div class="ch-plus">+</div>
 
   <div class="ch-body">
@@ -1074,19 +1082,19 @@
     通常 ¥80,000 → モニター ¥50,000。<br>
     プロのプロデュースを、特別価格で。
   </div>
-  <div class="ch-thumb">
-    <img src="image/image2/02.jpg" alt="">
-  </div>
+  <div class="ch-thumb"><img src="image/image2/02.jpg" alt=""></div>
 
   <div class="ch-oval-wrap">
     <div class="ch-oval" id="ovalMonitor">
       <div class="ch-oval-photo"><img src="image/image2/10.jpg" alt=""></div>
-      <div class="ch-oval-title">Monitor.</div>
-      <a href="#ready" class="ch-oval-more">More</a>
+      <div class="oval-gate" id="gateMonitor">
+        <div class="en">Monitor.</div>
+        <div class="jp">3組様限定、モニター募集。</div>
+      </div>
     </div>
   </div>
 
-  <div class="ch-vtag">Hanu &nbsp; | &nbsp; 3 Spots Only</div>
+  <div class="ch-vtitle">Monitor.</div>
   <div class="ch-plus">+</div>
 
   <div class="ch-body">
@@ -1137,25 +1145,23 @@
     あなたのパーティーを、<br>
     プロと一緒に、ここから始めましょう。
   </div>
-  <div class="ch-thumb">
-    <img src="image/image2/06.jpg" alt="">
-  </div>
+  <div class="ch-thumb"><img src="image/image2/06.jpg" alt=""></div>
 
   <div class="ch-oval-wrap">
     <div class="ch-oval" id="ovalReady">
       <div class="ch-oval-photo"><img src="image/image2/hanu4.jpg" alt=""></div>
-      <div class="ch-oval-title">Ready?</div>
-      <a href="booking.html" class="ch-oval-more">Book</a>
+      <div class="oval-ready-title" id="readyTitle">
+        <div class="en">Ready?</div>
+        <div class="jp">さあ、やりましょう。</div>
+      </div>
     </div>
   </div>
 
-  <div class="ch-vtag">Hanu &nbsp; | &nbsp; Are you ready?</div>
+  <div class="ch-vtitle">Ready?</div>
   <div class="ch-plus">+</div>
 
   <div class="ch-body">
-    <p class="ready-cta-head">
-      あなたのパーティーを、一緒に。
-    </p>
+    <p class="ready-cta-head">あなたのパーティーを、一緒に。</p>
     <p class="ready-cta-sub">Book a Free 30-min Zoom Consultation</p>
     <a class="ready-cta-btn" href="booking.html">
       Book Now
@@ -1175,16 +1181,15 @@
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const SKIP_BTN = document.getElementById('skipBtn');
 
-  /* ═══════ Before / After text sequencer ═══════ */
   const BEFORE = {
     texts: [
       "ランチ会は、開いたことがある。\nママ友会の延長線のような、気軽な集まり。\n7〜8人で、美味しいごはんを食べて、笑って。\n\n「また集まりたいね」",
-      "「次回はみんなで集まれたらいいね」\n\nそう言って、解散する。\n——そして次回もまた、同じ規模で、同じ集まり方。",
+      "「次回はみんなで集まれたらいいね」\n\nそう言って、解散する。\n——そして次回もまた、\n同じ規模で、同じ集まり方。",
       "それも全然悪くない。楽しい。\nでも、\"若干\"の物足りなさを感じてしまう。\n\nその\"若干\"の正体を言葉にしてみると——",
-      "来てくれる人は、大体毎回ほぼ同じ。\n来られなかった人も、\n予定を無理して空ける程の勢いはない。",
+      "来てくれる人は、大体毎回ほぼ同じ。\n来られなかった人も、\n予定を無理して空ける程の\n勢いはない。",
       "ちょっとおしゃれをして、出かける日——\nではなく、\nいつもよりちょっといいランチを\n楽しく食べる日のイメージ。",
-      "集まる趣旨も、少し曖昧だから\n楽しかったね、で終わってしまう。",
-      "記憶に残らないわけじゃない、けれど、\n\"特別な一日\"として、心に刻まれるものでもない。\n\n悪い集まりじゃない。\nむしろ、心地いい。",
+      "集まる趣旨も、少し曖昧だから\n楽しかったね、で\n終わってしまう。",
+      "記憶に残らないわけじゃない、\nけれど、\n\"特別な一日\"として、\n心に刻まれるものでもない。",
       "でも——\nこのままで、いいのかな、と\n思う瞬間がある。"
     ],
     durations: [7, 5, 7, 6, 7, 5, 6, 5],
@@ -1193,9 +1198,9 @@
 
   const AFTER = {
     texts: [
-      "パーティーをやると決めれば、\n自ずと動くもの。\n\n「誰に声をかける？」\n「場所はどこにする？」\n「どんな時間を過ごしてもらう？」\n\nこの段階から、\nパーティーは始まっている。",
-      "気軽なママ友会ともランチ会とも違う。\n\nもっと大きな目的をもって、\n時間を作ってきてもらえる。\n\n来ていただいた先に何があるかを、\n魅せること。",
-      "この部分を、プロがサポートする。\n\nあなたの、そしてあなたの大切なゲストの時間を、\n緩急と余白、一体感を持って演出する。",
+      "パーティーをやると決めれば、\n自ずと動くもの。\n\n「誰に声をかける？」\n「場所はどこにする？」\n「どんな時間を過ごしてもらう？」",
+      "気軽なママ友会とも\nランチ会とも違う。\n\nもっと大きな目的をもって、\n時間を作ってきてもらえる。",
+      "この部分を、プロがサポートする。\n\nあなたの、そしてあなたの\n大切なゲストの時間を、\n緩急と余白、一体感を持って演出する。",
       "それを体感した先には、\nあなたの求心力、\nあなたの想い、\nあなたへのリスペクトが高まる。",
       "ゲスト同士も、身近に感じられる。\n\nこれはリアルの場があってこそ。",
       "パーティーの力を借りて、\nあなたも一緒に、\n飛躍しませんか。"
@@ -1218,7 +1223,7 @@
     const show = (i) => { nodes.forEach((n, k) => n.classList.toggle('visible', k === i)); idx = i; };
     const finish = () => {
       done = true;
-      setTimeout(() => arrowEl.classList.add('show'), 3000);
+      setTimeout(() => arrowEl.classList.add('show'), 2500);
       SKIP_BTN.classList.remove('show');
     };
     const queue = (i) => {
@@ -1280,6 +1285,24 @@
     renderAll(document.getElementById('seqAfter'), AFTER);
   }
 
+  /* Profile / Monitor: gate title in oval for 1s then fades away */
+  function playGate(gateEl) {
+    if (prefersReduced) { gateEl.classList.add('show'); return; }
+    gateEl.classList.add('show');
+    setTimeout(() => gateEl.classList.remove('show'), 1400);
+  }
+
+  /* Ready: photo 3s -> fade out -> Ready? title fades in */
+  function playReady() {
+    const oval = document.getElementById('ovalReady');
+    const title = document.getElementById('readyTitle');
+    if (prefersReduced) { title.classList.add('show'); return; }
+    setTimeout(() => {
+      oval.classList.add('photo-hide');
+      setTimeout(() => title.classList.add('show'), 900);
+    }, 3000);
+  }
+
   const seen = new Set();
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -1289,6 +1312,9 @@
       seen.add(id);
       if (id === 'before' && sequencers.before) sequencers.before.start();
       else if (id === 'after' && sequencers.after) sequencers.after.start();
+      else if (id === 'profile') playGate(document.getElementById('gateProfile'));
+      else if (id === 'monitor') playGate(document.getElementById('gateMonitor'));
+      else if (id === 'ready')   playReady();
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('[data-chapter]').forEach(el => io.observe(el));
@@ -1308,6 +1334,5 @@
   });
 })();
 </script>
-
 </body>
 </html>
