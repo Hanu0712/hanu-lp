@@ -824,12 +824,21 @@
       color: var(--charcoal);
     }
 
-    .before-photo {
-      max-width: 520px;
-      margin: 48px auto 8px;
-      padding: 0;
+    .before-body {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, auto);
+      gap: 48px;
+      align-items: center;
       position: relative;
       z-index: 3;
+    }
+
+    .before-photo {
+      margin: 0;
+      padding: 0;
+      width: clamp(180px, 22vw, 280px);
+      flex-shrink: 0;
     }
 
     .before-photo img {
@@ -840,18 +849,18 @@
     }
 
     .before-story {
-      max-width: 780px;
-      margin: 56px auto 0;
-      padding: 32px 20px 0;
+      max-width: none;
+      margin: 0;
+      padding: 0;
       position: relative;
       z-index: 3;
       font-family: 'Noto Serif JP', serif;
-      font-size: 23px;
+      font-size: 21px;
       line-height: 1.95;
       letter-spacing: -0.01em;
       color: var(--charcoal);
       font-weight: 500;
-      text-align: center;
+      text-align: left;
       display: grid;
       min-height: 12em;
     }
@@ -2159,8 +2168,9 @@
       .before-display { font-size: 44px; flex: 1; min-width: 0; gap: 8px; }
       .before-display-sub { font-size: 17px; letter-spacing: 0.18em; display: block; width: 100%; margin-top: 4px; }
       .before-lead { font-size: 15px; line-height: 2; padding: 0; letter-spacing: 0.02em; }
-      .before-photo { margin: 28px 0 4px; }
-      .before-story { font-size: 19px; line-height: 1.9; margin-top: 40px; padding: 20px 16px 0; letter-spacing: -0.01em; min-height: 14em; }
+      .before-body { grid-template-columns: 1fr; gap: 24px; margin-top: 28px; }
+      .before-photo { width: 60%; max-width: 220px; margin: 0 auto; }
+      .before-story { font-size: 17px; line-height: 1.9; text-align: left; min-height: 14em; }
       .before-portrait { width: 88px; height: 88px; }
       .before-item { padding: 28px 20px 32px; }
       .before-num { font-size: 56px; margin-bottom: 8px; }
@@ -2445,9 +2455,7 @@
     でも——<em>&ldquo;特別な一日&rdquo;</em>として心に残る集まりが、<br>
     本当はほしいのかもしれない。
   </p>
-  <figure class="before-photo">
-    <img src="image/portrait_before_side.jpg?v=1" alt="">
-  </figure>
+  <div class="before-body">
   <div class="before-story" id="beforeStory">
     <div class="before-stanza">
       <p>ランチ会は、開いたことがある。</p>
@@ -2482,6 +2490,10 @@
       <p>むしろ、心地いい。</p>
       <p>でも——このままで、いいのかな、と思う瞬間がある。</p>
     </div>
+  </div>
+  <figure class="before-photo">
+    <img src="image/portrait_before_side.jpg?v=1" alt="">
+  </figure>
   </div>
 </section>
 
