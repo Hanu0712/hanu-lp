@@ -804,24 +804,59 @@
       flex-wrap: wrap;
     }
 
-    .before-lead {
+    .before-story {
       max-width: 720px;
-      margin: 0 0 72px;
+      margin: 0 auto 96px;
       position: relative;
       z-index: 3;
       font-family: 'Noto Serif JP', serif;
-      font-size: clamp(17px, 1.55vw, 22px);
-      line-height: 2.3;
+      font-size: clamp(16px, 1.4vw, 20px);
+      line-height: 2.35;
       letter-spacing: 0.04em;
       color: rgba(28,25,24,0.88);
       font-weight: 300;
-      padding-left: 28px;
-      border-left: 1px solid rgba(28,25,24,0.22);
+      text-align: center;
     }
 
-    .before-lead em {
+    .before-stanza { margin-bottom: 40px; }
+    .before-stanza:last-child { margin-bottom: 0; }
+
+    .before-stanza p {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1.4s ease, transform 1.4s ease;
+      margin: 0;
+    }
+
+    .before-stanza.visible p           { opacity: 1; transform: translateY(0); }
+    .before-stanza.visible p:nth-child(1) { transition-delay: 0s; }
+    .before-stanza.visible p:nth-child(2) { transition-delay: 0.4s; }
+    .before-stanza.visible p:nth-child(3) { transition-delay: 0.8s; }
+    .before-stanza.visible p:nth-child(4) { transition-delay: 1.2s; }
+    .before-stanza.visible p:nth-child(5) { transition-delay: 1.6s; }
+
+    .before-stanza-quote {
+      font-style: italic;
+      color: rgba(28,25,24,0.72);
+      letter-spacing: 0.02em;
+    }
+
+    .before-stanza-divider {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(22px, 2vw, 28px);
+      color: rgba(28,25,24,0.35);
+      text-align: center;
+      margin: 12px 0 40px;
+      opacity: 0;
+      transition: opacity 1.6s ease;
+      letter-spacing: 0.2em;
+    }
+    .before-stanza-divider.visible { opacity: 1; }
+
+    .before-story em {
       font-style: normal;
-      font-weight: 400;
+      font-weight: 500;
       color: var(--charcoal);
     }
 
@@ -2087,7 +2122,9 @@
       }
       .before-display { font-size: 44px; flex: 1; min-width: 0; gap: 8px; }
       .before-display-sub { font-size: 17px; letter-spacing: 0.18em; display: block; width: 100%; margin-top: 4px; }
-      .before-lead { font-size: 16px; line-height: 2.15; padding-left: 18px; margin-bottom: 40px; letter-spacing: 0.02em; }
+      .before-story { font-size: 15px; line-height: 2.2; margin-bottom: 56px; letter-spacing: 0.02em; }
+      .before-stanza { margin-bottom: 32px; }
+      .before-stanza-divider { font-size: 20px; margin: 8px 0 28px; }
       .before-portrait { width: 88px; height: 88px; }
       .before-item { padding: 28px 20px 32px; }
       .before-num { font-size: 56px; margin-bottom: 8px; }
@@ -2368,11 +2405,42 @@
       <span class="before-display-sub">こんなお悩み、ありませんか？</span>
     </div>
   </div>
-  <p class="before-lead">
-    <em>&ldquo;楽しかったね&rdquo;</em>で終わるランチ会も、悪くない。<br>
-    でも——<em>&ldquo;特別な一日&rdquo;</em>として心に残る集まりが、<br>
-    本当はほしいのかもしれない。
-  </p>
+  <div class="before-story" id="beforeStory">
+    <div class="before-stanza">
+      <p>ランチ会は、開いたことがある。</p>
+      <p>ママ友会の延長線のような、気軽な集まり。</p>
+      <p>7〜8人で、美味しいごはんを食べて、笑って。</p>
+      <p class="before-stanza-quote">「また集まりたいね」</p>
+      <p class="before-stanza-quote">「次回はみんなで集まれたらいいね」</p>
+    </div>
+    <div class="before-stanza">
+      <p>そう言って、解散する。</p>
+      <p>——そして次回もまた、同じ規模で、同じ集まり方。</p>
+      <p>それも全然悪くない。楽しい。</p>
+      <p>でも、<em>&ldquo;若干&rdquo;</em>の物足りなさを感じてしまう。</p>
+    </div>
+    <div class="before-stanza-divider" aria-hidden="true">——</div>
+    <div class="before-stanza">
+      <p>その<em>&ldquo;若干&rdquo;</em>の正体を言葉にしてみると——</p>
+      <p>来てくれる人は、大体毎回ほぼ同じ。</p>
+      <p>来られなかった人も、</p>
+      <p>予定を無理して空ける程の勢いはない。</p>
+    </div>
+    <div class="before-stanza">
+      <p>ちょっとおしゃれをして、出かける日——</p>
+      <p>ではなく、</p>
+      <p>いつもよりちょっといいランチを楽しく食べる日のイメージ。</p>
+      <p>集まる趣旨も、少し曖昧だから</p>
+      <p>楽しかったね、で終わってしまう。</p>
+    </div>
+    <div class="before-stanza">
+      <p>記憶に残らないわけじゃない、けれど、</p>
+      <p><em>&ldquo;特別な一日&rdquo;</em>として、心に刻まれるものでもない。</p>
+      <p>悪い集まりじゃない。</p>
+      <p>むしろ、心地いい。</p>
+      <p>でも——このままで、いいのかな、と思う瞬間がある。</p>
+    </div>
+  </div>
   <div class="before-grid">
     <div class="before-item">
       <div class="before-num">01</div>
@@ -2689,6 +2757,33 @@
   </div>
   <small>© 2025 Hanu Party Produce. All rights reserved.</small>
 </footer>
+
+<script>
+  (function () {
+    var story = document.getElementById('beforeStory');
+    if (!story) return;
+    var items = story.querySelectorAll('.before-stanza, .before-stanza-divider');
+    var STEP = 10000;
+    var fired = false;
+    var reveal = function () {
+      if (fired) return;
+      fired = true;
+      items.forEach(function (el, i) {
+        setTimeout(function () { el.classList.add('visible'); }, i * STEP);
+      });
+    };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { reveal(); io.disconnect(); }
+        });
+      }, { threshold: 0.15 });
+      io.observe(story);
+    } else {
+      reveal();
+    }
+  })();
+</script>
 
 </body>
 </html>
