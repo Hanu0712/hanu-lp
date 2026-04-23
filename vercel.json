@@ -6,6 +6,13 @@
         { "type": "query", "key": "pc", "value": "2" }
       ],
       "destination": "/lp.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        { "type": "query", "key": "pc", "value": "3" }
+      ],
+      "destination": "/v3.html"
     }
   ]
 }
