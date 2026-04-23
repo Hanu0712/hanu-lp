@@ -6,8 +6,8 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Hanu — Party Produce for Her</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
+  <title>Hanu — Party Produce for Her (PC preview)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -102,19 +102,6 @@
       max-width: 1280px;
       height: clamp(480px, 64vh, 640px);
       margin: 0 auto;
-    }
-
-    .hero-tagline {
-      font-family: 'Noto Serif JP', serif;
-      font-size: clamp(16px, 2.2vw, 22px);
-      font-weight: 500;
-      color: var(--charcoal);
-      letter-spacing: 0.22em;
-      text-align: center;
-      line-height: 1.8;
-      margin-bottom: 18px;
-      position: relative;
-      z-index: 10;
     }
 
     /* Arc text "ARE YOU READY?" */
@@ -239,26 +226,19 @@
 
     .hero-eyebrow {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(13px, 1.5vw, 16px);
-      letter-spacing: 0.2em;
+      font-size: 10px;
+      letter-spacing: 0.42em;
       text-transform: uppercase;
       color: var(--charcoal);
-      opacity: 0.82;
-      font-weight: 600;
-      margin-bottom: 6px;
-      line-height: 1.7;
-    }
-    .hero-eyebrow .sep {
-      display: inline-block;
-      margin: 0 0.45em;
-      opacity: 0.45;
-      font-weight: 400;
+      opacity: 0.65;
+      font-weight: 500;
+      margin-bottom: 14px;
     }
 
     .hero-jp-sub-new {
       font-family: 'Noto Serif JP', serif;
-      font-size: 24px;
-      font-weight: 500;
+      font-size: 20px;
+      font-weight: 400;
       line-height: 2.1;
       color: var(--charcoal);
       margin-bottom: 24px;
@@ -768,7 +748,7 @@
 
     /* ── BEFORE ── */
     .before {
-      background: var(--offwhite);
+      background: var(--greige);
       padding: 120px 32px;
       position: relative;
       overflow: hidden;
@@ -1079,11 +1059,6 @@
       border-bottom: 1px solid rgba(110,94,80,0.6);
     }
 
-    .prof-bio .bio-oneline {
-      display: inline-block;
-      white-space: nowrap;
-    }
-
     .prof-oval-col {
       grid-column: 2;
       display: flex;
@@ -1106,39 +1081,14 @@
       width: clamp(170px, 16vw, 230px);
       aspect-ratio: 3/4;
       overflow: hidden;
-      position: relative;
-      background: #2a2a2a;
     }
 
     .prof-right-thumb img {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center center;
+      object-position: center top;
       display: block;
-      opacity: 0;
-      animation: profSlideshow 30s infinite ease-in-out;
-    }
-    .prof-right-thumb img:nth-child(1)  { animation-delay: 0s; }
-    .prof-right-thumb img:nth-child(2)  { animation-delay: 3s; }
-    .prof-right-thumb img:nth-child(3)  { animation-delay: 6s; }
-    .prof-right-thumb img:nth-child(4)  { animation-delay: 9s; }
-    .prof-right-thumb img:nth-child(5)  { animation-delay: 12s; }
-    .prof-right-thumb img:nth-child(6)  { animation-delay: 15s; }
-    .prof-right-thumb img:nth-child(7)  { animation-delay: 18s; }
-    .prof-right-thumb img:nth-child(8)  { animation-delay: 21s; }
-    .prof-right-thumb img:nth-child(9)  { animation-delay: 24s; }
-    .prof-right-thumb img:nth-child(10) { animation-delay: 27s; }
-
-    @keyframes profSlideshow {
-      0%    { opacity: 0; }
-      1.5%  { opacity: 1; }
-      10%   { opacity: 1; }
-      11.5% { opacity: 0; }
-      100%  { opacity: 0; }
     }
 
     .prof-caption {
@@ -1548,482 +1498,6 @@
       color: rgba(245,240,234,0.2);
     }
 
-    /* ── HERO DIVIDER (eyebrow と 和文コピーの間の細線) ── */
-    .hero-divider {
-      width: 48px;
-      height: 1px;
-      background: rgba(28,25,24,0.35);
-      margin: 6px auto 20px;
-      opacity: 0.9;
-    }
-
-    /* ── PURPOSE (なぜパーティーを開くのか) ── */
-    .purpose {
-      background: var(--offwhite);
-      padding: 120px 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    .purpose-ghost {
-      position: absolute;
-      top: 50px;
-      left: -30px;
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(120px, 18vw, 260px);
-      font-weight: 900;
-      font-style: italic;
-      color: rgba(28,25,24,0.04);
-      pointer-events: none;
-      white-space: nowrap;
-      letter-spacing: -0.02em;
-    }
-    .purpose-head {
-      text-align: center;
-      margin-bottom: 64px;
-      position: relative;
-    }
-    .purpose-display {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(56px, 8.2vw, 124px);
-      font-weight: 900;
-      font-style: italic;
-      line-height: 1;
-      color: var(--charcoal);
-      margin: 6px 0 14px;
-      letter-spacing: -0.01em;
-    }
-    .purpose-display em {
-      font-style: italic;
-      color: #6E5E50;
-    }
-    .purpose-rule {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 0 auto 22px;
-      max-width: 320px;
-    }
-    .purpose-rule::before,
-    .purpose-rule::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(28,25,24,0.22);
-    }
-    .purpose-rule-dot {
-      width: 5px;
-      height: 5px;
-      background: #6E5E50;
-      border-radius: 50%;
-      display: inline-block;
-      opacity: 0.7;
-    }
-    .purpose-sub {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 1.9;
-      color: var(--charcoal);
-      letter-spacing: 0.04em;
-    }
-    .purpose-sub em {
-      font-style: normal;
-      color: #6E5E50;
-      font-weight: 500;
-    }
-    .purpose-grid {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 64px 40px;
-      background: transparent;
-      position: relative;
-    }
-    .purpose-item {
-      background: transparent;
-      padding: 0;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      grid-column: span 2;
-    }
-    /* 5 items: 3 top + 2 centered bottom */
-    .purpose-item:nth-child(4) { grid-column: 2 / span 2; }
-    .purpose-item:nth-child(5) { grid-column: 4 / span 2; }
-    .purpose-numeral {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: 60px;
-      line-height: 1;
-      color: #6E5E50;
-      letter-spacing: 0.02em;
-      margin-bottom: 20px;
-    }
-    .purpose-ornament {
-      width: 32px;
-      height: 1px;
-      background: rgba(110,94,80,0.45);
-      margin: 0 auto 24px;
-    }
-    .purpose-en {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 29px;
-      font-weight: 400;
-      color: var(--charcoal);
-      line-height: 1.3;
-      margin-bottom: 12px;
-      letter-spacing: 0.01em;
-    }
-    .purpose-title {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
-      letter-spacing: 0.36em;
-      color: rgba(28,25,24,0.58);
-      font-weight: 400;
-      margin-bottom: 22px;
-      padding-left: 0.36em;
-    }
-    .purpose-text {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 16.5px;
-      font-weight: 300;
-      color: rgba(28,25,24,0.82);
-      line-height: 2.05;
-      max-width: 270px;
-    }
-
-    /* ── AFTER (Before の対になる変化後) ── */
-    .after {
-      background: var(--white);
-      padding: 120px 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    .after-head {
-      margin-bottom: 72px;
-      position: relative;
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-    .after-display {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(56px, 9vw, 140px);
-      font-weight: 900;
-      font-style: italic;
-      line-height: 1;
-      color: var(--charcoal);
-      display: flex;
-      align-items: baseline;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .after-display em {
-      font-style: italic;
-      color: #6E5E50;
-    }
-    .after-display-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--charcoal);
-      opacity: 0.78;
-      font-weight: 500;
-      font-style: normal;
-    }
-    .after-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(28,25,24,0.12);
-    }
-    .after-item {
-      background: var(--offwhite);
-      padding: 48px 20px 52px;
-    }
-    .after-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 88px;
-      font-weight: 900;
-      font-style: italic;
-      line-height: 1;
-      color: rgba(110,94,80,0.16);
-      margin-bottom: 20px;
-    }
-    .after-title {
-      font-size: 23px;
-      font-weight: 500;
-      line-height: 1.8;
-      margin-bottom: 16px;
-      color: var(--charcoal);
-      letter-spacing: -0.02em;
-      word-break: keep-all;
-      overflow-wrap: break-word;
-    }
-    .after-text {
-      font-size: 17px;
-      color: rgba(28,25,24,0.82);
-      line-height: 2.1;
-    }
-
-    /* ── PRICE TOTAL (20名規模の総額イメージ) ── */
-    .price-total {
-      max-width: 760px;
-      margin: 0 auto 80px;
-      background: var(--offwhite);
-      padding: 40px 44px 36px;
-      position: relative;
-    }
-    .price-total-head {
-      text-align: center;
-      margin-bottom: 22px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--sand);
-    }
-    .price-total-eyebrow {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      color: #6E5E50;
-      font-weight: 600;
-      display: block;
-      margin-bottom: 10px;
-    }
-    .price-total-title {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 19px;
-      font-weight: 500;
-      color: var(--charcoal);
-    }
-    .price-total-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .price-total-table th,
-    .price-total-table td {
-      padding: 14px 8px;
-      text-align: left;
-      font-family: 'Noto Serif JP', serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: rgba(28,25,24,0.82);
-      border-bottom: 1px solid var(--sand);
-      vertical-align: baseline;
-    }
-    .price-total-table td {
-      text-align: right;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-weight: 500;
-      font-size: 18px;
-      color: var(--charcoal);
-      white-space: nowrap;
-    }
-    .price-total-table tr.sum th,
-    .price-total-table tr.sum td {
-      border-bottom: none;
-      padding-top: 18px;
-      font-weight: 600;
-      color: var(--charcoal);
-    }
-    .price-total-table tr.sum td {
-      font-size: 26px;
-      font-weight: 900;
-    }
-    .price-total-note {
-      margin-top: 16px;
-      font-family: 'Noto Serif JP', serif;
-      font-size: 13px;
-      color: rgba(28,25,24,0.6);
-      text-align: center;
-      line-height: 1.8;
-    }
-
-    /* ── OFFER SINGLE (サービス内容 full-width) ── */
-    .offer-single {
-      max-width: 760px;
-      margin: 0 auto 40px;
-      position: relative;
-    }
-
-    /* ── MONITOR EXCHANGE (条件 × 特典 対比) ── */
-    .monitor-exchange {
-      max-width: 980px;
-      margin: 0 auto;
-      position: relative;
-    }
-    .exchange-head {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .exchange-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 4.5vw, 56px);
-      font-weight: 900;
-      font-style: italic;
-      color: var(--charcoal);
-      line-height: 1.1;
-      margin-top: 6px;
-    }
-    .exchange-title em {
-      font-style: italic;
-      color: #6E5E50;
-    }
-    .exchange-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: stretch;
-      gap: 0;
-      background: var(--offwhite);
-    }
-    .exchange-col {
-      padding: 48px 44px;
-      display: flex;
-      flex-direction: column;
-    }
-    .exchange-col.give {
-      background: var(--offwhite);
-    }
-    .exchange-col.take {
-      background: var(--navy);
-      color: var(--offwhite);
-    }
-    .exchange-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 14px;
-      opacity: 0.82;
-    }
-    .exchange-col.give .exchange-label { color: #6E5E50; }
-    .exchange-col.take  .exchange-label { color: #C4B49E; }
-    .exchange-name {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 21px;
-      font-weight: 500;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-    }
-    .exchange-col.give .exchange-name {
-      color: var(--charcoal);
-      border-bottom: 1px solid var(--sand);
-    }
-    .exchange-col.take .exchange-name {
-      color: var(--offwhite);
-      border-bottom: 1px solid rgba(245,240,234,0.22);
-    }
-    .exchange-list {
-      list-style: none;
-    }
-    .exchange-list li {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 17px;
-      font-weight: 400;
-      line-height: 2;
-      padding-left: 22px;
-      position: relative;
-    }
-    .exchange-list li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-    .exchange-col.give .exchange-list li { color: rgba(28,25,24,0.85); }
-    .exchange-col.give .exchange-list li::before { color: var(--taupe); }
-    .exchange-col.take .exchange-list li { color: rgba(245,240,234,0.9); }
-    .exchange-col.take .exchange-list li::before { color: #C4B49E; }
-    .exchange-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 4px;
-      background: var(--offwhite);
-      position: relative;
-    }
-    .exchange-divider-mark {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--charcoal);
-      color: var(--offwhite);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      letter-spacing: 0;
-      font-weight: 600;
-    }
-
-    /* ── CTA DETAILS (話すこと / 所要時間 / 得られるもの) ── */
-    .cta-details {
-      max-width: 880px;
-      margin: 0 auto 56px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(245,240,234,0.18);
-      position: relative;
-    }
-    .cta-detail {
-      background: var(--navy);
-      padding: 36px 28px 40px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .cta-detail-icon {
-      width: 36px;
-      height: 36px;
-      margin-bottom: 16px;
-      color: #C4B49E;
-    }
-    .cta-detail-icon svg {
-      width: 100%;
-      height: 100%;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.3;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    .cta-detail-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 10px;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      color: #C4B49E;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    .cta-detail-title {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--offwhite);
-      margin-bottom: 10px;
-    }
-    .cta-detail-text {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
-      font-weight: 300;
-      line-height: 1.9;
-      color: rgba(245,240,234,0.78);
-    }
-
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       .site-header { padding: 20px 20px; }
@@ -2048,7 +1522,7 @@
       .hero-float.f7  { width: 54px; height: 70px; top: 16%; right: 0%; }
       .hero-float.f8  { width: 50px; height: 64px; top: 48%; right: 0%; }
       .hero-float.f9  { width: 58px; height: 74px; top: 82%; right: 4%; }
-      .hero-jp-sub-new { font-size: 22px; line-height: 2; }
+      .hero-jp-sub-new { font-size: 19px; line-height: 2; }
       .hero-jp-sub { font-size: 19px; line-height: 2; }
 
       .statement { padding: 56px 24px; min-height: 0; }
@@ -2074,12 +1548,6 @@
       .service-desc { font-size: 17px; line-height: 2; }
       .s-name { font-size: 17px; }
       .prof-bio { font-size: 15px; line-height: 1.8; white-space: normal; }
-      .prof-bio .bio-oneline {
-        display: inline-block;
-        white-space: nowrap;
-        font-size: 3.2vw;
-        letter-spacing: -0.015em;
-      }
       .who-lead { font-size: 15px; }
 
       .service {
@@ -2140,60 +1608,6 @@
 
       .cta-sec { padding: 80px 24px; }
 
-      .hero-eyebrow { letter-spacing: 0.16em; }
-      .hero-eyebrow .sep { margin: 0 0.3em; }
-      .hero-divider { width: 40px; margin: 4px auto 16px; }
-
-      .purpose { padding: 64px 20px; }
-      .purpose-ghost { font-size: 96px; top: 20px; left: -10px; }
-      /* mobile: 1カラム（text が 1 行に収まるようセル幅を確保） */
-      .purpose-grid { grid-template-columns: 1fr; gap: 52px; }
-      .purpose-item,
-      .purpose-item:nth-child(4),
-      .purpose-item:nth-child(5) { padding: 0; grid-column: 1; }
-      .purpose-numeral { font-size: 46px; margin-bottom: 16px; }
-      .purpose-ornament { margin-bottom: 18px; width: 26px; }
-      .purpose-en { font-size: 22px; }
-      .purpose-title { font-size: 12px; letter-spacing: 0.3em; margin-bottom: 16px; padding-left: 0.3em; }
-      .purpose-text { font-size: 15px; line-height: 1.95; max-width: 320px; }
-      /* sub 2行目「あなたのパーティーが〜」を1行に収める */
-      .purpose-sub { font-size: 14px; letter-spacing: 0; line-height: 1.9; }
-
-      .after { padding: 64px 20px; }
-      .after-grid { grid-template-columns: 1fr; gap: 1px; }
-      .after-head {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 14px;
-        margin-bottom: 32px;
-        flex-wrap: nowrap;
-      }
-      .after-display { font-size: 44px; flex: 1; min-width: 0; gap: 8px; }
-      .after-display-sub { font-size: 17px; letter-spacing: 0.18em; display: block; width: 100%; margin-top: 4px; }
-      .after-item { padding: 28px 20px 32px; }
-      .after-num { font-size: 56px; margin-bottom: 8px; }
-      .after-title { font-size: 19px; line-height: 1.7; margin-bottom: 12px; letter-spacing: -0.02em; white-space: normal; word-break: keep-all; overflow-wrap: break-word; }
-      .after-text  { font-size: 16px; line-height: 2; }
-
-      .price-total { padding: 28px 22px 24px; margin-bottom: 56px; }
-      .price-total-title { font-size: 16px; }
-      .price-total-table th, .price-total-table td { font-size: 13px; padding: 11px 4px; }
-      .price-total-table td { font-size: 15px; }
-      .price-total-table tr.sum td { font-size: 20px; }
-
-      .exchange-grid { grid-template-columns: 1fr; }
-      .exchange-col { padding: 32px 24px; }
-      .exchange-divider { padding: 6px 0; }
-      .exchange-divider-mark { transform: rotate(90deg); }
-      .exchange-name { font-size: 19px; }
-      .exchange-list li { font-size: 16px; line-height: 1.9; }
-      .exchange-title { font-size: 30px; }
-
-      .cta-details { grid-template-columns: 1fr; gap: 1px; margin-bottom: 40px; }
-      .cta-detail { padding: 28px 22px; }
-      .cta-detail-icon { width: 30px; height: 30px; margin-bottom: 12px; }
-
       footer {
         padding: 32px 20px;
         flex-direction: column;
@@ -2221,8 +1635,6 @@
 
 <!-- ── HERO (Cutout Collage) ── -->
 <section class="hero">
-  <div class="hero-tagline">女性起業家のための<br>パーティープロデュース</div>
-
   <div class="hero-stage">
     <svg class="hero-arc" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
       <defs>
@@ -2251,70 +1663,12 @@
   </div>
 
   <div class="hero-copy">
-    <div class="hero-eyebrow">
-      Wedding &amp; Party Planning<br>
-      19 Years · 500+ Events
-    </div>
-    <div class="hero-divider" aria-hidden="true"></div>
+    <div class="hero-eyebrow">2025 — Party Produce for Her</div>
     <p class="hero-jp-sub-new">
-      「ランチ会」から、「パーティー」へ。<br>
-      はじめての一日を、プロと設計する。
+      「招かれる側」から、「招く側」へ。<br>
+      「いつかやる」は、今日で終わりに。
     </p>
     <a href="#offer" class="hero-cta-link-new">モニター募集の詳細を見る</a>
-  </div>
-</section>
-
-<!-- ── BEFORE / 共感（お悩み）── -->
-<section class="before" id="before">
-  <div class="before-head">
-    <div class="before-display">
-      Before.
-      <span class="before-display-sub">こんなお悩み、ありませんか？</span>
-    </div>
-  </div>
-  <div class="before-grid">
-    <div class="before-item">
-      <div class="before-num">01</div>
-      <h3 class="before-title">「どこまでお金をかけていいか、判断できない」</h3>
-      <p class="before-text">適正価格が、どこにあるのか分からない。<br>ブランドに見合う金額が、見えないまま。</p>
-    </div>
-    <div class="before-item">
-      <div class="before-num">02</div>
-      <h3 class="before-title">「"それっぽく"ならない気がする」</h3>
-      <p class="before-text">自分で選ぶと、どこかチープになりそう。<br>センスに、自信が持てない。</p>
-    </div>
-    <div class="before-item" id="before-item-03">
-      <div class="before-num">03</div>
-      <h3 class="before-title">「"いつか"が、何ヶ月も続いている」</h3>
-      <p class="before-text">動けない自分に、一番焦っているのは自分。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── AFTER（Before 3項目に対応する、変化後の姿）── -->
-<section class="after" id="after">
-  <div class="after-head">
-    <div class="after-display">
-      After.
-      <span class="after-display-sub">変化した、あなたの世界。</span>
-    </div>
-  </div>
-  <div class="after-grid">
-    <div class="after-item">
-      <div class="after-num">01</div>
-      <h3 class="after-title">「やりきった」が、<br>次の一手になっている。</h3>
-      <p class="after-text">次の企画が、すでに動き出している。</p>
-    </div>
-    <div class="after-item">
-      <div class="after-num">02</div>
-      <h3 class="after-title">画面越しの関係が、<br>確かな信頼に変わる。</h3>
-      <p class="after-text">その日を境に、仕事の相談が増えていく。</p>
-    </div>
-    <div class="after-item">
-      <div class="after-num">03</div>
-      <h3 class="after-title">「次はどんなパーティー？」が、<br>口ぐせになる。</h3>
-      <p class="after-text">招く側でいることが、当たり前になっている。</p>
-    </div>
   </div>
 </section>
 
@@ -2336,58 +1690,29 @@
   </p>
 </section>
 
-<!-- ── PURPOSE（女性起業家がパーティーを開く目的）── -->
-<section class="purpose" id="purpose">
-  <div class="purpose-ghost">PURPOSE</div>
-  <div class="purpose-head">
-    <span class="section-eyebrow">— Purpose —</span>
-    <h2 class="purpose-display">Moments <em>worth</em><br>marking.</h2>
-    <div class="purpose-rule" aria-hidden="true"><span class="purpose-rule-dot"></span></div>
-    <p class="purpose-sub">
-      招く側に立つと、<em>世界の見え方が変わる。</em><br>
-      あなたのパーティーが、次の物語を動かしていく。
-    </p>
+<!-- ── BEFORE / 共感（お悩み）── -->
+<section class="before" id="before">
+  <div class="before-head">
+    <div class="before-display">
+      Before.
+      <span class="before-display-sub">こんなお悩み、ありませんか？</span>
+    </div>
   </div>
-
-  <div class="purpose-grid">
-    <div class="purpose-item">
-      <div class="purpose-numeral">I</div>
-      <div class="purpose-ornament" aria-hidden="true"></div>
-      <h3 class="purpose-en">Book Launch</h3>
-      <p class="purpose-title">出版パーティー</p>
-      <p class="purpose-text">一冊のはじまりを、<br>支えてくれた人たちと。</p>
+  <div class="before-grid">
+    <div class="before-item">
+      <div class="before-num">01</div>
+      <h3 class="before-title">「いくらかかるか、分からない」</h3>
+      <p class="before-text">会場、飲食、装飾——全部足したらいくら？<br>調べる気力も湧かないまま、後回しになっている。</p>
     </div>
-
-    <div class="purpose-item">
-      <div class="purpose-numeral">II</div>
-      <div class="purpose-ornament" aria-hidden="true"></div>
-      <h3 class="purpose-en">Anniversary</h3>
-      <p class="purpose-title">周年パーティー</p>
-      <p class="purpose-text">今日までの日々を、<br>共に歩んできた人たちと。</p>
+    <div class="before-item">
+      <div class="before-num">02</div>
+      <h3 class="before-title">「何から決めればいいか、分からない」</h3>
+      <p class="before-text">日程、場所、人数、テーマ、案内文。<br>決めることが多すぎて、最初の一歩で止まっている。</p>
     </div>
-
-    <div class="purpose-item">
-      <div class="purpose-numeral">III</div>
-      <div class="purpose-ornament" aria-hidden="true"></div>
-      <h3 class="purpose-en">Community Gathering</h3>
-      <p class="purpose-title">コミュニティパーティー</p>
-      <p class="purpose-text">はじめて出会う夜を、<br>同じ志を持つ人たちと。</p>
-    </div>
-
-    <div class="purpose-item">
-      <div class="purpose-numeral">IV</div>
-      <div class="purpose-ornament" aria-hidden="true"></div>
-      <h3 class="purpose-en">Birthday</h3>
-      <p class="purpose-title">お誕生日会</p>
-      <p class="purpose-text">年に一度の大切な日を、<br>いつも支えてくれている人たちと。</p>
-    </div>
-
-    <div class="purpose-item">
-      <div class="purpose-numeral">V</div>
-      <div class="purpose-ornament" aria-hidden="true"></div>
-      <h3 class="purpose-en">Milestones</h3>
-      <p class="purpose-title">記念日・節目</p>
-      <p class="purpose-text">辿り着いた景色を、<br>ここまで共にしてきた人たちと。</p>
+    <div class="before-item">
+      <div class="before-num">03</div>
+      <h3 class="before-title">「やらなくても、別に困らない」</h3>
+      <p class="before-text">わかっている。だから動けない。<br>でも本当は——"次のステージ"を見たい自分もいる。</p>
     </div>
   </div>
 </section>
@@ -2455,7 +1780,7 @@
       Hanu／パーティープロデューサー。<br><br>
       パーティー・ウェディング業界で19年、延べ500組以上の<br>
       パーティーをプランニング。<br>
-      <span class="bio-oneline">大切にしているのは、緩急と余白、そこから生まれる一体感。</span><br>
+      大切にしているのは、緩急と余白、そこから生まれる一体感。<br>
       パーティーに参加した人の記憶に鮮明に刻まれる一日を、<br>
       あなたのために設計します。
     </p>
@@ -2483,17 +1808,13 @@
 
   <div class="prof-right">
     <div class="prof-right-thumb">
-      <img src="image/slide01.png" alt="">
-      <img src="image/slide02.png" alt="">
-      <img src="image/slide03.png" alt="">
-      <img src="image/slide04.png" alt="">
-      <img src="image/slide05.png" alt="">
-      <img src="image/slide06.png" alt="">
-      <img src="image/slide07.jpg" alt="">
-      <img src="image/slide08.jpg" alt="">
-      <img src="image/slide09.jpg" alt="">
-      <img src="image/slide10.jpg" alt="">
+      <img src="image/portrait_profile_thumb.jpg?v=7" alt="">
     </div>
+    <p class="prof-caption">
+      女性起業家のための<br>
+      パーティープロデュース<br>
+      Party Produce for Her
+    </p>
   </div>
 </section>
 
@@ -2521,37 +1842,10 @@
 
   <p class="price-note">
     プロデュース料・当日ディレクション料を含む<br>
-    会場費・飲食費・装飾費は別途実費<br>
-    （おひとり 1.5万円前後が目安）
+    会場費・飲食費・装飾費は別途実費（おひとり 1.5万円前後が目安）
   </p>
 
-  <!-- 20名規模の総額イメージ -->
-  <div class="price-total" id="price-total">
-    <div class="price-total-head">
-      <span class="price-total-eyebrow">— Total Image —</span>
-      <h3 class="price-total-title">20名規模の場合の総額イメージ</h3>
-    </div>
-    <table class="price-total-table">
-      <tbody>
-        <tr>
-          <th>プロデュース料（当日ディレクション料含む／モニター価格）</th>
-          <td>¥50,000</td>
-        </tr>
-        <tr>
-          <th>会場費・飲食費・装飾費（20名 × 1.5万円）</th>
-          <td>¥300,000</td>
-        </tr>
-        <tr class="sum">
-          <th>総額イメージ</th>
-          <td>¥350,000</td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="price-total-note">※ 会場・内容により変動します。お見積もりは個別にご案内。</p>
-  </div>
-
-  <!-- サービス内容（単独・フル幅） -->
-  <div class="offer-single">
+  <div class="offer-grid">
     <div class="offer-block">
       <span class="block-eyebrow">— Service —</span>
       <h3 class="block-title">サービス内容</h3>
@@ -2564,34 +1858,14 @@
         <li>場所：相談可</li>
       </ul>
     </div>
-  </div>
-
-  <!-- モニター条件 × モニター特典（対比） -->
-  <div class="monitor-exchange">
-    <div class="exchange-head">
-      <span class="section-eyebrow">— Give &amp; Take —</span>
-      <h3 class="exchange-title">Monitor <em>Exchange.</em></h3>
-    </div>
-    <div class="exchange-grid">
-      <div class="exchange-col give">
-        <span class="exchange-label">For Hanu</span>
-        <h4 class="exchange-name">モニター条件</h4>
-        <ul class="exchange-list">
-          <li>感想のご提供</li>
-          <li>当日の写真・動画の使用許可</li>
-          <li>Instagramでのご紹介投稿</li>
-        </ul>
-      </div>
-      <div class="exchange-divider" aria-hidden="true">
-        <span class="exchange-divider-mark">⇄</span>
-      </div>
-      <div class="exchange-col take">
-        <span class="exchange-label">For You</span>
-        <h4 class="exchange-name">モニター特典</h4>
-        <ul class="exchange-list">
-          <li>ゲスト全員分のプチギフトプレゼント</li>
-        </ul>
-      </div>
+    <div class="offer-block">
+      <span class="block-eyebrow">— Conditions —</span>
+      <h3 class="block-title">モニター条件</h3>
+      <ul class="block-list">
+        <li>感想のご提供</li>
+        <li>当日の写真・動画の使用許可</li>
+        <li>Instagramでのご紹介投稿</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -2604,47 +1878,6 @@
     まずは <em>無料Zoom相談</em> から。<br>
     あなたのパーティーを、一緒に。
   </h2>
-
-  <!-- 無料Zoom相談の内訳（話すこと / 所要時間 / 得られるもの） -->
-  <div class="cta-details" aria-label="Zoom相談の内訳">
-    <div class="cta-detail">
-      <div class="cta-detail-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32">
-          <path d="M6 7h20v15H14l-6 5v-5H6z"/>
-          <path d="M11 13h10 M11 17h7"/>
-        </svg>
-      </div>
-      <span class="cta-detail-label">Topics</span>
-      <h4 class="cta-detail-title">話すこと</h4>
-      <p class="cta-detail-text">（文言未定）</p>
-    </div>
-
-    <div class="cta-detail">
-      <div class="cta-detail-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32">
-          <circle cx="16" cy="16" r="11"/>
-          <path d="M16 9v7l5 3"/>
-        </svg>
-      </div>
-      <span class="cta-detail-label">Time</span>
-      <h4 class="cta-detail-title">所要時間</h4>
-      <p class="cta-detail-text">（文言未定）</p>
-    </div>
-
-    <div class="cta-detail">
-      <div class="cta-detail-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32">
-          <path d="M8 14l8-8 8 8"/>
-          <path d="M16 6v20"/>
-          <path d="M6 26h20"/>
-        </svg>
-      </div>
-      <span class="cta-detail-label">Outcome</span>
-      <h4 class="cta-detail-title">得られるもの</h4>
-      <p class="cta-detail-text">（文言未定）</p>
-    </div>
-  </div>
-
   <a href="booking.html?v=5" class="cta-btn">
     無料Zoom相談を予約する
   </a>
