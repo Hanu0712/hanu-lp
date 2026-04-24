@@ -1616,13 +1616,51 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 900px) {
-    .site-header { padding: 18px 20px; }
-    .site-header .nav-right a { margin-left: 18px; font-size: 11px; }
+    .site-header { padding: 14px 16px; }
+    .site-header .brand { font-size: 15px; letter-spacing: 0.15em; }
+    .site-header .nav-right { display: none; }
     .side-rail { display: none; }
 
-    .hero { padding: 110px 24px 60px; min-height: 90vh; }
-    .hero-arch { width: 70vw; height: 80vw; }
+    .hero { padding: 110px 16px 60px; min-height: 90vh; }
+    .hero-arch { width: 92vw; height: 110vw; }
+
+    /* BEFORE / AFTER — 2カラム崩し＋afters のパディング修正 */
+    .worries,
+    .worries.afters { padding: 80px 22px 90px; }
+    .before-body { flex-direction: column; gap: 40px; padding: 0; align-items: center; }
+    .before-story { font-size: 15px; line-height: 1.95; min-height: auto; width: 100%; }
+    .before-photo { width: 85%; max-width: 320px; aspect-ratio: 3/4; }
+    .worries-head h2 { font-size: clamp(44px, 13vw, 72px); }
+
+    /* MOMENTS — numeral を一段小さく、テキストを読みやすく */
+    .moments-numeral { font-size: 60px; margin-bottom: 12px; }
+    .moments-en { font-size: 16px; letter-spacing: 0.2em; }
+    .moments-title { font-size: 19px; margin-bottom: 14px; }
+    .moments-text { font-size: 15px; line-height: 1.95; }
+    .moments-display { font-size: clamp(38px, 11vw, 60px); }
+    .moments-sub { font-size: 14px; line-height: 1.9; }
+    .section-eyebrow { font-size: 11px; letter-spacing: 0.35em; margin-bottom: 14px; }
+
+    /* EDITORIAL (non-strip) — モバイル時の paddding を詰める */
+    .editorial:not(.editorial-strip) { padding: 60px 20px; }
+    .editorial-strip { padding: 24px 0; }
+    .marquee { padding: 24px 0; }
+    .marquee-item, .ed-marquee-item { width: 150px; height: 190px; margin-right: 12px; }
+
+    /* MONITOR — display とeyebrow を画面に収める */
+    .monitor-display { font-size: clamp(44px, 13vw, 72px); }
+    .monitor-ghost { display: none; }
+
+    /* CTA h2 — サイズ調整 */
+    .cta h2 { font-size: clamp(24px, 6.5vw, 34px); line-height: 1.55; letter-spacing: 0.03em; }
+    .cta .label { font-size: 11px; letter-spacing: 0.35em; }
     .hero-sub { font-size: 12px; letter-spacing: 0.1em; margin-top: 30px; }
+    .hero-tagline-jp { font-size: clamp(22px, 5.2vw, 28px); margin-bottom: 20px; letter-spacing: 0.1em; }
+    .hero-headline { font-size: clamp(32px, 7.4vw, 48px); }
+    .hero-sub-en { font-size: clamp(13px, 3vw, 16px); letter-spacing: 0.25em; }
+    .hero-sub-jp { font-size: clamp(14px, 3.3vw, 18px); letter-spacing: 0.08em; }
+    .hero-divider { margin: 16px auto; }
+    .hero-monitor-link { font-size: 13px; margin-top: 16px; letter-spacing: 0.15em; }
 
     .intro { padding: 90px 24px 80px; }
     .intro-copy { font-size: 15px; line-height: 2.2; }
@@ -1634,19 +1672,43 @@
     .worry-item .num { font-size: 70px; margin-bottom: 24px; padding-bottom: 12px; }
     .worry-item h3 { font-size: 17px; }
 
-    .editorial { padding: 90px 24px; }
-    .editorial-layout { min-height: auto; }
-    .ed-oval, .ed-center, .ed-left-top, .ed-left-bottom, .ed-right {
+    .editorial { padding: 60px 20px; }
+    .editorial-layout {
+      min-height: auto;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .ed-oval, .ed-center, .ed-left-top, .ed-left-bottom, .ed-right, .ed-right-bottom {
       position: relative;
-      left: auto; right: auto; top: auto;
+      left: auto; right: auto; top: auto; bottom: auto;
       transform: none;
-      width: 100%;
+      width: 85%;
+      max-width: 360px;
       height: auto;
       aspect-ratio: 3/4;
-      margin-bottom: 20px;
+      margin: 0;
     }
     .ed-oval { display: none; }
-    .ed-left-top, .ed-right { aspect-ratio: 4/3; }
+    .ed-left-top { aspect-ratio: 4/3; width: 75%; }
+    .ed-right-bottom { aspect-ratio: 4/3; width: 75%; }
+    .ed-center { width: 85%; }
+    .ed-lead, .ed-lead.ed-lead-br {
+      position: relative;
+      left: auto; right: auto; top: auto; bottom: auto;
+      transform: none;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      white-space: normal;
+      font-size: clamp(14px, 3.4vw, 17px);
+      line-height: 1.9;
+      text-align: center;
+    }
+    .ed-lead br { display: none; }
+    .ed-lead-label { font-size: 11px; margin-bottom: 14px; letter-spacing: 0.2em; }
     .ed-word {
       position: relative;
       transform: none;
@@ -1661,10 +1723,17 @@
 
     .service { padding: 90px 24px 80px; }
     .service-wrap { grid-template-columns: 1fr; gap: 70px; }
-    .sv-profile { position: static; max-width: 420px; margin: 0 auto; }
+    .sv-profile { position: static; width: 100%; max-width: 100%; margin: 0 auto; padding: 0; min-width: 0; overflow: hidden; }
+    .sv-profile-img { max-width: 100%; width: 100%; }
+    .sv-profile-img img { width: 100%; max-width: 100%; }
+    .sv-profile-img::before { left: -8px; right: 8px; top: -8px; bottom: -8px; }
     .sv-profile h3 { font-size: 42px; margin-bottom: 22px; }
+    .sv-profile p { white-space: normal !important; font-size: 14px; max-width: 100%; }
+    .sv-profile p br { display: none; }
+    .sv-profile .ig-bar { padding: 14px 28px; font-size: 12px; }
     .sv-right h2 { font-size: 48px; margin-bottom: 24px; }
-    .sv-right .lead { margin-bottom: 40px; font-size: 14px; }
+    .sv-right .lead { margin-bottom: 40px; font-size: 14px; white-space: normal !important; }
+    .sv-right .lead br { display: none; }
     .service-item { grid-template-columns: 46px 1fr; row-gap: 4px; padding: 20px 8px; }
     .service-item .en-ttl { grid-column: 1 / -1; text-align: left; padding-left: 46px; font-size: 10px; }
     .service-item .ttl { font-size: 16px; }
