@@ -10,23 +10,13 @@
     {
       "source": "/",
       "has": [
-        { "type": "query", "key": "pc", "value": "3" }
-      ],
-      "destination": "/v3.html"
-    },
-    {
-      "source": "/",
-      "has": [
-        { "type": "query", "key": "pc", "value": "4" }
-      ],
-      "destination": "/v4.html"
-    },
-    {
-      "source": "/",
-      "has": [
         { "type": "query", "key": "pc", "value": "5" }
       ],
       "destination": "/v5.html"
+    },
+    {
+      "source": "/",
+      "destination": "/v3.html"
     }
   ]
 }
