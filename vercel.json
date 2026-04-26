@@ -10,13 +10,6 @@
     {
       "source": "/",
       "has": [
-        { "type": "query", "key": "pc", "value": "check" }
-      ],
-      "destination": "/check-no-works-index.html"
-    },
-    {
-      "source": "/",
-      "has": [
         { "type": "query", "key": "pc", "value": "2" }
       ],
       "destination": "/lp.html"
