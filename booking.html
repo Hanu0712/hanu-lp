@@ -189,8 +189,7 @@
       color: var(--taupe);
       font-weight: 500;
     }
-    .cal-header.sun { color: #B56B6B; }
-    .cal-header.sat { color: #6B8AB5; }
+    /* sun/sat header: inherit default sage from .cal-header (no color distinction) */
     .cal-cell {
       background: var(--white, #fff);
       background: #FFFFFF;
@@ -230,13 +229,13 @@
       font-size: 8.5px;
       letter-spacing: 0.12em;
       line-height: 1.15;
-      color: #B56B6B;
+      color: var(--gold);
       font-weight: 600;
       text-align: center;
       white-space: nowrap;
     }
-    .cal-cell.sun:not(.disabled):not(.blank) { color: #B56B6B; }
-    .cal-cell.sat:not(.disabled):not(.blank) { color: #6B8AB5; }
+    .cal-cell.sun:not(.disabled):not(.blank),
+    .cal-cell.sat:not(.disabled):not(.blank) { color: var(--gold); }
     .cal-cell:hover:not(.disabled):not(.blank):not(.selected) {
       background: var(--gold);
       color: var(--charcoal);
@@ -299,7 +298,7 @@
       font-family: 'Bodoni Moda', 'Playfair Display', serif;
       font-size: 13px;
       letter-spacing: 0.22em;
-      color: #B56B6B;
+      color: var(--gold);
       font-weight: 600;
       text-transform: uppercase;
     }
@@ -330,7 +329,7 @@
       margin-bottom: 6px;
     }
     .form-field label .req {
-      color: #B56B6B;
+      color: var(--gold);
       margin-left: 4px;
     }
     .form-field input,
