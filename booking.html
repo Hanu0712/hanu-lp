@@ -519,6 +519,53 @@
 
     .hidden { display: none !important; }
 
+    .confirm-notice {
+      margin: 18px 0 14px;
+      padding: 14px 18px;
+      background: #f7f7f4;
+      border-left: 2px solid var(--gold);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--charcoal);
+      letter-spacing: 0.02em;
+    }
+    .submit-error {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: #f7f7f4;
+      border: 1px solid var(--gold);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      color: var(--charcoal);
+      text-align: center;
+      border-radius: 2px;
+    }
+    .success-card {
+      background: var(--offwhite);
+      border: 1px solid var(--gold);
+      padding: 32px 28px;
+      border-radius: 3px;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .success-greeting {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--charcoal);
+      letter-spacing: 0.04em;
+      margin-bottom: 18px;
+    }
+    .success-card p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14px;
+      line-height: 1.95;
+      color: var(--charcoal);
+      letter-spacing: 0.02em;
+    }
+    .success-card p + p { margin-top: 14px; }
+
     @media (max-width: 540px) {
       body { padding: 16px 8px; }
       .container { padding: 32px 14px 36px; box-shadow: 5px 6px 0 var(--navy); }
@@ -626,16 +673,42 @@
     </form>
   </div>
 
-  <!-- STEP 4: Confirmation -->
+  <!-- STEP 4: Confirmation + submit -->
   <div id="step4" class="step hidden">
     <div class="step-label">Step 4</div>
-    <div class="step-title">ご予約内容の送信</div>
+    <div class="step-title">ご予約内容のご確認</div>
 
     <div class="confirm-greeting" id="confirmGreeting"></div>
 
     <div class="confirm-card" id="confirmCard"></div>
 
-    <a id="emailLink" href="#" class="submit-btn gold">✉ メールで送信する</a>
+    <div class="confirm-notice">
+      ご予約の確定は、Hanuからの返信メールをもって完了となります。<br>
+      内容をご確認のうえ、下記ボタンよりお申し込みください。
+    </div>
+
+    <button id="submitBookingBtn" type="button" class="submit-btn">お申し込みを送信する</button>
+    <div id="submitError" class="submit-error hidden">送信に失敗しました。お時間をおいて再度お試しください。</div>
+  </div>
+
+  <!-- STEP 5: Success -->
+  <div id="step5" class="step hidden">
+    <div class="step-label">Complete</div>
+    <div class="step-title">お申し込みを受け付けました</div>
+
+    <div class="success-card">
+      <div class="success-greeting" id="successGreeting"></div>
+      <p>
+        ご記入いただいたメールアドレス宛に<br>
+        自動受付メールをお送りしました。
+      </p>
+      <p>
+        ご予約の確定は、Hanuより改めて<br>
+        返信メールにてご連絡いたします。
+      </p>
+    </div>
+
+    <a href="/" class="submit-btn">‹ トップに戻る</a>
   </div>
 
 </div>
@@ -649,8 +722,6 @@
     { year: 2026, month: 8, label: '2026年 8月', comingSoon: true }
   ];
   const DAY_LABELS = ['日','月','火','水','木','金','土'];
-
-  const BOOKING_EMAIL = 'hanuparty.08@gmail.com';
 
   const BLOCKED_DATES = new Set([
     '2026-05-02','2026-05-07','2026-05-08','2026-05-09','2026-05-10','2026-05-12','2026-05-13',
@@ -779,6 +850,9 @@
     };
   });
 
+  const WEB3FORMS_KEY = '9f1631df-f1db-40c5-8d4c-e669f1f3d98a';
+  let pendingSubmission = null;
+
   $('bookingForm').onsubmit = (e) => {
     e.preventDefault();
     const name = $('name').value.trim();
@@ -822,10 +896,61 @@
       `パーティー内容: ${partyTypeText}\n` +
       (message ? `ご相談内容: ${message}\n` : '');
 
-    $('emailLink').href = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    pendingSubmission = {
+      name, nameKana, email, instagram, partyTypeText, message,
+      dateLabel: sel.dateLabel, slot: sel.slot, subject, body
+    };
 
+    $('submitError').classList.add('hidden');
     $('step4').classList.remove('hidden');
     $('step4').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  $('submitBookingBtn').onclick = async () => {
+    if (!pendingSubmission) return;
+    const s = pendingSubmission;
+    const btn = $('submitBookingBtn');
+    btn.disabled = true;
+    btn.textContent = '送信中…';
+    $('submitError').classList.add('hidden');
+
+    const formData = new FormData();
+    formData.append('access_key', WEB3FORMS_KEY);
+    formData.append('subject', s.subject);
+    formData.append('from_name', '予約フォーム — Hanu');
+    formData.append('name', `${s.name}（${s.nameKana}）`);
+    formData.append('email', s.email);
+    formData.append('replyto', s.email);
+    formData.append('日時', `${s.dateLabel} ${s.slot}`);
+    formData.append('お名前', `${s.name}（${s.nameKana}）`);
+    formData.append('メールアドレス', s.email);
+    if (s.instagram) formData.append('Instagram', s.instagram);
+    formData.append('パーティー内容', s.partyTypeText);
+    if (s.message) formData.append('ご相談内容', s.message);
+    formData.append('message', s.body);
+    formData.append('botcheck', '');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success !== false) {
+        $('successGreeting').textContent = `${s.name}様`;
+        $('step4').classList.add('hidden');
+        $('step5').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        $('submitError').classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = 'お申し込みを送信する';
+      }
+    } catch (err) {
+      $('submitError').classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = 'お申し込みを送信する';
+    }
   };
 
   function escapeHtml(s) {
