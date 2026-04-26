@@ -12,39 +12,39 @@
       "has": [
         { "type": "query", "key": "pc", "value": "0" }
       ],
-      "destination": "/original-2026-04-18-index.html"
+      "destination": "/original-2026-04-18-index"
     },
     {
       "source": "/",
       "has": [
         { "type": "query", "key": "pc", "value": "2" }
       ],
-      "destination": "/lp.html"
+      "destination": "/lp"
     },
     {
       "source": "/",
       "has": [
         { "type": "query", "key": "pc", "value": "5" }
       ],
-      "destination": "/v3.html"
+      "destination": "/v3"
     },
     {
       "source": "/",
       "has": [
         { "type": "query", "key": "pc", "value": "6" }
       ],
-      "destination": "/v6.html"
+      "destination": "/v6"
     },
     {
       "source": "/",
       "has": [
         { "type": "query", "key": "pc", "value": "7" }
       ],
-      "destination": "/v7.html"
+      "destination": "/v7"
     },
     {
       "source": "/",
-      "destination": "/v5.html"
+      "destination": "/v5"
     }
   ]
 }
