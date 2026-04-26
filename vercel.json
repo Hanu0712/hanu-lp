@@ -27,13 +27,6 @@
         { "type": "query", "key": "pc", "value": "5" }
       ],
       "destination": "/v5.html"
-    },
-    {
-      "source": "/",
-      "has": [
-        { "type": "query", "key": "pc", "value": "6" }
-      ],
-      "destination": "/v6.html"
     }
   ]
 }
