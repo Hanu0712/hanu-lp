@@ -808,16 +808,19 @@
       ${message ? `<div class="row"><div class="label">Message</div><div class="val">${escapeHtml(message).replace(/\n/g,'<br>')}</div></div>` : ''}
     `;
 
-    const subject = `【Zoom相談予約】${sel.dateLabel} ${sel.slot}`;
+    const [yy, mm, dd] = sel.date.split('-').map(Number);
+    const dow = DAY_LABELS[new Date(yy, mm - 1, dd).getDay()];
+    const startTime = sel.slot.split('-')[0];
+    const shortDate = `${mm}/${dd}（${dow}）${startTime}`;
+    const subject = `【Zoom相談予約】${name} / ${shortDate}`;
     const body =
-      `Hanu様\n\n下記の日時で無料Zoom相談を予約させていただきたく、ご連絡いたします。\n\n` +
-      `■ ご希望日時\n${sel.dateLabel} ${sel.slot}\n\n` +
-      `■ お名前\n${name}（${nameKana}）\n\n` +
-      `■ メールアドレス\n${email}\n` +
-      (instagram ? `\n■ Instagram\n${instagram}\n` : '') +
-      `\n■ パーティー内容\n${partyTypeText}\n` +
-      (message ? `\n■ ご相談内容\n${message}\n` : '') +
-      `\nZoom URLのご返信をお待ちしております。\nよろしくお願いいたします。\n`;
+      `予約フォームより送信しています。\n\n` +
+      `日時: ${sel.dateLabel} ${sel.slot}\n` +
+      `お名前: ${name}（${nameKana}）\n` +
+      `メール: ${email}\n` +
+      (instagram ? `Instagram: ${instagram}\n` : '') +
+      `パーティー内容: ${partyTypeText}\n` +
+      (message ? `ご相談内容: ${message}\n` : '');
 
     $('emailLink').href = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
