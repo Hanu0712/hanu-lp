@@ -19,7 +19,7 @@
       "has": [
         { "type": "query", "key": "pc", "value": "5" }
       ],
-      "destination": "/v5.html"
+      "destination": "/v3.html"
     },
     {
       "source": "/",
@@ -37,7 +37,7 @@
     },
     {
       "source": "/",
-      "destination": "/v3.html"
+      "destination": "/v5.html"
     }
   ]
 }
