@@ -17,7 +17,7 @@
       --taupe:    #9B8B7E;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: 'Noto Serif JP', serif;
       background: var(--greige);
@@ -25,6 +25,7 @@
       font-weight: 300;
       padding: 40px 16px;
       min-height: 100vh;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
     .back-link {
@@ -204,6 +205,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      min-width: 0;
     }
     .cal-cell.blank {
       background: transparent;
@@ -334,7 +337,7 @@
       border: 1px solid rgba(28,25,24,0.2);
       background: #FFFFFF;
       font-family: 'Noto Serif JP', serif;
-      font-size: 15px;
+      font-size: 16px;
       color: var(--charcoal);
       border-radius: 2px;
       transition: border-color 0.2s;
@@ -515,36 +518,39 @@
     .hidden { display: none !important; }
 
     @media (max-width: 540px) {
-      body { padding: 16px 4px; }
-      .container { padding: 32px 10px 36px; box-shadow: 5px 6px 0 var(--navy); }
+      body { padding: 16px 8px; }
+      .container { padding: 32px 14px 36px; box-shadow: 5px 6px 0 var(--navy); }
       h1 { font-size: 30px; }
+      .subtitle { font-size: 14px; line-height: 1.8; }
       .month-label { font-size: 18px; }
       .cal-grid { gap: 3px; }
-      .cal-cell { font-size: 14px; padding: 6px 0; min-width: 0; }
+      .cal-cell { font-size: 14px; padding: 6px 0; }
       .cal-header { font-size: 10px; padding: 6px 0; }
-      .cal-cell.disabled { padding: 3px 1px; gap: 0; }
-      .cal-cell.disabled .cell-num { font-size: 10px; }
-      .cal-cell.disabled .sold {
-        font-size: 7px;
-        letter-spacing: 0.02em;
-      }
+      .cal-cell.disabled { padding: 3px 1px; gap: 1px; }
+      .cal-cell.disabled .cell-num { font-size: 12px; opacity: 0.55; text-decoration: line-through; }
+      .cal-cell.disabled .sold { display: none; }
+      .cs-overlay { padding: 14px 20px; }
+      .cs-overlay .cs-label { font-size: 14px; letter-spacing: 0.2em; }
+      .cs-overlay .cs-sub { font-size: 11px; }
       .slot-btn { padding: 14px 16px; }
       .slot-btn .time { font-size: 19px; }
-      .confirm-card .row { flex-direction: column; gap: 2px; }
+      .confirm-card { padding: 22px 18px; }
+      .confirm-card .row { flex-direction: column; gap: 2px; padding: 8px 0; }
       .confirm-card .row .label { width: auto; }
+      .confirm-card .row .val { word-break: normal; overflow-wrap: anywhere; }
+      .confirm-card .row .val.hl { font-size: 16px; line-height: 1.4; }
     }
 
     @media (max-width: 380px) {
-      .cal-cell.disabled .sold {
-        font-size: 6px;
-        letter-spacing: 0;
-      }
+      .container { padding: 28px 12px 32px; }
+      .cal-cell { font-size: 13px; }
+      .cal-cell.disabled .cell-num { font-size: 11px; }
     }
   </style>
 </head>
 <body>
 
-<a href="index.html" class="back-link">‹ back to Hanu</a>
+<a href="/" class="back-link">‹ back to Hanu</a>
 
 <div class="container">
   <div class="eyebrow">— Free Zoom Consultation —</div>
