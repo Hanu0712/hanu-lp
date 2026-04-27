@@ -784,6 +784,9 @@
     const firstDay = new Date(m.year, m.month - 1, 1).getDay();
     const lastDate = new Date(m.year, m.month, 0).getDate();
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     for (let i = 0; i < firstDay; i++) {
       const blank = document.createElement('div');
       blank.className = 'cal-cell blank';
@@ -793,7 +796,9 @@
     for (let d = 1; d <= lastDate; d++) {
       const dow = new Date(m.year, m.month - 1, d).getDay();
       const iso = `${m.year}-${String(m.month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      const isBlocked = BLOCKED_DATES.has(iso);
+      const cellDate = new Date(m.year, m.month - 1, d);
+      const isPast = cellDate < today;
+      const isBlocked = BLOCKED_DATES.has(iso) || isPast;
       const cell = document.createElement('button');
       cell.type = 'button';
       cell.className = 'cal-cell' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '') + (isBlocked ? ' disabled' : '');
