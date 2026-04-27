@@ -42,7 +42,8 @@ export default async function handler(req, res) {
   const notificationBody =
     `${name} 様\n\n` +
     `パーティープロデューサーHanuと申します。\n` +
-    `この度はお問合せありがとうございます。\n\n` +
+    `この度は無料Zoom相談にお申込みいただき\n` +
+    `ありがとうございます。\n\n` +
     `ご予約の確定は、改めてメールにて\n` +
     `ご報告させていただきます。\n` +
     `今しばらくお待ちくださいませ。\n\n` +
