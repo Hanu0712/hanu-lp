@@ -850,7 +850,7 @@
     };
   });
 
-  const WEB3FORMS_KEY = '9f1631df-f1db-40c5-8d4c-e669f1f3d98a';
+  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/hanuparty.08@gmail.com';
   let pendingSubmission = null;
 
   $('bookingForm').onsubmit = (e) => {
@@ -914,29 +914,48 @@
     btn.textContent = '送信中…';
     $('submitError').classList.add('hidden');
 
+    const autoResponseBody =
+      `${s.name} 様\n\n\n` +
+      `無料Zoom相談へのお申し込みをいただき、\n` +
+      `誠にありがとうございます。\n\n` +
+      `下記の内容にて、承りました。\n\n` +
+      `【ご予約内容】\n` +
+      `■日時: ${s.dateLabel}\n` +
+      `　　　  ${s.slot}\n` +
+      `■お名前: ${s.name}（${s.nameKana}）\n` +
+      `■メールアドレス: ${s.email}\n` +
+      (s.instagram ? `■Instagram: ${s.instagram}\n` : '') +
+      `■パーティー内容: ${s.partyTypeText}\n` +
+      (s.message ? `■ご相談内容: ${s.message}\n` : '') +
+      `\nご予約の確定は、Hanuからの返信メールをもって\n` +
+      `完了となります。\n\n` +
+      `内容確認後、改めてご連絡いたしますので、\n` +
+      `今しばらくお待ちくださいませ。\n\n\n` +
+      `パーティープロデューサー Hanu`;
+
     const formData = new FormData();
-    formData.append('access_key', WEB3FORMS_KEY);
-    formData.append('subject', s.subject);
-    formData.append('from_name', '予約フォーム — Hanu');
-    formData.append('name', `${s.name}（${s.nameKana}）`);
-    formData.append('email', s.email);
-    formData.append('replyto', s.email);
-    formData.append('日時', `${s.dateLabel} ${s.slot}`);
+    formData.append('_subject', s.subject);
+    formData.append('_replyto', s.email);
+    formData.append('_autoresponse', autoResponseBody);
+    formData.append('_template', 'box');
+    formData.append('_captcha', 'false');
     formData.append('お名前', `${s.name}（${s.nameKana}）`);
-    formData.append('メールアドレス', s.email);
+    formData.append('email', s.email);
+    formData.append('日時', `${s.dateLabel} ${s.slot}`);
     if (s.instagram) formData.append('Instagram', s.instagram);
     formData.append('パーティー内容', s.partyTypeText);
     if (s.message) formData.append('ご相談内容', s.message);
-    formData.append('message', s.body);
-    formData.append('botcheck', '');
+    formData.append('お問い合わせ内容', s.body);
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch(FORMSUBMIT_ENDPOINT, {
         method: 'POST',
+        headers: { 'Accept': 'application/json' },
         body: formData
       });
       const data = await res.json().catch(() => ({}));
-      if (res.ok && data.success !== false) {
+      const ok = res.ok && (data.success === 'true' || data.success === true);
+      if (ok) {
         $('successGreeting').textContent = `${s.name}様`;
         $('step4').classList.add('hidden');
         $('step5').classList.remove('hidden');
