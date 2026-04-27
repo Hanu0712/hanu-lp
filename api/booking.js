@@ -5,6 +5,20 @@
 const HANU_EMAIL = 'hanuparty.08@gmail.com';
 const FROM_ADDRESS = 'Hanu Booking <onboarding@resend.dev>';
 
+export const config = { runtime: 'nodejs' };
+
+async function readJsonBody(req) {
+  if (req.body && typeof req.body === 'object') return req.body;
+  if (typeof req.body === 'string') {
+    try { return JSON.parse(req.body); } catch { return {}; }
+  }
+  const chunks = [];
+  for await (const chunk of req) chunks.push(chunk);
+  const raw = Buffer.concat(chunks).toString('utf8');
+  if (!raw) return {};
+  try { return JSON.parse(raw); } catch { return {}; }
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -15,10 +29,11 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
   }
 
+  const body = await readJsonBody(req);
   const {
     name, nameKana, email, instagram, message,
     partyTypeText, dateLabel, slot, subject
-  } = req.body || {};
+  } = body;
 
   if (!name || !nameKana || !email || !partyTypeText || !dateLabel || !slot || !subject) {
     return res.status(400).json({ error: '必須項目が不足しています' });
