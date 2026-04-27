@@ -699,12 +699,12 @@
     <div class="success-card">
       <div class="success-greeting" id="successGreeting"></div>
       <p>
-        ご予約のお申し込みを<br>
-        承りました。
+        ご記入いただいたメールアドレス宛に<br>
+        自動受付メールをお送りしました。
       </p>
       <p>
-        内容確認後、Hanuより<br>
-        受付確認のメールをお送りいたします。<br>
+        ご予約の確定は、Hanuより改めて<br>
+        返信メールにてご連絡いたします。<br>
         今しばらくお待ちくださいませ。
       </p>
     </div>
@@ -851,7 +851,7 @@
     };
   });
 
-  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/hanuparty.08@gmail.com';
+  const BOOKING_API_ENDPOINT = '/api/booking';
   let pendingSubmission = null;
 
   $('bookingForm').onsubmit = (e) => {
@@ -916,20 +916,19 @@
     $('submitError').classList.add('hidden');
 
     const payload = {
-      _subject: s.subject,
-      _replyto: s.email,
-      _template: 'box',
-      _captcha: 'false',
-      'お名前': `${s.name}（${s.nameKana}）`,
+      name: s.name,
+      nameKana: s.nameKana,
       email: s.email,
-      '日時': `${s.dateLabel} ${s.slot}`,
-      'パーティー内容': s.partyTypeText
+      instagram: s.instagram || '',
+      message: s.message || '',
+      partyTypeText: s.partyTypeText,
+      dateLabel: s.dateLabel,
+      slot: s.slot,
+      subject: s.subject
     };
-    if (s.instagram) payload['Instagram'] = s.instagram;
-    if (s.message) payload['ご相談内容'] = s.message;
 
     try {
-      const res = await fetch(FORMSUBMIT_ENDPOINT, {
+      const res = await fetch(BOOKING_API_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -938,7 +937,7 @@
         body: JSON.stringify(payload)
       });
       const data = await res.json().catch(() => ({}));
-      const ok = res.ok && (data.success === 'true' || data.success === true);
+      const ok = res.ok && data.success === true;
       if (ok) {
         $('successGreeting').textContent = `${s.name}様`;
         $('step4').classList.add('hidden');
