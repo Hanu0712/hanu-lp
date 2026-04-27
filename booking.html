@@ -933,25 +933,29 @@
       `今しばらくお待ちくださいませ。\n\n\n` +
       `パーティープロデューサー Hanu`;
 
-    const formData = new FormData();
-    formData.append('_subject', s.subject);
-    formData.append('_replyto', s.email);
-    formData.append('_autoresponse', autoResponseBody);
-    formData.append('_template', 'box');
-    formData.append('_captcha', 'false');
-    formData.append('お名前', `${s.name}（${s.nameKana}）`);
-    formData.append('email', s.email);
-    formData.append('日時', `${s.dateLabel} ${s.slot}`);
-    if (s.instagram) formData.append('Instagram', s.instagram);
-    formData.append('パーティー内容', s.partyTypeText);
-    if (s.message) formData.append('ご相談内容', s.message);
-    formData.append('お問い合わせ内容', s.body);
+    const payload = {
+      _subject: s.subject,
+      _replyto: s.email,
+      _autoresponse: autoResponseBody,
+      _template: 'box',
+      _captcha: 'false',
+      'お名前': `${s.name}（${s.nameKana}）`,
+      email: s.email,
+      '日時': `${s.dateLabel} ${s.slot}`,
+      'パーティー内容': s.partyTypeText,
+      'お問い合わせ内容': s.body
+    };
+    if (s.instagram) payload['Instagram'] = s.instagram;
+    if (s.message) payload['ご相談内容'] = s.message;
 
     try {
       const res = await fetch(FORMSUBMIT_ENDPOINT, {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: formData
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
       });
       const data = await res.json().catch(() => ({}));
       const ok = res.ok && (data.success === 'true' || data.success === true);
@@ -961,11 +965,14 @@
         $('step5').classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
+        const msg = data.message || data.error || `送信に失敗しました（HTTP ${res.status}）。お時間をおいて再度お試しください。`;
+        $('submitError').textContent = msg;
         $('submitError').classList.remove('hidden');
         btn.disabled = false;
         btn.textContent = 'お申し込みを送信する';
       }
     } catch (err) {
+      $('submitError').textContent = `通信エラー: ${err.message}`;
       $('submitError').classList.remove('hidden');
       btn.disabled = false;
       btn.textContent = 'お申し込みを送信する';
