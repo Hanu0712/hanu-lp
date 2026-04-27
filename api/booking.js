@@ -40,13 +40,22 @@ export default async function handler(req, res) {
   }
 
   const notificationBody =
-    `予約フォームより送信しています。\n\n` +
+    `${name} 様\n\n` +
+    `パーティープロデューサーHanuと申します。\n` +
+    `この度はお問合せありがとうございます。\n\n` +
+    `ご予約の確定は、改めてメールにて\n` +
+    `ご報告させていただきます。\n` +
+    `今しばらくお待ちくださいませ。\n\n` +
+    `――――――――――――――\n` +
+    `【ご予約内容】\n` +
     `日時: ${dateLabel} ${slot}\n` +
     `お名前: ${name}（${nameKana}）\n` +
     `メール: ${email}\n` +
     (instagram ? `Instagram: ${instagram}\n` : '') +
     `パーティー内容: ${partyTypeText}\n` +
-    (message ? `ご相談内容: ${message}\n` : '');
+    (message ? `ご相談内容: ${message}\n` : '') +
+    `――――――――――――――\n\n` +
+    `パーティープロデューサー Hanu\n`;
 
   const autoReplyBody =
     `${name} 様\n\n\n` +
