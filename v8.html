@@ -1792,11 +1792,16 @@
     .ed-details { position: relative; right: auto; bottom: auto; margin-top: 20px; }
 
     .service { padding: 90px 24px 80px; }
-    .service-wrap { grid-template-columns: 1fr; gap: 70px; }
-    .sv-profile { position: static; width: 100%; max-width: 100%; margin: 0 auto; padding: 0; min-width: 0; overflow: hidden; }
-    .sv-profile-img { max-width: 100%; width: 100%; }
+    .service-wrap { grid-template-columns: 1fr; gap: 0; }
+    .sv-right {
+      border-top: 1px solid var(--ink);
+      margin: 56px -24px 0;
+      padding: 56px 24px 0;
+    }
+    .sv-profile { position: static; width: 100%; max-width: 100%; margin: 0 auto; padding: 0 16px; min-width: 0; overflow: hidden; }
+    .sv-profile-img { max-width: 78%; width: 78%; margin: 16px auto 40px; }
     .sv-profile-img img { width: 100%; max-width: 100%; }
-    .sv-profile-img::before { left: -8px; right: 8px; top: -8px; bottom: -8px; }
+    .sv-profile-img::before { left: -16px; right: -16px; top: -16px; bottom: 0; }
     .sv-profile h3 { font-size: 42px; margin-bottom: 22px; }
     .sv-profile p { white-space: normal !important; font-size: 14px; max-width: 100%; }
     .sv-profile p br { display: none; }
