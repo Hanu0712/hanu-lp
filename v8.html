@@ -1054,7 +1054,7 @@
   }
 
   /* ============ MONITOR RECRUITMENT ============ */
-  .monitor {
+  #monitor {
     padding: 120px 60px 140px;
     background: var(--bg-warm);
     position: relative;
@@ -1818,10 +1818,10 @@
     .cta { padding: 90px 24px; }
     .cta-button { padding: 20px 38px; font-size: 14px; letter-spacing: 0.22em; }
 
-    .monitor { padding: 90px 24px; }
+    #monitor { padding: 90px 24px; }
     .monitor-head { margin-bottom: 50px; }
-    .price-compare { grid-template-columns: 1fr; }
-    .price-card { padding: 40px 20px 48px; }
+    .price-compare { grid-template-columns: 1fr; grid-auto-rows: 1fr; }
+    .price-card { padding: 40px 20px 48px; display: flex; flex-direction: column; justify-content: center; }
     .price-note-txt { margin-bottom: 60px; font-size: 13px; }
     .monitor-cards { grid-template-columns: 1fr; gap: 20px; }
     .mc-card { padding: 36px 28px 44px; }
@@ -1834,7 +1834,7 @@
     .price-total-table th, .price-total-table td { font-size: 12px; padding: 12px 0; }
     .price-total-table tr.sum th, .price-total-table tr.sum td { font-size: 14px; }
 
-    .monitor { padding: 80px 22px 100px; }
+    #monitor { padding: 80px 22px 100px; }
     .monitor-ghost { font-size: 96px; top: 30px; right: -20px; }
     .monitor-single .mc-card { padding: 36px 28px; }
     .monitor-exchange { padding: 36px 22px; margin-top: 60px; }
