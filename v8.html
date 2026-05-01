@@ -727,6 +727,63 @@
     object-fit: cover;
   }
 
+  /* ============ FOR YOU (Checklist) ============ */
+  .foryou {
+    padding: 90px 40px 90px;
+    background: var(--bg-soft);
+    text-align: center;
+    position: relative;
+  }
+  .foryou-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .foryou-inner .section-eyebrow {
+    display: block;
+    margin-bottom: 24px;
+  }
+  .foryou-headline {
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(26px, 2.8vw, 38px);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0 0 40px;
+  }
+  .foryou-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 36px;
+    display: inline-block;
+    text-align: left;
+  }
+  .foryou-list li {
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 16px;
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height: 1.9;
+    color: var(--ink);
+  }
+  .foryou-list li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0.55em;
+    width: 14px; height: 14px;
+    border: 1px solid var(--ink);
+    background: transparent;
+  }
+  .foryou-close {
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(14px, 1.1vw, 15px);
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+    line-height: 1.9;
+    margin: 0;
+  }
+
   /* ============ PERMISSION ============ */
   .permission {
     padding: 90px 40px 90px;
@@ -1707,6 +1764,14 @@
     .moments-sub { font-size: 14px; line-height: 1.9; }
     .section-eyebrow { font-size: 11px; letter-spacing: 0.35em; margin-bottom: 14px; }
 
+    /* FOR YOU — mobile */
+    .foryou { padding: 64px 24px; }
+    .foryou-headline { font-size: clamp(22px, 5.6vw, 30px); margin-bottom: 28px; letter-spacing: 0.08em; }
+    .foryou-list { margin-bottom: 28px; }
+    .foryou-list li { font-size: 15px; padding-left: 28px; margin-bottom: 12px; line-height: 1.85; }
+    .foryou-list li::before { width: 12px; height: 12px; top: 0.45em; }
+    .foryou-close { font-size: 13px; }
+
     /* PERMISSION — mobile */
     .permission { padding: 100px 24px; }
     .permission-headline { font-size: clamp(22px, 5.6vw, 30px); margin-bottom: 40px; letter-spacing: 0.08em; }
@@ -1911,6 +1976,22 @@
       <div class="marquee-item"><img src="image/image2/02.jpg" alt=""></div>
       <div class="marquee-item"><img src="image/image2/03.jpg" alt=""></div>
       <div class="marquee-item"><img src="image/image2/08.jpg" alt=""></div>
+    </div>
+  </section>
+
+  <!-- FOR YOU (Checklist) -->
+  <section class="foryou" id="foryou">
+    <div class="foryou-inner">
+      <span class="section-eyebrow">— For You —</span>
+      <h2 class="foryou-headline">こんなあなたへ</h2>
+      <ul class="foryou-list">
+        <li>月1のランチ会から、次に進めない</li>
+        <li>コミュニティを次のステージに動かしたい</li>
+        <li>パーティーを開きたいけど、やり方がわからない</li>
+        <li>&ldquo;自分が主役&rdquo;に、少し抵抗がある</li>
+        <li>大切な人たちと、特別な一日を過ごしたい</li>
+      </ul>
+      <p class="foryou-close">ひとつでも当てはまったら、このまま読み進めてください。</p>
     </div>
   </section>
 
