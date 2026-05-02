@@ -429,6 +429,24 @@
     color: rgba(14,14,12,0.72);
     letter-spacing: 0.02em;
     font-weight: 500;
+    padding: 0 1.2em;
+  }
+  .before-stanza .stanza-spacer {
+    height: 0.6em;
+  }
+  .before-stanza.solo-quote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.2em;
+  }
+  .before-stanza.solo-quote .before-stanza-quote {
+    font-size: clamp(20px, 2.4vw, 32px);
+    font-weight: 500;
+    line-height: 1.85;
+    color: var(--ink);
   }
   .before-stanza em {
     font-style: normal;
@@ -727,60 +745,43 @@
     object-fit: cover;
   }
 
-  /* ============ FOR YOU (Checklist) ============ */
-  .foryou {
-    padding: 90px 40px 90px;
+  /* ============ BRIDGE (Imagine your day) ============ */
+  .bridge {
+    padding: 110px 40px 110px;
     background: var(--bg-soft);
     text-align: center;
     position: relative;
   }
-  .foryou-inner {
-    max-width: 640px;
+  .bridge-inner {
+    max-width: 720px;
     margin: 0 auto;
   }
-  .foryou-inner .section-eyebrow {
-    display: block;
-    margin-bottom: 24px;
-  }
-  .foryou-headline {
+  .bridge-lead {
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(26px, 2.8vw, 38px);
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--ink);
-    line-height: 1.6;
+    font-size: clamp(15px, 1.4vw, 18px);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    line-height: 1.9;
     margin: 0 0 40px;
   }
-  .foryou-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto 36px;
-    display: inline-block;
-    text-align: left;
-  }
-  .foryou-list li {
-    position: relative;
-    padding-left: 36px;
-    margin-bottom: 16px;
+  .bridge-body {
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(15px, 1.3vw, 18px);
-    line-height: 1.9;
+    font-size: clamp(19px, 1.95vw, 26px);
+    font-weight: 600;
+    letter-spacing: 0.14em;
     color: var(--ink);
+    line-height: 2.05;
+    margin: 0 0 56px;
   }
-  .foryou-list li::before {
-    content: "";
-    position: absolute;
-    left: 0; top: 0.55em;
-    width: 14px; height: 14px;
-    border: 1px solid var(--ink);
-    background: transparent;
-  }
-  .foryou-close {
-    font-family: "Noto Serif JP", serif;
-    font-size: clamp(14px, 1.1vw, 15px);
-    color: var(--ink-soft);
-    letter-spacing: 0.08em;
-    line-height: 1.9;
+  .bridge-display {
+    font-family: "Bodoni Moda", "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(34px, 4.4vw, 60px);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: var(--shape);
     margin: 0;
   }
 
@@ -1765,12 +1766,10 @@
     .section-eyebrow { font-size: 11px; letter-spacing: 0.35em; margin-bottom: 14px; }
 
     /* FOR YOU — mobile */
-    .foryou { padding: 64px 24px; }
-    .foryou-headline { font-size: clamp(22px, 5.6vw, 30px); margin-bottom: 28px; letter-spacing: 0.08em; }
-    .foryou-list { margin-bottom: 28px; }
-    .foryou-list li { font-size: 15px; padding-left: 28px; margin-bottom: 12px; line-height: 1.85; }
-    .foryou-list li::before { width: 12px; height: 12px; top: 0.45em; }
-    .foryou-close { font-size: 13px; }
+    .bridge { padding: 80px 24px 80px; }
+    .bridge-lead { font-size: 14px; margin-bottom: 28px; letter-spacing: 0.12em; }
+    .bridge-body { font-size: 18px; margin-bottom: 40px; letter-spacing: 0.1em; line-height: 2.0; }
+    .bridge-display { font-size: clamp(28px, 8vw, 40px); }
 
     /* PERMISSION — mobile */
     .permission { padding: 100px 24px; }
@@ -1964,19 +1963,15 @@
     <div class="hero-scroll">SCROLL</div>
   </section>
 
-  <!-- FOR YOU (Checklist) -->
-  <section class="foryou" id="foryou">
-    <div class="foryou-inner">
-      <span class="section-eyebrow">— For You —</span>
-      <h2 class="foryou-headline">こんなあなたへ</h2>
-      <ul class="foryou-list">
-        <li>月1のランチ会から、次に進めない</li>
-        <li>コミュニティを次のステージに動かしたい</li>
-        <li>パーティーを開きたいけど、やり方がわからない</li>
-        <li>&ldquo;自分が主役&rdquo;に、少し抵抗がある</li>
-        <li>大切な人たちと、特別な一日を過ごしたい</li>
-      </ul>
-      <p class="foryou-close">ひとつでも当てはまったら、このまま読み進めてください。</p>
+  <!-- BRIDGE (Imagine your day) -->
+  <section class="bridge" id="bridge">
+    <div class="bridge-inner">
+      <p class="bridge-lead">今、少しだけ想像してみて。</p>
+      <p class="bridge-body">
+        あなたの大切な人たちが、<br>
+        あなたのために集まる時間を。
+      </p>
+      <h2 class="bridge-display">― Imagine your day ―</h2>
     </div>
   </section>
 
@@ -2003,21 +1998,41 @@
     <div class="before-body">
       <div class="before-story" id="beforeStory">
         <div class="before-stanza">
-          <p>いつも、呼ばれる側だった。</p>
-          <p>主役の隣で、拍手を送る側。</p>
-          <p>ドレスを選んで、お祝いの言葉を添えて、</p>
-          <p>素敵な一日に、心からの拍手を。</p>
+          <p>あなたがドレスを選ぶのは、</p>
+          <p>いつも誰かのためだった。</p>
+          <p class="stanza-spacer"></p>
+          <p>友人の結婚式。</p>
+          <p>メンターの出版パーティー。</p>
+          <p>起業家仲間の周年イベント。</p>
         </div>
         <div class="before-stanza">
+          <p>お祝いの花を抱えて、</p>
+          <p>「おめでとう」を伝えて——</p>
+          <p class="stanza-spacer"></p>
           <p>帰り道、ふと思う。</p>
-          <p class="before-stanza-quote">「私にも、集まってくれる人は、いるんだろうか」</p>
-          <p>招きたい人の顔は、浮かんでいる。</p>
-          <p style="white-space: nowrap;">クライアント、起業家仲間、コミュニティの生徒さんたち——</p>
+        </div>
+        <div class="before-stanza solo-quote">
+          <p class="before-stanza-quote">「私のために集まってくれる人、<br>　何人、いるんだろう」</p>
         </div>
         <div class="before-stanza">
-          <p>でも、月1のランチ会の先には、進めない。</p>
-          <p class="before-stanza-quote">「いつか一緒にお仕事できたら」のまま、</p>
-          <p>気づけば、半年が過ぎている。</p>
+          <p>招きたい顔は、すぐに浮かぶ。</p>
+          <p class="stanza-spacer"></p>
+          <p>1年以上、支えてくれているクライアント。</p>
+          <p>月1で励まし合う、起業家仲間。</p>
+          <p>コミュニティの、生徒さんたち。</p>
+        </div>
+        <div class="before-stanza">
+          <p>でも、ランチ会の先には進めない。</p>
+          <p class="stanza-spacer"></p>
+          <p class="before-stanza-quote">「20名集まる気がしない」</p>
+          <p class="before-stanza-quote">「実績もないし」</p>
+          <p class="before-stanza-quote">「私が主役って、おこがましい気がする」</p>
+        </div>
+        <div class="before-stanza">
+          <p>そう思っているうちに、半年が過ぎた。</p>
+          <p class="stanza-spacer"></p>
+          <p>「いつか一緒に」と言い合った相手とのLINEは、</p>
+          <p>今日も、止まったまま。</p>
         </div>
       </div>
       <figure class="before-photo">
@@ -2053,28 +2068,45 @@
     <div class="before-body">
       <div class="before-story" id="afterStory">
         <div class="before-stanza">
-          <p>今日は、自分のための一日。</p>
-          <p>大切な人たちが、</p>
-          <p>時間を空けて、ドレスを選んで、会いに来てくれている。</p>
+          <p>土曜日の、お昼12時。</p>
+          <p>窓から、やわらかい光が差し込む会場。</p>
+          <p class="stanza-spacer"></p>
+          <p>あなたが選んだ場所に、</p>
+          <p>大切な人たちが、集まりはじめる。</p>
         </div>
         <div class="before-stanza">
-          <p>「来てくれてありがとう」が、自然に口から出る。</p>
-          <p class="before-stanza-quote">「凄く素敵な時間だった」「また呼んでね」——</p>
-          <p>ゲストの言葉が、確かに残る。</p>
+          <p>最初に来たのは、</p>
+          <p>起業初期からのクライアント。</p>
+          <p class="stanza-spacer"></p>
+          <p>次に、月1ランチ会のメンバー。</p>
+          <p>お気に入りのワンピースで現れた、</p>
+          <p>コミュニティの仲間たち。</p>
+        </div>
+        <div class="before-stanza solo-quote">
+          <p class="before-stanza-quote">「素敵な会場!」</p>
+          <p class="before-stanza-quote">「今日楽しみにしてたの!」</p>
+          <p class="before-stanza-quote">「呼んでくれて、ありがとう」</p>
         </div>
         <div class="before-stanza">
-          <p>そして早くも翌日には既に、</p>
-          <p class="before-stanza-quote">「昨日のあなたを見て、お願いしたいと思いました」</p>
-          <p>——そんなメッセージが、届きはじめる。</p>
+          <p>そう言われるたび、</p>
+          <p>「来てくれてありがとう」が、</p>
+          <p>不思議なくらい、自然に出る。</p>
         </div>
         <div class="before-stanza">
-          <p>新しい仕事。新しい紹介。新しいご縁。</p>
+          <p>会が終わった直後から、</p>
+          <p>スマホに届く嬉しい通知。</p>
+          <p class="stanza-spacer"></p>
+          <p>その中には——</p>
+        </div>
+        <div class="before-stanza solo-quote">
+          <p class="before-stanza-quote">「昨日のあなたの言葉を聞いて、<br>　またご一緒したいと思いました」</p>
+        </div>
+        <div class="before-stanza">
           <p>ランチ会では生まれなかった動きが、</p>
-          <p>たった一日から、立ち上がっていく。</p>
-        </div>
-        <div class="before-stanza">
-          <p>招く側に立つって、こういうことだったのか。</p>
-          <p>ここから、事業の次のステージが、動きはじめる。</p>
+          <p>たった数時間から、立ち上がっていく。</p>
+          <p class="stanza-spacer"></p>
+          <p class="before-stanza-quote">「招く側に立つって、</p>
+          <p class="before-stanza-quote">　こういうことだったんだ」</p>
         </div>
       </div>
       <figure class="before-photo">
@@ -2377,24 +2409,42 @@
       if (!story) return;
       var stanzas = story.querySelectorAll(stanzaSel);
       if (!stanzas.length) return;
-      var STEP = 5000;
+      var STEP = 4500;
       var fired = false;
+      var current = 0;
+      var timer = null;
       var show = function (i) {
         stanzas.forEach(function (s, idx) {
           s.classList.toggle('active', idx === i);
         });
       };
+      var stopTimer = function () {
+        if (timer) { clearInterval(timer); timer = null; }
+      };
+      var auto = function () {
+        if (current >= stanzas.length - 1) { stopTimer(); return; }
+        current++;
+        show(current);
+        if (current >= stanzas.length - 1) { stopTimer(); }
+      };
+      var skip = function () {
+        if (!fired) { play(); return; }
+        if (current >= stanzas.length - 1) return;
+        stopTimer();
+        current++;
+        show(current);
+        if (current < stanzas.length - 1) {
+          timer = setInterval(auto, STEP);
+        }
+      };
       var play = function () {
         if (fired) return;
         fired = true;
-        var current = 0;
         show(current);
-        var timer = setInterval(function () {
-          current++;
-          if (current >= stanzas.length) { clearInterval(timer); return; }
-          show(current);
-        }, STEP);
+        timer = setInterval(auto, STEP);
       };
+      story.style.cursor = 'pointer';
+      story.addEventListener('click', skip);
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
