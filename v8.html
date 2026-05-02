@@ -1076,8 +1076,10 @@
     font-size: 17px;
     line-height: 2.2;
     color: var(--ink-soft);
-    margin-bottom: 50px;
-    white-space: nowrap;
+    margin: 0 0 50px;
+  }
+  .sv-right .lead.lead-mb-line {
+    margin-bottom: 1.6em;
   }
   .service-list {
     border-top: 1px solid var(--line);
@@ -1101,10 +1103,25 @@
     color: var(--mute);
     letter-spacing: 0.1em;
   }
+  .service-item .ttl-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
   .service-item .ttl {
     font-size: 20px;
     font-weight: 500;
     color: var(--ink);
+    line-height: 1.3;
+  }
+  .service-item .cap {
+    font-family: "Noto Serif JP", serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--mute);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
   }
   .service-item .en-ttl {
     font-family: "Bodoni Moda", "Playfair Display", serif;
@@ -1604,11 +1621,12 @@
   }
   .cta-monologue {
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(22px, 2.8vw, 36px);
+    font-size: clamp(15px, 2.5vw, 32px);
     line-height: 1.7;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     color: var(--ink);
     margin: 0 0 32px;
+    white-space: nowrap;
     font-weight: 500;
   }
   .cta-invite {
@@ -1882,6 +1900,7 @@
     .service-item { grid-template-columns: 46px 1fr; row-gap: 4px; padding: 20px 8px; }
     .service-item .en-ttl { grid-column: 1 / -1; text-align: left; padding-left: 46px; font-size: 10px; }
     .service-item .ttl { font-size: 16px; }
+    .service-item .cap { font-size: 12px; line-height: 1.55; }
 
     .cta { padding: 90px 24px; }
     .cta-button { padding: 20px 38px; font-size: 14px; letter-spacing: 0.22em; }
@@ -2245,40 +2264,62 @@
       <!-- RIGHT: How We Produce -->
       <div class="sv-right">
         <h2>How We<br>Produce.</h2>
+        <p class="lead lead-mb-line">
+          準備から、既にパーティーは始まっている。<br>
+          そのプロセスまでもが、パーティー。
+        </p>
         <p class="lead">
-          コンセプト設計から当日の進行まで<br>
-          すべてを一貫してプロデュース<br>
-          あなたの思いを記憶に残る1日へと設計します
+          この想いを大切に、コンセプト設計から当日の進行まで<br>
+          すべてを一貫してプロデュース。<br>
+          あなたの&ldquo;はじめてのパーティー&rdquo;に伴走します。
         </p>
         <div class="service-list">
           <div class="service-item">
             <div class="num">01</div>
-            <div class="ttl">コンセプト設計</div>
+            <div class="ttl-wrap">
+              <div class="ttl">コンセプト設計</div>
+              <div class="cap">誰を呼び、何を伝えるか</div>
+            </div>
             <div class="en-ttl">Concept</div>
           </div>
           <div class="service-item">
             <div class="num">02</div>
-            <div class="ttl">会場選定</div>
+            <div class="ttl-wrap">
+              <div class="ttl">会場選定</div>
+              <div class="cap">世界観に合う場所を</div>
+            </div>
             <div class="en-ttl">Venue</div>
           </div>
           <div class="service-item">
             <div class="num">03</div>
-            <div class="ttl">装飾・スタイリング</div>
+            <div class="ttl-wrap">
+              <div class="ttl">装飾・スタイリング</div>
+              <div class="cap">空間ごと、あなたらしく</div>
+            </div>
             <div class="en-ttl">Styling</div>
           </div>
           <div class="service-item">
             <div class="num">04</div>
-            <div class="ttl">ケータリング</div>
+            <div class="ttl-wrap">
+              <div class="ttl">ケータリング</div>
+              <div class="cap">ゲストの記憶に残る食を</div>
+            </div>
             <div class="en-ttl">Catering</div>
           </div>
           <div class="service-item">
             <div class="num">05</div>
-            <div class="ttl">ペーパーアイテム・演出</div>
+            <div class="ttl-wrap">
+              <div class="ttl">ペーパーアイテム・演出</div>
+              <div class="cap">細部から当日の演出まで</div>
+            </div>
             <div class="en-ttl">Paper &amp; Direction</div>
           </div>
           <div class="service-item">
             <div class="num">06</div>
-            <div class="ttl">当日の運営・進行</div>
+            <div class="ttl-wrap">
+              <div class="ttl">当日の運営・進行</div>
+              <div class="cap">あなたはゲストとの時間に集中</div>
+            </div>
             <div class="en-ttl">Operation</div>
           </div>
         </div>
@@ -2391,8 +2432,8 @@
     <div class="cta-inner">
       <div class="label">— First step —</div>
 
-      <p class="cta-monologue">「やってみたい。<br>でも誰にも話せていない」</p>
-      <p class="cta-invite">その気持ちをありのままお聞かせください。<br>まずは無料Zoom相談へ。</p>
+      <p class="cta-monologue">「やってみたい。でも、誰にも話せてない」</p>
+      <p class="cta-invite">今の気持ちをそのまま聞かせて。<br>その一歩、一緒に踏み出してみませんか？</p>
 
       <a href="/booking" class="cta-button">
         無料Zoom相談を予約する <span class="arrow">→</span>
