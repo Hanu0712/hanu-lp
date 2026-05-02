@@ -952,15 +952,20 @@
   .service {
     padding: 80px 60px 10px;
     background: var(--bg);
-    border-top: 1px solid var(--ink);
+    border-top: 56px solid var(--shape);
   }
   .service-wrap {
     max-width: 1080px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 0.72fr 1.28fr;
-    gap: 70px;
+    grid-template-columns: 0.72fr auto 1.28fr;
+    gap: 35px;
     align-items: stretch;
+  }
+  .service-bar {
+    width: 56px;
+    background: var(--shape);
+    align-self: stretch;
   }
 
   /* LEFT: Profile */
@@ -1879,12 +1884,18 @@
     .ed-vertical { display: none; }
     .ed-details { position: relative; right: auto; bottom: auto; margin-top: 20px; }
 
-    .service { padding: 90px 24px 80px; }
+    .service { padding: 80px 24px 60px; border-top-width: 40px; }
     .service-wrap { grid-template-columns: 1fr; gap: 0; }
+    .service-bar {
+      width: auto;
+      height: 40px;
+      margin: 40px -24px;
+      align-self: auto;
+    }
     .sv-right {
-      border-top: 1px solid var(--ink);
-      margin: 56px -24px 0;
-      padding: 56px 24px 0;
+      border-top: 0;
+      margin: 0;
+      padding: 0;
     }
     .sv-profile { position: static; width: 100%; max-width: 100%; margin: 0 auto; padding: 0 16px; min-width: 0; overflow: hidden; }
     .sv-profile-img { max-width: 78%; width: 78%; margin: 16px auto 40px; }
@@ -2238,6 +2249,9 @@
         <p>企画から当日の運営まで、その一体感で一貫してプロデュース。<br>記憶に残る一日を、あなたのために設計します。</p>
         <a href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener" class="ig-bar">INSTAGRAM <span class="arrow">→</span></a>
       </div>
+
+      <!-- DIVIDER: sage bar between Profile and How -->
+      <div class="service-bar" aria-hidden="true"></div>
 
       <!-- RIGHT: How We Produce -->
       <div class="sv-right">
