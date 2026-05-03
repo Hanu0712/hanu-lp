@@ -944,6 +944,16 @@
     line-height: 1.9;
   }
 
+  /* ============ SAGE BAR (section divider, ~1.5cm) ============ */
+  .sage-bar {
+    height: 56px;
+    background: var(--shape);
+    width: 100%;
+  }
+  @media (max-width: 900px) {
+    .sage-bar { height: 40px; }
+  }
+
   /* ============ ANSWER (Hand in Hand) ============ */
   .answer {
     padding: 110px 60px 120px;
@@ -2496,6 +2506,8 @@
     </div>
   </section>
 
+  <div class="sage-bar" aria-hidden="true"></div>
+
   <!-- MOMENTS (Purpose) -->
   <section class="moments" id="moments">
     <div class="moments-head">
@@ -2539,6 +2551,8 @@
       </div>
     </div>
   </section>
+
+  <div class="sage-bar" aria-hidden="true"></div>
 
   <!-- PROFILE (Hanu) -->
   <section class="profile-feature" id="profile">
@@ -2702,6 +2716,8 @@
       <p class="benefits-note">※モニター価格のご提供にあたり、ご感想・お写真の共有・Instagramでのご紹介にご協力いただいております。</p>
     </div>
   </section>
+
+  <div class="sage-bar" aria-hidden="true"></div>
 
   <!-- CTA: 無料Zoom相談 -->
   <section class="cta" id="cta">
