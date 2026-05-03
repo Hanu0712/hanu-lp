@@ -1266,6 +1266,21 @@
     color: var(--ink-soft);
     margin: 0 0 50px;
   }
+  .sv-video {
+    margin: 0 0 56px;
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-soft);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .sv-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
   .sv-right .lead.lead-mb-line {
     margin-bottom: 1.6em;
   }
@@ -2148,6 +2163,7 @@
     .sv-right h2 { font-size: 48px; margin-bottom: 24px; }
     .sv-right .lead { margin-bottom: 40px; font-size: 14px; white-space: normal !important; }
     .sv-right .lead br { display: none; }
+    .sv-video { margin-bottom: 40px; }
     .service-item { grid-template-columns: 46px 1fr; row-gap: 4px; padding: 20px 8px; }
     .service-item .en-ttl { grid-column: 1 / -1; text-align: left; padding-left: 46px; font-size: 10px; }
     .service-item .ttl { font-size: 16px; }
@@ -2469,6 +2485,12 @@
           すべてを一貫してプロデュース。<br>
           あなたの&ldquo;はじめてのパーティー&rdquo;に伴走します。
         </p>
+        <div class="sv-video">
+          <video autoplay muted loop playsinline controls preload="metadata" poster="image/main.png">
+            <source src="image/hanu-produce.mp4" type="video/mp4">
+            お使いのブラウザは動画再生に対応していません。
+          </video>
+        </div>
         <div class="service-list">
           <div class="service-item">
             <div class="num">01</div>
