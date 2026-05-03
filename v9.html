@@ -1028,11 +1028,11 @@
   }
   .answer-a {
     font-family: "Noto Serif JP", serif;
-    font-size: 15px;
+    font-size: clamp(16px, 1.4vw, 19px);
     font-weight: 400;
     color: var(--ink-soft);
     line-height: 2;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     margin: 0;
   }
 
@@ -1195,7 +1195,7 @@
     letter-spacing: 0.08em;
   }
   .pf-text p {
-    font-size: 17px;
+    font-size: clamp(16px, 1.4vw, 19px);
     line-height: 2.05;
     color: var(--ink-soft);
     margin-bottom: 18px;
@@ -1367,7 +1367,7 @@
     margin-bottom: 28px;
   }
   .sv-right .lead {
-    font-size: 17px;
+    font-size: clamp(16px, 1.4vw, 19px);
     line-height: 2.2;
     color: var(--ink-soft);
     margin: 0 0 50px;
@@ -2162,7 +2162,7 @@
     .answer-grid { grid-template-columns: 1fr; gap: 32px; }
     .answer-item { padding-top: 24px; }
     .answer-q { font-size: 20px; margin-bottom: 14px; white-space: normal; }
-    .answer-a { font-size: 14px; line-height: 1.85; }
+    .answer-a { font-size: clamp(15px, 3.8vw, 17px); line-height: 1.95; }
 
     /* EDITORIAL (non-strip) — モバイル時の paddding を詰める */
     .editorial:not(.editorial-strip) { padding: 60px 20px; }
@@ -2255,7 +2255,7 @@
     .pf-text { max-width: 100%; }
     .pf-text .role { font-size: 11px; letter-spacing: 0.3em; }
     .pf-text .name { font-size: 16px; margin-bottom: 22px; }
-    .pf-text p { font-size: 15px; line-height: 1.95; }
+    .pf-text p { font-size: clamp(15px, 3.8vw, 17px); line-height: 1.95; }
     .pf-text .ig-bar { padding: 12px 24px; font-size: 11px; }
     .service-bar {
       width: auto;
@@ -2277,7 +2277,7 @@
     .sv-profile p br { display: none; }
     .sv-profile .ig-bar { padding: 14px 28px; font-size: 12px; }
     .sv-right h2 { font-size: 48px; margin-bottom: 24px; }
-    .sv-right .lead { margin-bottom: 40px; font-size: 14px; white-space: normal !important; }
+    .sv-right .lead { margin-bottom: 40px; font-size: clamp(15px, 3.8vw, 17px); white-space: normal !important; }
     .sv-right .lead br { display: none; }
     .sv-video { margin-bottom: 40px; }
     .service-item { grid-template-columns: 46px 1fr; row-gap: 4px; padding: 20px 8px; }
