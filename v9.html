@@ -1010,6 +1010,12 @@
     margin-bottom: 22px;
     text-transform: uppercase;
   }
+  .answer-q-line {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
   .answer-q {
     font-family: "Noto Serif JP", serif;
     font-size: 23px;
@@ -1017,14 +1023,15 @@
     color: var(--ink);
     letter-spacing: 0.06em;
     line-height: 1.7;
-    margin-bottom: 18px;
+    margin: 0;
     white-space: nowrap;
   }
   .answer-arrow {
-    width: 22px;
+    width: 28px;
     height: 1px;
     background: var(--shape);
-    margin-bottom: 16px;
+    flex-shrink: 0;
+    margin: 0;
   }
   .answer-a {
     font-family: "Noto Serif JP", serif;
@@ -2509,20 +2516,26 @@
       <div class="answer-grid">
         <div class="answer-item">
           <div class="answer-num">Voice 01</div>
-          <p class="answer-q">「20名集まる気がしない」</p>
-          <div class="answer-arrow" aria-hidden="true"></div>
+          <div class="answer-q-line">
+            <p class="answer-q">「20名集まる気がしない」</p>
+            <div class="answer-arrow" aria-hidden="true"></div>
+          </div>
           <p class="answer-a">招待リスト作りから、声のかけ方まで。&ldquo;来てほしい人&rdquo;から逆算して、無理のない人数設計を一緒に。10名規模からの開催も、ご相談ください。</p>
         </div>
         <div class="answer-item">
           <div class="answer-num">Voice 02</div>
-          <p class="answer-q">「実績も、主役の経験もない」</p>
-          <div class="answer-arrow" aria-hidden="true"></div>
+          <div class="answer-q-line">
+            <p class="answer-q">「実績も、主役の経験もない」</p>
+            <div class="answer-arrow" aria-hidden="true"></div>
+          </div>
           <p class="answer-a">必要なのは、肩書きではなく&ldquo;伝えたい一言&rdquo;。19年・500組と作ってきた言葉の引き出しで、あなたの今を物語に編みなおします。</p>
         </div>
         <div class="answer-item">
           <div class="answer-num">Voice 03</div>
-          <p class="answer-q">「私が主役って、おこがましい」</p>
-          <div class="answer-arrow" aria-hidden="true"></div>
+          <div class="answer-q-line">
+            <p class="answer-q">「私が主役って、おこがましい」</p>
+            <div class="answer-arrow" aria-hidden="true"></div>
+          </div>
           <p class="answer-a">主役は、来てくれた人を喜ばせるための&ldquo;役割&rdquo;。あなたの一日が、あの人の次の一歩になる。そんな&ldquo;贈る場&rdquo;として設計します。</p>
         </div>
       </div>
