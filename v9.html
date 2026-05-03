@@ -1140,10 +1140,83 @@
   .service-wrap {
     max-width: 1080px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 0.72fr auto 1.28fr;
-    gap: 35px;
-    align-items: stretch;
+    display: block;
+  }
+
+  /* ============ PROFILE FEATURE ============ */
+  .profile-feature {
+    padding: 110px 60px;
+    background: var(--bg);
+  }
+  .pf-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: center;
+    justify-content: center;
+  }
+  .pf-text {
+    flex: 1;
+    max-width: 560px;
+    text-align: left;
+  }
+  .pf-text .role {
+    font-family: "Bodoni Moda", "Playfair Display", serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .pf-text .name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 28px;
+    letter-spacing: 0.08em;
+  }
+  .pf-text p {
+    font-size: 15px;
+    line-height: 2.05;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .pf-text .ig-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 26px;
+    padding: 12px 28px;
+    border: 1px solid var(--ink);
+    font-family: "Bodoni Moda", "Playfair Display", serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--ink);
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  .pf-text .ig-bar:hover {
+    background: var(--ink);
+    color: var(--white);
+    opacity: 1;
+  }
+  .pf-text .ig-bar .arrow {
+    transition: transform 0.3s ease;
+  }
+  .pf-text .ig-bar:hover .arrow { transform: translateX(6px); }
+  .pf-photo {
+    margin: 0;
+    width: clamp(280px, 32vw, 440px);
+    aspect-ratio: 4/5;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .pf-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .service-bar {
     width: 56px;
@@ -2140,7 +2213,17 @@
     .ed-details { position: relative; right: auto; bottom: auto; margin-top: 20px; }
 
     .service { padding: 80px 24px 60px; border-top-width: 40px; }
-    .service-wrap { grid-template-columns: 1fr; gap: 0; }
+    .service-wrap { display: block; }
+
+    /* PROFILE FEATURE — mobile */
+    .profile-feature { padding: 80px 24px; }
+    .pf-inner { flex-direction: column-reverse; gap: 36px; }
+    .pf-photo { width: 80%; max-width: 320px; }
+    .pf-text { max-width: 100%; }
+    .pf-text .role { font-size: 11px; letter-spacing: 0.3em; }
+    .pf-text .name { font-size: 16px; margin-bottom: 22px; }
+    .pf-text p { font-size: 14px; line-height: 1.95; }
+    .pf-text .ig-bar { padding: 12px 24px; font-size: 11px; }
     .service-bar {
       width: auto;
       height: 40px;
@@ -2457,26 +2540,26 @@
     </div>
   </section>
 
-  <!-- SERVICE (with Profile) -->
-  <section class="service" id="service">
-    <div class="service-wrap">
-
-      <!-- LEFT: Profile -->
-      <div class="sv-profile">
-        <div class="sv-profile-img">
-          <img src="image/image2/main.png" alt="Hanu - Party Producer">
-        </div>
+  <!-- PROFILE (Hanu) -->
+  <section class="profile-feature" id="profile">
+    <div class="pf-inner">
+      <div class="pf-text">
         <div class="role">— Party Producer —</div>
         <div class="name">Hanu ／ パーティープロデューサー</div>
-        <p>パーティー・ウェディング業界で19年、延べ500組以上の<br>パーティーをプランニング。</p>
-        <p>&ldquo;パーティーは準備から&rdquo;をモットーに、<br>お打合せから<br>パーティー当日までのプロセス、そして&ldquo;緩急と余白&rdquo;<br>そこから生まれる&ldquo;一体感&rdquo;を大切にしている。</p>
-        <p>企画から当日の運営まで、世界観を活かした一貫したプロデュースが得意。<br>現在も多数のイベントにも携わっており、当日のディレクションには定評がある。</p>
+        <p>パーティー・ウェディング業界で19年、延べ500組以上のパーティーをプランニング。</p>
+        <p>&ldquo;パーティーは準備から&rdquo;をモットーに、お打合せからパーティー当日までのプロセス、そして&ldquo;緩急と余白&rdquo;そこから生まれる&ldquo;一体感&rdquo;を大切にしている。</p>
+        <p>企画から当日の運営まで、世界観を活かした一貫したプロデュースが得意。現在も多数のイベントにも携わっており、当日のディレクションには定評がある。</p>
         <a href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener" class="ig-bar">INSTAGRAM <span class="arrow">→</span></a>
       </div>
+      <figure class="pf-photo">
+        <img src="image/image2/main.png" alt="Hanu - Party Producer">
+      </figure>
+    </div>
+  </section>
 
-      <!-- DIVIDER: sage bar between Profile and How -->
-      <div class="service-bar" aria-hidden="true"></div>
-
+  <!-- SERVICE (How We Produce only) -->
+  <section class="service" id="service">
+    <div class="service-wrap">
       <!-- RIGHT: How We Produce -->
       <div class="sv-right">
         <h2>How We<br>Produce.</h2>
