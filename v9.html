@@ -1665,11 +1665,16 @@
   }
   .benefits-extra {
     font-family: "Noto Serif JP", serif;
-    font-size: 16px;
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 700;
     color: var(--ink);
-    letter-spacing: 0.06em;
-    line-height: 1.9;
-    margin: 0 0 22px;
+    letter-spacing: 0.08em;
+    line-height: 1.7;
+    margin: 16px auto 28px;
+    display: inline-block;
+    padding: 16px 32px;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
   }
   .benefits-fluff {
     font-family: "Noto Serif JP", serif;
@@ -2321,7 +2326,7 @@
     .monitor-benefits { padding: 40px 24px; margin-top: 60px; }
     .benefits-title { font-size: clamp(18px, 4.8vw, 24px); }
     .benefits-price { font-size: clamp(20px, 5.2vw, 26px); }
-    .benefits-extra { font-size: 15px; }
+    .benefits-extra { font-size: clamp(17px, 4.5vw, 22px); padding: 12px 22px; margin: 12px auto 22px; }
     .benefits-fluff { font-size: 13px; }
     .benefits-note { font-size: 11px; }
 
