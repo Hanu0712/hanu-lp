@@ -1767,10 +1767,10 @@
   }
   .price-total-head h3 {
     font-family: "Noto Serif JP", serif;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: clamp(20px, 1.9vw, 26px);
+    font-weight: 600;
     color: var(--ink);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
   }
   .price-total-table {
     width: 100%;
@@ -1779,9 +1779,9 @@
   }
   .price-total-table th,
   .price-total-table td {
-    padding: 16px 0;
+    padding: 18px 0;
     border-bottom: 1px solid var(--line);
-    font-size: 14px;
+    font-size: clamp(16px, 1.4vw, 19px);
     font-weight: 400;
     line-height: 1.6;
     color: var(--ink);
@@ -1795,7 +1795,7 @@
   .price-total-table tr.sum th,
   .price-total-table tr.sum td {
     font-weight: 600;
-    font-size: 18px;
+    font-size: clamp(18px, 1.7vw, 22px);
     border-bottom: none;
     border-top: 1px solid var(--ink);
     padding-top: 22px;
@@ -1803,7 +1803,7 @@
   .price-total-table .sum-plus {
     font-family: "Noto Serif JP", serif;
     font-weight: 500;
-    font-size: 14px;
+    font-size: clamp(14px, 1.2vw, 16px);
     color: var(--shape);
     letter-spacing: 0.08em;
     margin-left: 4px;
@@ -2315,7 +2315,7 @@
 
     .price-total { padding: 28px 22px; margin-top: 40px; }
     .price-total-head h3 { font-size: 15px; line-height: 1.7; }
-    .price-total-table th, .price-total-table td { font-size: 12px; padding: 12px 0; }
+    .price-total-table th, .price-total-table td { font-size: clamp(14px, 3.6vw, 16px); padding: 14px 0; }
     .price-total-table tr.sum th, .price-total-table tr.sum td { font-size: 15px; }
     .price-total-table .sum-plus { font-size: 12px; }
     .price-note-strong { font-size: 12px; padding: 6px 14px; margin-top: 12px; }
@@ -2697,7 +2697,7 @@
     <div class="price-total">
       <div class="price-total-head">
         <span class="mc-label">— Your Cost —</span>
-        <h3>20名規模・会費制の場合の<br class="br-sp">主催者ご負担イメージ</h3>
+        <h3>ご予算例／20名様規模の場合</h3>
       </div>
       <table class="price-total-table">
         <tbody>
