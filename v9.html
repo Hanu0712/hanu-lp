@@ -74,6 +74,85 @@
     color: #fff;
   }
   .site-header .nav-right a { margin-left: 30px; }
+  .site-header .header-right {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    pointer-events: auto;
+  }
+  .nav-toggle {
+    display: inline-block;
+    width: 28px;
+    height: 22px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    pointer-events: auto;
+  }
+  .nav-toggle span {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: #fff;
+    transition: opacity 0.2s, transform 0.3s, top 0.3s, bottom 0.3s;
+  }
+  .nav-toggle span:nth-child(1) { top: 4px; }
+  .nav-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+  .nav-toggle span:nth-child(3) { bottom: 4px; }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--ink);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-close {
+    position: absolute;
+    top: 18px;
+    right: 36px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    font-weight: 300;
+    font-family: "Playfair Display", serif;
+  }
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(20px, 3vw, 34px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.25s;
+  }
+  .nav-menu a:hover {
+    opacity: 0.55;
+  }
 
   /* ============ SIDE RAIL ============ */
   .side-rail {
@@ -2140,6 +2219,9 @@
     .site-header { padding: 14px 16px; }
     .site-header .brand { font-size: 15px; letter-spacing: 0.15em; }
     .site-header .nav-right { display: none; }
+    .site-header .header-right { gap: 0; }
+    .nav-close { right: 14px; top: 12px; }
+    .nav-menu { font-size: clamp(18px, 5vw, 26px); gap: 18px; letter-spacing: 0.18em; }
     .side-rail { display: none; }
 
     .hero { padding: 110px 16px 60px; min-height: 90vh; }
@@ -2368,11 +2450,33 @@
   <!-- HEADER -->
   <header class="site-header">
     <a href="#top" class="brand">Hanu</a>
-    <nav class="nav-right">
-      <a href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">INSTAGRAM</a>
-      <a href="#cta">CONTACT</a>
-    </nav>
+    <div class="header-right">
+      <nav class="nav-right">
+        <a href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">INSTAGRAM</a>
+        <a href="#cta">CONTACT</a>
+      </nav>
+      <button type="button" class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="navOverlay">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
+
+  <!-- NAV OVERLAY -->
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true">
+    <button type="button" class="nav-close" aria-label="メニューを閉じる">&times;</button>
+    <nav class="nav-menu">
+      <a href="#top">Concept</a>
+      <a href="#before">Before</a>
+      <a href="#permission">Permission</a>
+      <a href="#answer">Voice</a>
+      <a href="#moments">Moments</a>
+      <a href="#profile">Profile</a>
+      <a href="#service">Service</a>
+      <a href="#monitor">Monitor</a>
+      <a href="#cta">Contact</a>
+      <a href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </div>
 
   <!-- SIDE VERTICAL TEXT -->
   <div class="side-rail">2026  ｜  ARE YOU READY?</div>
@@ -2855,6 +2959,34 @@
     };
     setup('beforeStory', '.before-stanza');
     setup('afterStory', '.before-stanza');
+  })();
+
+  // NAV TOGGLE
+  (function () {
+    var toggle = document.querySelector('.nav-toggle');
+    var overlay = document.getElementById('navOverlay');
+    if (!toggle || !overlay) return;
+    var closeBtn = overlay.querySelector('.nav-close');
+    function open() {
+      overlay.classList.add('is-open');
+      overlay.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    toggle.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    overlay.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+    });
   })();
 </script>
 
