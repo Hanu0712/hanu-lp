@@ -1999,18 +1999,20 @@
   .cta-button {
     display: inline-flex;
     align-items: center;
-    gap: 18px;
-    padding: 24px 56px;
-    background: var(--shape);
+    gap: 14px;
+    padding: 16px 40px;
+    background: transparent;
     color: var(--ink);
-    border: 1.5px solid var(--shape);
+    border: 1px solid var(--ink);
     font-family: "Noto Serif JP", serif;
-    font-size: 17px;
+    font-size: 14px;
     letter-spacing: 0.2em;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
   }
   .cta-button:hover {
-    opacity: 0.85;
+    background: var(--ink);
+    color: var(--white);
+    opacity: 1;
   }
   .cta-button .arrow {
     display: inline-block;
@@ -2396,7 +2398,7 @@
     .service-item .cap { font-size: 12px; line-height: 1.55; }
 
     .cta { padding: 90px 24px; }
-    .cta-button { padding: 20px 38px; font-size: 14px; letter-spacing: 0.22em; }
+    .cta-button { padding: 14px 28px; font-size: 13px; letter-spacing: 0.18em; gap: 10px; }
 
     #monitor { padding: 90px 24px; }
     .monitor-head { margin-bottom: 50px; }
