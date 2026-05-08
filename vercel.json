@@ -61,7 +61,7 @@
     },
     {
       "source": "/",
-      "destination": "/v5"
+      "destination": "/v9"
     }
   ]
 }
