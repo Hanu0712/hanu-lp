@@ -3053,6 +3053,11 @@
       if (!story) return;
       var stanzas = story.querySelectorAll(stanzaSel);
       if (!stanzas.length) return;
+      // IO trigger: observe the photo so the lock fires only after user
+      // scrolls far enough to see the portrait (matters on mobile where
+      // the photo is stacked below the text)
+      var body = story.closest('.before-body') || story.parentElement;
+      var trigger = (body && body.querySelector('.before-photo')) || story;
       var STEP = 4500;
       var fired = false;
       var locked = false;
@@ -3106,8 +3111,8 @@
           entries.forEach(function (e) {
             if (e.isIntersecting) { play(); io.disconnect(); }
           });
-        }, { root: null, rootMargin: '-30% 0px -30% 0px', threshold: 0 });
-        io.observe(story);
+        }, { root: null, rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+        io.observe(trigger);
       } else {
         play();
       }
