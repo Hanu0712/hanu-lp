@@ -172,175 +172,219 @@
   /* ============ HERO ============ */
   .hero {
     position: relative;
-    min-height: auto;
-    padding: 150px 60px 100px;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    background: #0a0907;
+    color: var(--white);
+  }
+  /* slideshow */
+  .hero-slideshow {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .hero-slide::before {
+    /* same image, blurred — fills 余白 */
+    content: "";
+    position: absolute;
+    inset: -50px;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    filter: blur(48px) brightness(0.78) saturate(0.95);
+    transform: scale(1.08);
+    z-index: 1;
+  }
+  .hero-slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    z-index: 2;
+  }
+  .hero-slide.is-active { opacity: 1; }
+
+  /* readability overlay */
+  .hero-overlay-tint {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: radial-gradient(ellipse at center,
+      rgba(0,0,0,0.05) 0%,
+      rgba(0,0,0,0.28) 65%,
+      rgba(0,0,0,0.42) 100%);
+    pointer-events: none;
+  }
+
+  /* doors */
+  .hero-doors {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .hero-door {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    transition: transform 2.7s cubic-bezier(0.7, 0.02, 0.2, 1);
+    will-change: transform;
+  }
+  .hero-door-left {
+    left: 0;
+    background:
+      linear-gradient(90deg,
+        #1a1612 0%,
+        #14110d 70%,
+        #100d09 92%,
+        #0a0805 100%);
+  }
+  .hero-door-right {
+    left: 50%;
+    background:
+      linear-gradient(90deg,
+        #0a0805 0%,
+        #100d09 8%,
+        #14110d 30%,
+        #1a1612 100%);
+  }
+  /* inner-edge: 1.5cm = ~56px (28px on each door) — subtle gold hairline + shadow */
+  .hero-door-left::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 28px;
+    background:
+      linear-gradient(90deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0.35) 60%,
+        rgba(0,0,0,0.55) 100%),
+      linear-gradient(90deg,
+        rgba(184,150,90,0) 0%,
+        rgba(184,150,90,0.18) 80%,
+        rgba(214,180,118,0.55) 100%);
+    pointer-events: none;
+  }
+  .hero-door-right::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 28px;
+    background:
+      linear-gradient(90deg,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.35) 40%,
+        rgba(0,0,0,0) 100%),
+      linear-gradient(90deg,
+        rgba(214,180,118,0.55) 0%,
+        rgba(184,150,90,0.18) 20%,
+        rgba(184,150,90,0) 100%);
+    pointer-events: none;
+  }
+  /* gold hairline on the very seam */
+  .hero-door-left::before,
+  .hero-door-right::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg,
+      rgba(214,180,118,0) 0%,
+      rgba(214,180,118,0.55) 12%,
+      rgba(214,180,118,0.85) 50%,
+      rgba(214,180,118,0.55) 88%,
+      rgba(214,180,118,0) 100%);
+    pointer-events: none;
+  }
+  .hero-door-left::before { right: 0; }
+  .hero-door-right::after { left: 0; }
+  .hero-doors.is-open .hero-door-left { transform: translateX(-100%); }
+  .hero-doors.is-open .hero-door-right { transform: translateX(100%); }
+
+  /* hero text overlay */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    background: var(--bg);
-    color: var(--ink);
     text-align: center;
+    padding: 0 32px;
+    opacity: 0;
+    transition: opacity 1.2s ease 1.5s; /* fade in mid-door-open */
   }
-  .hero-arch {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: min(680px, 60vw);
-    height: min(880px, 80vw);
-    background: var(--shape);
-    border-top-left-radius: 50%;
-    border-top-right-radius: 50%;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    z-index: 1;
-    opacity: 1;
-    overflow: hidden;
-  }
-  .hero-arch img {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 60%;
-    height: auto;
-    max-height: 55%;
-    object-fit: contain;
-    object-position: center bottom;
-  }
-  .hero-arch-text {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-family: "Noto Serif JP", serif;
-    font-size: clamp(28px, 2.6vw, 36px);
-    font-weight: 500;
-    color: var(--ink);
-    letter-spacing: 0.18em;
-    line-height: 2;
-    text-align: center;
-    white-space: nowrap;
-    z-index: 5;
-  }
-  .hero-ghost {
-    position: absolute;
-    left: 50%;
-    top: 52%;
-    transform: translate(-50%, -50%);
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
-    font-style: italic;
-    font-size: clamp(200px, 34vw, 500px);
-    color: rgba(42,40,36,0.05);
-    letter-spacing: 0.05em;
-    pointer-events: none;
-    z-index: 2;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  .hero-inner {
-    position: relative;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    z-index: 3;
-  }
-  .hero-label {
-    font-family: "Playfair Display", serif;
-    font-size: 12px;
-    letter-spacing: 0.5em;
-    color: var(--mute);
-    text-transform: uppercase;
-    margin-bottom: 50px;
-  }
-  .hero-label::before,
-  .hero-label::after {
-    content: "—";
-    margin: 0 14px;
-    color: var(--line);
-  }
-  .hero-headline {
-    font-family: "Bodoni Moda", "Playfair Display", serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: clamp(36px, 6vw, 92px);
-    line-height: 1.02;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-  }
-  .hero-headline .w1 { color: var(--ink); }
-  .hero-headline .w2 { color: var(--accent); }
-  .hero-headline .line-break { display: block; }
+  .hero-overlay.is-revealed { opacity: 1; }
+
   .hero-tagline-jp {
-    margin-top: 0;
-    margin-bottom: 30px;
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(28px, 2.6vw, 36px);
+    font-size: clamp(28px, 4.4vw, 60px);
     font-weight: 500;
-    color: var(--ink);
-    letter-spacing: 0.2em;
+    color: #fff;
+    letter-spacing: 0.18em;
     line-height: 1.7;
     text-align: center;
+    text-shadow: 0 2px 28px rgba(0,0,0,0.55);
   }
-  .hero-sub-en {
-    margin-top: 18px;
-    font-family: "Playfair Display", serif;
-    font-size: clamp(16px, 1.6vw, 20px);
-    letter-spacing: 0.35em;
-    color: var(--ink-soft);
-    line-height: 2.1;
-    text-transform: uppercase;
-  }
-  .hero-divider {
-    width: 48px;
-    height: 1px;
-    background: var(--line);
-    margin: 36px auto 32px;
-  }
-  .hero-sub-jp {
+  .hero-subtagline-jp {
+    margin-top: clamp(18px, 2.4vw, 30px);
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(16px, 1.7vw, 23px);
-    color: var(--ink);
-    letter-spacing: 0.15em;
-    font-weight: 500;
-    line-height: 1.9;
-    text-align: center;
-  }
-  .hero-promise {
-    font-family: "Noto Serif JP", serif;
-    font-size: clamp(20px, 2.4vw, 30px);
-    color: var(--ink);
-    letter-spacing: 0.14em;
-    font-weight: 600;
+    font-size: clamp(15px, 1.5vw, 20px);
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: 0.22em;
     line-height: 1.7;
     text-align: center;
-    margin: 18px auto 14px;
-    padding: 0 8px;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.5);
   }
-  .hero-monitor-link {
+  .hero-cta-zoom {
     display: inline-flex;
     align-items: center;
-    gap: 22px;
-    margin-top: 10px;
+    gap: 18px;
+    margin-top: clamp(40px, 6vw, 72px);
+    padding: 22px 56px;
     font-family: "Noto Serif JP", serif;
-    font-size: 16px;
-    letter-spacing: 0.2em;
-    color: var(--ink);
-    padding: 10px 0;
+    font-size: 18px;
     font-weight: 500;
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.85);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    letter-spacing: 0.2em;
     transition: all 0.4s ease;
+    white-space: nowrap;
   }
-  .hero-monitor-link .bar {
+  .hero-cta-zoom:hover {
+    background: #fff;
+    color: var(--ink);
+    opacity: 1;
+  }
+  .hero-cta-zoom .arrow {
     display: inline-block;
-    width: 70px;
-    height: 1px;
-    background: var(--ink);
-    transition: width 0.4s ease, background 0.4s ease;
+    transition: transform 0.4s ease;
   }
-  .hero-monitor-link:hover { opacity: 1; color: var(--accent); }
-  .hero-monitor-link:hover .bar { width: 120px; background: var(--accent); }
+  .hero-cta-zoom:hover .arrow { transform: translateX(6px); }
 
   .hero-scroll {
     position: absolute;
@@ -350,15 +394,18 @@
     font-family: "Playfair Display", serif;
     font-size: 11px;
     letter-spacing: 0.35em;
-    color: var(--mute);
-    z-index: 3;
+    color: rgba(255,255,255,0.7);
+    z-index: 6;
+    opacity: 0;
+    transition: opacity 1s ease 2.4s;
   }
+  .hero-scroll.is-revealed { opacity: 1; }
   .hero-scroll::after {
     content: "";
     display: block;
     width: 1px;
     height: 40px;
-    background: var(--mute);
+    background: rgba(255,255,255,0.55);
     margin: 10px auto 0;
   }
 
@@ -2247,8 +2294,12 @@
     .nav-menu { font-size: clamp(18px, 5vw, 26px); gap: 18px; letter-spacing: 0.18em; }
     .side-rail { display: none; }
 
-    .hero { padding: 110px 16px 60px; min-height: 90vh; }
-    .hero-arch { width: 92vw; height: 110vw; }
+    .hero { height: 100vh; min-height: 560px; }
+    .hero-tagline-jp { font-size: clamp(20px, 5.2vw, 36px); letter-spacing: 0.1em; line-height: 1.75; }
+    .hero-subtagline-jp { font-size: clamp(13px, 3.4vw, 16px); letter-spacing: 0.16em; margin-top: 18px; }
+    .hero-cta-zoom { padding: 16px 28px; font-size: 13px; letter-spacing: 0.14em; gap: 10px; margin-top: 38px; }
+    .hero-door-left::after,
+    .hero-door-right::before { width: 18px; }
 
     /* BEFORE / AFTER — 2カラム崩し＋afters のパディング修正 */
     .worries,
@@ -2314,14 +2365,6 @@
     /* CTA h2 — サイズ調整 */
     .cta h2 { font-size: clamp(24px, 6.5vw, 34px); line-height: 1.55; letter-spacing: 0.03em; }
     .cta .label { font-size: 11px; letter-spacing: 0.35em; }
-    .hero-sub { font-size: 12px; letter-spacing: 0.1em; margin-top: 30px; }
-    .hero-tagline-jp { font-size: clamp(22px, 5.2vw, 28px); margin-bottom: 20px; letter-spacing: 0.1em; }
-    .hero-headline { font-size: clamp(32px, 7.4vw, 48px); }
-    .hero-sub-en { font-size: clamp(13px, 3vw, 16px); letter-spacing: 0.25em; }
-    .hero-sub-jp { font-size: clamp(14px, 3.3vw, 18px); letter-spacing: 0.08em; }
-    .hero-promise { font-size: clamp(18px, 4.8vw, 24px); letter-spacing: 0.06em; margin: 12px auto 10px; line-height: 1.65; }
-    .hero-divider { margin: 16px auto; }
-    .hero-monitor-link { font-size: 13px; margin-top: 16px; letter-spacing: 0.15em; }
 
     .intro { padding: 90px 24px 80px; }
     .intro-copy { font-size: 15px; line-height: 2.2; }
@@ -2499,37 +2542,44 @@
       <a href="#moments">Moments</a>
       <a href="#profile">Profile</a>
       <a href="#service">Service</a>
-      <a href="#monitor">Monitor</a>
       <a href="#cta">Contact</a>
       <a href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">Instagram</a>
     </nav>
   </div>
 
-  <!-- SIDE VERTICAL TEXT -->
-  <div class="side-rail">2026  ｜  ARE YOU READY?</div>
-
   <!-- HERO -->
   <section class="hero" id="top">
-    <div class="hero-arch"></div>
-    <div class="hero-ghost">CONCEPT</div>
-    <div class="hero-inner">
-      <div class="hero-label">CONCEPT</div>
-      <p class="hero-tagline-jp">女性起業家のための<br>パーティープロデュース</p>
-      <h1 class="hero-headline">
-        <span class="line-break"><span class="w1">small things,</span></span>
-        <span class="line-break"><span class="w2">true treasures.</span></span>
-      </h1>
-      <p class="hero-sub-en">
-        WEDDING &amp; PARTY PLANNING<br>
-        19 YEARS · 500+ EVENTS
-      </p>
-      <div class="hero-divider"></div>
-      <p class="hero-sub-jp">「ランチ会」から、「パーティー」へ。</p>
-      <p class="hero-promise">主役は、自分でいい。</p>
-      <p class="hero-sub-jp">はじめての一日を、19 年・500 組の経験で設計する。</p>
-      <a href="#monitor" class="hero-monitor-link">モニター募集の詳細を見る<span class="bar"></span></a>
+    <!-- slideshow background -->
+    <div class="hero-slideshow" id="heroSlideshow">
+      <div class="hero-slide is-active" style="background-image:url('image/image2/01.jpg')"><img src="image/image2/01.jpg" alt=""></div>
+      <div class="hero-slide" style="background-image:url('image/image2/02.jpg')"><img src="image/image2/02.jpg" alt=""></div>
+      <div class="hero-slide" style="background-image:url('image/image2/03.jpg')"><img src="image/image2/03.jpg" alt=""></div>
+      <div class="hero-slide" style="background-image:url('image/image2/04.jpg')"><img src="image/image2/04.jpg" alt=""></div>
+      <div class="hero-slide" style="background-image:url('image/image2/05.jpg')"><img src="image/image2/05.jpg" alt=""></div>
+      <div class="hero-slide" style="background-image:url('image/image2/06.jpg')"><img src="image/image2/06.jpg" alt=""></div>
+      <div class="hero-slide" style="background-image:url('image/image2/07.jpg')"><img src="image/image2/07.jpg" alt=""></div>
+      <div class="hero-slide" style="background-image:url('image/image2/08.jpg')"><img src="image/image2/08.jpg" alt=""></div>
+      <div class="hero-slide" style="background-image:url('image/image2/09.jpg')"><img src="image/image2/09.jpg" alt=""></div>
+      <div class="hero-slide" style="background-image:url('image/image2/10.jpg')"><img src="image/image2/10.jpg" alt=""></div>
     </div>
-    <div class="hero-scroll">SCROLL</div>
+
+    <!-- readability tint -->
+    <div class="hero-overlay-tint" aria-hidden="true"></div>
+
+    <!-- text overlay -->
+    <div class="hero-overlay" id="heroOverlay">
+      <h1 class="hero-tagline-jp">女性起業家のための<br>パーティープロデュース</h1>
+      <p class="hero-subtagline-jp">はじめてのパーティーを一緒に。</p>
+      <a href="/booking" class="hero-cta-zoom">無料Zoom相談を予約する <span class="arrow">→</span></a>
+    </div>
+
+    <!-- doors (close on top, slide outward to reveal) -->
+    <div class="hero-doors" id="heroDoors" aria-hidden="true">
+      <div class="hero-door hero-door-left"></div>
+      <div class="hero-door hero-door-right"></div>
+    </div>
+
+    <div class="hero-scroll" id="heroScroll">SCROLL</div>
   </section>
 
   <!-- BEFORE -->
@@ -2571,24 +2621,9 @@
     </div>
   </section>
 
-  <!-- MOVING PHOTO STRIP (between Before and After) -->
+  <!-- BRIDGE (between Before and After) -->
   <section class="editorial editorial-strip">
     <p class="editorial-bridge">もし、その止まったLINEに——<br>招待の言葉を、載せられたら。</p>
-    <div class="ed-marquee">
-      <div class="ed-marquee-track">
-        <div class="ed-marquee-item"><img src="image/image2/07.jpg" alt=""></div>
-        <div class="ed-marquee-item"><img src="image/image2/02.jpg" alt=""></div>
-        <div class="ed-marquee-item"><img src="image/image2/09.jpg" alt=""></div>
-        <div class="ed-marquee-item"><img src="image/image2/01.jpg" alt=""></div>
-        <div class="ed-marquee-item"><img src="image/image2/10.jpg" alt=""></div>
-        <!-- duplicate for seamless loop -->
-        <div class="ed-marquee-item"><img src="image/image2/07.jpg" alt=""></div>
-        <div class="ed-marquee-item"><img src="image/image2/02.jpg" alt=""></div>
-        <div class="ed-marquee-item"><img src="image/image2/09.jpg" alt=""></div>
-        <div class="ed-marquee-item"><img src="image/image2/01.jpg" alt=""></div>
-        <div class="ed-marquee-item"><img src="image/image2/10.jpg" alt=""></div>
-      </div>
-    </div>
   </section>
 
   <!-- AFTER -->
@@ -2634,7 +2669,7 @@
   <section class="permission" id="permission">
     <div class="permission-inner">
       <span class="section-eyebrow">— Permission —</span>
-      <h2 class="permission-headline">はじめて、いいんです。</h2>
+      <h2 class="permission-headline">主役になると決めた人から、<br>変わっていく。</h2>
       <div class="permission-body">
         <p class="permission-block">
           「20名集まらないと、開いちゃいけない」<br>
@@ -2647,7 +2682,7 @@
           「まだ早いかな」と思っている今こそ、<br>開く意味があります。
         </p>
         <p class="permission-block">パーティーは&ldquo;到達点を祝う場&rdquo;ではなく、</p>
-        <p class="permission-block permission-emphasis">&ldquo;次のステージへと動かす場&rdquo;。<br>主役になると決めた人から、変わっていく。</p>
+        <p class="permission-block permission-emphasis">&ldquo;次のステージへと動かす場&rdquo;。</p>
         <p class="permission-block permission-close">その一日を、あなたと一緒に設計します。</p>
       </div>
       <div class="permission-cta">
@@ -2807,7 +2842,6 @@
 
     <div class="monitor-head">
       <span class="section-eyebrow">— Special Offer —</span>
-      <h2 class="monitor-display">Monitor.</h2>
       <p class="monitor-lead">
         <span class="monitor-lead-emph">【先着3組様】</span>
         <span class="monitor-lead-sub">募集期間：2026年6月30日まで（定員に達し次第終了）</span>
@@ -2928,7 +2962,78 @@
   </footer>
 
 <script>
+  // HERO: doors open + slideshow
   (function () {
+    var doors = document.getElementById('heroDoors');
+    var overlay = document.getElementById('heroOverlay');
+    var scroll = document.getElementById('heroScroll');
+    var slideshow = document.getElementById('heroSlideshow');
+    if (!doors || !slideshow) return;
+    var slides = slideshow.querySelectorAll('.hero-slide');
+    if (!slides.length) return;
+
+    // open doors after a short pause (the "溜め")
+    setTimeout(function () {
+      doors.classList.add('is-open');
+      if (overlay) overlay.classList.add('is-revealed');
+      if (scroll) scroll.classList.add('is-revealed');
+    }, 650);
+
+    // slideshow: change every 3s with crossfade via opacity
+    var current = 0;
+    setInterval(function () {
+      slides[current].classList.remove('is-active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-active');
+    }, 3000);
+  })();
+
+  (function () {
+    // Shared scroll lock — position:fixed approach (bulletproof across browsers)
+    var lockCount = 0;
+    var lockedY = 0;
+    function preventDefault(e) { e.preventDefault(); }
+    var BLOCKED_KEYS = ['ArrowDown','ArrowUp','PageDown','PageUp','Space',' ','Home','End'];
+    function blockKeys(e) {
+      if (BLOCKED_KEYS.indexOf(e.key) !== -1) e.preventDefault();
+    }
+    function lockScroll() {
+      if (lockCount === 0) {
+        lockedY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var b = document.body;
+        b.style.position = 'fixed';
+        b.style.top = -lockedY + 'px';
+        b.style.left = '0';
+        b.style.right = '0';
+        b.style.width = '100%';
+        document.addEventListener('wheel', preventDefault, { passive: false });
+        document.addEventListener('touchmove', preventDefault, { passive: false });
+        document.addEventListener('keydown', blockKeys, true);
+        console.log('[scrollLock] LOCKED at y=' + lockedY);
+      }
+      lockCount++;
+    }
+    function unlockScroll() {
+      lockCount = Math.max(0, lockCount - 1);
+      if (lockCount === 0) {
+        var b = document.body;
+        b.style.position = '';
+        b.style.top = '';
+        b.style.left = '';
+        b.style.right = '';
+        b.style.width = '';
+        document.removeEventListener('wheel', preventDefault);
+        document.removeEventListener('touchmove', preventDefault);
+        document.removeEventListener('keydown', blockKeys, true);
+        // restore scroll without smooth-behavior to avoid jump animation
+        var prev = document.documentElement.style.scrollBehavior;
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, lockedY);
+        document.documentElement.style.scrollBehavior = prev;
+        console.log('[scrollLock] UNLOCKED');
+      }
+    }
+
     var setup = function (storyId, stanzaSel) {
       var story = document.getElementById(storyId);
       if (!story) return;
@@ -2936,12 +3041,20 @@
       if (!stanzas.length) return;
       var STEP = 4500;
       var fired = false;
+      var locked = false;
       var current = 0;
       var timer = null;
+      var releaseLock = function () {
+        if (locked) {
+          unlockScroll();
+          locked = false;
+        }
+      };
       var show = function (i) {
         stanzas.forEach(function (s, idx) {
           s.classList.toggle('active', idx === i);
         });
+        if (i >= stanzas.length - 1) releaseLock();
       };
       var stopTimer = function () {
         if (timer) { clearInterval(timer); timer = null; }
@@ -2965,17 +3078,21 @@
       var play = function () {
         if (fired) return;
         fired = true;
+        lockScroll();
+        locked = true;
         show(current);
         timer = setInterval(auto, STEP);
       };
       story.style.cursor = 'pointer';
       story.addEventListener('click', skip);
+      // Safety net: if user navigates away (unload, hash change), make sure to release
+      window.addEventListener('pagehide', releaseLock);
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
             if (e.isIntersecting) { play(); io.disconnect(); }
           });
-        }, { threshold: 0.15 });
+        }, { root: null, rootMargin: '-30% 0px -30% 0px', threshold: 0 });
         io.observe(story);
       } else {
         play();
