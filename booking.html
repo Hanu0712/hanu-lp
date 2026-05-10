@@ -786,6 +786,10 @@
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    // 当日予約は受け付けない（最短で翌日から）。
+    // つまり「今日も含めて過去」をブロック対象にする。
+    const cutoff = new Date(today);
+    cutoff.setDate(cutoff.getDate() + 1);
 
     for (let i = 0; i < firstDay; i++) {
       const blank = document.createElement('div');
@@ -797,7 +801,7 @@
       const dow = new Date(m.year, m.month - 1, d).getDay();
       const iso = `${m.year}-${String(m.month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
       const cellDate = new Date(m.year, m.month - 1, d);
-      const isPast = cellDate < today;
+      const isPast = cellDate < cutoff;
       const isBlocked = BLOCKED_DATES.has(iso) || isPast;
       const cell = document.createElement('button');
       cell.type = 'button';
