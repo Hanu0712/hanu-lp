@@ -681,8 +681,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 3cm;
-    min-height: 100px;
+    height: 2cm;
+    min-height: 70px;
     padding: 0;
     background: var(--shape);
   }
@@ -694,10 +694,10 @@
     margin: 0;
     padding: 0 24px;
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(15px, 1.6vw, 19px);
+    font-size: clamp(17px, 1.85vw, 22px);
     color: var(--ink);
-    letter-spacing: 0.12em;
-    line-height: 1.7;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
     font-weight: 700;
   }
   .editorial .editorial-brand,
@@ -1544,10 +1544,10 @@
     margin: 0 0 50px;
   }
   .sv-video {
-    margin: 0 0 56px;
+    margin: 0 auto 56px;
     width: 100%;
-    max-width: 720px;
-    aspect-ratio: 16 / 9;
+    max-width: 380px;
+    aspect-ratio: 9 / 16;
     background: var(--bg-soft);
     overflow: hidden;
     border: 1px solid var(--line);
@@ -1557,6 +1557,40 @@
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  /* ============ ZOOM BAR (CTA, reusable) ============ */
+  .zoom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 64px auto 0;
+    width: min(520px, 92%);
+    padding: 22px 32px;
+    background: var(--ink);
+    color: var(--white);
+    border: 1.5px solid var(--ink);
+    font-family: "Noto Serif JP", serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-align: center;
+    transition: all 0.4s ease;
+    white-space: nowrap;
+  }
+  .zoom-bar:hover {
+    background: var(--white);
+    color: var(--ink);
+    opacity: 1;
+  }
+  .zoom-bar .arrow {
+    display: inline-block;
+    transition: transform 0.4s ease;
+  }
+  .zoom-bar:hover .arrow { transform: translateX(6px); }
+  @media (max-width: 768px) {
+    .zoom-bar { padding: 16px 20px; font-size: 14px; letter-spacing: 0.16em; gap: 12px; margin-top: 44px; }
   }
   .sv-right .lead.lead-mb-line {
     margin-bottom: 1.6em;
@@ -2372,8 +2406,8 @@
 
     /* EDITORIAL (non-strip) — モバイル時の paddding を詰める */
     .editorial:not(.editorial-strip) { padding: 60px 20px; }
-    .editorial-bridge { font-size: 13px; letter-spacing: 0.06em; line-height: 1.65; margin: 0; padding: 0 20px; }
-    .editorial.editorial-strip { height: 3cm; min-height: 90px; padding: 0; }
+    .editorial-bridge { font-size: clamp(15px, 4vw, 17px); letter-spacing: 0.05em; line-height: 1.55; margin: 0; padding: 0 20px; }
+    .editorial.editorial-strip { height: 2cm; min-height: 64px; padding: 0; }
     .marquee { padding: 24px 0; }
     .marquee-item, .ed-marquee-item { width: 150px; height: 190px; margin-right: 12px; }
 
@@ -2786,6 +2820,8 @@
     </div>
 
     <p class="moments-promise">次に祝われるのは、あなたの番。</p>
+
+    <a href="/booking" class="zoom-bar">無料Zoom相談を予約する <span class="arrow">→</span></a>
   </section>
 
   <div class="sage-bar" aria-hidden="true"></div>
@@ -2850,6 +2886,8 @@
             <div class="en-ttl">Direction</div>
           </div>
         </div>
+
+        <a href="/booking" class="zoom-bar">無料Zoom相談を予約する <span class="arrow">→</span></a>
       </div>
 
     </div>
