@@ -678,7 +678,12 @@
     color: var(--ink);
   }
   .editorial.editorial-strip {
-    padding: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3cm;
+    min-height: 100px;
+    padding: 0;
     background: var(--shape);
   }
   .editorial.editorial-strip .ed-marquee {
@@ -686,13 +691,13 @@
   }
   .editorial-bridge {
     text-align: center;
-    margin: 0 auto 36px;
+    margin: 0;
     padding: 0 24px;
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(18px, 2vw, 24px);
+    font-size: clamp(15px, 1.6vw, 19px);
     color: var(--ink);
     letter-spacing: 0.12em;
-    line-height: 1.95;
+    line-height: 1.7;
     font-weight: 700;
   }
   .editorial .editorial-brand,
@@ -2367,8 +2372,8 @@
 
     /* EDITORIAL (non-strip) — モバイル時の paddding を詰める */
     .editorial:not(.editorial-strip) { padding: 60px 20px; }
-    .editorial-bridge { font-size: 16px; letter-spacing: 0.06em; line-height: 1.8; margin-bottom: 28px; padding: 0 20px; }
-    .editorial-strip { padding: 24px 0; }
+    .editorial-bridge { font-size: 13px; letter-spacing: 0.06em; line-height: 1.65; margin: 0; padding: 0 20px; }
+    .editorial.editorial-strip { height: 3cm; min-height: 90px; padding: 0; }
     .marquee { padding: 24px 0; }
     .marquee-item, .ed-marquee-item { width: 150px; height: 190px; margin-right: 12px; }
 
