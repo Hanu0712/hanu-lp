@@ -3107,11 +3107,13 @@
       // Safety net: if user navigates away (unload, hash change), make sure to release
       window.addEventListener('pagehide', releaseLock);
       if ('IntersectionObserver' in window) {
+        // Fire only after the portrait is (almost) fully on screen, with
+        // a small bottom buffer so the photo isn't pinned to viewport edge.
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
-            if (e.isIntersecting) { play(); io.disconnect(); }
+            if (e.intersectionRatio >= 0.98) { play(); io.disconnect(); }
           });
-        }, { root: null, rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+        }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: [0.9, 0.98, 1.0] });
         io.observe(trigger);
       } else {
         play();
