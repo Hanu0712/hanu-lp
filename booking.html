@@ -786,10 +786,10 @@
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    // 当日予約は受け付けない（最短で翌日から）。
-    // つまり「今日も含めて過去」をブロック対象にする。
+    // 予約は2日前まで受付（最短で今日+2日から予約可能）。
+    // 例：今日が 5/11 なら 5/11・5/12 はブロック、5/13 から選択可。
     const cutoff = new Date(today);
-    cutoff.setDate(cutoff.getDate() + 1);
+    cutoff.setDate(cutoff.getDate() + 2);
 
     for (let i = 0; i < firstDay; i++) {
       const blank = document.createElement('div');
