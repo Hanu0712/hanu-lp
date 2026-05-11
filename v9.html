@@ -634,6 +634,13 @@
     object-fit: cover;
     object-position: center;
   }
+  /* After photo: the source image shows Hanu seated at a distance, so she
+     appears much smaller than in the Before bust-up portrait. Zoom the
+     image in to match Before's framing. */
+  #after .before-photo img {
+    transform: scale(1.75);
+    transform-origin: 50% 28%;
+  }
 
   .worries-grid {
     display: grid;
