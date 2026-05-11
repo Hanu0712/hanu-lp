@@ -2371,14 +2371,15 @@
 
     /* BEFORE / AFTER — 2カラム崩し＋afters のパディング修正 */
     .worries,
-    .worries.afters { padding: 0; height: 280vh; }
-    .worries .scroll-pin { padding: 32px 22px; }
+    .worries.afters { padding: 0; height: 300vh; }
+    .worries .scroll-pin { padding: 16px 18px; }
+    .worries .worries-head { margin: 0 auto 14px; }
+    .worries-head h2 { font-size: clamp(38px, 11vw, 60px); }
     .before-stanza-quote { font-size: clamp(15px, 4.2vw, 19px); padding: 0 0.6em; letter-spacing: 0; }
     .worries.afters .before-stanza-quote { font-size: clamp(15px, 4.2vw, 19px); padding: 0 0.6em; letter-spacing: 0; }
-    .before-body { grid-template-columns: 1fr; gap: 24px; padding: 0; align-items: center; justify-items: center; }
-    .before-story { font-size: 16px; line-height: 1.85; min-height: auto; width: 100%; }
-    .before-photo { width: 60%; max-width: 220px; aspect-ratio: 3/4; }
-    .worries-head h2 { font-size: clamp(44px, 13vw, 72px); }
+    .before-body { grid-template-columns: 1fr; gap: 18px; padding: 0; align-items: center; justify-items: center; }
+    .before-story { font-size: 15.5px; line-height: 1.8; min-height: auto; width: 100%; }
+    .before-photo { width: 78%; max-width: 300px; aspect-ratio: 3/4; }
 
     /* MOMENTS — numeral を一段小さく、テキストを読みやすく */
     .moments-numeral { font-size: 60px; margin-bottom: 12px; }
