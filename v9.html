@@ -492,7 +492,7 @@
 
   /* ============ BEFORE / WORRIES (scroll-driven) ============ */
   .worries {
-    height: 220vh;
+    height: 280vh;
     padding: 0;
     background: var(--bg-soft);
     position: relative;
@@ -512,7 +512,7 @@
   }
   .worries.afters {
     background: var(--bg-soft);
-    height: 220vh;
+    height: 280vh;
     padding: 0;
   }
   .worries.afters .worries-head {
@@ -563,19 +563,17 @@
     min-height: 12em;
     min-width: 0;
   }
-  /* Block fade: each stanza fades in/out as one unit via opacity only.
-     No translate, no transform — pure cross-fade for a calm "ふわっと" feel. */
+  /* Scroll-linked fade: opacity is set inline by JS based on scroll progress
+     within the section's pin range. Each stanza fades in over ~20% of its
+     segment, stays fully visible for ~60%, then fades out for ~20%.
+     Only a small linear smoothing here so fast scroll doesn't look jittery. */
   .before-stanza {
     grid-column: 1;
     grid-row: 1;
     opacity: 0;
-    transition: opacity 0.85s ease;
+    transition: opacity 0.18s linear;
     pointer-events: none;
     will-change: opacity;
-  }
-  .before-stanza.active {
-    opacity: 1;
-    pointer-events: auto;
   }
   .before-stanza p {
     margin: 0;
@@ -2358,7 +2356,7 @@
 
     /* BEFORE / AFTER — 2カラム崩し＋afters のパディング修正 */
     .worries,
-    .worries.afters { padding: 0; height: 300vh; }
+    .worries.afters { padding: 0; height: 380vh; }
     .worries .scroll-pin { padding: 16px 18px; }
     .worries .worries-head { margin: 0 auto 14px; }
     .worries-head h2 { font-size: clamp(38px, 11vw, 60px); }
@@ -3064,50 +3062,87 @@
     //   native scroll all the way (works reliably on iOS Safari too).
     // - Photo gets a subtle transform per stanza for some "おしゃれ" motion.
 
+    // easeInOutQuad — gives the fade a soft "ふわっと" curve at both ends
+    function easeInOut(t) {
+      if (t <= 0) return 0;
+      if (t >= 1) return 1;
+      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+
     var setup = function (sectionId, storyId) {
       var section = document.getElementById(sectionId);
       var story = document.getElementById(storyId);
       if (!section || !story) return;
       var stanzas = story.querySelectorAll('.before-stanza');
       if (!stanzas.length) return;
-      var photo = section.querySelector('.before-photo');
 
-      var lastIdx = -2; // -2 = initial state (different from -1 hidden)
+      var FADE_IN = 0.20;   // first 20% of each segment: fade in
+      var FADE_OUT = 0.80;  // last 20% (after 80%) of each segment: fade out
+      var ticking = false;
+      var prevOps = new Array(stanzas.length).fill(-1);
 
-      function setStanza(idx) {
-        if (idx === lastIdx) return;
-        lastIdx = idx;
-        stanzas.forEach(function (s, i) {
-          s.classList.toggle('active', i === idx);
-        });
-        // Photo stays completely static — size and position never change.
+      function applyOps(ops) {
+        for (var i = 0; i < ops.length; i++) {
+          if (Math.abs(ops[i] - prevOps[i]) > 0.005) {
+            stanzas[i].style.opacity = ops[i];
+            prevOps[i] = ops[i];
+          }
+        }
+      }
+
+      function compute() {
+        ticking = false;
+        var rect = section.getBoundingClientRect();
+        var viewportH = window.innerHeight;
+        var pinRange = section.offsetHeight - viewportH;
+        var n = stanzas.length;
+        var ops = new Array(n).fill(0);
+
+        if (pinRange <= 0) {
+          ops[0] = 1;
+          return applyOps(ops);
+        }
+        // Pre-pin: section hasn't pinned to top yet — everything hidden.
+        if (rect.top > 0) {
+          return applyOps(ops);
+        }
+        // Post-pin: section has moved past — keep last stanza visible.
+        if (rect.bottom <= viewportH) {
+          ops[n - 1] = 1;
+          return applyOps(ops);
+        }
+
+        var progress = Math.max(0, Math.min(1, -rect.top / pinRange));
+        var segLen = 1 / n;
+
+        for (var i = 0; i < n; i++) {
+          var segStart = i * segLen;
+          var segEnd = (i + 1) * segLen;
+          var op = 0;
+          if (progress >= segStart && progress <= segEnd) {
+            var localP = (progress - segStart) / segLen;
+            if (localP < FADE_IN) {
+              op = easeInOut(localP / FADE_IN);
+            } else if (localP > FADE_OUT) {
+              op = easeInOut((1 - localP) / (1 - FADE_OUT));
+            } else {
+              op = 1;
+            }
+          }
+          // Last stanza never fades out — once it appears, it stays.
+          if (i === n - 1) {
+            var lp = (progress - segStart) / segLen;
+            if (lp >= FADE_IN) op = 1;
+          }
+          ops[i] = op;
+        }
+        applyOps(ops);
       }
 
       function update() {
-        var rect = section.getBoundingClientRect();
-        var viewportH = window.innerHeight;
-        var sectionH = section.offsetHeight;
-        var pinRange = sectionH - viewportH;
-
-        // Pre-pin: section approaching, content not yet pinned at top.
-        // Hide all stanzas so stanza 0 fades in cleanly when pin begins.
-        if (rect.top > 0) {
-          setStanza(-1);
-          return;
-        }
-        // Post-pin: pin has released (section moving up out of view).
-        // Keep the last stanza visible so it doesn't suddenly disappear.
-        if (rect.bottom <= viewportH) {
-          setStanza(stanzas.length - 1);
-          return;
-        }
-        if (pinRange <= 0) { setStanza(0); return; }
-
-        // During pin: map scroll progress to stanza index.
-        var scrolled = -rect.top;
-        var progress = Math.max(0, Math.min(1, scrolled / pinRange));
-        var idx = Math.min(stanzas.length - 1, Math.floor(progress * stanzas.length));
-        setStanza(idx);
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(compute);
       }
 
       update();
