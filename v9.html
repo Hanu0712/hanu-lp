@@ -490,21 +490,33 @@
     100% { transform: translateX(-50%); }
   }
 
-  /* ============ BEFORE / WORRIES ============ */
+  /* ============ BEFORE / WORRIES (scroll-driven) ============ */
   .worries {
-    padding: 70px 60px 70px;
+    height: 220vh;
+    padding: 0;
     background: var(--bg-soft);
     position: relative;
   }
+  .worries .scroll-pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    overflow: hidden;
+  }
   .worries .worries-head {
-    margin-bottom: 50px;
+    margin: 0 auto 32px;
   }
   .worries.afters {
     background: var(--bg-soft);
-    padding: 70px 60px 70px;
+    height: 220vh;
+    padding: 0;
   }
   .worries.afters .worries-head {
-    margin-bottom: 50px;
+    margin: 0 auto 32px;
   }
   .worries-head {
     display: flex;
@@ -531,7 +543,7 @@
   }
   /* Before stanza rotation */
   .before-body {
-    margin: 48px auto 0;
+    margin: 0 auto;
     max-width: 1080px;
     padding: 0 24px;
     display: grid;
@@ -2359,12 +2371,13 @@
 
     /* BEFORE / AFTER — 2カラム崩し＋afters のパディング修正 */
     .worries,
-    .worries.afters { padding: 80px 22px 90px; }
+    .worries.afters { padding: 0; height: 280vh; }
+    .worries .scroll-pin { padding: 32px 22px; }
     .before-stanza-quote { font-size: clamp(15px, 4.2vw, 19px); padding: 0 0.6em; letter-spacing: 0; }
     .worries.afters .before-stanza-quote { font-size: clamp(15px, 4.2vw, 19px); padding: 0 0.6em; letter-spacing: 0; }
-    .before-body { grid-template-columns: 1fr; gap: 40px; padding: 0; align-items: center; justify-items: center; }
-    .before-story { font-size: 17px; line-height: 1.95; min-height: auto; width: 100%; }
-    .before-photo { width: 85%; max-width: 320px; aspect-ratio: 3/4; }
+    .before-body { grid-template-columns: 1fr; gap: 24px; padding: 0; align-items: center; justify-items: center; }
+    .before-story { font-size: 16px; line-height: 1.85; min-height: auto; width: 100%; }
+    .before-photo { width: 60%; max-width: 220px; aspect-ratio: 3/4; }
     .worries-head h2 { font-size: clamp(44px, 13vw, 72px); }
 
     /* MOMENTS — numeral を一段小さく、テキストを読みやすく */
@@ -2425,8 +2438,9 @@
     .intro { padding: 90px 24px 80px; }
     .intro-copy { font-size: 15px; line-height: 2.2; }
 
-    .worries { padding: 90px 24px 100px; }
-    .worries-head { gap: 14px; margin-bottom: 50px; }
+    .worries { padding: 0; }
+    .worries .scroll-pin { padding: 90px 24px 100px; }
+    .worries-head { gap: 14px; margin-bottom: 32px; }
     .worries-head .sub { font-size: 12px; }
     .worries-grid { grid-template-columns: 1fr; gap: 40px; }
     .worry-item .num { font-size: 70px; margin-bottom: 24px; padding-bottom: 12px; }
@@ -2640,40 +2654,42 @@
 
   <!-- BEFORE -->
   <section class="worries" id="before">
-    <div class="worries-head">
-      <h2>Before.</h2>
-    </div>
-    <div class="before-body">
-      <div class="before-story" id="beforeStory">
-        <div class="before-stanza">
-          <p>あなたがドレスを選ぶのは、</p>
-          <p>いつも誰かのためだった。</p>
-          <p class="stanza-spacer"></p>
-          <p>友人の結婚式、メンターの出版パーティー、</p>
-          <p>仲間の周年イベント——</p>
-          <p>「おめでとう」を伝えた帰り道、ふと思う。</p>
-        </div>
-        <div class="before-stanza solo-quote">
-          <p class="before-stanza-quote">「私のために集まってくれる人、<br>　何人、いるんだろう」</p>
-        </div>
-        <div class="before-stanza">
-          <p>招きたい顔が、ひとり、ふたり、と浮かぶ。</p>
-          <p>でも、ランチ会の先には進めない。</p>
-          <p class="stanza-spacer"></p>
-          <p class="before-stanza-quote">「20名集まる気がしない」</p>
-          <p class="before-stanza-quote">「実績もないし」</p>
-          <p class="before-stanza-quote">「私が主役って、おこがましい気がする」</p>
-        </div>
-        <div class="before-stanza">
-          <p>そう思っているうちに、半年が過ぎた。</p>
-          <p class="stanza-spacer"></p>
-          <p>「いつか一緒に」と言い合った相手とのLINEは、</p>
-          <p>今日も、止まったまま。</p>
-        </div>
+    <div class="scroll-pin">
+      <div class="worries-head">
+        <h2>Before.</h2>
       </div>
-      <figure class="before-photo">
-        <img src="image/portrait_before_side.jpg" alt="">
-      </figure>
+      <div class="before-body">
+        <div class="before-story" id="beforeStory">
+          <div class="before-stanza">
+            <p>あなたがドレスを選ぶのは、</p>
+            <p>いつも誰かのためだった。</p>
+            <p class="stanza-spacer"></p>
+            <p>友人の結婚式、メンターの出版パーティー、</p>
+            <p>仲間の周年イベント——</p>
+            <p>「おめでとう」を伝えた帰り道、ふと思う。</p>
+          </div>
+          <div class="before-stanza solo-quote">
+            <p class="before-stanza-quote">「私のために集まってくれる人、<br>　何人、いるんだろう」</p>
+          </div>
+          <div class="before-stanza">
+            <p>招きたい顔が、ひとり、ふたり、と浮かぶ。</p>
+            <p>でも、ランチ会の先には進めない。</p>
+            <p class="stanza-spacer"></p>
+            <p class="before-stanza-quote">「20名集まる気がしない」</p>
+            <p class="before-stanza-quote">「実績もないし」</p>
+            <p class="before-stanza-quote">「私が主役って、おこがましい気がする」</p>
+          </div>
+          <div class="before-stanza">
+            <p>そう思っているうちに、半年が過ぎた。</p>
+            <p class="stanza-spacer"></p>
+            <p>「いつか一緒に」と言い合った相手とのLINEは、</p>
+            <p>今日も、止まったまま。</p>
+          </div>
+        </div>
+        <figure class="before-photo">
+          <img src="image/portrait_before_side.jpg" alt="">
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -2684,40 +2700,42 @@
 
   <!-- AFTER -->
   <section class="worries afters" id="after">
-    <div class="worries-head">
-      <h2>After.</h2>
-    </div>
-    <div class="before-body">
-      <div class="before-story" id="afterStory">
-        <div class="before-stanza">
-          <p>土曜日の、お昼12時。</p>
-          <p class="stanza-spacer"></p>
-          <p>あなたが選んだ場所に、</p>
-          <p>大切な人たちが、集まりはじめる。</p>
-        </div>
-        <div class="before-stanza solo-quote">
-          <p class="before-stanza-quote">「今日、楽しみにしてたの!」</p>
-          <p class="before-stanza-quote">「呼んでくれて、ありがとう」</p>
-          <p class="before-stanza-quote">「あなたのお仕事、もっと聞かせて」</p>
-        </div>
-        <div class="before-stanza">
-          <p>パーティーが終わった直後から、</p>
-          <p>スマホに届く嬉しい通知。</p>
-          <p class="stanza-spacer"></p>
-          <p class="before-stanza-quote">「あなたの言葉を聞いて、<br>　またご一緒したいと思いました」</p>
-        </div>
-        <div class="before-stanza">
-          <p>新しい仕事の相談、共催のお誘い、紹介の輪。</p>
-          <p class="stanza-spacer"></p>
-          <p>ランチ会では、起きなかったこと。</p>
-          <p class="stanza-spacer"></p>
-          <p class="before-stanza-quote">「招く側に立つって、</p>
-          <p class="before-stanza-quote">　こういうことだったんだ」</p>
-        </div>
+    <div class="scroll-pin">
+      <div class="worries-head">
+        <h2>After.</h2>
       </div>
-      <figure class="before-photo">
-        <img src="image/%E9%BB%92%E3%83%A1%E3%82%A4%E3%83%B3.PNG" alt="Hanu">
-      </figure>
+      <div class="before-body">
+        <div class="before-story" id="afterStory">
+          <div class="before-stanza">
+            <p>土曜日の、お昼12時。</p>
+            <p class="stanza-spacer"></p>
+            <p>あなたが選んだ場所に、</p>
+            <p>大切な人たちが、集まりはじめる。</p>
+          </div>
+          <div class="before-stanza solo-quote">
+            <p class="before-stanza-quote">「今日、楽しみにしてたの!」</p>
+            <p class="before-stanza-quote">「呼んでくれて、ありがとう」</p>
+            <p class="before-stanza-quote">「あなたのお仕事、もっと聞かせて」</p>
+          </div>
+          <div class="before-stanza">
+            <p>パーティーが終わった直後から、</p>
+            <p>スマホに届く嬉しい通知。</p>
+            <p class="stanza-spacer"></p>
+            <p class="before-stanza-quote">「あなたの言葉を聞いて、<br>　またご一緒したいと思いました」</p>
+          </div>
+          <div class="before-stanza">
+            <p>新しい仕事の相談、共催のお誘い、紹介の輪。</p>
+            <p class="stanza-spacer"></p>
+            <p>ランチ会では、起きなかったこと。</p>
+            <p class="stanza-spacer"></p>
+            <p class="before-stanza-quote">「招く側に立つって、</p>
+            <p class="before-stanza-quote">　こういうことだったんだ」</p>
+          </div>
+        </div>
+        <figure class="before-photo">
+          <img src="image/%E9%BB%92%E3%83%A1%E3%82%A4%E3%83%B3.PNG" alt="Hanu">
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -3049,183 +3067,61 @@
   })();
 
   (function () {
-    // Scroll-driven stanza progression for Before / After.
+    // Native scroll-driven stanza progression for Before / After.
     //
-    // 1) Section locks when the portrait is (almost) fully visible.
-    // 2) While locked, each wheel-tick / touch-swipe / arrow-key press
-    //    advances or reverses by one stanza with fade — synced to the
-    //    user's own scroll speed (no time-based auto-play).
-    // 3) Scrolling past the last stanza (or back before the first)
-    //    releases the lock and the page flows naturally to next section.
-    // 4) Photo gets a subtle motion (lift + zoom + micro tilt) per stanza
-    //    so the image also "moves" while reading.
+    // Approach:
+    // - Each .worries section is height: 220vh (260vh mobile).
+    // - Inside, .scroll-pin uses position:sticky to pin content at top:0
+    //   while the user scrolls through the section's extra height.
+    // - As scroll progresses through the section, we map progress (0–1) to
+    //   stanza index. No event hijacking, no body position:fixed lock —
+    //   native scroll all the way (works reliably on iOS Safari too).
+    // - Photo gets a subtle transform per stanza for some "おしゃれ" motion.
 
-    var INPUT_THROTTLE = 380;   // ms between stanza changes (per input)
-    var TOUCH_THRESHOLD = 28;   // px of finger travel before a swipe counts
-
-    var setup = function (storyId, stanzaSel) {
+    var setup = function (sectionId, storyId) {
+      var section = document.getElementById(sectionId);
       var story = document.getElementById(storyId);
-      if (!story) return;
-      var stanzas = story.querySelectorAll(stanzaSel);
+      if (!section || !story) return;
+      var stanzas = story.querySelectorAll('.before-stanza');
       if (!stanzas.length) return;
-      var body = story.closest('.before-body') || story.parentElement;
-      var trigger = (body && body.querySelector('.before-photo')) || story;
-      var photo = body ? body.querySelector('.before-photo') : null;
+      var photo = section.querySelector('.before-photo');
 
-      var fired = false;
-      var locked = false;
-      var lockedY = 0;
-      var current = 0;
-      var lastInput = 0;
-      var touchStartY = 0;
+      var lastIdx = -1;
 
-      function setStanza(i) {
-        current = Math.max(0, Math.min(stanzas.length - 1, i));
-        stanzas.forEach(function (s, idx) {
-          s.classList.toggle('active', idx === current);
+      function setStanza(idx) {
+        if (idx === lastIdx) return;
+        lastIdx = idx;
+        stanzas.forEach(function (s, i) {
+          s.classList.toggle('active', i === idx);
         });
         if (photo) {
-          var lift = -current * 6;            // px translate up
-          var zoom = 1 + current * 0.012;     // gentle zoom
-          var tilt = (current % 2 === 0) ? 0 : 0.45;
+          var lift = -idx * 6;
+          var zoom = 1 + idx * 0.012;
+          var tilt = (idx % 2 === 0) ? 0 : 0.45;
           photo.style.transform =
             'translateY(' + lift + 'px) scale(' + zoom + ') rotate(' + tilt + 'deg)';
         }
       }
-      function advance() {
-        if (current < stanzas.length - 1) { setStanza(current + 1); return true; }
-        return false;
-      }
-      function retreat() {
-        if (current > 0) { setStanza(current - 1); return true; }
-        return false;
+
+      function update() {
+        var rect = section.getBoundingClientRect();
+        var sectionH = section.offsetHeight;
+        var viewportH = window.innerHeight;
+        var pinRange = sectionH - viewportH;
+        if (pinRange <= 0) { setStanza(0); return; }
+        var scrolled = -rect.top;
+        var progress = Math.max(0, Math.min(1, scrolled / pinRange));
+        var idx = Math.min(stanzas.length - 1, Math.floor(progress * stanzas.length));
+        setStanza(idx);
       }
 
-      function tryStep(direction) {
-        var now = Date.now();
-        if (now - lastInput < INPUT_THROTTLE) return true; // throttled, still locked
-        lastInput = now;
-        if (direction > 0) return advance();
-        if (direction < 0) return retreat();
-        return false;
-      }
-
-      function onWheel(e) {
-        if (!locked) return;
-        var dy = e.deltaY;
-        if (dy > 0) {
-          if (current < stanzas.length - 1) {
-            e.preventDefault();
-            tryStep(1);
-          } else {
-            release();
-          }
-        } else if (dy < 0) {
-          if (current > 0) {
-            e.preventDefault();
-            tryStep(-1);
-          } else {
-            release();
-          }
-        }
-      }
-      function onTouchStart(e) { touchStartY = e.touches[0].clientY; }
-      function onTouchMove(e) {
-        if (!locked) return;
-        var y = e.touches[0].clientY;
-        var dy = touchStartY - y;
-        if (Math.abs(dy) < TOUCH_THRESHOLD) { e.preventDefault(); return; }
-        if (dy > 0) {
-          if (current < stanzas.length - 1) {
-            e.preventDefault();
-            if (tryStep(1)) touchStartY = y;
-          } else { release(); }
-        } else {
-          if (current > 0) {
-            e.preventDefault();
-            if (tryStep(-1)) touchStartY = y;
-          } else { release(); }
-        }
-      }
-      function onKey(e) {
-        if (!locked) return;
-        var down = ['ArrowDown', 'PageDown', 'Space', ' '].indexOf(e.key) !== -1;
-        var up = ['ArrowUp', 'PageUp'].indexOf(e.key) !== -1;
-        if (down) {
-          if (current < stanzas.length - 1) {
-            e.preventDefault();
-            tryStep(1);
-          } else { release(); }
-        } else if (up) {
-          if (current > 0) {
-            e.preventDefault();
-            tryStep(-1);
-          } else { release(); }
-        }
-      }
-
-      function lock() {
-        if (locked) return;
-        locked = true;
-        // pin the page so the section stays put while reading
-        lockedY = window.pageYOffset || document.documentElement.scrollTop || 0;
-        var b = document.body;
-        b.style.position = 'fixed';
-        b.style.top = -lockedY + 'px';
-        b.style.left = '0';
-        b.style.right = '0';
-        b.style.width = '100%';
-        window.addEventListener('wheel', onWheel, { passive: false });
-        window.addEventListener('touchstart', onTouchStart, { passive: true });
-        window.addEventListener('touchmove', onTouchMove, { passive: false });
-        window.addEventListener('keydown', onKey, true);
-      }
-      function release() {
-        if (!locked) return;
-        locked = false;
-        var b = document.body;
-        b.style.position = '';
-        b.style.top = '';
-        b.style.left = '';
-        b.style.right = '';
-        b.style.width = '';
-        var prev = document.documentElement.style.scrollBehavior;
-        document.documentElement.style.scrollBehavior = 'auto';
-        window.scrollTo(0, lockedY);
-        document.documentElement.style.scrollBehavior = prev;
-        window.removeEventListener('wheel', onWheel);
-        window.removeEventListener('touchstart', onTouchStart);
-        window.removeEventListener('touchmove', onTouchMove);
-        window.removeEventListener('keydown', onKey, true);
-      }
-
-      function play() {
-        if (fired) return;
-        fired = true;
-        setStanza(0);
-        lock();
-      }
-
-      story.style.cursor = 'pointer';
-      story.addEventListener('click', function () {
-        if (!fired) { play(); return; }
-        if (!advance()) release();
-      });
-      window.addEventListener('pagehide', release);
-
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.intersectionRatio >= 0.98) { play(); io.disconnect(); }
-          });
-        }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: [0.9, 0.98, 1.0] });
-        io.observe(trigger);
-      } else {
-        play();
-      }
+      // initial state + listen
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
     };
-    setup('beforeStory', '.before-stanza');
-    setup('afterStory', '.before-stanza');
+    setup('before', 'beforeStory');
+    setup('after', 'afterStory');
   })();
 
   // NAV TOGGLE
