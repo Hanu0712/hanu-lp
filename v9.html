@@ -563,17 +563,25 @@
     min-height: 12em;
     min-width: 0;
   }
-  /* Scroll-linked fade: opacity is set inline by JS based on scroll progress
-     within the section's pin range. Each stanza fades in over ~20% of its
-     segment, stays fully visible for ~60%, then fades out for ~20%.
-     Only a small linear smoothing here so fast scroll doesn't look jittery. */
+  /* Sequential fade: when a stanza becomes .active, the OLD stanza first
+     fades out (0.9s), then there's a brief pause, then the NEW stanza
+     fades in (1.1s) — driven entirely by CSS transition-delay.
+     Result: "ふわっと消えて → 一瞬置いて → ふわっと出てくる" autonomously. */
   .before-stanza {
     grid-column: 1;
     grid-row: 1;
     opacity: 0;
-    transition: opacity 0.18s linear;
+    /* On exit (active → not active): no delay, smooth fade out */
+    transition: opacity 0.9s ease-in-out;
     pointer-events: none;
     will-change: opacity;
+  }
+  .before-stanza.active {
+    opacity: 1;
+    pointer-events: auto;
+    /* On entry (not active → active): wait for the old stanza's fade-out
+       to finish before fading in. */
+    transition: opacity 1.1s ease-in-out 0.95s;
   }
   .before-stanza p {
     margin: 0;
@@ -3062,13 +3070,6 @@
     //   native scroll all the way (works reliably on iOS Safari too).
     // - Photo gets a subtle transform per stanza for some "おしゃれ" motion.
 
-    // easeInOutQuad — gives the fade a soft "ふわっと" curve at both ends
-    function easeInOut(t) {
-      if (t <= 0) return 0;
-      if (t >= 1) return 1;
-      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-    }
-
     var setup = function (sectionId, storyId) {
       var section = document.getElementById(sectionId);
       var story = document.getElementById(storyId);
@@ -3076,17 +3077,15 @@
       var stanzas = story.querySelectorAll('.before-stanza');
       if (!stanzas.length) return;
 
-      var FADE_IN = 0.20;   // first 20% of each segment: fade in
-      var FADE_OUT = 0.80;  // last 20% (after 80%) of each segment: fade out
       var ticking = false;
-      var prevOps = new Array(stanzas.length).fill(-1);
+      var lastIdx = -1; // -1 = no stanza active (pre-pin)
 
-      function applyOps(ops) {
-        for (var i = 0; i < ops.length; i++) {
-          if (Math.abs(ops[i] - prevOps[i]) > 0.005) {
-            stanzas[i].style.opacity = ops[i];
-            prevOps[i] = ops[i];
-          }
+      function setActive(idx) {
+        if (idx === lastIdx) return;
+        lastIdx = idx;
+        for (var i = 0; i < stanzas.length; i++) {
+          if (i === idx) stanzas[i].classList.add('active');
+          else stanzas[i].classList.remove('active');
         }
       }
 
@@ -3096,47 +3095,22 @@
         var viewportH = window.innerHeight;
         var pinRange = section.offsetHeight - viewportH;
         var n = stanzas.length;
-        var ops = new Array(n).fill(0);
 
-        if (pinRange <= 0) {
-          ops[0] = 1;
-          return applyOps(ops);
-        }
-        // Pre-pin: section hasn't pinned to top yet — everything hidden.
+        // Pre-pin: section approaching but not yet at top — no stanza
         if (rect.top > 0) {
-          return applyOps(ops);
+          setActive(-1);
+          return;
         }
-        // Post-pin: section has moved past — keep last stanza visible.
+        // Post-pin: section has moved past — keep last stanza visible
         if (rect.bottom <= viewportH) {
-          ops[n - 1] = 1;
-          return applyOps(ops);
+          setActive(n - 1);
+          return;
         }
+        if (pinRange <= 0) { setActive(0); return; }
 
         var progress = Math.max(0, Math.min(1, -rect.top / pinRange));
-        var segLen = 1 / n;
-
-        for (var i = 0; i < n; i++) {
-          var segStart = i * segLen;
-          var segEnd = (i + 1) * segLen;
-          var op = 0;
-          if (progress >= segStart && progress <= segEnd) {
-            var localP = (progress - segStart) / segLen;
-            if (localP < FADE_IN) {
-              op = easeInOut(localP / FADE_IN);
-            } else if (localP > FADE_OUT) {
-              op = easeInOut((1 - localP) / (1 - FADE_OUT));
-            } else {
-              op = 1;
-            }
-          }
-          // Last stanza never fades out — once it appears, it stays.
-          if (i === n - 1) {
-            var lp = (progress - segStart) / segLen;
-            if (lp >= FADE_IN) op = 1;
-          }
-          ops[i] = op;
-        }
-        applyOps(ops);
+        var idx = Math.min(n - 1, Math.floor(progress * n));
+        setActive(idx);
       }
 
       function update() {
