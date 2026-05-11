@@ -563,25 +563,20 @@
     min-height: 12em;
     min-width: 0;
   }
-  /* Sequential fade: when a stanza becomes .active, the OLD stanza first
-     fades out (0.9s), then there's a brief pause, then the NEW stanza
-     fades in (1.1s) — driven entirely by CSS transition-delay.
-     Result: "ふわっと消えて → 一瞬置いて → ふわっと出てくる" autonomously. */
+  /* Soft cross-fade: each stanza fades in/out with a long ease-in-out.
+     No delay — fade starts immediately when .active changes so the very
+     first stanza appears right as the section pins. */
   .before-stanza {
     grid-column: 1;
     grid-row: 1;
     opacity: 0;
-    /* On exit (active → not active): no delay, smooth fade out */
-    transition: opacity 0.9s ease-in-out;
+    transition: opacity 1.3s ease-in-out;
     pointer-events: none;
     will-change: opacity;
   }
   .before-stanza.active {
     opacity: 1;
     pointer-events: auto;
-    /* On entry (not active → active): wait for the old stanza's fade-out
-       to finish before fading in. */
-    transition: opacity 1.1s ease-in-out 0.95s;
   }
   .before-stanza p {
     margin: 0;
