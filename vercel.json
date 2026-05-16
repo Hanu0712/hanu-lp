@@ -61,7 +61,14 @@
     },
     {
       "source": "/",
-      "destination": "/v9"
+      "has": [
+        { "type": "query", "key": "pc", "value": "10" }
+      ],
+      "destination": "/v10"
+    },
+    {
+      "source": "/",
+      "destination": "/v10"
     }
   ]
 }
