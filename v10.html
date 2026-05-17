@@ -21,9 +21,12 @@
     --bg-warm: #8d928a;
     --ink-soft: #2a2a27;
     --mute: #8d928a;
-    --line: #8d928a;
     --accent: #0e0e0c;
     --white: #ffffff;
+
+    /* line accent — muted champagne gold (matches hero door hairline) */
+    --gold: #b8965a;
+    --line: var(--gold);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -492,27 +495,24 @@
     100% { transform: translateX(-50%); }
   }
 
-  /* ============ PRE-BEFORE (framed prompt) ============ */
+  /* ============ PRE-BEFORE (open editorial prompt — no frame) ============ */
   .prebefore {
     background: var(--bg);
-    padding: clamp(72px, 10vw, 140px) clamp(20px, 6vw, 60px);
-  }
-  .prebefore-frame {
-    max-width: 760px;
-    margin: 0 auto;
-    border: 1px solid var(--ink);
-    background: var(--bg);
-    padding: clamp(48px, 7vw, 96px) clamp(28px, 6vw, 80px);
+    padding: clamp(96px, 14vw, 180px) clamp(20px, 6vw, 60px);
     text-align: center;
+  }
+  .prebefore-inner {
+    max-width: 720px;
+    margin: 0 auto;
   }
   .prebefore-head {
     font-family: "Noto Serif JP", serif;
     font-weight: 600;
     color: var(--ink);
-    font-size: clamp(26px, 4vw, 42px);
+    font-size: clamp(28px, 4.4vw, 46px);
     letter-spacing: 0.08em;
     line-height: 1.55;
-    margin-bottom: clamp(40px, 6vw, 64px);
+    margin-bottom: clamp(48px, 7vw, 72px);
   }
   .prebefore-body {
     font-family: "Noto Serif JP", serif;
@@ -524,12 +524,12 @@
   .prebefore-body p { margin: 0; }
   .prebefore-body .gap { height: 1.2em; }
   .prebefore-divider {
-    font-family: "Bodoni Moda", serif;
-    color: var(--mute);
-    font-size: 22px;
-    letter-spacing: 0.3em;
-    margin: clamp(28px, 4vw, 44px) 0;
-    opacity: 0.7;
+    width: 56px;
+    height: 1px;
+    background: var(--gold);
+    margin: clamp(36px, 5vw, 56px) auto;
+    border: 0;
+    opacity: 0.85;
   }
 
   /* ============ BEFORE / WORRIES (scroll-driven) ============ */
@@ -2680,9 +2680,9 @@
     <div class="hero-scroll" id="heroScroll">SCROLL</div>
   </section>
 
-  <!-- PRE-BEFORE: framed prompt -->
+  <!-- PRE-BEFORE: open editorial prompt -->
   <section class="prebefore" id="prebefore">
-    <div class="prebefore-frame">
+    <div class="prebefore-inner">
       <h2 class="prebefore-head">こんな風に感じたことは<br>ありませんか？</h2>
       <div class="prebefore-body">
         <p>集客は出来た。</p>
@@ -2693,7 +2693,7 @@
         <p>“ただ開催しただけ”</p>
         <p>で終わっていた。</p>
       </div>
-      <div class="prebefore-divider" aria-hidden="true">—</div>
+      <hr class="prebefore-divider" aria-hidden="true">
       <div class="prebefore-body">
         <p>主催者として動き続けて、</p>
         <p>ゆっくり話せなかった。</p>
