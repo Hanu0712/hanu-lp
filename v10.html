@@ -492,6 +492,46 @@
     100% { transform: translateX(-50%); }
   }
 
+  /* ============ PRE-BEFORE (framed prompt) ============ */
+  .prebefore {
+    background: var(--bg);
+    padding: clamp(72px, 10vw, 140px) clamp(20px, 6vw, 60px);
+  }
+  .prebefore-frame {
+    max-width: 760px;
+    margin: 0 auto;
+    border: 1px solid var(--ink);
+    background: var(--bg);
+    padding: clamp(48px, 7vw, 96px) clamp(28px, 6vw, 80px);
+    text-align: center;
+  }
+  .prebefore-head {
+    font-family: "Noto Serif JP", serif;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: clamp(26px, 4vw, 42px);
+    letter-spacing: 0.08em;
+    line-height: 1.55;
+    margin-bottom: clamp(40px, 6vw, 64px);
+  }
+  .prebefore-body {
+    font-family: "Noto Serif JP", serif;
+    color: var(--ink-soft);
+    font-size: clamp(16px, 1.6vw, 19px);
+    letter-spacing: 0.06em;
+    line-height: 2.1;
+  }
+  .prebefore-body p { margin: 0; }
+  .prebefore-body .gap { height: 1.2em; }
+  .prebefore-divider {
+    font-family: "Bodoni Moda", serif;
+    color: var(--mute);
+    font-size: 22px;
+    letter-spacing: 0.3em;
+    margin: clamp(28px, 4vw, 44px) 0;
+    opacity: 0.7;
+  }
+
   /* ============ BEFORE / WORRIES (scroll-driven) ============ */
   .worries {
     height: 280vh;
@@ -2638,6 +2678,30 @@
     </div>
 
     <div class="hero-scroll" id="heroScroll">SCROLL</div>
+  </section>
+
+  <!-- PRE-BEFORE: framed prompt -->
+  <section class="prebefore" id="prebefore">
+    <div class="prebefore-frame">
+      <h2 class="prebefore-head">こんな風に感じたことは<br>ありませんか？</h2>
+      <div class="prebefore-body">
+        <p>集客は出来た。</p>
+        <p>当日写真もたくさん撮った。</p>
+        <p class="gap"></p>
+        <p>でも、</p>
+        <p>気づけば</p>
+        <p>“ただ開催しただけ”</p>
+        <p>で終わっていた。</p>
+      </div>
+      <div class="prebefore-divider" aria-hidden="true">—</div>
+      <div class="prebefore-body">
+        <p>主催者として動き続けて、</p>
+        <p>ゆっくり話せなかった。</p>
+        <p class="gap"></p>
+        <p>なんとなく交流会みたいになって、</p>
+        <p>「またやりたい」が残らなかった。</p>
+      </div>
+    </div>
   </section>
 
   <!-- BEFORE -->
