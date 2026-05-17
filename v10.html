@@ -537,9 +537,9 @@
   /* ============ BEFORE / AFTER (static, left text + right photo) ============ */
   .worries {
     background: var(--bg-soft);
-    padding: clamp(80px, 10vw, 140px) clamp(20px, 6vw, 60px);
-    border-top: 1.5px solid var(--gold);
-    border-bottom: 1.5px solid var(--gold);
+    padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 48px);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
   }
   .worries.afters {
     background: var(--bg);
@@ -547,7 +547,7 @@
   /* avoid double hairline at the Before↔After boundary */
   .worries + .worries { border-top: 0; }
   .worries-inner {
-    max-width: 1120px;
+    max-width: 860px;
     margin: 0 auto;
   }
   .worries-head {
@@ -570,8 +570,8 @@
   }
   .ba-body {
     display: grid;
-    grid-template-columns: 1fr clamp(360px, 42vw, 560px);
-    gap: clamp(40px, 6vw, 80px);
+    grid-template-columns: 1fr clamp(260px, 32vw, 420px);
+    gap: clamp(32px, 5vw, 64px);
     align-items: center;
   }
   .ba-list {
@@ -1095,19 +1095,11 @@
     line-height: 1.9;
   }
 
-  /* ============ GOLD HAIRLINE (section divider — mirrors hero door seam) ============ */
+  /* ============ INK HAIRLINE (section divider) ============ */
   .sage-bar {
-    height: 2px;
-    background: linear-gradient(90deg,
-      rgba(214,180,118,0)    0%,
-      rgba(214,180,118,0.55) 12%,
-      rgba(214,180,118,0.95) 50%,
-      rgba(214,180,118,0.55) 88%,
-      rgba(214,180,118,0)    100%);
+    height: 1px;
+    background: var(--ink);
     width: 100%;
-  }
-  @media (max-width: 900px) {
-    .sage-bar { height: 1.5px; }
   }
 
   /* ============ ANSWER (Hand in Hand) ============ */
@@ -1336,7 +1328,7 @@
   .service {
     padding: 80px 60px 10px;
     background: var(--bg);
-    border-top: 1.5px solid var(--gold);
+    border-top: 1px solid var(--ink);
   }
   .service-wrap {
     max-width: 720px;
@@ -1661,7 +1653,7 @@
   #monitor {
     padding: 100px 60px 140px;
     background: var(--bg-soft);
-    border-top: 1.5px solid var(--gold);
+    border-top: 1px solid var(--ink);
     position: relative;
     overflow: hidden;
   }
@@ -1790,7 +1782,7 @@
   .price-card.monitor {
     background: var(--ink);
     color: var(--white);
-    border-top: 1.5px solid var(--gold);
+    border-top: 1px solid var(--white);
   }
   .price-card .label {
     font-size: 13px;
@@ -1854,7 +1846,6 @@
     padding: 56px 40px;
     background: var(--white);
     border: 1px solid var(--ink);
-    border-top: 1.5px solid var(--gold);
     text-align: center;
     box-shadow: 0 24px 60px rgba(42,40,36,0.08);
   }
