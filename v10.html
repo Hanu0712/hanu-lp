@@ -1091,14 +1091,19 @@
     line-height: 1.9;
   }
 
-  /* ============ GOLD BAR (section divider, ~1cm champagne) ============ */
+  /* ============ GOLD HAIRLINE (section divider — mirrors hero door seam) ============ */
   .sage-bar {
-    height: 38px;
-    background: var(--gold);
+    height: 2px;
+    background: linear-gradient(90deg,
+      rgba(214,180,118,0)    0%,
+      rgba(214,180,118,0.55) 12%,
+      rgba(214,180,118,0.95) 50%,
+      rgba(214,180,118,0.55) 88%,
+      rgba(214,180,118,0)    100%);
     width: 100%;
   }
   @media (max-width: 900px) {
-    .sage-bar { height: 28px; }
+    .sage-bar { height: 1.5px; }
   }
 
   /* ============ ANSWER (Hand in Hand) ============ */
