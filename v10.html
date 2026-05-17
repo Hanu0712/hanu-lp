@@ -2380,10 +2380,8 @@
     .nav-menu { font-size: clamp(18px, 5vw, 26px); gap: 18px; letter-spacing: 0.18em; }
     .side-rail { display: none; }
 
-    .hero { height: 100vh; min-height: 560px; }
-    /* mobile: 画面いっぱいに写真を見せる（contain だとレターボックスで小さく見える） */
-    .hero-slide img { object-fit: cover; }
-    .hero-slide::before { display: none; }
+    /* mobile: hero を低くして、3:2写真の上下に出るブラー帯を最小化 */
+    .hero { height: 72vh; min-height: 460px; max-height: 640px; }
     .hero-tagline-jp { font-size: clamp(20px, 5.2vw, 36px); letter-spacing: 0.1em; line-height: 1.75; }
     .hero-subtagline-jp { font-size: clamp(13px, 3.4vw, 16px); letter-spacing: 0.16em; margin-top: 18px; }
     .hero-cta-zoom { padding: 16px 28px; font-size: 13px; letter-spacing: 0.14em; gap: 10px; margin-top: 38px; }
