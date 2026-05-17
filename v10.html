@@ -2380,8 +2380,13 @@
     .nav-menu { font-size: clamp(18px, 5vw, 26px); gap: 18px; letter-spacing: 0.18em; }
     .side-rail { display: none; }
 
-    /* mobile: hero を低くして、3:2写真の上下に出るブラー帯を最小化 */
-    .hero { height: 72vh; min-height: 460px; max-height: 640px; }
+    /* mobile: hero を画面いっぱい、写真は cover + 横パン3分割で表示 */
+    .hero { height: 100vh; min-height: 560px; }
+    .hero-slide img {
+      object-fit: cover;
+      transition: object-position 0.6s ease, opacity 0.6s ease;
+    }
+    .hero-slide::before { display: none; }
     .hero-tagline-jp { font-size: clamp(20px, 5.2vw, 36px); letter-spacing: 0.1em; line-height: 1.75; }
     .hero-subtagline-jp { font-size: clamp(13px, 3.4vw, 16px); letter-spacing: 0.16em; margin-top: 18px; }
     .hero-cta-zoom { padding: 16px 28px; font-size: 13px; letter-spacing: 0.14em; gap: 10px; margin-top: 38px; }
@@ -2988,13 +2993,55 @@
       openDoors();
     }
 
-    // slideshow: change every 3s with crossfade via opacity
+    // slideshow:
+    //  - desktop: each slide for 3s, crossfade
+    //  - mobile (≤700px): each slide split into 3 horizontal frames (left/center/right)
+    //    shown 2s each → 6s per photo
     var current = 0;
-    setInterval(function () {
-      slides[current].classList.remove('is-active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('is-active');
-    }, 3000);
+    var mql = window.matchMedia('(max-width: 700px)');
+    var positions = ['0% center', '50% center', '100% center'];
+
+    function resetImgPosition(slide) {
+      var img = slide.querySelector('img');
+      if (!img) return;
+      var saved = img.style.transition;
+      img.style.transition = 'none';
+      img.style.objectPosition = positions[0];
+      // force reflow so the next transition starts clean
+      void img.offsetHeight;
+      img.style.transition = saved;
+    }
+
+    if (mql.matches) {
+      // initialize: all slide imgs at frame 0
+      for (var i = 0; i < slides.length; i++) {
+        var im = slides[i].querySelector('img');
+        if (im) im.style.objectPosition = positions[0];
+      }
+      var frame = 0;
+      setInterval(function () {
+        frame++;
+        if (frame >= positions.length) {
+          // advance to next slide and reset frame
+          var prev = slides[current];
+          frame = 0;
+          slides[current].classList.remove('is-active');
+          current = (current + 1) % slides.length;
+          slides[current].classList.add('is-active');
+          // reset prev's pan position after fade-out so it starts at left next round
+          setTimeout(function () { resetImgPosition(prev); }, 1500);
+        } else {
+          var img = slides[current].querySelector('img');
+          if (img) img.style.objectPosition = positions[frame];
+        }
+      }, 2000);
+    } else {
+      setInterval(function () {
+        slides[current].classList.remove('is-active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('is-active');
+      }, 3000);
+    }
   })();
 
   // NAV TOGGLE
