@@ -528,20 +528,24 @@
   .prebefore-divider {
     width: 44px;
     height: 1px;
-    background: var(--gold);
+    background: var(--ink);
     margin: clamp(22px, 3vw, 32px) auto;
     border: 0;
-    opacity: 0.85;
+    opacity: 0.6;
   }
 
   /* ============ BEFORE / AFTER (static, left text + right photo) ============ */
   .worries {
     background: var(--bg-soft);
     padding: clamp(80px, 10vw, 140px) clamp(20px, 6vw, 60px);
+    border-top: 1.5px solid var(--gold);
+    border-bottom: 1.5px solid var(--gold);
   }
   .worries.afters {
     background: var(--bg);
   }
+  /* avoid double hairline at the Before↔After boundary */
+  .worries + .worries { border-top: 0; }
   .worries-inner {
     max-width: 1120px;
     margin: 0 auto;
@@ -594,7 +598,7 @@
     top: 0.45em;
     width: 18px;
     height: 18px;
-    border: 1.5px solid var(--gold);
+    border: 1.5px solid var(--ink);
     background: transparent;
   }
   .ba-list li::after {
@@ -604,8 +608,8 @@
     top: 0.55em;
     width: 11px;
     height: 6px;
-    border-left: 2px solid var(--gold);
-    border-bottom: 2px solid var(--gold);
+    border-left: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
     transform: rotate(-45deg);
   }
   .ba-photo {
@@ -1332,7 +1336,7 @@
   .service {
     padding: 80px 60px 10px;
     background: var(--bg);
-    border-top: 56px solid var(--shape);
+    border-top: 1.5px solid var(--gold);
   }
   .service-wrap {
     max-width: 720px;
@@ -1657,7 +1661,7 @@
   #monitor {
     padding: 100px 60px 140px;
     background: var(--bg-soft);
-    border-top: 56px solid var(--shape);
+    border-top: 1.5px solid var(--gold);
     position: relative;
     overflow: hidden;
   }
@@ -1786,7 +1790,7 @@
   .price-card.monitor {
     background: var(--ink);
     color: var(--white);
-    border-top: 6px solid var(--shape);
+    border-top: 1.5px solid var(--gold);
   }
   .price-card .label {
     font-size: 13px;
@@ -1827,7 +1831,7 @@
     display: inline-block;
     margin-top: 14px;
     padding: 6px 18px;
-    border: 1px solid var(--shape);
+    border: 1px solid var(--ink);
     font-size: 14px;
     color: var(--ink);
     letter-spacing: 0.06em;
@@ -1849,8 +1853,8 @@
     margin: 100px auto 0;
     padding: 56px 40px;
     background: var(--white);
-    border: 1px solid var(--line);
-    border-top: 6px solid var(--shape);
+    border: 1px solid var(--ink);
+    border-top: 1.5px solid var(--gold);
     text-align: center;
     box-shadow: 0 24px 60px rgba(42,40,36,0.08);
   }
