@@ -1234,10 +1234,23 @@
   }
   .moments-sub {
     font-family: "Noto Serif JP", serif;
-    font-size: 15px;
+    font-size: clamp(15px, 1.2vw, 17px);
     color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    line-height: 2.05;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .moments-sub p { margin: 0 0 1.1em; }
+  .moments-sub p:last-child { margin-bottom: 0; }
+  .moments-sub .pivot {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 1.08em;
     letter-spacing: 0.08em;
-    line-height: 2.1;
+    margin: 1.4em 0;
   }
   .moments-sub em {
     font-style: normal;
@@ -2688,10 +2701,16 @@
       <span class="section-eyebrow">— Purpose —</span>
       <h2 class="moments-display">Moments <em>worth</em><br>marking.</h2>
       <div class="moments-rule" aria-hidden="true"><span class="moments-rule-dot"></span></div>
-      <p class="moments-sub">
-        あなたの&ldquo;パーティー&rdquo;はひとつじゃない。<br>
-        <em>次のステージの起点になる3つの&ldquo;パーティー&rdquo;。</em>
-      </p>
+      <div class="moments-sub">
+        <p>ウェディングプランナー歴19年。<br>
+        延べ500組以上の「結婚式」という、人生の節目に携わる中で、<br>
+        「いい時間だった」と後から思い出される場には、<br>
+        想いだけではなく、<br>
+        空気・流れ・距離感まで考える&ldquo;設計&rdquo;が必要だと感じてきました。</p>
+        <p>パーティーも同じ。</p>
+        <p class="pivot">&ldquo;到達点を祝う場&rdquo;ではなく、<br>&ldquo;次のステージへと動かす場&rdquo;。</p>
+        <p>女性起業家・主催者の<br>&ldquo;次のステージ&rdquo;となる時間を、<br>プロデュースしています。</p>
+      </div>
     </div>
 
     <div class="moments-grid moments-grid-3">
