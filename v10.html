@@ -533,41 +533,20 @@
     opacity: 0.85;
   }
 
-  /* ============ BEFORE / WORRIES (scroll-driven) ============ */
+  /* ============ BEFORE / AFTER (static, left text + right photo) ============ */
   .worries {
-    height: 280vh;
-    padding: 0;
     background: var(--bg-soft);
-    position: relative;
-  }
-  .worries .scroll-pin {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 60px;
-    overflow: hidden;
-  }
-  .worries .worries-head {
-    margin: 0 auto 32px;
+    padding: clamp(80px, 10vw, 140px) clamp(20px, 6vw, 60px);
   }
   .worries.afters {
-    background: var(--bg-soft);
-    height: 280vh;
-    padding: 0;
+    background: var(--bg);
   }
-  .worries.afters .worries-head {
-    margin: 0 auto 32px;
+  .worries-inner {
+    max-width: 1120px;
+    margin: 0 auto;
   }
   .worries-head {
-    display: flex;
-    align-items: baseline;
-    gap: 40px;
-    max-width: 1120px;
-    margin: 0 auto 90px;
-    flex-wrap: wrap;
+    margin: 0 0 clamp(40px, 5vw, 64px);
   }
   .worries-head h2 {
     font-family: "Bodoni Moda", "Playfair Display", serif;
@@ -584,105 +563,61 @@
     color: var(--ink-soft);
     letter-spacing: 0.3em;
   }
-  /* Before stanza rotation */
-  .before-body {
-    margin: 0 auto;
-    max-width: 1080px;
-    padding: 0 24px;
+  .ba-body {
     display: grid;
-    grid-template-columns: 1fr clamp(240px, 24vw, 340px);
-    gap: clamp(40px, 6vw, 90px);
+    grid-template-columns: 1fr clamp(360px, 42vw, 560px);
+    gap: clamp(40px, 6vw, 80px);
     align-items: center;
   }
-  .before-story {
+  .ba-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(17px, 1.65vw, 25px);
-    line-height: 1.95;
-    letter-spacing: -0.01em;
-    color: var(--ink);
+  }
+  .ba-list li {
+    position: relative;
+    padding-left: 44px;
+    margin-bottom: clamp(18px, 2.4vw, 28px);
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.65;
+    letter-spacing: 0.03em;
     font-weight: 500;
-    text-align: center;
-    display: grid;
-    min-height: 12em;
-    min-width: 0;
+    color: var(--ink);
   }
-  /* Soft cross-fade: each stanza fades in/out with a long ease-in-out.
-     No delay — fade starts immediately when .active changes so the very
-     first stanza appears right as the section pins. */
-  .before-stanza {
-    grid-column: 1;
-    grid-row: 1;
-    opacity: 0;
-    transition: opacity 1.3s ease-in-out;
-    pointer-events: none;
-    will-change: opacity;
+  .ba-list li:last-child { margin-bottom: 0; }
+  .ba-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--gold);
+    background: transparent;
   }
-  .before-stanza.active {
-    opacity: 1;
-    pointer-events: auto;
+  .ba-list li::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.55em;
+    width: 11px;
+    height: 6px;
+    border-left: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    transform: rotate(-45deg);
   }
-  .before-stanza p {
+  .ba-photo {
     margin: 0;
-  }
-  .before-stanza-quote {
-    font-size: clamp(19px, 2vw, 25px);
-    font-style: normal;
-    color: var(--ink);
-    letter-spacing: 0.02em;
-    font-weight: 500;
-    padding: 0 0.4em;
-    line-height: 1.85;
-  }
-  .before-stanza .stanza-spacer {
-    height: 0.6em;
-  }
-  .before-stanza.solo-quote {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 0.2em;
-  }
-  .before-stanza.solo-quote .before-stanza-quote {
-    font-size: clamp(19px, 2vw, 25px);
-    font-weight: 500;
-    line-height: 1.85;
-    color: var(--ink);
-  }
-  /* After: 全引用文を大きく統一 */
-  .worries.afters .before-stanza-quote {
-    font-size: clamp(19px, 2vw, 25px);
-    font-weight: 500;
-    line-height: 1.85;
-    color: var(--ink);
-    font-style: normal;
-  }
-  .before-stanza em {
-    font-style: normal;
-    font-weight: 500;
-    color: var(--ink);
-  }
-  .before-photo {
-    margin: 0;
-    width: clamp(240px, 24vw, 340px);
-    aspect-ratio: 3 / 4;
-    flex-shrink: 0;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
   }
-  .before-photo img {
+  .ba-photo img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-  }
-  /* After photo: the source image shows Hanu seated at a distance, so she
-     appears much smaller than in the Before bust-up portrait. Zoom the
-     image in to match Before's framing. */
-  #after .before-photo img {
-    transform: scale(1.75);
-    transform-origin: 50% 28%;
   }
 
   .worries-grid {
@@ -2409,15 +2344,14 @@
 
     /* BEFORE / AFTER — 2カラム崩し＋afters のパディング修正 */
     .worries,
-    .worries.afters { padding: 0; height: 380vh; }
-    .worries .scroll-pin { padding: 16px 18px; }
-    .worries .worries-head { margin: 0 auto 14px; }
+    .worries.afters { padding: 56px 20px; }
+    .worries-head { margin: 0 0 28px; }
     .worries-head h2 { font-size: clamp(38px, 11vw, 60px); }
-    .before-stanza-quote { font-size: clamp(15px, 4.2vw, 19px); padding: 0 0.6em; letter-spacing: 0; }
-    .worries.afters .before-stanza-quote { font-size: clamp(15px, 4.2vw, 19px); padding: 0 0.6em; letter-spacing: 0; }
-    .before-body { grid-template-columns: 1fr; gap: 28px; padding: 0; align-items: center; justify-items: center; }
-    .before-story { font-size: 17px; line-height: 1.85; min-height: 10em; width: 100%; }
-    .before-photo { width: 78%; max-width: 300px; aspect-ratio: 3/4; }
+    .ba-body { grid-template-columns: 1fr; gap: 28px; }
+    .ba-list li { font-size: 16px; padding-left: 38px; margin-bottom: 16px; }
+    .ba-list li::before { width: 16px; height: 16px; top: 0.4em; }
+    .ba-list li::after { width: 9px; height: 5px; left: 3px; top: 0.5em; }
+    .ba-photo { aspect-ratio: 3 / 2; width: 100%; }
 
     /* MOMENTS — numeral を一段小さく、テキストを読みやすく */
     .moments-numeral { font-size: 60px; margin-bottom: 12px; }
@@ -2708,86 +2642,39 @@
 
   <!-- BEFORE -->
   <section class="worries" id="before">
-    <div class="scroll-pin">
+    <div class="worries-inner">
       <div class="worries-head">
         <h2>Before.</h2>
       </div>
-      <div class="before-body">
-        <div class="before-story" id="beforeStory">
-          <div class="before-stanza">
-            <p>あなたがドレスを選ぶのは、</p>
-            <p>いつも誰かのためだった。</p>
-            <p class="stanza-spacer"></p>
-            <p>友人の結婚式、メンターの出版パーティー、</p>
-            <p>仲間の周年イベント——</p>
-            <p>「おめでとう」を伝えた帰り道、ふと思う。</p>
-          </div>
-          <div class="before-stanza solo-quote">
-            <p class="before-stanza-quote">「私のために集まってくれる人、<br>　何人、いるんだろう」</p>
-          </div>
-          <div class="before-stanza">
-            <p>招きたい顔が、ひとり、ふたり、と浮かぶ。</p>
-            <p>でも、ランチ会の先には進めない。</p>
-            <p class="stanza-spacer"></p>
-            <p class="before-stanza-quote">「20名集まる気がしない」</p>
-            <p class="before-stanza-quote">「実績もないし」</p>
-            <p class="before-stanza-quote">「私が主役って、おこがましい気がする」</p>
-          </div>
-          <div class="before-stanza">
-            <p>そう思っているうちに、半年が過ぎた。</p>
-            <p class="stanza-spacer"></p>
-            <p>「いつか一緒に」と言い合った相手とのLINEは、</p>
-            <p>今日も、止まったまま。</p>
-          </div>
-        </div>
-        <figure class="before-photo">
-          <img src="image/portrait_before_side.jpg" alt="">
+      <div class="ba-body">
+        <ul class="ba-list">
+          <li>「ただ開催しただけ」で終わる</li>
+          <li>主催者だけが忙しい</li>
+          <li>会話が自然に広がらない</li>
+          <li>なんとなく交流会っぽくなる</li>
+        </ul>
+        <figure class="ba-photo">
+          <img src="image/before_scene.jpg" alt="">
         </figure>
       </div>
     </div>
   </section>
 
-  <!-- BRIDGE (between Before and After) -->
-  <section class="editorial editorial-strip">
-    <p class="editorial-bridge">もし、その止まったLINEに——<br>招待の言葉を、載せられたら。</p>
-  </section>
-
   <!-- AFTER -->
   <section class="worries afters" id="after">
-    <div class="scroll-pin">
+    <div class="worries-inner">
       <div class="worries-head">
         <h2>After.</h2>
       </div>
-      <div class="before-body">
-        <div class="before-story" id="afterStory">
-          <div class="before-stanza">
-            <p>土曜日の、お昼12時。</p>
-            <p class="stanza-spacer"></p>
-            <p>あなたが選んだ場所に、</p>
-            <p>大切な人たちが、集まりはじめる。</p>
-          </div>
-          <div class="before-stanza solo-quote">
-            <p class="before-stanza-quote">「今日、楽しみにしてたの!」</p>
-            <p class="before-stanza-quote">「呼んでくれて、ありがとう」</p>
-            <p class="before-stanza-quote">「あなたのお仕事、もっと聞かせて」</p>
-          </div>
-          <div class="before-stanza">
-            <p>パーティーが終わった直後から、</p>
-            <p>スマホに届く嬉しい通知。</p>
-            <p class="stanza-spacer"></p>
-            <p class="before-stanza-quote">「あなたの言葉を聞いて、<br>　またご一緒したいと思いました」</p>
-          </div>
-          <div class="before-stanza">
-            <p>新しい仕事の相談、共催のお誘い、紹介の輪。</p>
-            <p class="stanza-spacer"></p>
-            <p>ランチ会では、起きなかったこと。</p>
-            <p class="stanza-spacer"></p>
-            <p class="before-stanza-quote">「招く側に立つって、</p>
-            <p class="before-stanza-quote">　こういうことだったんだ」</p>
-          </div>
-        </div>
-        <figure class="before-photo">
-          <img src="image/%E9%BB%92%E3%83%A1%E3%82%A4%E3%83%B3.PNG" alt="Hanu">
+      <div class="ba-body">
+        <ul class="ba-list">
+          <li>「またやりたい」が残る</li>
+          <li>自然と会話が生まれる</li>
+          <li>主催者自身も楽しめる</li>
+          <li>ゲスト同士の距離が近づく</li>
+        </ul>
+        <figure class="ba-photo">
+          <img src="image/after_scene.jpg" alt="">
         </figure>
       </div>
     </div>
@@ -3137,75 +3024,6 @@
       current = (current + 1) % slides.length;
       slides[current].classList.add('is-active');
     }, 3000);
-  })();
-
-  (function () {
-    // Native scroll-driven stanza progression for Before / After.
-    //
-    // Approach:
-    // - Each .worries section is height: 220vh (260vh mobile).
-    // - Inside, .scroll-pin uses position:sticky to pin content at top:0
-    //   while the user scrolls through the section's extra height.
-    // - As scroll progresses through the section, we map progress (0–1) to
-    //   stanza index. No event hijacking, no body position:fixed lock —
-    //   native scroll all the way (works reliably on iOS Safari too).
-    // - Photo gets a subtle transform per stanza for some "おしゃれ" motion.
-
-    var setup = function (sectionId, storyId) {
-      var section = document.getElementById(sectionId);
-      var story = document.getElementById(storyId);
-      if (!section || !story) return;
-      var stanzas = story.querySelectorAll('.before-stanza');
-      if (!stanzas.length) return;
-
-      var ticking = false;
-      var lastIdx = -1; // -1 = no stanza active (pre-pin)
-
-      function setActive(idx) {
-        if (idx === lastIdx) return;
-        lastIdx = idx;
-        for (var i = 0; i < stanzas.length; i++) {
-          if (i === idx) stanzas[i].classList.add('active');
-          else stanzas[i].classList.remove('active');
-        }
-      }
-
-      function compute() {
-        ticking = false;
-        var rect = section.getBoundingClientRect();
-        var viewportH = window.innerHeight;
-        var pinRange = section.offsetHeight - viewportH;
-        var n = stanzas.length;
-
-        // Pre-pin: section approaching but not yet at top — no stanza
-        if (rect.top > 0) {
-          setActive(-1);
-          return;
-        }
-        // Post-pin: section has moved past — keep last stanza visible
-        if (rect.bottom <= viewportH) {
-          setActive(n - 1);
-          return;
-        }
-        if (pinRange <= 0) { setActive(0); return; }
-
-        var progress = Math.max(0, Math.min(1, -rect.top / pinRange));
-        var idx = Math.min(n - 1, Math.floor(progress * n));
-        setActive(idx);
-      }
-
-      function update() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(compute);
-      }
-
-      update();
-      window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update, { passive: true });
-    };
-    setup('before', 'beforeStory');
-    setup('after', 'afterStory');
   })();
 
   // NAV TOGGLE
