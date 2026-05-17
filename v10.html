@@ -6,6 +6,8 @@
 <title>Hanu ｜ Party Producer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="image/image2/hero01.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="image/image2/hero02.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -2615,8 +2617,8 @@
   <section class="hero" id="top">
     <!-- slideshow background -->
     <div class="hero-slideshow" id="heroSlideshow">
-      <div class="hero-slide is-active" style="background-image:url('image/image2/hero01.png')"><img src="image/image2/hero01.png" alt=""></div>
-      <div class="hero-slide" style="background-image:url('image/image2/hero02.png')"><img src="image/image2/hero02.png" alt=""></div>
+      <div class="hero-slide is-active" style="background-image:url('image/image2/hero01.jpg')"><img src="image/image2/hero01.jpg" alt="" fetchpriority="high"></div>
+      <div class="hero-slide" style="background-image:url('image/image2/hero02.jpg')"><img src="image/image2/hero02.jpg" alt=""></div>
     </div>
 
     <!-- readability tint -->
@@ -3036,12 +3038,31 @@
     var slides = slideshow.querySelectorAll('.hero-slide');
     if (!slides.length) return;
 
-    // open doors after a short pause (the "溜め")
-    setTimeout(function () {
-      doors.classList.add('is-open');
-      if (overlay) overlay.classList.add('is-revealed');
-      if (scroll) scroll.classList.add('is-revealed');
-    }, 650);
+    // open doors after a short pause (the "溜め"),
+    // but only after the first hero image is fully decoded —
+    // otherwise the user sees black behind the opening doors.
+    var firstImg = slides[0].querySelector('img');
+    var minDelay = 650;
+    var startedAt = Date.now();
+    function openDoors() {
+      var elapsed = Date.now() - startedAt;
+      var wait = Math.max(0, minDelay - elapsed);
+      setTimeout(function () {
+        doors.classList.add('is-open');
+        if (overlay) overlay.classList.add('is-revealed');
+        if (scroll) scroll.classList.add('is-revealed');
+      }, wait);
+    }
+    if (firstImg && !firstImg.complete) {
+      // hard cap so we never wait forever on a slow network
+      var fired = false;
+      var fire = function () { if (fired) return; fired = true; openDoors(); };
+      firstImg.addEventListener('load', fire, { once: true });
+      firstImg.addEventListener('error', fire, { once: true });
+      setTimeout(fire, 2500);
+    } else {
+      openDoors();
+    }
 
     // slideshow: change every 3s with crossfade via opacity
     var current = 0;
