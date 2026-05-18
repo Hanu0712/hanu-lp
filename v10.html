@@ -1308,7 +1308,7 @@
     padding: 0 8px;
   }
 
-  /* ============ MOMENTS GALLERY (horizontal scroll, swipe/drag) ============ */
+  /* ============ MOMENTS GALLERY (auto-marquee, infinite loop) ============ */
   .moments-gallery {
     background: var(--bg);
     padding: clamp(64px, 8vw, 110px) 0;
@@ -1318,19 +1318,14 @@
   }
   .moments-gallery-track {
     display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    gap: clamp(14px, 2vw, 24px);
-    padding: 0 clamp(20px, 6vw, 60px);
-    cursor: grab;
-    scrollbar-width: none;
+    width: max-content;
+    gap: clamp(12px, 1.8vw, 20px);
+    animation: moments-marquee 36s linear infinite;
   }
-  .moments-gallery-track::-webkit-scrollbar { display: none; }
-  .moments-gallery-track.is-dragging { cursor: grabbing; scroll-behavior: auto; }
+  .moments-gallery:hover .moments-gallery-track { animation-play-state: paused; }
   .moments-gallery-slide {
-    flex: 0 0 min(86%, 1080px);
-    scroll-snap-align: center;
+    flex: 0 0 auto;
+    width: clamp(280px, 38vw, 540px);
     aspect-ratio: 3 / 2;
     overflow: hidden;
     margin: 0;
@@ -1343,24 +1338,13 @@
     display: block;
     pointer-events: none;
   }
-  .moments-gallery-dots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: clamp(20px, 3vw, 32px);
-    padding: 0 20px;
+  @keyframes moments-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
   }
-  .moments-gallery-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: transparent;
-    border: 1px solid var(--ink);
-    padding: 0;
-    cursor: pointer;
-    transition: background 0.3s ease;
+  @media (prefers-reduced-motion: reduce) {
+    .moments-gallery-track { animation: none; }
   }
-  .moments-gallery-dot.is-active { background: var(--ink); }
   .moments-item {
     text-align: center;
     padding: 0 8px;
@@ -2844,17 +2828,17 @@
     <a href="/booking" class="zoom-bar">無料Zoom相談を予約する <span class="arrow">→</span></a>
   </section>
 
-  <!-- MOMENTS GALLERY: horizontal scroll with dots -->
+  <!-- MOMENTS GALLERY: auto-marquee (seamless infinite loop) -->
   <section class="moments-gallery" aria-label="Moments gallery">
-    <div class="moments-gallery-track" id="momentsGalleryTrack">
+    <div class="moments-gallery-track">
+      <!-- set 1 -->
       <figure class="moments-gallery-slide"><img src="image/gallery01.jpg" alt="" draggable="false"></figure>
       <figure class="moments-gallery-slide"><img src="image/gallery02.jpg" alt="" draggable="false"></figure>
       <figure class="moments-gallery-slide"><img src="image/gallery03.jpg" alt="" draggable="false"></figure>
-    </div>
-    <div class="moments-gallery-dots" id="momentsGalleryDots">
-      <button class="moments-gallery-dot is-active" type="button" aria-label="写真 1へ"></button>
-      <button class="moments-gallery-dot" type="button" aria-label="写真 2へ"></button>
-      <button class="moments-gallery-dot" type="button" aria-label="写真 3へ"></button>
+      <!-- set 2: duplicate for seamless loop -->
+      <figure class="moments-gallery-slide" aria-hidden="true"><img src="image/gallery01.jpg" alt="" draggable="false"></figure>
+      <figure class="moments-gallery-slide" aria-hidden="true"><img src="image/gallery02.jpg" alt="" draggable="false"></figure>
+      <figure class="moments-gallery-slide" aria-hidden="true"><img src="image/gallery03.jpg" alt="" draggable="false"></figure>
     </div>
   </section>
 
@@ -3108,73 +3092,6 @@
         slides[current].classList.add('is-active');
       }, 3000);
     }
-  })();
-
-  // MOMENTS GALLERY: horizontal scroll, dots, mouse drag
-  (function () {
-    var track = document.getElementById('momentsGalleryTrack');
-    var dotsWrap = document.getElementById('momentsGalleryDots');
-    if (!track || !dotsWrap) return;
-    var slides = track.querySelectorAll('.moments-gallery-slide');
-    var dots = dotsWrap.querySelectorAll('.moments-gallery-dot');
-    if (!slides.length || !dots.length) return;
-
-    function updateActiveDot() {
-      var trackRect = track.getBoundingClientRect();
-      var center = trackRect.left + trackRect.width / 2;
-      var closest = 0, minDist = Infinity;
-      for (var i = 0; i < slides.length; i++) {
-        var r = slides[i].getBoundingClientRect();
-        var c = r.left + r.width / 2;
-        var d = Math.abs(c - center);
-        if (d < minDist) { minDist = d; closest = i; }
-      }
-      for (var j = 0; j < dots.length; j++) {
-        dots[j].classList.toggle('is-active', j === closest);
-      }
-    }
-
-    // dot click → scroll to slide
-    for (var i = 0; i < dots.length; i++) {
-      (function (idx) {
-        dots[idx].addEventListener('click', function () {
-          slides[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        });
-      })(i);
-    }
-
-    var ticking = false;
-    track.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () { updateActiveDot(); ticking = false; });
-    }, { passive: true });
-    window.addEventListener('resize', updateActiveDot, { passive: true });
-    updateActiveDot();
-
-    // mouse drag-to-scroll (desktop; mobile uses native touch)
-    var isDown = false, startX = 0, startScroll = 0;
-    track.addEventListener('mousedown', function (e) {
-      isDown = true;
-      startX = e.pageX;
-      startScroll = track.scrollLeft;
-      track.classList.add('is-dragging');
-    });
-    document.addEventListener('mouseup', function () {
-      if (!isDown) return;
-      isDown = false;
-      track.classList.remove('is-dragging');
-    });
-    track.addEventListener('mouseleave', function () {
-      if (!isDown) return;
-      isDown = false;
-      track.classList.remove('is-dragging');
-    });
-    track.addEventListener('mousemove', function (e) {
-      if (!isDown) return;
-      e.preventDefault();
-      track.scrollLeft = startScroll - (e.pageX - startX);
-    });
   })();
 
   // NAV TOGGLE
