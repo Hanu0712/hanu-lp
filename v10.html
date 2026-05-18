@@ -13,16 +13,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* 3-color palette — Soft Greige */
+    /* 3-color palette — Pearl Gray (chic & premium) */
     --bg: #ffffff;        /* white */
-    --shape: #b0a48d;     /* warm greige (replaces sage) */
+    --shape: #aaa39d;     /* pearl gray (replaces sage/greige) */
     --ink: #0e0e0c;       /* deep black */
 
     /* derived */
-    --bg-soft: #f3f0e8;
-    --bg-warm: #c4b8a4;
+    --bg-soft: #f4f1ec;   /* pearl ivory */
+    --bg-warm: #c8c0ba;   /* lighter pearl */
     --ink-soft: #2a2a27;
-    --mute: #8d8678;      /* darker warm greige for text */
+    --mute: #7e7873;      /* darker pearl for muted text */
     --accent: #0e0e0c;
     --white: #ffffff;
 
@@ -1319,13 +1319,13 @@
   .moments-gallery-track {
     display: flex;
     width: max-content;
-    gap: clamp(12px, 1.8vw, 20px);
-    animation: moments-marquee 60s linear infinite;
+    gap: clamp(14px, 2vw, 24px);
+    animation: moments-marquee 80s linear infinite;
   }
   .moments-gallery:hover .moments-gallery-track { animation-play-state: paused; }
   .moments-gallery-slide {
     flex: 0 0 auto;
-    width: clamp(340px, 48vw, 680px);
+    width: clamp(380px, 56vw, 820px);
     aspect-ratio: 3 / 2;
     overflow: hidden;
     margin: 0;
@@ -3070,7 +3070,7 @@
       // force reflow so the upcoming transition starts cleanly from 0%
       void img.offsetHeight;
       // start a single continuous pan to the right
-      img.style.transition = 'object-position 5.6s linear';
+      img.style.transition = 'object-position 8.5s linear';
       requestAnimationFrame(function () {
         img.style.objectPosition = '100% center';
       });
@@ -3084,13 +3084,13 @@
         current = (current + 1) % slides.length;
         slides[current].classList.add('is-active');
         startPan(slides[current]);
-      }, 6000);
+      }, 9000);
     } else {
       setInterval(function () {
         slides[current].classList.remove('is-active');
         current = (current + 1) % slides.length;
         slides[current].classList.add('is-active');
-      }, 3000);
+      }, 5000);
     }
   })();
 
