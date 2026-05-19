@@ -2387,41 +2387,36 @@
     margin-bottom: clamp(22px, 3vw, 34px);
   }
   .cta-topics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--ink);
-    border: 1px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 480px;
+    margin: 0 auto;
     text-align: left;
   }
   .cta-topic {
-    background: var(--white);
-    padding: clamp(20px, 2.4vw, 30px) clamp(18px, 2vw, 26px);
+    padding: clamp(14px, 1.8vw, 20px) 0;
+    border-bottom: 1px solid rgba(14,14,12,0.1);
+    display: flex;
+    align-items: baseline;
+    gap: clamp(12px, 1.6vw, 18px);
   }
+  .cta-topic:last-child { border-bottom: none; }
   .cta-topic-num {
     font-family: "Bodoni Moda", serif;
     font-style: italic;
-    font-size: clamp(24px, 2.8vw, 36px);
+    font-size: clamp(13px, 1.2vw, 16px);
     color: var(--shape);
-    display: block;
-    margin-bottom: 14px;
+    flex-shrink: 0;
     line-height: 1;
   }
   .cta-topic-title {
     font-family: "Noto Serif JP", serif;
     font-size: clamp(13px, 1.05vw, 15px);
-    font-weight: 500;
-    color: var(--ink);
-    letter-spacing: 0.05em;
-    line-height: 1.75;
-    margin-bottom: 10px;
-  }
-  .cta-topic-text {
-    font-family: "Noto Serif JP", serif;
-    font-size: clamp(11px, 0.85vw, 12px);
-    color: var(--mute);
-    line-height: 1.9;
-    letter-spacing: 0.03em;
+    font-weight: 400;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    line-height: 1.8;
   }
 
   /* ============ PROFILE ============ */
