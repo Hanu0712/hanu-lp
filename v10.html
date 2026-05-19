@@ -2451,24 +2451,9 @@
   .profile-img {
     position: relative;
   }
-  .profile-img::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 82%;
-    height: 88%;
-    background: var(--bg-warm);
-    border-radius: 50% 50% 10% 10% / 28% 28% 8% 8%;
-    z-index: 0;
-  }
   .profile-img img {
-    position: relative;
     width: 100%;
     display: block;
-    z-index: 1;
-    mix-blend-mode: multiply;
   }
   .profile-body {
     padding-bottom: clamp(24px, 3vw, 40px);
