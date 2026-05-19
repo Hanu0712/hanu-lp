@@ -1346,7 +1346,7 @@
     .moments-gallery-track { animation: none; }
   }
 
-  /* ============ VOICE (testimonials) ============ */
+  /* ============ VOICE (editorial single-column quotes) ============ */
   .voice {
     background: var(--bg-soft);
     padding: clamp(80px, 10vw, 140px) clamp(20px, 6vw, 60px);
@@ -1354,66 +1354,70 @@
     border-bottom: 1px solid var(--ink);
   }
   .voice-inner {
-    max-width: 1120px;
+    max-width: 720px;
     margin: 0 auto;
   }
   .voice-head {
     text-align: center;
-    margin-bottom: clamp(48px, 6vw, 80px);
+    margin-bottom: clamp(40px, 5vw, 64px);
   }
   .voice-headline {
     font-family: "Noto Serif JP", serif;
     font-weight: 600;
-    font-size: clamp(24px, 3.4vw, 40px);
+    font-size: clamp(22px, 2.8vw, 34px);
     color: var(--ink);
-    line-height: 1.55;
+    line-height: 1.6;
     letter-spacing: 0.08em;
     margin: 14px 0 0;
   }
   .voice-lead {
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(14px, 1.3vw, 16px);
+    font-size: clamp(13px, 1.15vw, 15px);
     line-height: 2;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     color: var(--ink-soft);
-    margin: clamp(20px, 3vw, 32px) auto 0;
-    max-width: 640px;
+    margin: clamp(20px, 3vw, 28px) auto 0;
+    max-width: 580px;
   }
-  .voice-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(20px, 2.6vw, 32px);
+
+  .voice-stack { margin: 0; padding: 0; }
+  .voice-item {
+    margin: 0;
+    padding: clamp(40px, 5vw, 64px) 0;
+    text-align: center;
+    position: relative;
   }
-  .voice-card {
-    background: var(--bg);
-    padding: clamp(28px, 3.4vw, 44px);
-    border-radius: 22px;
-    box-shadow: 0 18px 48px rgba(14,14,12,0.06);
-  }
-  .voice-quote {
+  .voice-item + .voice-item { border-top: 1px solid var(--ink); }
+  .voice-mark {
     display: block;
     font-family: "Playfair Display", "Bodoni Moda", serif;
-    font-size: 48px;
-    line-height: 0.6;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(64px, 7.5vw, 100px);
+    line-height: 0.55;
     color: var(--shape);
-    margin-bottom: 22px;
+    margin-bottom: clamp(20px, 2.6vw, 32px);
   }
-  .voice-title {
+  .voice-quote-large {
     font-family: "Noto Serif JP", serif;
-    font-weight: 600;
-    font-size: clamp(16px, 1.4vw, 19px);
-    line-height: 1.75;
+    font-weight: 500;
+    font-size: clamp(19px, 2.1vw, 26px);
+    line-height: 1.85;
     letter-spacing: 0.06em;
     color: var(--ink);
-    margin: 0 0 18px;
+    margin: 0 0 clamp(20px, 2.6vw, 28px);
+    quotes: none;
   }
-  .voice-body {
+  .voice-quote-large::before,
+  .voice-quote-large::after { content: none; }
+  .voice-detail {
     font-family: "Noto Serif JP", serif;
-    font-size: clamp(13px, 1.05vw, 14.5px);
+    font-size: clamp(13px, 1.05vw, 15px);
     line-height: 2;
     letter-spacing: 0.04em;
     color: var(--ink-soft);
-    margin: 0;
+    margin: 0 auto;
+    max-width: 540px;
   }
 
   .moments-item {
@@ -2719,14 +2723,14 @@
     .moments-grid { grid-template-columns: 1fr; gap: 44px; max-width: 420px; }
     .moments-item { grid-column: 1; }
 
-    .voice { padding: 56px 20px; }
-    .voice-head { margin-bottom: 32px; }
-    .voice-headline { font-size: clamp(20px, 5.6vw, 26px); }
+    .voice { padding: 56px 22px; }
+    .voice-head { margin-bottom: 24px; }
+    .voice-headline { font-size: clamp(19px, 5.4vw, 24px); }
     .voice-lead { font-size: 13px; line-height: 1.95; }
-    .voice-grid { grid-template-columns: 1fr; gap: 16px; }
-    .voice-card { padding: 26px 22px; border-radius: 18px; }
-    .voice-quote { font-size: 40px; margin-bottom: 16px; }
-    .voice-title { font-size: 16px; margin-bottom: 14px; }
+    .voice-item { padding: 36px 0; }
+    .voice-mark { font-size: 56px; margin-bottom: 18px; }
+    .voice-quote-large { font-size: clamp(17px, 4.6vw, 20px); line-height: 1.85; }
+    .voice-detail { font-size: 13px; line-height: 1.95; }
 
     .footer { padding: 60px 24px 30px; }
     .footer-brand { font-size: 32px; }
@@ -2981,22 +2985,22 @@
         <h2 class="voice-headline">場をつくる人として、<br class="sp-br">いただいた言葉</h2>
         <p class="voice-lead">結婚式という人生の節目に、19年間向き合ってきた中でいただいた声。<br class="sp-br">パーティーづくりにも通じる、安心感と場づくりの原点です。</p>
       </div>
-      <div class="voice-grid">
-        <article class="voice-card">
-          <span class="voice-quote" aria-hidden="true">&ldquo;</span>
-          <h3 class="voice-title">言葉にしきれない想いまで、<br>自然に汲み取ってくれました</h3>
-          <p class="voice-body">ただ綺麗に整えるだけではなく、&ldquo;私たちらしさ&rdquo;が伝わる時間になっていて、ゲストとの距離も自然と縮まっていました。</p>
-        </article>
-        <article class="voice-card">
-          <span class="voice-quote" aria-hidden="true">&ldquo;</span>
-          <h3 class="voice-title">当日は安心して、<br>任せることができました</h3>
-          <p class="voice-body">細かな部分まで先回りして動いてくださったので、私は大切な人たちとの時間を心から楽しむことができました。</p>
-        </article>
-        <article class="voice-card">
-          <span class="voice-quote" aria-hidden="true">&ldquo;</span>
-          <h3 class="voice-title">気づけば、<br>空気がひとつになっていました</h3>
-          <p class="voice-body">進行や演出だけではなく、その場の流れや空気感まで整っていて、&ldquo;ただのイベント&rdquo;では終わらない時間になりました。</p>
-        </article>
+      <div class="voice-stack">
+        <figure class="voice-item">
+          <span class="voice-mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="voice-quote-large">言葉にしきれない想いまで、<br>自然に汲み取ってくれました</blockquote>
+          <p class="voice-detail">ただ綺麗に整えるだけではなく、&ldquo;私たちらしさ&rdquo;が伝わる時間になっていて、ゲストとの距離も自然と縮まっていました。</p>
+        </figure>
+        <figure class="voice-item">
+          <span class="voice-mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="voice-quote-large">当日は安心して、<br>任せることができました</blockquote>
+          <p class="voice-detail">細かな部分まで先回りして動いてくださったので、私は大切な人たちとの時間を心から楽しむことができました。</p>
+        </figure>
+        <figure class="voice-item">
+          <span class="voice-mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="voice-quote-large">気づけば、<br>空気がひとつになっていました</blockquote>
+          <p class="voice-detail">進行や演出だけではなく、その場の流れや空気感まで整っていて、&ldquo;ただのイベント&rdquo;では終わらない時間になりました。</p>
+        </figure>
       </div>
     </div>
   </section>
