@@ -1876,78 +1876,50 @@
     font-weight: 400;
   }
 
-  .price-compare {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    max-width: 540px;
+  /* price — unified block */
+  .price-unified {
+    max-width: 440px;
     margin: 0 auto 50px;
-  }
-  .price-card {
-    width: 100%;
-    padding: 50px 30px 56px;
     text-align: center;
-    position: relative;
-    box-shadow: 0 14px 40px rgba(42,40,36,0.06);
   }
-  .price-arrow {
-    font-family: "Playfair Display", serif;
-    font-size: 24px;
-    line-height: 1;
-    color: var(--mute);
-    margin: 2px 0;
-  }
-  .price-off {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 9px 28px;
+  .price-normal {
     font-family: "Noto Serif JP", serif;
-    font-weight: 500;
-    font-size: clamp(14px, 1.4vw, 18px);
-    letter-spacing: 0.12em;
-    color: var(--ink);
-    background: var(--bg);
-    border: 1px solid var(--ink);
-    border-radius: 999px;
-  }
-  .price-card.normal {
-    background: var(--white);
+    font-size: clamp(12px, 1vw, 14px);
+    letter-spacing: 0.15em;
     color: var(--mute);
-    box-shadow: inset 0 0 0 1px rgba(14,14,12,0.2);
-    padding: 32px 30px 36px;
+    margin-bottom: 12px;
   }
-  .price-card.monitor {
+  .price-normal-amount {
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+  .price-monitor-block {
     background: var(--ink);
     color: var(--white);
+    padding: clamp(36px, 4vw, 56px) 30px;
   }
-  .price-card .label {
+  .price-monitor-label {
     font-size: 11px;
     letter-spacing: 0.4em;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     font-weight: 400;
     opacity: 0.7;
   }
-  .price-card .amount {
+  .price-monitor-amount {
     font-family: "Playfair Display", serif;
     font-style: italic;
     font-weight: 500;
-    font-size: clamp(56px, 8vw, 90px);
+    font-size: clamp(48px, 7vw, 80px);
     line-height: 1;
     letter-spacing: 0.01em;
   }
-  .price-card.normal .amount {
-    font-size: clamp(32px, 4.5vw, 52px);
-    text-decoration: line-through;
-    text-decoration-thickness: 1.5px;
-    text-decoration-color: var(--mute);
-    opacity: 0.6;
-  }
-  .price-card .limit {
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    margin-top: 26px;
-    opacity: 0.75;
+  .price-monitor-off {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(12px, 1vw, 14px);
+    letter-spacing: 0.15em;
+    opacity: 0.7;
   }
 
   .price-note-txt {
@@ -3101,17 +3073,13 @@
       <p>&ldquo;はじめてのパーティー&rdquo;を開催される3組様を、<br>特別価格にて。<br>一緒にパーティーを創りあげませんか？</p>
     </div>
 
-    <div class="price-compare">
-      <div class="price-card normal">
-        <div class="label">通常価格</div>
-        <div class="amount">¥80,000</div>
+    <div class="price-unified">
+      <p class="price-normal">通常価格 <span class="price-normal-amount">¥80,000</span></p>
+      <div class="price-monitor-block">
+        <div class="price-monitor-label">モニター価格</div>
+        <div class="price-monitor-amount">¥50,000</div>
+        <div class="price-monitor-off">¥30,000 OFF</div>
       </div>
-      <div class="price-arrow" aria-hidden="true">↓</div>
-      <div class="price-card monitor">
-        <div class="label">モニター価格</div>
-        <div class="amount">¥50,000</div>
-      </div>
-      <div class="price-off">¥30,000 OFF</div>
     </div>
 
     <p class="price-note-txt">
@@ -3162,22 +3130,11 @@
       </ul>
     </div>
 
-    <!-- Monitor Benefits -->
+    <!-- Special Gift -->
     <div class="monitor-benefits">
       <div class="benefits-head">
-        <span class="section-eyebrow">— Monitor Benefits —</span>
-        <h3 class="benefits-title">Special Gift</h3>
-      </div>
-      <div class="benefits-body">
-        <p class="benefits-price">
-          ¥80,000 → ¥50,000<br>
-          <span class="benefits-off-inline">（¥30,000 OFF）</span>
-        </p>
-        <p class="benefits-extra">ゲスト全員分のプチギフト<br>プレゼント</p>
-        <p class="benefits-fluff">
-          あなたの&ldquo;はじめてのパーティー&rdquo;を<br class="sp-br">フルプロデュース<br>
-          事前お打合せはオンライン or 対面<br class="sp-br">（4回を想定）<br>※対面の際はお打合せ場所のご相談可
-        </p>
+        <span class="section-eyebrow">— Special Gift —</span>
+        <h3 class="benefits-title">ゲスト全員分のプチギフトをプレゼント</h3>
       </div>
     </div>
   </section>
