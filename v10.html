@@ -524,7 +524,7 @@
     line-height: 1.95;
   }
   .prebefore-body p { margin: 0; }
-  .prebefore-body .gap { height: 0.9em; }
+  .prebefore-body .gap { display: block; height: 1.2em; content: ""; }
   .prebefore-divider {
     width: 44px;
     height: 1px;
@@ -2834,17 +2834,17 @@
       <div class=”prebefore-body”>
         <p>集客は出来た。</p>
         <p>写真もたくさん撮った。</p>
-        <p class=”gap”></p>
+        <p class=”gap” aria-hidden=”true”>&nbsp;</p>
         <p>でも、</p>
         <p>気づけば——</p>
-        <p class=”gap”></p>
+        <p class=”gap” aria-hidden=”true”>&nbsp;</p>
         <p>&ldquo;ただ開催しただけ&rdquo;</p>
-        <p class=”gap”></p>
+        <p class=”gap” aria-hidden=”true”>&nbsp;</p>
         <p>で終わっていた。</p>
-        <p class=”gap”></p>
+        <p class=”gap” aria-hidden=”true”>&nbsp;</p>
         <p>主催者として動き続けて、</p>
         <p>ゆっくり話せなかった。</p>
-        <p class=”gap”></p>
+        <p class=”gap” aria-hidden=”true”>&nbsp;</p>
         <p>「楽しかったね」で終わって、</p>
         <p>次に繋がらなかった。</p>
       </div>
