@@ -10,20 +10,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* match main LP (v5) palette: white / cream / sage / ink */
-      --greige:   #f5f4f0;  /* warm cream — page bg (was greige) */
-      --greige2:  #f5f4f0;
-      --navy:     #0e0e0c;  /* deep ink — accents/buttons (was navy) */
+      /* match LP v10 palette: white / plum / ink */
+      --greige:   #efe6e8;  /* dusty mauve ivory — page bg */
+      --greige2:  #efe6e8;
+      --navy:     #0e0e0c;  /* deep ink — accents/buttons */
       --charcoal: #0e0e0c;  /* deep ink — text */
-      --offwhite: #ffffff;  /* white — container bg (was cream) */
-      --gold:     #8d928a;  /* sage gray — secondary accents (was gold) */
-      --taupe:    #8d928a;  /* sage gray — labels */
+      --offwhite: #ffffff;  /* white — container bg */
+      --gold:     #4e3848;  /* deep plum — secondary accents */
+      --taupe:    #7a6b71;  /* muted plum — labels */
+      --hover:    #efe6e8;  /* dusty mauve — hover bg */
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: 'Noto Serif JP', serif;
-      background: var(--gold);
+      background: var(--greige);
       color: var(--charcoal);
       font-weight: 300;
       padding: 40px 16px;
@@ -237,9 +238,9 @@
     .cal-cell.sun:not(.disabled):not(.blank),
     .cal-cell.sat:not(.disabled):not(.blank) { color: var(--gold); }
     .cal-cell:hover:not(.disabled):not(.blank):not(.selected) {
-      background: var(--gold);
+      background: var(--hover);
       color: var(--charcoal);
-      border-color: var(--gold);
+      border-color: var(--hover);
     }
     .cal-cell.selected {
       background: var(--navy) !important;
@@ -283,8 +284,8 @@
       color: var(--taupe);
     }
     .slot-btn:hover:not(.selected) {
-      background: var(--gold);
-      border-color: var(--gold);
+      background: var(--hover);
+      border-color: var(--hover);
     }
     .slot-btn.selected {
       background: var(--navy);
@@ -432,9 +433,9 @@
     .submit-btn:hover { background: var(--charcoal); }
     .submit-btn.gold {
       background: var(--gold);
-      color: var(--navy);
+      color: var(--offwhite);
     }
-    .submit-btn.gold:hover { background: #6f7370; }
+    .submit-btn.gold:hover { background: #3a2a34; }
     .submit-btn.ig {
       background: #E4405F;
       color: #fff;
