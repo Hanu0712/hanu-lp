@@ -760,7 +760,10 @@
     '2026-05-18','2026-05-29','2026-05-30'
   ].forEach(d => _addNgSlot(d, '21:00-21:30'));
 
-  let monthIdx = 0;
+  // 今月を初期表示（該当なければ最初の月）
+  const _now = new Date();
+  const _curY = _now.getFullYear(), _curM = _now.getMonth() + 1;
+  let monthIdx = Math.max(0, MONTHS.findIndex(m => m.year === _curY && m.month === _curM));
   let sel = { date: null, dateLabel: null, slot: null };
 
   const $ = id => document.getElementById(id);
