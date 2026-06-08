@@ -2403,8 +2403,19 @@
     padding: clamp(36px, 4vw, 56px) clamp(20px, 6vw, 60px);
     background: var(--white);
     position: relative;
+    overflow: hidden;
+  }
+  .profile-bg-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.12;
   }
   .profile-wrap {
+    position: relative;
+    z-index: 1;
     max-width: 880px;
     margin: 0 auto;
     display: grid;
@@ -2971,12 +2982,6 @@
           すべてを一貫してプロデュース。<br>
           「何から始めればいいか分からない」<br>そんな&ldquo;はじめてのパーティー&rdquo;にも、伴走します。
         </p>
-        <div class="sv-video">
-          <video autoplay muted loop playsinline controls preload="metadata" poster="image/main.png">
-            <source src="image/hanu-produce.mp4" type="video/mp4">
-            お使いのブラウザは動画再生に対応していません。
-          </video>
-        </div>
         <div class="service-list">
           <div class="service-item">
             <div class="num">01</div>
@@ -3040,6 +3045,9 @@
 
   <!-- PROFILE -->
   <section class="profile" id="profile">
+    <video class="profile-bg-video" autoplay muted loop playsinline preload="metadata">
+      <source src="image/profile-bg.mp4" type="video/mp4">
+    </video>
     <div class="profile-wrap">
       <div class="profile-img">
         <img src="image/黒メイン.PNG" alt="Hanu">
