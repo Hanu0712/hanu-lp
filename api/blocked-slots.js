@@ -1,16 +1,32 @@
-// GET /api/blocked-slots — returns dynamically booked slots from Upstash Redis
+// GET /api/blocked-slots — returns dynamically booked slots from Vercel Blob
 export const config = { runtime: 'nodejs' };
 
-async function redisGet(key) {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
+const BLOB_STORE_ID = 'store_o3GaqKsSSAZuAV6h';
+const BLOB_PATH = 'booked-slots.json';
 
-  const res = await fetch(`${url}/get/${encodeURIComponent(key)}`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  const data = await res.json();
-  return data.result;
+async function readBlob() {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) return [];
+
+  try {
+    // List blobs to find our file
+    const listRes = await fetch(`https://blob.vercel-storage.com?prefix=${BLOB_PATH}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const listData = await listRes.json();
+
+    if (!listData.blobs || listData.blobs.length === 0) return [];
+
+    const blobUrl = listData.blobs[0].url;
+    const dataRes = await fetch(blobUrl, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!dataRes.ok) return [];
+    return await dataRes.json();
+  } catch (e) {
+    console.error('Blob read error:', e);
+    return [];
+  }
 }
 
 export default async function handler(req, res) {
@@ -19,9 +35,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const raw = await redisGet('hanu:booked-slots');
-    // stored as JSON array: [{ date: "2026-06-12", slot: "21:00-21:30" }, ...]
-    const booked = raw ? JSON.parse(raw) : [];
+    const booked = await readBlob();
     return res.status(200).json({ booked });
   } catch (err) {
     return res.status(500).json({ error: err.message, booked: [] });

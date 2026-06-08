@@ -7,47 +7,56 @@ const FROM_ADDRESS = 'Hanu Booking <onboarding@resend.dev>';
 
 export const config = { runtime: 'nodejs' };
 
-// ---- Upstash Redis helpers ----
-async function redisGet(key) {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
-  const res = await fetch(`${url}/get/${encodeURIComponent(key)}`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  const data = await res.json();
-  return data.result;
+// ---- Vercel Blob helpers ----
+const BLOB_PATH = 'booked-slots.json';
+
+async function readBooked() {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) return [];
+  try {
+    const listRes = await fetch(`https://blob.vercel-storage.com?prefix=${BLOB_PATH}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const listData = await listRes.json();
+    if (!listData.blobs || listData.blobs.length === 0) return [];
+    const blobUrl = listData.blobs[0].url;
+    const dataRes = await fetch(blobUrl, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!dataRes.ok) return [];
+    return await dataRes.json();
+  } catch (e) {
+    console.error('Blob read error:', e);
+    return [];
+  }
 }
 
-async function redisSet(key, value) {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return;
-  await fetch(`${url}/set/${encodeURIComponent(key)}`, {
-    method: 'POST',
+async function writeBooked(data) {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) return;
+  await fetch(`https://blob.vercel-storage.com/${BLOB_PATH}`, {
+    method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-vercel-blob-content-type': 'application/json'
     },
-    body: JSON.stringify(value)
+    body: JSON.stringify(data)
   });
 }
 
 async function saveBookedSlot(date, slot) {
-  const KEY = 'hanu:booked-slots';
   try {
-    const raw = await redisGet(KEY);
-    const booked = raw ? JSON.parse(raw) : [];
-    // avoid duplicates
+    const booked = await readBooked();
     if (!booked.some(b => b.date === date && b.slot === slot)) {
       booked.push({ date, slot });
     }
-    await redisSet(KEY, JSON.stringify(booked));
+    await writeBooked(booked);
   } catch (e) {
-    console.error('Redis saveBookedSlot error:', e);
+    console.error('Blob saveBookedSlot error:', e);
   }
 }
-// ---- end Redis helpers ----
+// ---- end Blob helpers ----
 
 async function readJsonBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;
