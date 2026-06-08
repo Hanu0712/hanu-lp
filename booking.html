@@ -218,13 +218,23 @@
     }
     .cal-cell.disabled {
       cursor: not-allowed;
-      background: #FFFFFF;
+      background: rgba(78,56,72,0.08);
       color: rgba(28,25,24,0.3);
       flex-direction: column;
       gap: 1px;
       padding: 4px 2px;
+      position: relative;
     }
-    .cal-cell.disabled .cell-num { font-size: 11px; line-height: 1; opacity: 0.7; }
+    .cal-cell.disabled::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: rgba(78,56,72,0.25);
+    }
+    .cal-cell.disabled .cell-num { font-size: 11px; line-height: 1; opacity: 0.5; text-decoration: line-through; text-decoration-color: rgba(78,56,72,0.3); }
     .cal-cell.disabled .sold {
       font-family: 'Bodoni Moda', 'Playfair Display', serif;
       font-size: 8.5px;
@@ -234,6 +244,7 @@
       font-weight: 600;
       text-align: center;
       white-space: nowrap;
+      opacity: 0.7;
     }
     .cal-cell.sun:not(.disabled):not(.blank),
     .cal-cell.sat:not(.disabled):not(.blank) { color: var(--gold); }
@@ -305,10 +316,11 @@
     }
     .slot-btn.disabled {
       cursor: not-allowed;
-      color: rgba(28,25,24,0.45);
-      background: #FFFFFF;
+      color: rgba(28,25,24,0.35);
+      background: rgba(78,56,72,0.06);
+      border-color: rgba(78,56,72,0.12);
     }
-    .slot-btn.disabled .time { color: rgba(28,25,24,0.45); }
+    .slot-btn.disabled .time { color: rgba(28,25,24,0.35); text-decoration: line-through; text-decoration-color: rgba(78,56,72,0.3); }
     .slot-btn.disabled .dur { display: none; }
     .slot-btn.disabled .sold { display: inline; }
     .slot-btn.disabled:hover {
