@@ -7,6 +7,48 @@ const FROM_ADDRESS = 'Hanu Booking <onboarding@resend.dev>';
 
 export const config = { runtime: 'nodejs' };
 
+// ---- Upstash Redis helpers ----
+async function redisGet(key) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  const res = await fetch(`${url}/get/${encodeURIComponent(key)}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  const data = await res.json();
+  return data.result;
+}
+
+async function redisSet(key, value) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return;
+  await fetch(`${url}/set/${encodeURIComponent(key)}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(value)
+  });
+}
+
+async function saveBookedSlot(date, slot) {
+  const KEY = 'hanu:booked-slots';
+  try {
+    const raw = await redisGet(KEY);
+    const booked = raw ? JSON.parse(raw) : [];
+    // avoid duplicates
+    if (!booked.some(b => b.date === date && b.slot === slot)) {
+      booked.push({ date, slot });
+    }
+    await redisSet(KEY, JSON.stringify(booked));
+  } catch (e) {
+    console.error('Redis saveBookedSlot error:', e);
+  }
+}
+// ---- end Redis helpers ----
+
 async function readJsonBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;
   if (typeof req.body === 'string') {
@@ -32,7 +74,7 @@ export default async function handler(req, res) {
   const body = await readJsonBody(req);
   const {
     name, nameKana, email, instagram, message,
-    partyTypeText, dateLabel, slot, subject
+    partyTypeText, date, dateLabel, slot, subject
   } = body;
 
   if (!name || !nameKana || !email || !partyTypeText || !dateLabel || !slot || !subject) {
@@ -114,6 +156,12 @@ export default async function handler(req, res) {
       text: autoReplyBody
     });
     const autoData = await autoRes.json();
+
+    // Save booked slot to Redis (non-blocking — don't fail the booking if Redis is down)
+    if (date && slot) {
+      await saveBookedSlot(date, slot).catch(e => console.error('Redis save failed:', e));
+    }
+
     if (!autoRes.ok) {
       return res.status(200).json({
         success: true,

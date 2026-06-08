@@ -880,6 +880,23 @@
     };
   });
 
+  // ---- 動的予約データの取得 ----
+  (async function loadDynamicBookings() {
+    try {
+      const res = await fetch('/api/blocked-slots');
+      const data = await res.json();
+      if (data.booked && Array.isArray(data.booked)) {
+        data.booked.forEach(({ date, slot }) => {
+          _addNgSlot(date, slot);
+        });
+        // re-render calendar with merged data
+        renderCalendar();
+      }
+    } catch (e) {
+      console.warn('動的予約データの取得に失敗:', e);
+    }
+  })();
+
   const BOOKING_API_ENDPOINT = '/api/booking';
   let pendingSubmission = null;
 
@@ -928,7 +945,7 @@
 
     pendingSubmission = {
       name, nameKana, email, instagram, partyTypeText, message,
-      dateLabel: sel.dateLabel, slot: sel.slot, subject, body
+      date: sel.date, dateLabel: sel.dateLabel, slot: sel.slot, subject, body
     };
 
     $('submitError').classList.add('hidden');
@@ -951,6 +968,7 @@
       instagram: s.instagram || '',
       message: s.message || '',
       partyTypeText: s.partyTypeText,
+      date: s.date,
       dateLabel: s.dateLabel,
       slot: s.slot,
       subject: s.subject
@@ -968,6 +986,11 @@
       const data = await res.json().catch(() => ({}));
       const ok = res.ok && data.success === true;
       if (ok) {
+        // 即座にローカルでもこの枠をブロック
+        if (s.date && s.slot) {
+          _addNgSlot(s.date, s.slot);
+          renderCalendar();
+        }
         $('successGreeting').textContent = `${s.name}様`;
         $('step4').classList.add('hidden');
         $('step5').classList.remove('hidden');
