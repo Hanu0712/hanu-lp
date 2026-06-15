@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>申込者一覧 — Hanu（管理用）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,500&family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #efe6e8;        /* dusty mauve ivory */
+      --panel: #ffffff;
+      --ink: #0e0e0c;
+      --plum: #4e3848;
+      --mute: #7a6b71;
+      --line: rgba(28,25,24,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif JP', serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-weight: 400;
+      padding: 32px 16px 64px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    .eyebrow {
+      font-family: 'Bodoni Moda', serif;
+      letter-spacing: 0.4em; text-transform: uppercase;
+      font-size: 11px; color: var(--mute); text-align: center;
+    }
+    h1 {
+      font-family: 'Bodoni Moda', serif; font-style: italic; font-weight: 500;
+      font-size: clamp(26px, 5vw, 38px); color: var(--plum);
+      text-align: center; margin: 6px 0 28px;
+    }
+
+    /* ---- login gate ---- */
+    .gate {
+      max-width: 380px; margin: 8vh auto 0;
+      background: var(--panel); padding: 40px 32px;
+      border-radius: 4px; box-shadow: 6px 8px 0 var(--ink);
+      text-align: center;
+    }
+    .gate label { display: block; font-size: 13px; color: var(--mute); margin-bottom: 12px; letter-spacing: 0.04em; }
+    .gate input {
+      width: 100%; padding: 12px 14px; font-size: 16px;
+      border: 1px solid var(--line); border-radius: 3px; margin-bottom: 16px;
+      font-family: inherit; background: #fff;
+    }
+    .gate input:focus { outline: none; border-color: var(--plum); }
+    button {
+      font-family: 'Bodoni Moda', serif; letter-spacing: 0.18em; text-transform: uppercase;
+      font-size: 13px; cursor: pointer; border: 1px solid var(--ink);
+      background: var(--ink); color: #fff; padding: 12px 22px; border-radius: 3px;
+      transition: opacity .2s;
+    }
+    button:hover { opacity: 0.7; }
+    button.ghost { background: transparent; color: var(--ink); }
+    .msg { font-size: 13px; margin-top: 14px; min-height: 18px; }
+    .msg.err { color: #b23a48; }
+
+    /* ---- list ---- */
+    .toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .count { font-size: 14px; color: var(--ink); }
+    .count b { font-family: 'Bodoni Moda', serif; font-size: 20px; color: var(--plum); }
+    .toolbar .actions { display: flex; gap: 8px; }
+    .toolbar button { padding: 8px 16px; font-size: 11px; }
+
+    .table-scroll { overflow-x: auto; background: var(--panel); border-radius: 4px; box-shadow: 6px 8px 0 var(--ink); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 760px; }
+    th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th {
+      font-family: 'Bodoni Moda', serif; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 11px; color: var(--mute); background: #faf6f7; position: sticky; top: 0;
+      white-space: nowrap;
+    }
+    tr:last-child td { border-bottom: none; }
+    td.name { font-weight: 600; white-space: nowrap; }
+    td.kana { color: var(--mute); font-size: 11px; }
+    td.when { white-space: nowrap; }
+    td.ig a { color: var(--plum); text-decoration: underline; }
+    .empty { text-align: center; color: var(--mute); padding: 40px 0; }
+    .hint { text-align: center; color: var(--mute); font-size: 12px; margin-top: 18px; line-height: 1.8; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="eyebrow">Reservations</div>
+    <h1>無料Zoom相談 申込者一覧</h1>
+
+    <!-- パスワード入力 -->
+    <div id="gate" class="gate">
+      <label for="pw">管理用パスワードを入力してください</label>
+      <input id="pw" type="password" autocomplete="current-password" placeholder="パスワード">
+      <button id="loginBtn" type="button">見る</button>
+      <div id="gateMsg" class="msg"></div>
+    </div>
+
+    <!-- 一覧 -->
+    <div id="list" class="hidden">
+      <div class="toolbar">
+        <div class="count">申込み <b id="count">0</b> 件</div>
+        <div class="actions">
+          <button id="refreshBtn" class="ghost" type="button">更新</button>
+          <button id="logoutBtn" class="ghost" type="button">ログアウト</button>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>申込日時</th>
+              <th>お名前</th>
+              <th>希望日時</th>
+              <th>Instagram</th>
+              <th>メール</th>
+              <th>パーティー内容</th>
+              <th>ご相談内容</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div id="emptyMsg" class="empty hidden">まだ申込みはありません。（このページは設置後の予約から記録されます）</div>
+      <div class="hint">このページは検索エンジンに載りません。URLとパスワードは他人に教えないでください。</div>
+    </div>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const KEY = 'hanu_admin_key';
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function fmtTs(ts) {
+      if (!ts) return '—';
+      try {
+        return new Date(ts).toLocaleString('ja-JP', {
+          timeZone: 'Asia/Tokyo',
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit'
+        });
+      } catch (e) { return '—'; }
+    }
+    function igLink(handle) {
+      if (!handle) return '—';
+      const h = String(handle).trim().replace(/^@/, '');
+      if (!h) return '—';
+      return `<a href="https://instagram.com/${encodeURIComponent(h)}" target="_blank" rel="noopener">@${esc(h)}</a>`;
+    }
+
+    async function load(pw) {
+      $('gateMsg').textContent = '読み込み中…';
+      $('gateMsg').classList.remove('err');
+      try {
+        const res = await fetch('/api/bookings', { headers: { 'x-admin-key': pw } });
+        if (res.status === 401) {
+          $('gateMsg').textContent = 'パスワードが違います。';
+          $('gateMsg').classList.add('err');
+          return false;
+        }
+        if (res.status === 503) {
+          $('gateMsg').textContent = 'まだパスワードが設定されていません（Vercelの環境変数 ADMIN_PASSWORD を設定してください）。';
+          $('gateMsg').classList.add('err');
+          return false;
+        }
+        if (!res.ok) {
+          $('gateMsg').textContent = '読み込みに失敗しました（' + res.status + '）。';
+          $('gateMsg').classList.add('err');
+          return false;
+        }
+        const data = await res.json();
+        render(data.bookings || []);
+        sessionStorage.setItem(KEY, pw);
+        $('gate').classList.add('hidden');
+        $('list').classList.remove('hidden');
+        return true;
+      } catch (e) {
+        $('gateMsg').textContent = '通信エラーが発生しました。';
+        $('gateMsg').classList.add('err');
+        return false;
+      }
+    }
+
+    function render(rows) {
+      $('count').textContent = rows.length;
+      const tbody = $('rows');
+      tbody.innerHTML = '';
+      $('emptyMsg').classList.toggle('hidden', rows.length > 0);
+      rows.forEach(b => {
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          `<td class="when">${esc(fmtTs(b.ts))}</td>` +
+          `<td class="name">${esc(b.name)}<div class="kana">${esc(b.nameKana)}</div></td>` +
+          `<td class="when">${esc(b.dateLabel)}<br>${esc(b.slot)}</td>` +
+          `<td class="ig">${igLink(b.instagram)}</td>` +
+          `<td>${esc(b.email)}</td>` +
+          `<td>${esc(b.partyTypeText)}</td>` +
+          `<td>${esc(b.message) || '—'}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    $('loginBtn').onclick = () => {
+      const pw = $('pw').value.trim();
+      if (!pw) { $('gateMsg').textContent = 'パスワードを入力してください。'; return; }
+      load(pw);
+    };
+    $('pw').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('loginBtn').click(); });
+    $('refreshBtn').onclick = () => { const pw = sessionStorage.getItem(KEY); if (pw) load(pw); };
+    $('logoutBtn').onclick = () => {
+      sessionStorage.removeItem(KEY);
+      $('list').classList.add('hidden');
+      $('gate').classList.remove('hidden');
+      $('pw').value = '';
+      $('gateMsg').textContent = '';
+    };
+
+    // セッションに残っていれば自動で開く
+    const saved = sessionStorage.getItem(KEY);
+    if (saved) load(saved);
+  </script>
+</body>
+</html>

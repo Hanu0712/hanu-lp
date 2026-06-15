@@ -8,33 +8,34 @@ const FROM_ADDRESS = 'Hanu Booking <onboarding@resend.dev>';
 export const config = { runtime: 'nodejs' };
 
 // ---- Vercel Blob helpers ----
-const BLOB_PATH = 'booked-slots.json';
+const SLOTS_PATH = 'booked-slots.json';   // 枠ブロック用（SOLD OUT表示）
+const BOOKINGS_PATH = 'bookings.json';    // 申込者リスト用（/admin で閲覧）
 
-async function readBooked() {
+async function readBlobJson(path, fallback) {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
-  if (!token) return [];
+  if (!token) return fallback;
   try {
-    const listRes = await fetch(`https://blob.vercel-storage.com?prefix=${BLOB_PATH}`, {
+    const listRes = await fetch(`https://blob.vercel-storage.com?prefix=${path}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     const listData = await listRes.json();
-    if (!listData.blobs || listData.blobs.length === 0) return [];
+    if (!listData.blobs || listData.blobs.length === 0) return fallback;
     const blobUrl = listData.blobs[0].url;
     const dataRes = await fetch(blobUrl, {
       headers: { Authorization: `Bearer ${token}` }
     });
-    if (!dataRes.ok) return [];
+    if (!dataRes.ok) return fallback;
     return await dataRes.json();
   } catch (e) {
     console.error('Blob read error:', e);
-    return [];
+    return fallback;
   }
 }
 
-async function writeBooked(data) {
+async function writeBlobJson(path, data) {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token) return;
-  await fetch(`https://blob.vercel-storage.com/${BLOB_PATH}`, {
+  await fetch(`https://blob.vercel-storage.com/${path}`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -47,13 +48,23 @@ async function writeBooked(data) {
 
 async function saveBookedSlot(date, slot) {
   try {
-    const booked = await readBooked();
+    const booked = await readBlobJson(SLOTS_PATH, []);
     if (!booked.some(b => b.date === date && b.slot === slot)) {
       booked.push({ date, slot });
+      await writeBlobJson(SLOTS_PATH, booked);
     }
-    await writeBooked(booked);
   } catch (e) {
     console.error('Blob saveBookedSlot error:', e);
+  }
+}
+
+async function saveBooking(record) {
+  try {
+    const list = await readBlobJson(BOOKINGS_PATH, []);
+    list.push(record);
+    await writeBlobJson(BOOKINGS_PATH, list);
+  } catch (e) {
+    console.error('Blob saveBooking error:', e);
   }
 }
 // ---- end Blob helpers ----
@@ -166,10 +177,22 @@ export default async function handler(req, res) {
     });
     const autoData = await autoRes.json();
 
-    // Save booked slot to Redis (non-blocking — don't fail the booking if Redis is down)
-    if (date && slot) {
-      await saveBookedSlot(date, slot).catch(e => console.error('Redis save failed:', e));
-    }
+    // 申込者リスト保存 + 枠ブロック保存（どちらも失敗しても予約自体は成功扱い）
+    const bookingRecord = {
+      ts: Date.now(),
+      name, nameKana, email,
+      instagram: instagram || '',
+      partyTypeText,
+      message: message || '',
+      date: date || '',
+      dateLabel, slot
+    };
+    await Promise.all([
+      saveBooking(bookingRecord).catch(e => console.error('saveBooking failed:', e)),
+      (date && slot)
+        ? saveBookedSlot(date, slot).catch(e => console.error('slot save failed:', e))
+        : Promise.resolve()
+    ]);
 
     if (!autoRes.ok) {
       return res.status(200).json({
