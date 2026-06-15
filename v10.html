@@ -3287,5 +3287,18 @@
   })();
 </script>
 
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  // CTA（無料Zoom相談）クリックをイベントとして計測
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="/booking"]');
+    if (a) { window.va('event', { name: 'cta_booking_click' }); }
+  });
+</script>
+
 </body>
 </html>

@@ -987,6 +987,7 @@
       const data = await res.json().catch(() => ({}));
       const ok = res.ok && data.success === true;
       if (ok) {
+        if (window.va) window.va('event', { name: 'booking_submitted' });
         // 即座にローカルでもこの枠をブロック
         if (s.date && s.slot) {
           _addNgSlot(s.date, s.slot);
@@ -1017,6 +1018,12 @@
 
   renderCalendar();
 </script>
+
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 
 </body>
 </html>
