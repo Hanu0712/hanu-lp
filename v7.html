@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>「招かれる側」から、「招く側」へ。 | Hanu｜パーティープロデューサー</title>
+<meta name="description" content="女性起業家のためのパーティープロデュース。企画から当日運営まで、あなたの"はじめての一席"をトータルプロデュース。" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============================================
+     Reset / Base
+  ============================================ */
+  *,
+  *::before,
+  *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root{
+    --bg:          #F3EFE9;   /* off-white / ivory */
+    --bg-2:        #E8E2D8;   /* warm greige */
+    --bg-3:        #D6CEC3;   /* deeper greige */
+    --ink:         #2B2724;   /* charcoal */
+    --ink-2:       #554E47;   /* sub text */
+    --ink-3:       #8A8278;   /* muted */
+    --line:        #C9C0B4;
+    --accent:      #7A6A5B;   /* mocha */
+    --accent-dk:   #5C4E42;
+    --white:       #FBF8F3;
+    --ff-en: "Playfair Display", "Noto Serif JP", serif;
+    --ff-jp: "Noto Serif JP", "Playfair Display", serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--ff-jp);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.9;
+    letter-spacing: .04em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; text-decoration: none; }
+
+  /* ============================================
+     Utilities
+  ============================================ */
+  .wrap{ width: min(92%, 1120px); margin-inline: auto; }
+  .narrow{ width: min(92%, 760px); margin-inline: auto; }
+  .en{ font-family: var(--ff-en); font-weight: 400; letter-spacing: .14em; }
+  .jp-serif{ font-family: var(--ff-jp); }
+
+  .section{ padding: clamp(72px, 11vw, 140px) 0; position: relative; }
+  .section-label{
+    font-family: var(--ff-en);
+    font-size: 12px;
+    letter-spacing: .5em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: inline-block;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+  .section-title{
+    font-family: var(--ff-jp);
+    font-weight: 500;
+    font-size: clamp(22px, 3.2vw, 30px);
+    letter-spacing: .12em;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  /* fade-in on scroll */
+  .reveal{ opacity: 0; transform: translateY(24px); transition: opacity 1.1s ease, transform 1.1s ease; }
+  .reveal.is-on{ opacity: 1; transform: none; }
+
+  /* ============================================
+     Top bar
+  ============================================ */
+  .topbar{
+    position: fixed; inset: 0 0 auto 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(20px, 4vw, 44px);
+    z-index: 50;
+    mix-blend-mode: difference;
+    color: #F3EFE9;
+    pointer-events: none;
+  }
+  .topbar .brand{
+    font-family: var(--ff-en);
+    font-size: 18px;
+    letter-spacing: .4em;
+    font-weight: 500;
+  }
+  .topbar .role{
+    font-family: var(--ff-en);
+    font-size: 10px;
+    letter-spacing: .5em;
+    text-transform: uppercase;
+  }
+
+  /* ============================================
+     Hero
+  ============================================ */
+  .hero{
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    align-items: stretch;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(60% 60% at 15% 20%, rgba(255,255,255,.45), transparent 60%),
+      radial-gradient(50% 50% at 85% 80%, rgba(122,106,91,.08), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-copy{
+    position: relative;
+    padding: clamp(100px, 12vw, 150px) clamp(28px, 6vw, 90px) clamp(60px, 8vw, 100px);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-eyebrow{
+    font-family: var(--ff-en);
+    font-size: 11px;
+    letter-spacing: .6em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 34px;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .hero-eyebrow::before{
+    content:""; width: 44px; height: 1px; background: var(--accent);
+  }
+  .hero-title{
+    font-family: var(--ff-jp);
+    font-weight: 500;
+    font-size: clamp(30px, 5.2vw, 58px);
+    letter-spacing: .08em;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero-title .mark{
+    background: linear-gradient(transparent 62%, rgba(122,106,91,.16) 62%);
+    padding: 0 .08em;
+  }
+  .hero-sub{
+    font-family: var(--ff-en);
+    font-style: italic;
+    font-size: clamp(14px, 1.5vw, 18px);
+    letter-spacing: .12em;
+    color: var(--ink-2);
+    margin-bottom: 22px;
+  }
+  .hero-sub-jp{
+    font-size: 15px;
+    color: var(--ink-2);
+    letter-spacing: .14em;
+    line-height: 1.9;
+    margin-bottom: 48px;
+  }
+  .hero-scroll{
+    font-family: var(--ff-en);
+    font-size: 10px;
+    letter-spacing: .5em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    position: absolute;
+    left: clamp(28px, 6vw, 90px);
+    bottom: 32px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-scroll::after{
+    content:""; width: 1px; height: 40px; background: var(--ink-3);
+    animation: scrollLine 2.2s ease-in-out infinite;
+    transform-origin: top;
+  }
+  @keyframes scrollLine{
+    0%{ transform: scaleY(0); }
+    50%{ transform: scaleY(1); }
+    100%{ transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  .hero-visual{
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-2);
+  }
+  .hero-visual::after{
+    content:"PARTY PRODUCE";
+    position: absolute;
+    left: -6px; bottom: 28px;
+    writing-mode: vertical-rl;
+    font-family: var(--ff-en);
+    font-size: 11px;
+    letter-spacing: .6em;
+    color: rgba(255,255,255,.88);
+    mix-blend-mode: difference;
+  }
+  .hero-visual img{
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 18%;
+    filter: contrast(.98) saturate(.92);
+  }
+  .hero-tag{
+    position: absolute;
+    right: clamp(20px, 3vw, 40px);
+    top: clamp(24px, 4vw, 44px);
+    font-family: var(--ff-en);
+    font-size: 10px;
+    letter-spacing: .5em;
+    color: rgba(255,255,255,.92);
+    mix-blend-mode: difference;
+    text-align: right;
+  }
+  .hero-tag span{ display:block; }
+  .hero-tag .num{ font-size: 44px; font-style: italic; letter-spacing: 0; margin-bottom: 4px; font-weight: 400; }
+
+  /* ============================================
+     Intro quote
+  ============================================ */
+  .intro{
+    background: var(--bg);
+    padding: clamp(90px, 13vw, 160px) 0;
+    text-align: center;
+    position: relative;
+  }
+  .intro .en-big{
+    font-family: var(--ff-en);
+    font-style: italic;
+    font-size: clamp(28px, 5vw, 52px);
+    color: var(--accent);
+    letter-spacing: .06em;
+    line-height: 1.4;
+    margin-bottom: 34px;
+  }
+  .intro .jp-body{
+    font-size: clamp(14px, 1.6vw, 16px);
+    line-height: 2.2;
+    color: var(--ink-2);
+    letter-spacing: .12em;
+  }
+  .intro .divider{
+    width: 1px; height: 64px; background: var(--line);
+    margin: 56px auto 0;
+  }
+
+  /* ============================================
+     Worry
+  ============================================ */
+  .worry{ background: var(--bg-2); }
+  .worry-head{ text-align:center; margin-bottom: 72px; }
+  .worry-head .section-label{ border: none; padding-bottom: 0; margin-bottom: 22px; }
+  .worry-head h2{
+    font-family: var(--ff-jp);
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 30px);
+    letter-spacing: .15em;
+    line-height: 1.85;
+  }
+  .worry-head h2 em{
+    font-style: normal;
+    background: linear-gradient(transparent 62%, rgba(122,106,91,.18) 62%);
+    padding: 0 .1em;
+  }
+  .worry-list{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .worry-item{
+    background: var(--white);
+    padding: clamp(32px, 4vw, 52px) clamp(28px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(22px, 4vw, 52px);
+    align-items: start;
+    border: 1px solid rgba(201,192,180,.55);
+  }
+  .worry-num{
+    font-family: var(--ff-en);
+    font-style: italic;
+    font-size: clamp(40px, 5.5vw, 64px);
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .worry-body h3{
+    font-weight: 500;
+    font-size: clamp(17px, 2vw, 20px);
+    letter-spacing: .1em;
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  .worry-body p{
+    font-size: 14.5px;
+    line-height: 2;
+    color: var(--ink-2);
+    letter-spacing: .08em;
+  }
+
+  .worry-outro{
+    text-align:center;
+    margin-top: 80px;
+    font-family: var(--ff-jp);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 24px);
+    letter-spacing: .15em;
+    line-height: 1.9;
+    color: var(--ink);
+  }
+  .worry-outro .en{
+    display:block;
+    font-family: var(--ff-en);
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: .4em;
+    color: var(--accent);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  /* ============================================
+     Service / Get
+  ============================================ */
+  .service{ background: var(--bg); }
+  .service .head{ text-align:center; margin-bottom: 80px; }
+  .service .head h2{
+    font-family: var(--ff-jp);
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 30px);
+    letter-spacing: .15em;
+    line-height: 1.8;
+  }
+
+  .gets{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(24px, 3vw, 44px);
+  }
+  .get-card{
+    background: var(--white);
+    padding: clamp(34px, 3.6vw, 52px) clamp(26px, 3vw, 40px);
+    border: 1px solid rgba(201,192,180,.5);
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+  .get-card .num{
+    font-family: var(--ff-en);
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: .4em;
+    color: var(--accent);
+    margin-bottom: 26px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .get-card h3{
+    font-family: var(--ff-jp);
+    font-weight: 500;
+    font-size: clamp(16px, 1.8vw, 19px);
+    letter-spacing: .1em;
+    line-height: 1.8;
+    margin-bottom: 22px;
+    min-height: 5em;
+  }
+  .get-card p{
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ink-2);
+    letter-spacing: .08em;
+  }
+
+  /* service detail */
+  .service-detail{
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(30px, 5vw, 80px);
+    align-items: center;
+    background: var(--bg-2);
+    padding: clamp(40px, 6vw, 80px);
+  }
+  .service-detail h3{
+    font-family: var(--ff-en);
+    font-style: italic;
+    font-size: clamp(26px, 3.6vw, 40px);
+    color: var(--accent);
+    letter-spacing: .06em;
+    line-height: 1.3;
+    margin-bottom: 26px;
+  }
+  .service-detail h3 small{
+    display: block;
+    font-family: var(--ff-jp);
+    font-style: normal;
+    font-size: 14px;
+    letter-spacing: .3em;
+    color: var(--ink-2);
+    margin-top: 10px;
+  }
+  .sd-list{ list-style:none; }
+  .sd-list li{
+    display:grid;
+    grid-template-columns: 110px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(122,106,91,.18);
+    font-size: 14.5px;
+    line-height: 1.9;
+    letter-spacing: .06em;
+  }
+  .sd-list li:last-child{ border-bottom:none; }
+  .sd-list dt{
+    font-family: var(--ff-en);
+    font-size: 11px;
+    letter-spacing: .35em;
+    color: var(--accent);
+    padding-top: 4px;
+  }
+  .sd-list dd{ color: var(--ink-2); }
+
+  /* ============================================
+     Price / CTA
+  ============================================ */
+  .price{
+    background: var(--ink);
+    color: var(--white);
+    position: relative;
+  }
+  .price::before{
+    content:"PRICE";
+    position: absolute;
+    top: 40px; right: 40px;
+    font-family: var(--ff-en);
+    font-size: 11px;
+    letter-spacing: .5em;
+    color: rgba(251,248,243,.4);
+  }
+  .price .section-label{ color: rgba(251,248,243,.6); border-color: rgba(251,248,243,.25); }
+  .price .head{ text-align:center; margin-bottom: 70px; }
+  .price .head h2{
+    font-family: var(--ff-jp);
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 30px);
+    letter-spacing: .15em;
+    color: var(--white);
+  }
+  .price-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    max-width: 900px;
+    margin: 0 auto 70px;
+  }
+  .price-card{
+    border: 1px solid rgba(251,248,243,.22);
+    padding: clamp(30px, 3.5vw, 48px);
+    text-align: center;
+    position: relative;
+  }
+  .price-card.featured{
+    background: rgba(251,248,243,.05);
+    border-color: rgba(251,248,243,.55);
+  }
+  .price-card .badge{
+    position:absolute; top:-12px; left:50%; transform: translateX(-50%);
+    font-family: var(--ff-en);
+    font-size: 10px; letter-spacing:.4em;
+    background: var(--white); color: var(--ink);
+    padding: 7px 18px;
+  }
+  .price-card .label{
+    font-family: var(--ff-en);
+    font-size: 11px; letter-spacing: .4em;
+    color: rgba(251,248,243,.7);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .price-card .amount{
+    font-family: var(--ff-en);
+    font-size: clamp(36px, 5vw, 54px);
+    font-weight: 500;
+    letter-spacing: .04em;
+    line-height: 1.1;
+  }
+  .price-card .amount small{ font-size: .45em; letter-spacing:.18em; margin-left: 6px; font-family: var(--ff-jp); }
+  .price-card .amount.strike{ color: rgba(251,248,243,.45); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .price-card .note{
+    font-size: 12.5px;
+    color: rgba(251,248,243,.7);
+    letter-spacing: .08em;
+    margin-top: 16px;
+    line-height: 1.9;
+  }
+  .price-card .limit{
+    display: inline-block;
+    font-family: var(--ff-en);
+    font-size: 10px; letter-spacing:.4em;
+    border: 1px solid rgba(251,248,243,.5);
+    padding: 4px 12px;
+    margin-top: 14px;
+  }
+
+  .price-notes{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 32px;
+    border-top: 1px solid rgba(251,248,243,.15);
+    border-bottom: 1px solid rgba(251,248,243,.15);
+    font-size: 13px;
+    color: rgba(251,248,243,.75);
+    letter-spacing: .08em;
+    line-height: 2;
+  }
+  .price-notes h4{
+    font-family: var(--ff-en);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: .4em;
+    margin-bottom: 12px;
+    color: rgba(251,248,243,.9);
+  }
+  .price-notes ul{ list-style: none; padding-left: 0; }
+  .price-notes ul li{ padding-left: 14px; position: relative; }
+  .price-notes ul li::before{
+    content:""; position: absolute; left: 0; top: 17px;
+    width: 5px; height: 1px; background: rgba(251,248,243,.6);
+  }
+
+  /* CTA */
+  .cta-wrap{
+    text-align:center;
+    margin-top: 70px;
+  }
+  .cta-lead{
+    font-family: var(--ff-en);
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: .24em;
+    color: rgba(251,248,243,.8);
+    margin-bottom: 10px;
+  }
+  .cta-lead-jp{
+    font-size: 14px;
+    letter-spacing: .2em;
+    color: rgba(251,248,243,.78);
+    margin-bottom: 34px;
+  }
+  .cta-btn{
+    display: inline-flex; align-items: center; gap: 20px;
+    padding: 22px 56px;
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--ff-en);
+    font-size: 13px;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    border: 1px solid var(--white);
+    transition: all .45s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-btn::after{
+    content:""; width: 30px; height: 1px; background: var(--ink); transition: all .4s ease;
+  }
+  .cta-btn:hover{
+    background: transparent;
+    color: var(--white);
+  }
+  .cta-btn:hover::after{ background: var(--white); width: 46px; }
+  .cta-sub{
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(251,248,243,.65);
+    letter-spacing: .2em;
+  }
+
+  /* ============================================
+     Profile
+  ============================================ */
+  .profile{ background: var(--bg); }
+  .profile-inner{
+    display: grid;
+    grid-template-columns: .85fr 1.15fr;
+    gap: clamp(32px, 6vw, 90px);
+    align-items: center;
+  }
+  .profile-img{
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: var(--bg-2);
+    overflow: hidden;
+  }
+  .profile-img img{
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 22%;
+    filter: saturate(.93);
+  }
+  .profile-img::before{
+    content:""; position: absolute; inset: 16px; border: 1px solid rgba(251,248,243,.55);
+    z-index: 2; pointer-events:none;
+  }
+  .profile-img .en-vert{
+    position: absolute;
+    right: -8px; top: 24px;
+    writing-mode: vertical-rl;
+    font-family: var(--ff-en);
+    font-size: 10px;
+    letter-spacing: .55em;
+    color: rgba(255,255,255,.9);
+    mix-blend-mode: difference;
+  }
+  .profile-body .section-label{ margin-bottom: 26px; }
+  .profile-name{
+    font-family: var(--ff-en);
+    font-size: clamp(46px, 6.5vw, 82px);
+    font-weight: 400;
+    letter-spacing: .04em;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .profile-role{
+    font-family: var(--ff-jp);
+    font-size: 13px;
+    letter-spacing: .4em;
+    color: var(--accent);
+    margin-bottom: 38px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--line);
+  }
+  .profile-text{
+    font-size: 14.5px;
+    line-height: 2.2;
+    color: var(--ink-2);
+    letter-spacing: .08em;
+    margin-bottom: 36px;
+  }
+  .profile-stats{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+  .profile-stats dt{
+    font-family: var(--ff-en);
+    font-size: 10px; letter-spacing: .4em;
+    color: var(--ink-3); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .profile-stats dd{
+    font-family: var(--ff-en);
+    font-style: italic;
+    font-size: clamp(22px, 2.6vw, 30px);
+    color: var(--accent);
+    letter-spacing: .02em;
+  }
+  .profile-stats dd small{
+    font-family: var(--ff-jp);
+    font-style: normal;
+    font-size: 12px;
+    color: var(--ink-2);
+    letter-spacing: .2em;
+    margin-left: 6px;
+  }
+
+  /* ============================================
+     Final CTA band
+  ============================================ */
+  .final{
+    background: var(--bg-3);
+    padding: clamp(80px, 10vw, 130px) 0;
+    text-align: center;
+    position: relative;
+  }
+  .final .en-big{
+    font-family: var(--ff-en);
+    font-style: italic;
+    font-size: clamp(34px, 5.4vw, 64px);
+    color: var(--ink);
+    letter-spacing: .04em;
+    line-height: 1.3;
+    margin-bottom: 28px;
+  }
+  .final .jp-lead{
+    font-size: 15px;
+    color: var(--ink-2);
+    letter-spacing: .18em;
+    margin-bottom: 48px;
+    line-height: 2;
+  }
+  .final .cta-btn{
+    background: var(--ink);
+    color: var(--white);
+    border-color: var(--ink);
+  }
+  .final .cta-btn::after{ background: var(--white); }
+  .final .cta-btn:hover{ background: transparent; color: var(--ink); }
+  .final .cta-btn:hover::after{ background: var(--ink); }
+
+  /* ============================================
+     Footer
+  ============================================ */
+  footer{
+    background: var(--ink);
+    color: rgba(251,248,243,.72);
+    padding: 70px 0 40px;
+    text-align: center;
+  }
+  footer .brand{
+    font-family: var(--ff-en);
+    font-size: 26px;
+    letter-spacing: .4em;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  footer .role{
+    font-family: var(--ff-jp);
+    font-size: 12px;
+    letter-spacing: .35em;
+    color: rgba(251,248,243,.55);
+    margin-bottom: 36px;
+  }
+  .sns-line{
+    display: inline-flex;
+    align-items: center; gap: 14px;
+    padding: 14px 26px;
+    border: 1px solid rgba(251,248,243,.25);
+    font-family: var(--ff-en);
+    font-size: 12px;
+    letter-spacing: .3em;
+    color: var(--white);
+    transition: .35s ease;
+  }
+  .sns-line:hover{ background: rgba(251,248,243,.08); border-color: rgba(251,248,243,.55); }
+  .sns-line svg{ width:16px; height:16px; }
+  footer .copy{
+    margin-top: 44px;
+    font-family: var(--ff-en);
+    font-size: 10px;
+    letter-spacing: .35em;
+    color: rgba(251,248,243,.35);
+  }
+
+  /* ============================================
+     Responsive
+  ============================================ */
+  @media (max-width: 900px){
+    .hero{ grid-template-columns: 1fr; min-height: auto; }
+    .hero-visual{ order: -1; aspect-ratio: 4/5; }
+    .hero-visual img{ object-position: center 20%; }
+    .hero-copy{ padding: 72px 28px 88px; }
+    .hero-scroll{ display:none; }
+
+    .gets{ grid-template-columns: 1fr; }
+    .get-card h3{ min-height: auto; }
+
+    .service-detail{ grid-template-columns: 1fr; padding: 40px 26px; }
+
+    .price-grid{ grid-template-columns: 1fr; }
+    .price::before{ right: 20px; top: 26px; }
+
+    .profile-inner{ grid-template-columns: 1fr; }
+    .profile-img{ max-width: 340px; margin-inline: auto; aspect-ratio: 4/5; }
+
+    .worry-item{ grid-template-columns: 1fr; gap: 12px; padding: 34px 26px; }
+    .worry-num{ font-size: 44px; }
+
+    .sd-list li{ grid-template-columns: 90px 1fr; gap: 10px; }
+  }
+
+  @media (max-width: 520px){
+    .section-label{ font-size: 11px; letter-spacing: .4em; }
+    .hero-title{ font-size: 30px; letter-spacing: .06em; }
+    .hero-eyebrow{ margin-bottom: 26px; }
+    .worry-head h2, .service .head h2, .price .head h2{ font-size: 21px; letter-spacing: .1em; }
+    .sd-list li{ grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+    .sd-list dt{ font-size: 10px; }
+    .topbar{ padding: 16px 20px; }
+    .topbar .role{ display:none; }
+    .profile-stats{ grid-template-columns: 1fr; }
+    .cta-btn{ padding: 18px 32px; font-size: 11px; letter-spacing: .3em; }
+    .cta-btn::after{ width: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<header class="topbar">
+  <div class="brand">HANU</div>
+  <div class="role">Party Producer</div>
+</header>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="hero-copy">
+    <div class="hero-eyebrow reveal">FOR WOMEN ENTREPRENEURS</div>
+    <h1 class="hero-title reveal">
+      「招かれる側」から、<br />
+      <span class="mark">「招く側」</span>へ。
+    </h1>
+    <p class="hero-sub reveal">The day you become the host.</p>
+    <p class="hero-sub-jp reveal">「いつかやる」は、今日で終わりに。</p>
+
+    <div class="hero-scroll">SCROLL</div>
+  </div>
+
+  <div class="hero-visual">
+    <img src="image/黒メイン.PNG" alt="Hanu - Party Producer" />
+    <div class="hero-tag">
+      <span class="num"><em>No.</em>01</span>
+      <span>PARTY PRODUCE</span>
+      <span>BY HANU</span>
+    </div>
+  </div>
+</section>
+
+<!-- Intro quote -->
+<section class="intro">
+  <div class="narrow">
+    <p class="en-big reveal"><em>A night to remember —<br />designed for you.</em></p>
+    <p class="jp-body reveal">
+      一夜限りの、あなたの物語。<br />
+      大切な人たちが集う、たった一度の時間を<br />
+      余白と緩急のある空気で、丁寧に設計します。
+    </p>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<!-- 2. WORRY -->
+<section class="section worry">
+  <div class="wrap">
+    <div class="worry-head reveal">
+      <span class="section-label">Concerns</span>
+      <h2>
+        いつかやる、と思いながら。<br />
+        <em>"はじめの一歩"で止まっていませんか。</em>
+      </h2>
+    </div>
+
+    <div class="worry-list">
+      <div class="worry-item reveal">
+        <div class="worry-num">01</div>
+        <div class="worry-body">
+          <h3>「いくらかかるか分からない」</h3>
+          <p>会場、飲食、装飾——全部足したらいくら？<br />調べる気力も湧かないまま、後回しになっている。</p>
+        </div>
+      </div>
+      <div class="worry-item reveal">
+        <div class="worry-num">02</div>
+        <div class="worry-body">
+          <h3>「何から決めればいいか分からない」</h3>
+          <p>日程、場所、人数、テーマ、案内文。<br />決めることが多すぎて、最初の一歩で止まっている。</p>
+        </div>
+      </div>
+      <div class="worry-item reveal">
+        <div class="worry-num">03</div>
+        <div class="worry-body">
+          <h3>「やらなくても、別に困らない」</h3>
+          <p>わかっている。だから動けない。<br />でも本当は——"次のステージ"を見たい自分もいる。</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="worry-outro reveal">
+      <span class="en">— But —</span>
+      その"いつか"を、今日、動かす。
+    </p>
+  </div>
+</section>
+
+<!-- 3. SERVICE / GET -->
+<section class="section service">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="section-label">What You'll Gain</span>
+      <h2>パーティーを終えたとき、<br />景色はきっと変わっている。</h2>
+    </div>
+
+    <div class="gets">
+      <div class="get-card reveal">
+        <div class="num">01 — Clarity</div>
+        <h3>「何から手をつければ」の迷いが、<br />「次はこれをやろう」に変わる。</h3>
+        <p>会場も段取りも費用も、<br />一から話しながら決めていける。</p>
+      </div>
+      <div class="get-card reveal">
+        <div class="num">02 — Connection</div>
+        <h3>お客様との距離が、<br />確実に縮まる。</h3>
+        <p>画面越しでは伝わらなかったあなたの温度が、その日、リアルに届く。数字には表れない、関係の質が変わる。</p>
+      </div>
+      <div class="get-card reveal">
+        <div class="num">03 — New Stage</div>
+        <h3>"招く側"が、<br />非日常ではなくなる。</h3>
+        <p>迷っていた自分は、もういない。次はどんなパーティーをしようか——その視点で、選択肢が広がっていく。</p>
+      </div>
+    </div>
+
+    <!-- Service detail -->
+    <div class="service-detail reveal">
+      <div>
+        <h3>Party Produce<br /><small>女性起業家のためのパーティープロデュース</small></h3>
+        <p style="font-size:14.5px; line-height:2.1; color:var(--ink-2); letter-spacing:.08em;">
+          企画から当日の運営まで。<br />
+          あなたの"はじめての一席"を、<br />
+          一つひとつ丁寧に形にしていきます。
+        </p>
+      </div>
+      <dl class="sd-list">
+        <li><dt>Service</dt><dd>パーティー1回まるごとトータルプロデュース<br />（企画〜当日運営まで）</dd></li>
+        <li><dt>Meeting</dt><dd>事前打ち合わせはオンライン / 対面<br />当日はディレクションとして参加</dd></li>
+        <li><dt>Size</dt><dd>15〜30名前後</dd></li>
+        <li><dt>Venue</dt><dd>ご相談可</dd></li>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 4. PRICE / CTA -->
+<section class="section price" id="cta">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="section-label">Price</span>
+      <h2>プロデュース料金</h2>
+    </div>
+
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <div class="label">Regular</div>
+        <div class="amount strike">¥80,000<small>（税込）</small></div>
+        <p class="note">プロデュース料<br />当日ディレクション料 含む</p>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="badge">MONITOR</div>
+        <div class="label">Monitor Price</div>
+        <div class="amount">¥50,000<small>（税込）</small></div>
+        <p class="note">プロデュース料<br />当日ディレクション料 含む</p>
+        <div class="limit">限定 3 組</div>
+      </div>
+    </div>
+
+    <div class="price-notes reveal">
+      <h4>— About</h4>
+      <ul>
+        <li>会場費・飲食費・装飾費は別途実費（おひとり1.5万円前後が目安）</li>
+      </ul>
+      <h4 style="margin-top:22px;">— Monitor Conditions</h4>
+      <ul>
+        <li>ご感想のご提供</li>
+        <li>当日の写真・動画の使用許可</li>
+        <li>Instagram でのご紹介投稿</li>
+      </ul>
+    </div>
+
+    <div class="cta-wrap reveal">
+      <p class="cta-lead"><em>Free Consultation</em></p>
+      <p class="cta-lead-jp">まずは無料相談（Zoom）から、<br />お気軽にお話ししませんか。</p>
+      <a class="cta-btn" href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">
+        Apply via Instagram DM
+      </a>
+      <p class="cta-sub">@hanu_party へ直接メッセージください</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PROFILE -->
+<section class="section profile">
+  <div class="wrap">
+    <div class="profile-inner">
+      <div class="profile-img reveal">
+        <img src="image/白メイン.PNG" alt="Hanu" />
+        <div class="en-vert">PARTY PRODUCER — HANU</div>
+      </div>
+      <div class="profile-body reveal">
+        <span class="section-label">Profile</span>
+        <h2 class="profile-name">Hanu.</h2>
+        <p class="profile-role">パーティープロデューサー</p>
+        <p class="profile-text">
+          パーティー・ウェディング業界で19年。<br />
+          延べ500組以上のパーティーをプランニング。<br /><br />
+          大切にしているのは、緩急と余白、<br />
+          そしてそこから生まれる一体感。<br /><br />
+          パーティーに参加した人の記憶に<br />
+          鮮明に刻まれる一日を、<br />
+          あなたのために設計します。
+        </p>
+        <dl class="profile-stats">
+          <div>
+            <dt>Experience</dt>
+            <dd>19<small>年</small></dd>
+          </div>
+          <div>
+            <dt>Produced</dt>
+            <dd>500+<small>組</small></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final">
+  <div class="narrow">
+    <p class="en-big reveal"><em>Shall we begin?</em></p>
+    <p class="jp-lead reveal">
+      "いつか"を、今日、動かす。<br />
+      まずは30分の無料相談から。
+    </p>
+    <a class="cta-btn reveal" href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">
+      Contact via Instagram
+    </a>
+  </div>
+</section>
+
+<!-- 6. FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="brand">HANU</div>
+    <div class="role">Party Producer</div>
+    <a class="sns-line" href="https://www.instagram.com/hanu_party" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+      </svg>
+      @hanu_party
+    </a>
+    <div class="copy">© HANU — PARTY PRODUCE</div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-on');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>
