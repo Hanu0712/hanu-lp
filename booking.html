@@ -749,6 +749,11 @@
     '2026-10-24','2026-10-26','2026-10-27','2026-10-28','2026-10-29','2026-10-30','2026-10-31'
   ]);
 
+  // ▼ SOLD OUT ではなく、過去日と同じ「—」の薄字で出したい日
+  const CLOSED_DATES = new Set([
+    '2026-09-06','2026-09-07','2026-09-14','2026-09-15','2026-09-19'
+  ]);
+
   // per-date disabled slots (date -> Set of slot strings NG)
   const BLOCKED_SLOTS = {};
   const _addNgSlot = (iso, slot) => {
@@ -820,9 +825,9 @@
       const dow = new Date(m.year, m.month - 1, d).getDay();
       const iso = `${m.year}-${String(m.month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
       const cellDate = new Date(m.year, m.month - 1, d);
-      const isPast = cellDate < today;          // 今日より前 ＝ 終了した日
+      const isPast = cellDate < today || CLOSED_DATES.has(iso);  // 終了した日、または「—」表示指定日
       const isCutoff = cellDate < cutoff;       // 今日・明日 ＝ 締切のため予約不可
-      const isBlocked = BLOCKED_DATES.has(iso) || isCutoff;
+      const isBlocked = BLOCKED_DATES.has(iso) || isCutoff || isPast;
       const cell = document.createElement('button');
       cell.type = 'button';
       cell.className = 'cal-cell' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '') + (isBlocked ? ' disabled' : '') + (isPast ? ' past' : '');
