@@ -225,6 +225,8 @@
       padding: 4px 2px;
     }
     .cal-cell.disabled .cell-num { font-size: 11px; line-height: 1; opacity: 0.7; }
+    .cal-cell.disabled.past .cell-num { opacity: 0.45; text-decoration: none; }
+    .cal-cell.disabled.past .sold { color: rgba(28,25,24,0.55); font-weight: 400; font-size: 11px; }
     .cal-cell.disabled .sold {
       font-family: 'Bodoni Moda', 'Playfair Display', serif;
       font-size: 8.5px;
@@ -818,15 +820,20 @@
       const dow = new Date(m.year, m.month - 1, d).getDay();
       const iso = `${m.year}-${String(m.month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
       const cellDate = new Date(m.year, m.month - 1, d);
-      const isPast = cellDate < cutoff;
-      const isBlocked = BLOCKED_DATES.has(iso) || isPast;
+      const isPast = cellDate < today;          // 今日より前 ＝ 終了した日
+      const isCutoff = cellDate < cutoff;       // 今日・明日 ＝ 締切のため予約不可
+      const isBlocked = BLOCKED_DATES.has(iso) || isCutoff;
       const cell = document.createElement('button');
       cell.type = 'button';
-      cell.className = 'cal-cell' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '') + (isBlocked ? ' disabled' : '');
+      cell.className = 'cal-cell' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '') + (isBlocked ? ' disabled' : '') + (isPast ? ' past' : '');
       if (m.comingSoon) {
         cell.textContent = d;
         cell.disabled = true;
         cell.style.cursor = 'default';
+      } else if (isPast) {
+        cell.innerHTML = `<span class="cell-num">${d}</span><span class="sold">—</span>`;
+        cell.disabled = true;
+        cell.title = '終了';
       } else if (isBlocked) {
         cell.innerHTML = `<span class="cell-num">${d}</span><span class="sold">— SOLD OUT —</span>`;
         cell.disabled = true;
