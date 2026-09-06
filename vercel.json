@@ -75,7 +75,7 @@
     },
     {
       "source": "/",
-      "destination": "/v10"
+      "destination": "/v12"
     }
   ]
 }
