@@ -1735,6 +1735,24 @@
   .sv-right .lead.lead-mb-line {
     margin-bottom: 1.6em;
   }
+  /* Photo booth — 実績写真（How We Produce 内） */
+  .sv-photobooth {
+    margin: 0 0 26px;
+    width: 100%;
+  }
+  .sv-photobooth img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .sv-photobooth figcaption {
+    font-family: "Bodoni Moda", "Playfair Display", serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--mute);
+    margin-top: 12px;
+  }
   .service-list {
     border-top: 1px solid var(--line);
   }
@@ -2710,6 +2728,8 @@
     .sv-right h2 { font-size: 48px; margin-bottom: 24px; }
     .sv-right .lead { margin-bottom: 40px; font-size: clamp(15px, 3.8vw, 17px); white-space: normal !important; }
     .sv-video { margin-bottom: 40px; }
+    .sv-photobooth { margin-bottom: 20px; }
+    .sv-photobooth figcaption { font-size: 11px; margin-top: 10px; }
     .service-item { grid-template-columns: 46px 1fr; row-gap: 4px; padding: 20px 8px; }
     .service-item .en-ttl { grid-column: 1 / -1; text-align: left; padding-left: 46px; font-size: 10px; }
     .service-item .ttl { font-size: 16px; }
@@ -2965,6 +2985,11 @@
             <div class="en-ttl">Direction</div>
           </div>
         </div>
+
+        <figure class="sv-photobooth">
+          <img src="image/photobooth01.jpg" alt="Hanu photo booth at a 10th anniversary party" loading="lazy">
+          <figcaption>Photo Booth — 10th Anniversary Party</figcaption>
+        </figure>
 
         <p class="lead lead-mb-line">この他、フォトブースだけの<br class="sp-br">ご予約も承っております。</p>
 
