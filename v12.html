@@ -1737,13 +1737,15 @@
   }
   /* Photo booth — 実績写真（How We Produce 内） */
   .sv-photobooth {
-    margin: 0 0 26px;
-    width: 100%;
+    margin: 0 auto;
+    width: 60%;
+    max-width: 440px;
   }
   .sv-photobooth img {
     width: 100%;
     height: auto;
     display: block;
+    border: 1px solid var(--line);
   }
   .sv-photobooth figcaption {
     font-family: "Bodoni Moda", "Playfair Display", serif;
@@ -2728,7 +2730,7 @@
     .sv-right h2 { font-size: 48px; margin-bottom: 24px; }
     .sv-right .lead { margin-bottom: 40px; font-size: clamp(15px, 3.8vw, 17px); white-space: normal !important; }
     .sv-video { margin-bottom: 40px; }
-    .sv-photobooth { margin-bottom: 20px; }
+    .sv-photobooth { width: 84%; max-width: 320px; }
     .sv-photobooth figcaption { font-size: 11px; margin-top: 10px; }
     .service-item { grid-template-columns: 46px 1fr; row-gap: 4px; padding: 20px 8px; }
     .service-item .en-ttl { grid-column: 1 / -1; text-align: left; padding-left: 46px; font-size: 10px; }
@@ -2986,12 +2988,12 @@
           </div>
         </div>
 
+        <p class="lead lead-mb-line">この他、フォトブースだけの<br class="sp-br">ご予約も承っております。</p>
+
         <figure class="sv-photobooth">
           <img src="image/photobooth01.jpg" alt="Hanu photo booth at a 10th anniversary party" loading="lazy">
           <figcaption>Photo Booth — 10th Anniversary Party</figcaption>
         </figure>
-
-        <p class="lead lead-mb-line">この他、フォトブースだけの<br class="sp-br">ご予約も承っております。</p>
 
         <a href="/booking" class="zoom-bar">無料Zoom相談を予約する <span class="arrow">→</span></a>
       </div>
