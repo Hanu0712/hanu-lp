@@ -1472,8 +1472,22 @@
     padding: 56px 60px 10px;
     background: var(--bg);
     border-top: 1px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Photo booth — 背景にうっすら流す（Profile と同じ扱い） */
+  .service-bg-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.12;
+    pointer-events: none;
   }
   .service-wrap {
+    position: relative;
+    z-index: 1;
     max-width: 720px;
     margin: 0 auto;
     display: block;
@@ -1734,29 +1748,6 @@
   }
   .sv-right .lead.lead-mb-line {
     margin-bottom: 1.6em;
-  }
-  /* Photo booth — 実績写真（How We Produce 内） */
-  .sv-photobooth {
-    margin: 0 auto;
-    width: 52%;
-    max-width: 380px;
-  }
-  .sv-photobooth img,
-  .sv-photobooth video {
-    width: 100%;
-    height: auto;
-    display: block;
-    border: 1px solid var(--line);
-    background: var(--bg-soft);
-  }
-  .sv-photobooth figcaption {
-    font-family: "Bodoni Moda", "Playfair Display", serif;
-    font-style: italic;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    color: var(--mute);
-    margin-top: 12px;
-    white-space: nowrap;
   }
   .service-list {
     border-top: 1px solid var(--line);
@@ -2733,8 +2724,6 @@
     .sv-right h2 { font-size: 48px; margin-bottom: 24px; }
     .sv-right .lead { margin-bottom: 40px; font-size: clamp(15px, 3.8vw, 17px); white-space: normal !important; }
     .sv-video { margin-bottom: 40px; }
-    .sv-photobooth { width: 72%; max-width: 280px; }
-    .sv-photobooth figcaption { font-size: 11px; margin-top: 10px; letter-spacing: 0.14em; }
     .service-item { grid-template-columns: 46px 1fr; row-gap: 4px; padding: 20px 8px; }
     .service-item .en-ttl { grid-column: 1 / -1; text-align: left; padding-left: 46px; font-size: 10px; }
     .service-item .ttl { font-size: 16px; }
@@ -2801,6 +2790,23 @@
 
     .footer { padding: 60px 24px 30px; }
     .footer-brand { font-size: 32px; }
+  }
+  /* Selected work: Project F */
+  .selected-work { padding: 100px 32px; background: #faf8f5; }
+  .selected-work-inner { max-width: 1120px; margin: 0 auto; }
+  .selected-work-eyebrow { color: var(--mute); font-family: "Bodoni Moda", serif; letter-spacing: .2em; font-size: 13px; margin-bottom: 18px; }
+  .selected-work h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 400; letter-spacing: .08em; margin-bottom: 38px; }
+  .selected-work-photo { width: 100%; height: auto; }
+  .selected-work-caption { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding-top: 28px; }
+  .selected-work h3 { font-family: "Bodoni Moda", serif; font-size: clamp(21px, 2.5vw, 28px); font-weight: 400; letter-spacing: .04em; }
+  .selected-work-anniversary { font-family: "Bodoni Moda", serif; font-size: 13px; letter-spacing: .16em; margin-top: 4px; }
+  .selected-work-credit { font-size: 12px; color: var(--mute); margin-top: 16px; }
+  .selected-work-description { font-size: 14px; line-height: 2.2; }
+  @media (max-width: 640px) {
+    .selected-work { padding: 64px 22px; }
+    .selected-work h2 { font-size: 23px; letter-spacing: .02em; margin-bottom: 26px; }
+    .selected-work-caption { grid-template-columns: 1fr; gap: 22px; padding-top: 22px; }
+    .selected-work-description { font-size: 13px; }
   }
 </style>
 </head>
@@ -2954,8 +2960,27 @@
     </div>
   </section>
 
+  <section class="selected-work" id="works" aria-labelledby="selected-work-title">
+    <div class="selected-work-inner">
+      <p class="selected-work-eyebrow">SELECTED WORK</p>
+      <h2 id="selected-work-title">節目を彩る、特別なフォトブース。</h2>
+      <img class="selected-work-photo" src="image/project-f-10th.jpg" alt="PROJECT Fの10周年フォトブース。ネイビーとシルバーにブルーを添えたバルーン、ミラーパネル、光る数字の10を配置。" width="2000" height="1257" loading="lazy" decoding="async">
+      <div class="selected-work-caption">
+        <div>
+          <h3>PROJECT F</h3>
+          <p class="selected-work-anniversary">10TH ANNIVERSARY</p>
+          <p class="selected-work-credit">ディレクション・デザイン：Hanu</p>
+        </div>
+        <p class="selected-work-description">ネイビーとシルバーを基調に、ブルーをアクセントに添えて。<br>光る「10」とバルーンで彩った、10周年のフォトブース。</p>
+      </div>
+    </div>
+  </section>
+
   <!-- SERVICE (How We Produce only) -->
   <section class="service" id="service">
+    <video class="service-bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="image/photobooth01.mp4" type="video/mp4">
+    </video>
     <div class="service-wrap">
       <!-- RIGHT: How We Produce -->
       <div class="sv-right">
@@ -2992,11 +3017,6 @@
         </div>
 
         <p class="lead lead-mb-line">この他、フォトブースだけの<br class="sp-br">ご予約も承っております。</p>
-
-        <figure class="sv-photobooth">
-          <video src="image/photobooth01.mp4" poster="image/photobooth01.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Hanu photo booth at a 10th anniversary party"></video>
-          <figcaption>Photo Booth — 10th Anniversary</figcaption>
-        </figure>
 
         <a href="/booking" class="zoom-bar">無料Zoom相談を予約する <span class="arrow">→</span></a>
       </div>
